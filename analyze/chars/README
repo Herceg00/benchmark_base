@@ -1,0 +1,11 @@
+
+***    USAGE    ***
+How to use program:
+
+1. Run command 'make' to create executable.
+2. Run command './run' to count locality characteristics. By default input data are taken from file input/data.txt, but this can be changed in this script. 
+3. View results in characteristics.csv.
+3a. Some more results can be viewed in bin/output.log. This also can be changed in 'run' script.
+
+P.S. If necessary, run 'make clean' to delete all results (in bin/ dir) or run 'make clean_all' to also delete executable.
+

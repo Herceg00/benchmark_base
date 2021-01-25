@@ -1,0 +1,54 @@
+--------------------------------------------------------------------------------
+Profile data file 'callgrind.out.26874' (creator: callgrind-3.8.1)
+--------------------------------------------------------------------------------
+I1 cache: 
+D1 cache: 
+LL cache: 
+Timerange: Basic block 0 - 1040140555
+Trigger: Program termination
+Profiled target:  ./out -f=../input/data.txt -m=1 (PID 26874, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       99
+Include dirs:     
+User annotated:   
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+           Ir 
+--------------------------------------------------------------------------------
+4,788,904,213  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+           Ir  file:function
+--------------------------------------------------------------------------------
+3,792,542,018  ???:findIdent(long*, std::map<unsigned long, std::list<unsigned long, std::allocator<unsigned long> >, std::less<unsigned long>, std::allocator<std::pair<unsigned long const, std::list<unsigned long, std::allocator<unsigned long> > > > >&, std::vector<unsigned long, std::allocator<unsigned long> >&) [/export/home/localityman/chars/bin/out]
+  339,513,456  ???:countChars(long*, long*, unsigned long) [/export/home/localityman/chars/bin/out]
+   82,517,824  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/src/../../../../libstdc++-v3/src/istream.cc:std::basic_istream<char, std::char_traits<char> >& std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char) [/usr/lib64/libstdc++.so.6.0.13]
+   76,957,708  /usr/src/debug/glibc-2.12-2-gc4ccff1/stdlib/../stdlib/strtol_l.c:____strtol_l_internal [/lib64/libc-2.12.so]
+   59,313,278  ???:getType(long*, std::vector<unsigned long, std::allocator<unsigned long> >&, unsigned long, unsigned long) [/export/home/localityman/chars/bin/out]
+   34,275,690  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/bits/istream.tcc:std::istream::sentry::sentry(std::istream&, bool) [/usr/lib64/libstdc++.so.6.0.13]
+   32,905,536  /usr/src/debug////////glibc-2.12-2-gc4ccff1/string/../sysdeps/x86_64/memchr.S:memchr [/lib64/libc-2.12.so]
+   27,928,444  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/bits/basic_string.tcc:std::string::_M_mutate(unsigned long, unsigned long, unsigned long)
+   26,658,260  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/bits/basic_string.h:std::string::append(char const*, unsigned long) [/usr/lib64/libstdc++.so.6.0.13]
+   24,120,034  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/bits/basic_string.h:std::string::_M_mutate(unsigned long, unsigned long, unsigned long) [/usr/lib64/libstdc++.so.6.0.13]
+   22,701,241  ???:main_part(unsigned long, long*, long*) [/export/home/localityman/chars/bin/out]
+   21,522,668  /usr/src/debug////////glibc-2.12-2-gc4ccff1/string/../sysdeps/x86_64/memcpy.S:memcpy [/lib64/libc-2.12.so]
+   19,676,874  ???:readFromFile(unsigned long, long*, long*) [/export/home/localityman/chars/bin/out]
+   19,042,970  /usr/src/debug////////glibc-2.12-2-gc4ccff1/string/../sysdeps/x86_64/multiarch/strlen-sse4.S:__strlen_sse42 [/lib64/libc-2.12.so]
+   19,041,616  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/bits/basic_string.tcc:std::string::append(char const*, unsigned long)
+   17,772,629  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/bits/basic_string.h:std::string::compare(char const*) const [/usr/lib64/libstdc++.so.6.0.13]
+   16,625,317  ???:countSEQ_L(long*, unsigned long, unsigned long) [/export/home/localityman/chars/bin/out]
+   16,503,210  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/bits/char_traits.h:std::string::compare(char const*) const
+   14,135,551  ???:countAVG_LEN(long*, unsigned long, unsigned long) [/export/home/localityman/chars/bin/out]
+   13,964,272  ???:getNumLines() [/export/home/localityman/chars/bin/out]
+   13,964,178  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/bits/char_traits.h:std::basic_istream<char, std::char_traits<char> >& std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char)
+   11,428,394  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/streambuf:std::basic_istream<char, std::char_traits<char> >& std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char)
+   10,155,816  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/bits/basic_string.tcc:std::string::compare(char const*) const
+    7,619,060  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/bits/basic_string.h:std::basic_istream<char, std::char_traits<char> >& std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char)
+    7,616,808  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/streambuf:std::basic_streambuf<char, std::char_traits<char> >::sbumpc() [/usr/lib64/libstdc++.so.6.0.13]
+    5,276,728  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/bits/char_traits.h:std::string::append(char const*, unsigned long)
+    5,077,884  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/bits/char_traits.h:std::string::_M_mutate(unsigned long, unsigned long, unsigned long)
+    5,077,884  /usr/src/debug/gcc-4.4.6-20120305/obj-x86_64-redhat-linux/x86_64-redhat-linux/libstdc++-v3/include/bits/basic_ios.h:std::basic_istream<char, std::char_traits<char> >& std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::basic_string<char, std::char_traits<char>, std::allocator<char> >&, char)
+

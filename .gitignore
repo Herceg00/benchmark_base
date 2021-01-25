@@ -1,0 +1,17 @@
+hpl*
+*.rep*
+*.out*
+*/out
+*/err
+*/arrays/*
+*/bin/*
+*machinefile*
+*.o
+*.png
+*.csv
+*.txt
+
+*unified.log*
+*united.log*
+*virt.log*
+

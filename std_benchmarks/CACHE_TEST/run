@@ -1,0 +1,1 @@
+mpirun -np 1 -as single ./_cache l24 -gra

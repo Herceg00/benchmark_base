@@ -1,0 +1,5 @@
+How to modify profile so that its minimum element will be zero
+1. sort -n input/graph500/seq-list.virt.log | less
+2. Get first element from this result
+3. cat input/graph500/seq-list.virt.log | awk '{line = $0; print line-<first_element>}' > <reduced_file>
+

@@ -1,0 +1,16 @@
+**********    State      **********
+
+
+--------------------------------------------------------------------------------------------
+name 				insturmentation								verification
+--------------------------------------------------------------------------------------------
+graph				ready										not verified
+
+
+**********    make      **********
+
+make CC=g++
+
+seq-list/seq-list -s5 -e5
+
+'-s5 -e5' - size params, somehow set the test size

@@ -1,0 +1,140 @@
+//*****************************************************************************
+//                     FFT settings
+//*****************************************************************************
+
+#if defined(__BENCH_FFT) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     1024 //
+#endif
+
+//*****************************************************************************
+//                     TRIADA settings
+//*****************************************************************************
+
+#if defined(__BENCH_TRIADA) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     1024 // input size 1310720 max
+#endif
+
+//
+//*****************************************************************************
+//                     MATRIX_MULT settings
+//*****************************************************************************
+
+#if defined(__BENCH_MATRIX_MULT) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     32 //
+#endif
+
+
+//*****************************************************************************
+//                     BLOCK_MATRIX_MULT settings
+//*****************************************************************************
+
+#if defined(__BENCH_BLOCK_MATRIX_MULT) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     32 // same as matrix mul
+	#define BLOCK_SIZE_PREDEF     8 //
+#endif
+
+//*****************************************************************************
+//                     MATRIX_TRANSP settings
+//*****************************************************************************
+
+#if defined(__BENCH_MATRIX_TRANSP) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     32 // same as matrix mul
+	#define BLOCK_SIZE_PREDEF     8 //
+#endif
+
+//*****************************************************************************
+//                     RAND settings
+//*****************************************************************************
+
+#if defined(__BENCH_RAND) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF 1024 *16 //
+#endif
+
+//*****************************************************************************
+//                     VECTORS settings
+//*****************************************************************************
+
+#if defined(__BENCH_VECTORS) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF 1024 // input size
+#endif
+
+//*****************************************************************************
+//                     LINPACK settings
+//*****************************************************************************
+
+#if defined(__BENCH_LINPACK) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     32 // input size
+#endif
+
+//*****************************************************************************
+//                     DENSE MATRIX VECT MULT settings
+//*****************************************************************************
+
+#if defined(__BENCH_D_MATRIX_VECT_MULT) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     32 // input size
+#endif
+
+//*****************************************************************************
+//                     HOLECKY settings
+//*****************************************************************************
+
+#if defined(__BENCH_HOLECKY) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     32 // input size
+#endif
+
+//*****************************************************************************
+//                     GIVENS settings
+//*****************************************************************************
+
+#if defined(__BENCH_GIVENS) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     32 // input size
+#endif
+
+//*****************************************************************************
+//                     GAUSS settings
+//*****************************************************************************
+
+#if defined(__BENCH_GAUSS) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     32 // input size
+#endif
+
+//*****************************************************************************
+//                     JACOBI settings
+//*****************************************************************************
+
+#if defined(__BENCH_JACOBI) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     32 // input size
+#endif
+
+//*****************************************************************************
+//                     recursive FFT settings
+//*****************************************************************************
+
+#if defined(__BENCH_REC_FFT) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     1024 //
+#endif
+
+//*****************************************************************************
+//                     vector_seqpar
+//*****************************************************************************
+
+#if defined(__BENCH_VECTORS_SEQPAR) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     1024 //
+	#define BLOCK_SIZE_PREDEF 8
+#endif
+
+//*****************************************************************************
+//                     qubit_evolution
+//*****************************************************************************
+
+#if defined(__BENCH_QUBIT_EVOLUTION) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     12
+#endif
+
+//*****************************************************************************
+//                     dijkstra
+//*****************************************************************************
+
+#if defined(__BENCH_DIJKSTRA) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     10
+#endif

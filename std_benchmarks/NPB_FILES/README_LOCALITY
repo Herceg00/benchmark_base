@@ -1,0 +1,30 @@
+**********    State      **********
+
+--------------------------------------------------------------------------------------------
+name 				insturmentation								verification
+--------------------------------------------------------------------------------------------
+BT					ready										not verified
+CG					ready										not verified
+IS					ready										not verified
+MG					ready										not verified
+
+UA					in progress									not verified
+
+LU					not started									not verified
+SP					not started									not verified
+
+FT					not possible(?) - structures, bad C
+DC					not possible(?) - structures 
+EP					not possible - no arrays
+
+**********    make      **********
+
+make all CC=g++
+
+make <test_name> CC=g++
+
+bin/<test_name>.S.x
+
+*********** test params ***********
+
+sys/setparam.c

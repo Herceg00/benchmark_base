@@ -1,0 +1,3 @@
+cd bin/
+./out ../input/data.txt &> output.log
+mv characteristics.csv ../

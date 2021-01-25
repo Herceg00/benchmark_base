@@ -1,0 +1,4 @@
+bin/*
+*.o
+ADC*
+*/npbparams*

@@ -1,0 +1,61 @@
+##########################
+Filename: ../input/data.txt, Mode: 1, K=1 ,N=2
+##########################
+
+Time on file work: 0 sec
+Time in main part before ident: 0
+DOING REFACTORING...
+No clusters refactored.
+Time on modification: 0
+...........................No fragments found!
+
+
+!!!!!INFORMATION ABOUT CLUSTERS !!!!!
+
+
+Length: 652, mode: 1, name of file: ../input/data.txt
+
+************************
+Value of L: 0.563337 = 1/(1+0.800163)
+
+Value of SEQ_L:  21.4167 = 652/30
+
+Value of Alpha: 0.156152
+
+Value of NAlpha: 1.45502, num_unique: 0
+
+Value of P: 0, tmp_p: 0
+
+************************
+AVG_LEN: 0.800163
+ALT ALPHA: 1.37333
+************************
+
+Number of clusters: 30, AVG_LEN for clusters: 17, AVG size of cluster: 21.7333
+
+
+!!!!!INFORMATION ABOUT OVERALL SEQUENCE !!!!!
+
+
+Length: 652, mode: 1, name of file: ../input/data.txt
+
+************************
+Value of L: 0.388889 = 1/(1+1.57143)
+
+Value of SEQ_L:  21.0323 = 652/30
+
+Value of Alpha: 0.0536737
+
+Value of NAlpha: 20.375, num_unique: 0
+
+Value of P: 1, tmp_p: 0
+
+************************
+AVG_LEN: 1.57143
+ALT ALPHA: 20.0255
+************************
+
+Time on ident: 0 sec
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Overall time: 0 sec
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

@@ -1,0 +1,1 @@
+mpirun -np 1 -q test -maxtime 10 -as single ../_cache l24 --harpertown

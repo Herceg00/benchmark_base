@@ -1,0 +1,127 @@
+==26874== Callgrind, a call-graph generating cache profiler
+==26874== Copyright (C) 2002-2012, and GNU GPL'd, by Josef Weidendorfer et al.
+==26874== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==26874== Command: ./out -f=../input/data.txt -m=1
+==26874== 
+==26874== For interactive control, run 'callgrind_control -h'.
+##########################
+Filename: ../input/data.txt, Mode: 1, K=1 ,N=2
+##########################
+
+Time on file work: 8 sec
+Time in main part before ident: 2
+DOING REFACTORING...
+No clusters refactored.
+Time on modification: 0
+...
+preliminary exit on 3 %
+
+
+NUM OF START CLUSTER: 66, SIZE OF FRAGMENT IN ELEMENTS: 4162, NUMBER OF FRAGMENTS: 150, OVERALL SIZE: 624300
+COVERED: 98.3562% (624300 out of 634734)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+!!!!!INFORMATION ABOUT FRAGMENTS !!!!!
+
+
+Length: 4162, mode: 1, name of file: ../input/data.txt
+
+************************
+Value of L: 0.498829 = 1/(1+1.00751)
+
+Value of SEQ_L:  33.9846 = 4162/122
+
+Value of Alpha: 0.0153846
+
+Value of NAlpha: 1.01587, num_unique: 0
+
+Value of P: 0, tmp_p: 0
+
+************************
+AVG_LEN: 1.00751
+ALT ALPHA: 1
+************************
+
+Number of clusters in fragment: 65, AVG_LEN for clusters: 62.9688, AVG size of cluster: 64.0308
+AVG_LEN for fragments: 63
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+!!!!!INFORMATION ABOUT WHOLE FRAGMENT !!!!!
+
+
+Length: 4162, mode: 1, name of file: ../input/data.txt
+
+************************
+Value of L: 0.338733 = 1/(1+1.95217)
+
+Value of SEQ_L:  32.7717 = 4162/126
+
+Value of Alpha: 0.0156331
+
+Value of NAlpha: 65.0312, num_unique: 0
+
+Value of P: 1, tmp_p: 0
+
+************************
+AVG_LEN: 1.95217
+ALT ALPHA: 63.9699
+************************
+
+
+
+!!!!!INFORMATION ABOUT CLUSTERS !!!!!
+
+
+Length: 634734, mode: 1, name of file: ../input/data.txt
+
+************************
+Value of L: 0.498828 = 1/(1+1.00752)
+
+Value of SEQ_L:  33.9824 = 634734/18678
+
+Value of Alpha: 0.0153319
+
+Value of NAlpha: 1.01591, num_unique: 0
+
+Value of P: 0, tmp_p: 0
+
+************************
+AVG_LEN: 1.00752
+ALT ALPHA: 1
+************************
+
+Number of clusters: 9914, AVG_LEN for clusters: 62.9664, AVG size of cluster: 64.024
+
+
+!!!!!INFORMATION ABOUT OVERALL SEQUENCE !!!!!
+
+
+Length: 634734, mode: 1, name of file: ../input/data.txt
+
+************************
+Value of L: 0.337068 = 1/(1+1.96676)
+
+Value of SEQ_L:  32.7706 = 634734/19369
+
+Value of Alpha: 0.015625
+
+Value of NAlpha: 9917.72, num_unique: 0
+
+Value of P: 1, tmp_p: 0
+
+************************
+AVG_LEN: 1.96676
+ALT ALPHA: 64.0003
+************************
+
+Time on ident: 43 sec
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Overall time: 54 sec
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+==26874== 
+==26874== Events    : Ir
+==26874== Collected : 4788904213
+==26874== 
+==26874== I   refs:      4,788,904,213
