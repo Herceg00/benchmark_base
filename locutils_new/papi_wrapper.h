@@ -2,7 +2,7 @@
 #define PAPI_WRAPPER_H
 
 #include <stdio.h>
-#include <papi.h>
+#include <./papi.h>
 #include <string>
 #include <vector>
 #include <stdexcept>
