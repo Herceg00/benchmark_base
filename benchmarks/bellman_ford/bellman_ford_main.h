@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <sys/time.h>
+#include "omp.h"
 
 
 #include "locality.h"
@@ -45,7 +46,18 @@ double CallKernel()
 
 gettimeofday(&start, NULL);
 
+        double time_start = omp_get_wtime();
+
 		Kernel<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, d);
+
+        double time_end = omp_get_wtime();
+
+        printf("Time spent %lf", time_end - time_start);
+
+        size_t bytes_requested = edge_count * vertex_count * (4 * sizeof(int) + 2 * sizeof(size_t) + sizeof(int)) + vertex_count;
+
+        printf("Memory bandwidth %lf", bytes_requested * 1e-9 / (time_end - time_start));
+
 
 gettimeofday(&end, NULL);
 

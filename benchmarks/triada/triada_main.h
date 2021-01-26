@@ -3,6 +3,7 @@
 
 #include "locality.h"
 #include "size.h"
+#include "omp.h"
 
 #define N SIZE_PREDEF
 
@@ -31,8 +32,15 @@ double CallKernel(int core_type)
 		locality::utils::CacheAnnil(core_type);
 
 gettimeofday(&start, NULL);
+        double time_start = omp_get_wtime();
 
 		Kernel<base_type, array_type, helper_type> (core_type, a, b, c, x, ind, N);
+
+        double time_end = omp_get_wtime();
+
+        size_t bytes_requested = N * (4 * sizeof(size_t));
+
+        printf("Memory bandwidth %lf", bytes_requested * 1e-9 / (time_end - time_start));
 
 gettimeofday(&end, NULL);
 
@@ -53,7 +61,9 @@ int main()
 {
 	LOC_PAPI_INIT
 
-	for(int core_type = 12; core_type < 1 + CORE_TYPES; core_type++)
+	std::cout << GetCoreName(3) << std::endl;
+
+	for(int core_type = 3; core_type < 4 ; core_type++)
 	{
 		locality::plain::Rotate("triada_" +locality::utils::ToString(core_type));
 
