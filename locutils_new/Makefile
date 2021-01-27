@@ -46,14 +46,14 @@ TGT_OMP_PAPI = $(OUT_DIR)/omp_$(LOC_PAPI)_$(SIZE)_Set$(PAPI)
 TGT_OMP_FILES = $(OUT_DIR)/omp_$(LOC_FILES)_$(SIZE)
 TGT_OMP_RECTS = $(OUT_DIR)/omp_$(LOC_RECTS)_$(SIZE)_$(W_SIZE)
 
-TGT := $(TGT_OMP_NP)
+TGT := $(TGT_OMP_NP) $(TGT_NP)
 
 CMD := $(CXX) $(CPPFLAGS) $(CXXFLAGS) $(ADD_FLAGS) -I $(INC_DIR)
 
 all : $(TGT)
 
 $(TGT_NP): $(LOC_NP).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
-	$(CMD) -DLOC_THREADS=1 -DLOC_REPEAT=$(REPEAT) $< -o $@ $(ADD_SRC)
+	$(CMD) -DLOC_THREADS=1 -DLOC_REPEAT=$(REPEAT) $< -fopenmp -o $@ $(ADD_SRC)
 
 $(TGT_PAPI): $(LOC_PAPI).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
 	$(CMD) -DLOC_THREADS=1 -DLOC_REPEAT=1 -DLOC_PAPI=$(PAPI) $< -lpapi $(ADD_SRC) -o $@
