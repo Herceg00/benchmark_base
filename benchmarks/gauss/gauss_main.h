@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <sys/time.h>
+#include <chrono>
 
 
 #include "locality.h"
@@ -35,8 +36,22 @@ double CallKernel()
 		locality::utils::CacheAnnil();
 
 gettimeofday(&start, NULL);
+        auto time_start = std::chrono::steady_clock::now();
 
 		Kernel<base_type, vec_type, matrix_type, indx_type>(b, x, matrix, indx, N);
+
+        auto time_end = std::chrono::steady_clock::now();
+
+
+        std::chrono::duration<double> elapsed_seconds = time_end - time_start;
+
+        std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
+
+
+        size_t bytes_requested = 11 * sizeof(double_t) * N * N + 15 * sizeof(double) * N;
+
+        printf("Memory bandwidth %lf GB/s\n", bytes_requested * 1e-9 / elapsed_seconds.count());
+        printf("Performance  %lf GFlops ", (N*N*N/2 + N*N * 2.5) * 1e-9 / elapsed_seconds.count());
 
 gettimeofday(&end, NULL);
 

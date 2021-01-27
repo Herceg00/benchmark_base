@@ -32,15 +32,20 @@ double CallKernel(int core_type)
 		locality::utils::CacheAnnil(core_type);
 
 gettimeofday(&start, NULL);
-        double time_start = omp_get_wtime();
+        auto time_start = std::chrono::steady_clock::now();
 
 		Kernel<base_type, array_type, helper_type> (core_type, a, b, c, x, ind, N);
 
-        double time_end = omp_get_wtime();
+        auto time_end = std::chrono::steady_clock::now();
+
+
+        std::chrono::duration<double> elapsed_seconds = time_end - time_start;
+
+        std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
 
         size_t bytes_requested = N * (4 * sizeof(size_t));
 
-        printf("Memory bandwidth %lf", bytes_requested * 1e-9 / (time_end - time_start));
+        printf("Memory bandwidth %lf GB/s", bytes_requested * 1e-9 / elapsed_seconds.count());
 
 gettimeofday(&end, NULL);
 
