@@ -65,6 +65,7 @@ $(TGT_RECTS): $(LOC_RECTS).cpp size.h ../size.h $(BENCH)_p.h $(BENCH).h $(INC_DI
 	$(CMD) -DLOC_THREADS=1 $< -o $@   $(ADD_SRC)
 
 $(TGT_OMP_NP): $(LOC_NP).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
+	mkdir bin
 	$(CMD) -DLOC_THREADS=$(THREADS) -DLOC_REPEAT=$(REPEAT) $< -fopenmp -pthread -o $@  $(ADD_SRC)
 
 $(TGT_OMP_PAPI): $(LOC_PAPI).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
