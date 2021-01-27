@@ -3,6 +3,7 @@
 
 #include "locality.h"
 #include "size.h"
+#include <chrono>
 
 #define N SIZE_PREDEF
 #define BLOCK_SIZE BLOCK_SIZE_PREDEF

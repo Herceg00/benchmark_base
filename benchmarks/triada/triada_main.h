@@ -4,6 +4,7 @@
 #include "locality.h"
 #include "size.h"
 #include "omp.h"
+#include <chrono>
 
 #define N SIZE_PREDEF
 
