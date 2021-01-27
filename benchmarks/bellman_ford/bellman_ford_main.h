@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <sys/time.h>
-#include "omp.h"
+#include <chrono>
 
 
 #include "locality.h"
@@ -46,17 +46,21 @@ double CallKernel()
 
 gettimeofday(&start, NULL);
 
-        double time_start = omp_get_wtime();
+        auto time_start = std::chrono::steady_clock::now();
 
-		Kernel<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, d);
+        Kernel<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, d);
 
-        double time_end = omp_get_wtime();
+        auto time_end = std::chrono::steady_clock::now();
 
-        printf("Time spent %lf", time_end - time_start);
+
+        std::chrono::duration<double> elapsed_seconds = time_end - time_start;
+
+        std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
+
 
         size_t bytes_requested = edge_count * vertex_count * (4 * sizeof(int) + 2 * sizeof(size_t) + sizeof(int)) + vertex_count;
 
-        printf("Memory bandwidth %lf", bytes_requested * 1e-9 / (time_end - time_start));
+        printf("Memory bandwidth %lf GB/s", bytes_requested * 1e-9 / elapsed_seconds.count());
 
 
 gettimeofday(&end, NULL);

@@ -53,7 +53,7 @@ CMD := $(CXX) $(CPPFLAGS) $(CXXFLAGS) $(ADD_FLAGS) -I $(INC_DIR)
 all : $(TGT)
 
 $(TGT_NP): $(LOC_NP).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
-	$(CMD) -DLOC_THREADS=1 -DLOC_REPEAT=$(REPEAT) $< -fopenmp -o $@ $(ADD_SRC)
+	$(CMD) -DLOC_THREADS=1 -DLOC_REPEAT=$(REPEAT) $< -o $@ $(ADD_SRC)
 
 $(TGT_PAPI): $(LOC_PAPI).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
 	$(CMD) -DLOC_THREADS=1 -DLOC_REPEAT=1 -DLOC_PAPI=$(PAPI) $< -lpapi $(ADD_SRC) -o $@
