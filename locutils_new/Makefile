@@ -12,9 +12,9 @@ W_SIZE ?= 512
 CXX := g++
 
 ifdef DEBUG
-	CXXFLAGS := -g -Wall -Wextra -Werror -Wno-error=unknown-pragmas -Wno-unknown-pragmas
+	CXXFLAGS := -g  -std=c++11 -Wall -Wextra -Werror -Wno-error=unknown-pragmas -Wno-unknown-pragmas
 else
-	CXXFLAGS := -O2 -Wall -Wextra -Werror -Wno-error=unknown-pragmas -Wno-unknown-pragmas
+	CXXFLAGS := -O2 -std=c++11 -Wall -Wextra -Werror -Wno-error=unknown-pragmas -Wno-unknown-pragmas
 endif
 
 ifdef SIZE
