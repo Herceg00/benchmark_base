@@ -48,10 +48,10 @@ gettimeofday(&start, NULL);
         std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
 
 
-        double bytes_requested = 3 * N * N * N * sizeof(double)/4  + 8 * sizeof(double)*N*N + 17 * sizeof(double)*N ;
+        double bytes_requested = 3 * (double)N * (double)N * (double)N * sizeof(double)/4  + 8 * sizeof(double)*(double)N*(double)N + 17 * sizeof(double)*(double)N ;
 
         printf("Memory bandwidth %lf GB/s\n", bytes_requested * 1e-9 / elapsed_seconds.count());
-        printf("Performance  %lf GFlops ", (N*N*N/2 + N*N * 3.5 + 2 *N) * 1e-9 / elapsed_seconds.count());
+        printf("Performance  %lf GFlops ", ((double)N*(double)N*(double)N/2 + (double)N*(double)N * 3.5 + 2 *(double)N) * 1e-9 / elapsed_seconds.count());
 
 gettimeofday(&end, NULL);
 
