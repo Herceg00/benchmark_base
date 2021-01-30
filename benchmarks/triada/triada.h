@@ -38,7 +38,8 @@ string GetCoreName(int core_type)
 template<typename T, typename AT, typename AT_ind>
 void InitSeq(AT a, AT b, AT c, AT x, AT_ind ind, int size)
 {
-	for(int i = 0; i < size; i++)
+#pragma omp parallel for num_threads(LOC_THREADS) schedule(static)
+    for(int i = 0; i < size; i++)
 	{
 		ind[i] = i;
 		a[i] = 0;
@@ -51,7 +52,8 @@ void InitSeq(AT a, AT b, AT c, AT x, AT_ind ind, int size)
 template<typename T, typename AT, typename AT_ind>
 void InitRand(AT a, AT b, AT c, AT x, AT_ind ind, int size)
 {
-	for(int i = 0; i < size; i++)
+#pragma omp parallel for num_threads(LOC_THREADS) schedule(static)
+    for(int i = 0; i < size; i++)
 	{
 		ind[i] = (((long)i*CACHE_LINE_K)%size + ((long)i*CACHE_LINE_K/size))%size; // we try to make as much cache-misses as we can
 
