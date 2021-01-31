@@ -35,7 +35,7 @@
 
 //	#define SIZE_PREDEF     1024*1024*7 // 1.16e8 bytes transf
 
-	#define SIZE_PREDEF     8*1024*1024 // input size 67M per array
+	#define SIZE_PREDEF     48000000 // input size 67M per array
 //	#define SIZE_PREDEF     16*1024*1024 // input size 134M per array
 //	#define SIZE_PREDEF     768*1024 // input size 31M
 #endif

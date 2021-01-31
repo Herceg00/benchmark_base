@@ -26,7 +26,8 @@ double CallKernel(int core_type)
 
 	double time = -1;
 
-	for(int i = 0; i < LOC_REPEAT; i++)
+	std::cout << (int)LOC_REPEAT << std::endl;
+	for(int i = 0; i < 1; i++)
 	{
 		Init<base_type, array_type, helper_type>(core_type, a, b, c, x, ind, N);
 
@@ -71,7 +72,7 @@ int main()
 
 	for(int core_type = 3; core_type < 4 ; core_type++)
 	{
-		locality::plain::Rotate("triada_" +locality::utils::ToString(core_type));
+		//locality::plain::Rotate("triada_" +locality::utils::ToString(core_type));
 
 		double time = CallKernel(core_type);
 
