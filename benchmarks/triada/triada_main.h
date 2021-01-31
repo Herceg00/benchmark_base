@@ -27,7 +27,7 @@ double CallKernel(int core_type)
 	double time = -1;
 
 	std::cout << (int)LOC_REPEAT << std::endl;
-	for(int i = 0; i < 1; i++)
+	for(int i = 0; i < LOC_REPEAT; i++)
 	{
 		Init<base_type, array_type, helper_type>(core_type, a, b, c, x, ind, N);
 
