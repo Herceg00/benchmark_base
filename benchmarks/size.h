@@ -7,7 +7,7 @@
 // #define BLOCK_SIZE_PREDEF 4 // why is it here?
 #define SHIFT_PREDEF 6
 
-#include "size.h.1"
-//#include "size.h.30"
+//#include "size.h.1"
+#include "size.h.30"
 //#include "size.h.tiny"
 //#include "size.h.less_tiny"
