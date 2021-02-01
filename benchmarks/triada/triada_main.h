@@ -69,9 +69,8 @@ int main()
 {
 	LOC_PAPI_INIT
 
-	std::cout << GetCoreName(3) << std::endl;
 
-	for(int core_type = 3; core_type < 4 ; core_type++)
+	for(int core_type = (int)MODE; core_type < (int)MODE + 1 ; core_type++)
 	{
 		//locality::plain::Rotate("triada_" +locality::utils::ToString(core_type));
 

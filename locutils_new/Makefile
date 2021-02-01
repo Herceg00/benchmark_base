@@ -53,7 +53,7 @@ CMD := $(CXX) $(CPPFLAGS) $(CXXFLAGS) $(ADD_FLAGS) -I $(INC_DIR)
 all : $(TGT)
 
 $(TGT_NP): $(LOC_NP).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
-	$(CMD) -DLOC_THREADS=1 -DLOC_REPEAT=$(REPEAT) $< -o $@ $(ADD_SRC)
+	$(CMD) -DLOC_THREADS=1 -DLOC_REPEAT=$(REPEAT) -DRADIUS=$(ELEMS) -DLENGTH=$(LENGTH) -DMODE=$(MODE) $< -o $@ $(ADD_SRC)
 
 $(TGT_PAPI): $(LOC_PAPI).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
 	$(CMD) -DLOC_THREADS=1 -DLOC_REPEAT=1 -DLOC_PAPI=$(PAPI) $< -lpapi $(ADD_SRC) -o $@
@@ -66,7 +66,7 @@ $(TGT_RECTS): $(LOC_RECTS).cpp size.h ../size.h $(BENCH)_p.h $(BENCH).h $(INC_DI
 
 $(TGT_OMP_NP): $(LOC_NP).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
 	mkdir bin
-	$(CMD) -DLOC_THREADS=$(THREADS) -DLOC_REPEAT=$(REPEAT) $< -fopenmp -pthread -o $@  $(ADD_SRC)
+	$(CMD) -DLOC_THREADS=$(THREADS) -DLOC_REPEAT=$(REPEAT) -DRADIUS=$(ELEMS) -DLENGTH=$(LENGTH) -DMODE=$(MODE) $< -fopenmp -pthread -o $@  $(ADD_SRC)
 
 $(TGT_OMP_PAPI): $(LOC_PAPI).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
 	$(CMD) -DLOC_THREADS=$(THREADS) -DLOC_REPEAT=1 -DLOC_PAPI=$(PAPI) $< -fopenmp -pthread -lpapi $(ADD_SRC) -o $@

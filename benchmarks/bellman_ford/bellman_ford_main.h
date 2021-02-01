@@ -10,7 +10,6 @@
 #include "locality.h"
 #include "size.h"
 
-#define N SIZE_PREDEF
 
 static const int EDGES_PER_VERTEX = 16;
 
@@ -22,8 +21,8 @@ typedef int* weight_type;
 
 double CallKernel()
 {
-	size_t edge_count = std::pow(2, N) * EDGES_PER_VERTEX;
-	size_t vertex_count = std::pow(2, N);
+	size_t edge_count = std::pow(2, LENGTH) * EDGES_PER_VERTEX;
+	size_t vertex_count = std::pow(2, LENGTH);
 
 	edge_type edges = new size_t*[edge_count];
 
@@ -40,7 +39,7 @@ double CallKernel()
 
 	for(int i = 0; i < LOC_REPEAT; i++)
 	{
-		Init<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, N);
+		Init<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, LENGTH);
 
 		locality::utils::CacheAnnil();
 
@@ -65,7 +64,7 @@ gettimeofday(&start, NULL);
 
 gettimeofday(&end, NULL);
 
-		printf("                  check_sum: %ld\n", Check<weight_type>(d, N));
+		printf("                  check_sum: %ld\n", Check<weight_type>(d, LENGTH));
 
 		double next_time = locality::utils::TimeDif(start, end);
 
@@ -84,7 +83,7 @@ int main()
 
 	double time = CallKernel();
 
-locality::plain::Print(N, time);
+locality::plain::Print(LENGTH, time);
 
 	return 0;
 }

@@ -10,12 +10,11 @@
 #include "locality.h"
 #include "size.h"
 
-#define N SIZE_PREDEF
 
 typedef double base_type;
-typedef int indx_type[N];
-typedef base_type vec_type[N];
-typedef base_type matrix_type[N][N];
+typedef int indx_type[LENGTH];
+typedef base_type vec_type[LENGTH];
+typedef base_type matrix_type[LENGTH][LENGTH];
 
 #include "gauss.h"
 
@@ -31,14 +30,14 @@ double CallKernel()
 
 	for(int i = 0; i < LOC_REPEAT; i++)
 	{
-		Init<base_type, vec_type, matrix_type, indx_type>(b, x, matrix, indx, N);
+		Init<base_type, vec_type, matrix_type, indx_type>(b, x, matrix, indx, LENGTH);
 
 		locality::utils::CacheAnnil();
 
 gettimeofday(&start, NULL);
         auto time_start = std::chrono::steady_clock::now();
 
-		Kernel<base_type, vec_type, matrix_type, indx_type>(b, x, matrix, indx, N);
+		Kernel<base_type, vec_type, matrix_type, indx_type>(b, x, matrix, indx, LENGTH);
 
         auto time_end = std::chrono::steady_clock::now();
 
@@ -48,14 +47,14 @@ gettimeofday(&start, NULL);
         std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
 
 
-        double bytes_requested = 3 * (double)N * (double)N * (double)N * sizeof(double)/4  + 8 * sizeof(double)*(double)N*(double)N + 17 * sizeof(double)*(double)N ;
+        double bytes_requested = 3 * (double)LENGTH * (double)LENGTH * (double)LENGTH * sizeof(double)/4  + 8 * sizeof(double)*(double)LENGTH*(double)LENGTH + 17 * sizeof(double)*(double)LENGTH ;
 
         printf("Memory bandwidth %lf GB/s\n", bytes_requested * 1e-9 / elapsed_seconds.count());
-        printf("Performance  %lf GFlops ", ((double)N*(double)N*(double)N/2 + (double)N*(double)N * 3.5 + 2 *(double)N) * 1e-9 / elapsed_seconds.count());
+        printf("Performance  %lf GFlops ", ((double)LENGTH*(double)LENGTH*(double)LENGTH/2 + (double)LENGTH*(double)LENGTH * 3.5 + 2 *(double)LENGTH) * 1e-9 / elapsed_seconds.count());
 
 gettimeofday(&end, NULL);
 
-		printf("                  check_sum: %lg\n", Check<base_type, vec_type>(x, N));
+		printf("                  check_sum: %lg\n", Check<base_type, vec_type>(x, LENGTH));
 
 		double next_time = locality::utils::TimeDif(start, end);
 
@@ -74,7 +73,7 @@ int main()
 
 	double time = CallKernel();
 
-locality::plain::Print(N, time);
+locality::plain::Print(LENGTH, time);
 
 	return 0;
 }
