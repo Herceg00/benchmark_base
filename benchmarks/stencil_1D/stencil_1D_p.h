@@ -4,7 +4,7 @@
 #include "locality.h"
 #include "size.h"
 
-#define N SIZE_PREDEF
+
 
 typedef double base_type;
 typedef locality::PtrWrapper<base_type, 1> array_type;

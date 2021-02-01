@@ -7,6 +7,7 @@
 #include <chrono>
 
 #define N SIZE_PREDEF
+#define TYPE TYPE_PREDEF
 
 typedef double base_type;
 typedef base_type array_type[N];
