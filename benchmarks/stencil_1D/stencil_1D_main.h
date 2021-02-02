@@ -17,6 +17,9 @@ double CallKernel(void )
 {
 	static array_type a;
 	static array_type b;
+    double total_time = 0;
+    double total_bw = 0;
+    double total_flops = 0;
 
 	timeval start, end;
 
@@ -38,13 +41,20 @@ gettimeofday(&start, NULL);
 
         std::chrono::duration<double> elapsed_seconds = time_end - time_start;
 
-        std::cout << "\n\nelapsed time: " << elapsed_seconds.count() << "s\n";
 
         size_t bytes_requested = (long int) LENGTH * ( sizeof(double));
 
-        printf("Minimal memory bandwidth %lf GB/s\n", bytes_requested * 1e-9 / elapsed_seconds.count());
-        printf("Maximal memory bandwidth %lf GB/s\n", 2 * (RADIUS + 1) * bytes_requested * 1e-9 / elapsed_seconds.count());
-        printf("Performance  %lf GFlops ", 2  * (RADIUS + 1) * LENGTH * 1e-9 / elapsed_seconds.count());
+        total_time += elapsed_seconds.count();
+        std::cout << "local_time: " << elapsed_seconds.count() << " s\n";
+        double local_bw = bytes_requested * (RADIUS + 1) * 1e-9 / elapsed_seconds.count();
+        total_bw += local_bw;
+        printf("local_bw: %lf GB/s\n", local_bw);
+
+//        printf("Minimal memory bandwidth %lf GB/s\n", bytes_requested * 1e-9 / elapsed_seconds.count());
+//        printf("Maximal memory bandwidth %lf GB/s\n", 2 * (RADIUS + 1) * bytes_requested * 1e-9 / elapsed_seconds.count());
+        printf("local_flops %lf GFlops ", 2  * (RADIUS + 1) * LENGTH * 1e-9 / elapsed_seconds.count());
+        total_flops += 2  * (RADIUS + 1) * LENGTH * 1e-9 / elapsed_seconds.count();
+
 
 gettimeofday(&end, NULL);
 
@@ -58,7 +68,9 @@ gettimeofday(&end, NULL);
 			time = next_time;
 		std::swap(a,b);
 	}
-
+    std::cout << "avg_time: " << total_time/LOC_REPEAT << " s\n";
+    std::cout << "avg_bw: " << total_bw / LOC_REPEAT << " Gb/s\n";
+    std::cout << "avg_flops: " << total_flops / LOC_REPEAT << " GFlops\n";
 	return time;
 }
 

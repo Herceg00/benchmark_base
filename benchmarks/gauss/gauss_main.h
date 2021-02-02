@@ -24,6 +24,9 @@ double CallKernel()
 	static vec_type b;
 	static vec_type x;
 	static indx_type indx;
+    double total_time = 0;
+    double total_bw = 0;
+    double total_flops = 0;
 
 	timeval start, end;
 	double time = -1;
@@ -44,13 +47,19 @@ gettimeofday(&start, NULL);
 
         std::chrono::duration<double> elapsed_seconds = time_end - time_start;
 
-        std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
+        total_time += elapsed_seconds.count();
+        std::cout << "local_time: " << elapsed_seconds.count() << " s\n";
 
 
         double bytes_requested = 3 * (double)LENGTH * (double)LENGTH * (double)LENGTH * sizeof(double)/4  + 8 * sizeof(double)*(double)LENGTH*(double)LENGTH + 17 * sizeof(double)*(double)LENGTH ;
+        double local_bw = bytes_requested * 1e-9 / elapsed_seconds.count();
+        total_bw += local_bw;
+        printf("local_bw: %lf GB/s\n", local_bw);
 
-        printf("Memory bandwidth %lf GB/s\n", bytes_requested * 1e-9 / elapsed_seconds.count());
-        printf("Performance  %lf GFlops ", ((double)LENGTH*(double)LENGTH*(double)LENGTH/2 + (double)LENGTH*(double)LENGTH * 3.5 + 2 *(double)LENGTH) * 1e-9 / elapsed_seconds.count());
+        double local_performance = ((double)LENGTH*(double)LENGTH*(double)LENGTH/2 + (double)LENGTH*(double)LENGTH * 3.5 + 2 *(double)LENGTH) * 1e-9 / elapsed_seconds.count();
+
+        printf("Performance  %lf GFlops ", local_performance);
+        total_flops += local_performance;
 
 gettimeofday(&end, NULL);
 
@@ -63,7 +72,9 @@ gettimeofday(&end, NULL);
 		if(next_time < time || time < 0)
 			time = next_time;
 	}
-
+    std::cout << "avg_time: " << total_time/LOC_REPEAT << " s\n";
+    std::cout << "avg_bw: " << total_bw / LOC_REPEAT << " Gb/s\n";
+    std::cout << "avg_flops: " << total_flops / LOC_REPEAT << " GFlops\n";
 	return time;
 }
 
