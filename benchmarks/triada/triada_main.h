@@ -6,12 +6,11 @@
 #include "omp.h"
 #include <chrono>
 
-#define N SIZE_PREDEF
 #define TYPE TYPE_PREDEF
 
 typedef double base_type;
-typedef base_type array_type[N];
-typedef size_t helper_type[N];
+typedef base_type array_type[LENGTH];
+typedef size_t helper_type[LENGTH];
 
 #include "triada.h"
 
@@ -31,14 +30,14 @@ double CallKernel(int core_type)
 
 	for(int i = 0; i < LOC_REPEAT; i++)
 	{
-		Init<base_type, array_type, helper_type>(core_type, a, b, c, x, ind, N);
+		Init<base_type, array_type, helper_type>(core_type, a, b, c, x, ind, LENGTH);
 
 		locality::utils::CacheAnnil(core_type);
 
 gettimeofday(&start, NULL);
         auto time_start = std::chrono::steady_clock::now();
 
-		Kernel<base_type, array_type, helper_type> (core_type, a, b, c, x, ind, N);
+		Kernel<base_type, array_type, helper_type> (core_type, a, b, c, x, ind, LENGTH);
 
         auto time_end = std::chrono::steady_clock::now();
 
@@ -49,7 +48,7 @@ gettimeofday(&start, NULL);
 
         total_time += elapsed_seconds.count();
 
-        size_t bytes_requested = N * (4 * sizeof(size_t));
+        size_t bytes_requested = LENGTH * (4 * sizeof(size_t));
 
         double local_bw = bytes_requested * 1e-9 / elapsed_seconds.count();
         total_bw += local_bw;
@@ -57,7 +56,7 @@ gettimeofday(&start, NULL);
 
 gettimeofday(&end, NULL);
 
-		printf("                  check_sum: %lg\n", Check<base_type, array_type>(a, N));
+		printf("                  check_sum: %lg\n", Check<base_type, array_type>(a, LENGTH));
 
 		double next_time = locality::utils::TimeDif(start, end);
 
@@ -82,6 +81,6 @@ int main()
 
 		double time = CallKernel(core_type);
 
-		locality::plain::Print(N, time);
+		locality::plain::Print(LENGTH, time);
 	}
 }
