@@ -6,6 +6,29 @@ PROG_NAME=$1
 LAST_MODE=$2
 LENGTH=$3
 ELEMS=$4
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --prog=*)
+      PROG_NAME="${1#*=}"
+      ;;
+    --mode=*)
+      LAST_MODE="${1#*=}"
+      ;;
+    --length=*)
+      LENGTH="${1#*=}"
+      ;;
+    --radius=*)
+      ELEMS="${1#*=}"
+      ;;
+    *)
+      printf "***************************\n"
+      printf "* Error: Invalid argument.*\n"
+      printf "***************************\n"
+      exit 1
+  esac
+  shift
+done
+cd ./$PROG_NAME || return
 for ((i=1; i < $LAST_MODE; i++))
 do
 rm -r bin
