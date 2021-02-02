@@ -16,6 +16,7 @@ typedef size_t helper_type[LENGTH];
 
 double CallKernel(int core_type)
 {
+    int triad_step_size[16] = {2,3,3,4,3,4,4,5,3,4,4,5,2,2,3,4};
 	static array_type a;
 	static array_type b;
 	static array_type c;
@@ -48,7 +49,7 @@ gettimeofday(&start, NULL);
 
         total_time += elapsed_seconds.count();
 
-        size_t bytes_requested = LENGTH * (4 * sizeof(size_t));
+        size_t bytes_requested = LENGTH * (triad_step_size[(int)MODE] * sizeof(size_t));
 
         double local_bw = bytes_requested * 1e-9 / elapsed_seconds.count();
         total_bw += local_bw;
@@ -73,7 +74,6 @@ gettimeofday(&end, NULL);
 int main()
 {
 	LOC_PAPI_INIT
-
 
 	for(int core_type = (int)MODE; core_type < (int)MODE + 1 ; core_type++)
 	{

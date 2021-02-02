@@ -43,6 +43,7 @@ void KernelTranspIJ(AT a, AT b, int size)
 {
 	LOC_PAPI_BEGIN_BLOCK
 
+#pragma omp parallel for schedule(static)
 	LOOP(i)
 		LOOP(j)
 		{
@@ -57,6 +58,7 @@ void KernelTranspJI(AT a, AT b, int size)
 {
 	LOC_PAPI_BEGIN_BLOCK
 
+#pragma omp parallel for schedule(static)
 	LOOP(j)
 		LOOP(i)
 		{
@@ -71,6 +73,7 @@ void KernelBlockTranspIJ(AT a, AT b, int block_size, int size)
 {
 	LOC_PAPI_BEGIN_BLOCK
 
+#pragma omp parallel for schedule(static)
 	OUTER_LOOP(i)
 		OUTER_LOOP(j)
 			INNER_LOOP(i)
@@ -87,6 +90,7 @@ void KernelBlockTranspJI(AT a, AT b, int block_size, int size)
 {
 	LOC_PAPI_BEGIN_BLOCK
 
+#pragma omp parallel for schedule(static)
 	OUTER_LOOP(j)
 		OUTER_LOOP(i)
 			INNER_LOOP(j)
