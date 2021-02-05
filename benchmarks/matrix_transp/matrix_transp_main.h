@@ -12,58 +12,80 @@ typedef double base_type;
 typedef base_type array_type[LENGTH][LENGTH];
 
 #include "matrix_transp.h"
+class PerformanceCounter {
+    double total_time = 0;
+    double total_bw = 0;
+    double total_flops = 0;
+    std::chrono::time_point<std::chrono::steady_clock> start_time = std::chrono::steady_clock::now();
+    std::chrono::time_point<std::chrono::steady_clock> end_time = std::chrono::steady_clock::now();
+    double local_bw = 0;
+    double local_time = 0;
+    double local_flops = 0;
+
+public:
+
+
+    void start_timing(void) {
+        start_time = std::chrono::steady_clock::now();
+    }
+
+    void end_timing(void) {
+        end_time = std::chrono::steady_clock::now();
+    }
+
+    void update_counters(size_t bytes_requested, size_t flops_executed) {
+        std::chrono::duration<double> elapsed_seconds = end_time - start_time;
+        local_time = elapsed_seconds.count();
+        local_bw = bytes_requested * 1e-9 / local_time;
+        local_flops = flops_executed * 1e-9 / local_time;
+        total_bw += local_bw;
+        total_time += local_time;
+        total_flops += local_flops;
+    }
+
+    void print_local_counters(void) {
+        std::cout << "local_time: " << local_time << " s\n";
+        std::cout << "local_bw: " << local_bw << " Gb/s\n";
+        std::cout << "local_flops: " << local_flops << " GFlops\n";
+    }
+
+    void print_average_counters(bool flops_required) {
+        std::cout << "avg_time: " << total_time/LOC_REPEAT << " s\n";
+        std::cout << "avg_bw: " << total_bw/LOC_REPEAT << " Gb/s\n";
+        if (flops_required) {
+            std::cout << "avg_flops: " << total_flops/LOC_REPEAT << " GFlops\n";
+        }
+    }
+};
 
 double CallKernel(int core_type)
 {
 	static array_type a;
 	static array_type b;
-    double total_time = 0;
-    double total_bw = 0;
-
-	timeval start, end;
 
 	double time = -1;
+    size_t bytes_requested = 2 * sizeof(double) * LENGTH * LENGTH;
+    auto counter = PerformanceCounter();
 
 	for(int i = 0; i < LOC_REPEAT; i++)
 	{
 		Init<base_type, array_type>(a, b, LENGTH);
 		locality::utils::CacheAnnil(core_type);
 
-gettimeofday(&start, NULL);
-        auto time_start = std::chrono::steady_clock::now();
+        counter.start_timing();
 
 		CallKernel<base_type, array_type> (core_type, a, b, BLOCK_SIZE, LENGTH);
 
-        auto time_end = std::chrono::steady_clock::now();
+        counter.end_timing();
 
+        counter.update_counters(bytes_requested, 0);
 
-        std::chrono::duration<double> elapsed_seconds = time_end - time_start;
-        total_time += elapsed_seconds.count();
-        std::cout << "local_time: " << elapsed_seconds.count() << " s\n";
+        counter.print_local_counters();
 
-
-
-        size_t bytes_requested = 2 * sizeof(double) * LENGTH * LENGTH; //чтение и сразу запись
-
-        double local_bw = bytes_requested * 1e-9 / elapsed_seconds.count();
-        total_bw += local_bw;
-        printf("local_bw: %lf GB/s\n", local_bw);
-
-gettimeofday(&end, NULL);
-
-		printf("                  check_sum: %lg\n", Check<base_type, array_type>(b, LENGTH));
-
-		double next_time = locality::utils::TimeDif(start, end);
-
-//		printf("                                      time: %lg\n", next_time);
-
-		if(next_time < time || time < 0)
-			time = next_time;
 	}
-    std::cout << "avg_time: " << total_time/LOC_REPEAT << " s\n";
-    std::cout << "avg_bw: " << total_bw / LOC_REPEAT << " Gb/s\n";
 
-	return time;
+    counter.print_average_counters(false);
+    return time;
 }
 
 int main()

@@ -9,12 +9,13 @@ W_SIZE ?= 512
 
 #####
 
-CXX := g++
+CXX := $(COMPILER)
+CXX ?= g++
 
 ifdef DEBUG
 	CXXFLAGS := -g  -std=c++11 -Wall -Wextra -Werror -Wno-error=unknown-pragmas -Wno-unknown-pragmas
 else
-	CXXFLAGS := -O2 -std=c++11 -Wall -Wextra -Werror -Wno-error=unknown-pragmas -Wno-unknown-pragmas
+	CXXFLAGS := -O3 -std=c++11 -Wall -Wextra -Werror -Wno-error=unknown-pragmas -Wno-unknown-pragmas
 endif
 
 ifdef SIZE

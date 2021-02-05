@@ -19,12 +19,57 @@ typedef int* weight_type;
 
 #include "bellman_ford.h"
 
+class PerformanceCounter {
+    double total_time = 0;
+    double total_bw = 0;
+    double total_flops = 0;
+    std::chrono::time_point<std::chrono::steady_clock> start_time = std::chrono::steady_clock::now();
+    std::chrono::time_point<std::chrono::steady_clock> end_time = std::chrono::steady_clock::now();
+    double local_bw = 0;
+    double local_time = 0;
+    double local_flops = 0;
+
+public:
+
+
+    void start_timing(void) {
+        start_time = std::chrono::steady_clock::now();
+    }
+
+    void end_timing(void) {
+        end_time = std::chrono::steady_clock::now();
+    }
+
+    void update_counters(size_t bytes_requested, size_t flops_executed) {
+        std::chrono::duration<double> elapsed_seconds = end_time - start_time;
+        local_time = elapsed_seconds.count();
+        local_bw = bytes_requested * 1e-9 / local_time;
+        local_flops = flops_executed * 1e-9 / local_time;
+        total_bw += local_bw;
+        total_time += local_time;
+        total_flops += local_flops;
+    }
+
+    void print_local_counters(void) {
+        std::cout << "local_time: " << local_time << " s\n";
+        std::cout << "local_bw: " << local_bw << " Gb/s\n";
+        std::cout << "local_flops: " << local_flops << " GFlops\n";
+    }
+
+    void print_average_counters(bool flops_required) {
+        std::cout << "avg_time: " << total_time/LOC_REPEAT << " s\n";
+        std::cout << "avg_bw: " << total_bw/LOC_REPEAT << " Gb/s\n";
+        if (flops_required) {
+            std::cout << "avg_flops: " << total_flops/LOC_REPEAT << " GFlops\n";
+        }
+    }
+};
+
+
 double CallKernel()
 {
 	size_t edge_count = std::pow(2, LENGTH) * EDGES_PER_VERTEX;
 	size_t vertex_count = std::pow(2, LENGTH);
-	double total_time = 0;
-    double total_bw = 0;
 
 	edge_type edges = new size_t*[edge_count];
 
@@ -36,8 +81,11 @@ double CallKernel()
 	weight_type weights = new int[edge_count];
 	weight_type d = new int[vertex_count];
 
-	timeval start, end;
 	double time = -1;
+
+    size_t bytes_requested = edge_count * vertex_count * (4 * sizeof(int) + 2 * sizeof(size_t) + sizeof(int)) + vertex_count;
+
+    auto counter = PerformanceCounter();
 
 	for(int i = 0; i < LOC_REPEAT; i++)
 	{
@@ -45,38 +93,17 @@ double CallKernel()
 
 		locality::utils::CacheAnnil();
 
-gettimeofday(&start, NULL);
-
-        auto time_start = std::chrono::steady_clock::now();
+        counter.start_timing();
 
         Kernel<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, d);
 
-        auto time_end = std::chrono::steady_clock::now();
+        counter.end_timing();
 
-        size_t bytes_requested = edge_count * vertex_count * (4 * sizeof(int) + 2 * sizeof(size_t) + sizeof(int)) + vertex_count;
-        std::chrono::duration<double> elapsed_seconds = time_end - time_start;
-        total_time += elapsed_seconds.count();
-        std::cout << "local_time: " << elapsed_seconds.count() << " s\n";
-        double local_bw = bytes_requested * 1e-9 / elapsed_seconds.count();
-        total_bw += local_bw;
+        counter.update_counters(bytes_requested, 0);
 
-
-        printf("local_bw: %lf GB/s\n", local_bw);
-
-
-gettimeofday(&end, NULL);
-
-		printf("check_sum: %ld\n\n", Check<weight_type>(d, LENGTH));
-
-		double next_time = locality::utils::TimeDif(start, end);
-
-//		printf("                                      time: %lg\n", next_time);
-
-		if(next_time < time || time < 0)
-			time = next_time;
+        counter.print_local_counters();
 	}
-    std::cout << "avg_time: " << total_time/LOC_REPEAT << " s\n";
-    std::cout << "avg_bw: " << total_bw / LOC_REPEAT << " Gb/s\n";
+    counter.print_average_counters(false);
 	return time;
 }
 

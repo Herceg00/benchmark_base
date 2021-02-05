@@ -20,6 +20,9 @@ while [ $# -gt 0 ]; do
     --radius=*)
       ELEMS="${1#*=}"
       ;;
+    --compiler=*)
+      COMPILER="${1#*=}"
+      ;;
     *)
       printf "***************************\n"
       printf "* Error: Invalid argument.*\n"
@@ -32,7 +35,7 @@ cd ./$PROG_NAME || return
 for ((i=1; i < $LAST_MODE; i++))
 do
 rm -r bin
-make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$i
+make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$i COMPILER=$COMPILER
 ./bin/omp_$PROG_NAME""_np_STD > tmp_file_mode$i''.txt
 search_result=$(grep -R "$PERF_PATTERN_BW" tmp_file_mode$i''.txt)
 perf=`echo $search_result`

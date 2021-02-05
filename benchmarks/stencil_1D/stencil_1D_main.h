@@ -88,23 +88,10 @@ double CallKernel(void )
 
 		counter.print_local_counters();
 
-
-//        printf("Minimal memory bandwidth %lf GB/s\n", bytes_requested * 1e-9 / elapsed_seconds.count());
-//        printf("Maximal memory bandwidth %lf GB/s\n", 2 * (RADIUS + 1) * bytes_requested * 1e-9 / elapsed_seconds.count());
-
-
-
-//		printf("                  check_sum: %lg\n", Check<base_type, array_type>(a, N));
-
-		double next_time = locality::utils::TimeDif(start, end);
-
-
-		if(next_time < time || time < 0)
-			time = next_time;
 		std::swap(a,b);
 	}
-
 	counter.print_average_counters(true);
+    std::cout << "Benchmark type: " << (double) flops_requested / (double) bytes_requested<< " flops/byte";
 	return time;
 }
 
