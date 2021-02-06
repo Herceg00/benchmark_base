@@ -64,7 +64,6 @@ double CallKernel(void )
 	static array_type a;
 	static array_type b;
 
-	timeval start, end;
 
 	double time = -1;
 	auto counter = PerformanceCounter();

@@ -15,3 +15,4 @@ hpl*
 *united.log*
 *virt.log*
 
+/benchmarks/rand_generator/bin/

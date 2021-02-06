@@ -6,7 +6,7 @@ using std::string;
 
 
 template<typename T, typename AT, typename AT_ind>
-void InitSeq(AT a, AT b, int size)
+void InitSeq(AT a, int size)
 {
 #pragma omp parallel for schedule(static)
     for(int i = 0; i < size; i++)
@@ -16,9 +16,9 @@ void InitSeq(AT a, AT b, int size)
 }
 
 template<typename T, typename AT, typename AT_ind>
-void Init(AT a, AT b, int size)
+void Init(AT a, int size)
 {
-    InitSeq<T, AT, AT_ind>(a, b, size);
+    InitSeq<T, AT, AT_ind>(a, size);
 }
 
 template<typename T, typename AT>

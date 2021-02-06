@@ -64,7 +64,6 @@ double CallKernel(void )
 	static array_type a;
 	static array_type b;
 
-	timeval start, end;
 
 	double time = -1;
 	auto counter = PerformanceCounter();
@@ -75,7 +74,7 @@ double CallKernel(void )
 	for(int i = 0; i < LOC_REPEAT; i++)
 	{
         counter.start_timing();
-		Init<base_type, array_type, helper_type>(a, b, LENGTH);
+		Init<base_type, array_type, helper_type>(a, LENGTH);
         counter.end_timing();
 
 		locality::utils::CacheAnnil(3);
