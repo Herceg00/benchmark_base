@@ -41,7 +41,7 @@ void InitSeq(AT a, AT b, AT c, AT x, AT_ind ind, int size)
 #pragma omp parallel for schedule(static)
     for(int i = 0; i < size; i++)
 	{
-		ind[i] = i;
+		//ind[i] = i;
 		a[i] = 0;
 		b[i] = locality::utils::RRand(i << 2);
 		c[i] = locality::utils::RRand(i << 3);

@@ -1,4 +1,7 @@
 #!/bin/bash
+export OMP_NUM_THREADS=96
+export OMP_PLACES=cores
+export OMP_PROC_BIND=close
 PERF_PATTERN_BW="avg_bw"
 PERF_PATTERN_TIME="avg_time"
 PERF_PATTERN_FLOPS="avg_flops"
@@ -32,7 +35,7 @@ while [ $# -gt 0 ]; do
   shift
 done
 cd ./$PROG_NAME || return
-for ((i=1; i < $LAST_MODE; i++))
+for ((i=4; i < $LAST_MODE; i++))
 do
 rm -r bin
 make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$i COMPILER=$COMPILER
