@@ -36,7 +36,7 @@ string GetCoreName(int core_type)
 }
 
 template<typename T, typename AT, typename AT_ind>
-void InitSeq(AT a, AT b, AT c, AT x, AT_ind ind, int size)
+void InitSeq(AT a, AT b, AT c, AT x, int size)
 {
 #pragma omp parallel for schedule(static)
     for(int i = 0; i < size; i++)
@@ -68,7 +68,7 @@ template<typename T, typename AT, typename AT_ind>
 void Init(int core_type, AT a, AT b, AT c, AT x, AT_ind ind, int size)
 {
 	if(core_type < 9)
-		InitSeq<T, AT, AT_ind>(a, b, c, x, ind, size);
+		InitSeq<T, AT, AT_ind>(a, b, c, x, size);
 	else
 		InitRand<T, AT, AT_ind>(a, b, c, x, ind, size);
 }

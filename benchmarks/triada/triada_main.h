@@ -18,8 +18,10 @@ class PerformanceCounter {
     double total_time = 0;
     double total_bw = 0;
     double total_flops = 0;
-    std::chrono::time_point<std::chrono::steady_clock> start_time = std::chrono::steady_clock::now();
-    std::chrono::time_point<std::chrono::steady_clock> end_time = std::chrono::steady_clock::now();
+//    std::chrono::time_point<std::chrono::steady_clock> start_time = std::chrono::steady_clock::now();
+//    std::chrono::time_point<std::chrono::steady_clock> end_time = std::chrono::steady_clock::now();
+    double start_time = omp_get_wtime();
+    double end_time = omp_get_wtime();
     double local_bw = 0;
     double local_time = 0;
     double local_flops = 0;
@@ -28,16 +30,20 @@ public:
 
 
     void start_timing(void) {
-        start_time = std::chrono::steady_clock::now();
+//        start_time = std::chrono::steady_clock::now();
+        start_time = omp_get_wtime();
     }
 
     void end_timing(void) {
-        end_time = std::chrono::steady_clock::now();
+//        end_time = std::chrono::steady_clock::now();
+        end_time = omp_get_wtime();
     }
 
     void update_counters(size_t bytes_requested, size_t flops_executed) {
-        std::chrono::duration<double> elapsed_seconds = end_time - start_time;
-        local_time = elapsed_seconds.count();
+//        std::chrono::duration<double> elapsed_seconds = end_time - start_time;
+        double elapsed_seconds = end_time - start_time;
+//        local_time = elapsed_seconds.count();
+        local_time = elapsed_seconds;
         local_bw = bytes_requested * 1e-9 / local_time;
         local_flops = flops_executed * 1e-9 / local_time;
         total_bw += local_bw;
@@ -83,6 +89,8 @@ double CallKernel(int core_type)
         counter.start_timing();
 
 		Kernel<base_type, array_type, helper_type> (core_type, a, b, c, x, ind, LENGTH);
+
+#pragma omp barrier
 
         counter.end_timing();
 
