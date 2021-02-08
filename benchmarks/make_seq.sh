@@ -1,4 +1,5 @@
 #!/bin/bash
+export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/usr/local/lib64:/usr/lib64
 PERF_PATTERN_BW="avg_bw"
 PERF_PATTERN_TIME="avg_time"
 PERF_PATTERN_FLOPS="avg_flops"
@@ -20,6 +21,21 @@ while [ $# -gt 0 ]; do
     --radius=*)
       ELEMS="${1#*=}"
       ;;
+    --compiler=*)
+      COMPILER="${1#*=}"
+      ;;
+    --threads=*)
+      EXP_THREADS="${1#*=}"
+      ;;
+    --lower_bound=*)
+      L_BOUND="${1#*=}"
+      ;;
+    --higher_bound=*)
+      H_BOUND="${1#*=}"
+      ;;
+    --no_run=*)
+      NO_RUN="${1#*=}"
+      ;;
     *)
       printf "***************************\n"
       printf "* Error: Invalid argument.*\n"
@@ -28,14 +44,12 @@ while [ $# -gt 0 ]; do
   esac
   shift
 done
-
-cd ./$PROG_NAME || return
-rm tmp*
-#rm results.txt
-for ((i=1; i < $LAST_MODE; i++))
+cd ./"$PROG_NAME" || return
+for ((i=L_BOUND; i < H_BOUND + 1; i++))
 do
 rm -r bin
-make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$i
+make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$i COMPILER=$COMPILER
+if [ $NO_RUN = "false" ]; then
 ./bin/$PROG_NAME""_np_STD > tmp_file_mode$i''.txt
 search_result=$(grep -R "$PERF_PATTERN_BW" tmp_file_mode$i''.txt)
 perf=`echo $search_result`
@@ -47,4 +61,5 @@ search_result=$(grep -R "$PERF_PATTERN_FLOPS" tmp_file_mode$i''.txt)
 perf=`echo $search_result`
 echo "mode $i $perf " >> results.txt
 echo "" >> results.txt
+fi
 done

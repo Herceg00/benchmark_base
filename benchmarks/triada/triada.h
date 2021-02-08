@@ -42,14 +42,6 @@ void InitSeq(AT a, AT b, AT c, AT x, int size)
 #pragma omp parallel for schedule(static)
     for(int i = 0; i < size; i++)
 	{
-        int thread_num = omp_get_thread_num();
-        int cpu = sched_getcpu();
-        int own_elems = 100;
-        if (i % own_elems == 0) {
-            printf("Thread %d on CPU %d", thread_num, cpu);
-        }
-
-
 		//ind[i] = i;
 		a[i] = 0;
 		b[i] = locality::utils::RRand(i << 2);
@@ -86,7 +78,7 @@ template<typename T, typename AT>
 T Check(AT a, int size)
 {
 	T sum = 0;
-
+#pragma omp parallel for schedule(static) reduction(+: sum)
 	for(int i = 0; i < size; i++)
 		sum += a[i] / size;
 

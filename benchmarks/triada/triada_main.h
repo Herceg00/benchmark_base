@@ -77,7 +77,7 @@ double CallKernel(int core_type)
 
 
 	double time = -1;
-    size_t bytes_requested = LENGTH * (triad_step_size[(int)MODE] * sizeof(size_t));
+    size_t bytes_requested = LENGTH * (triad_step_size[(int)MODE - 1] * sizeof(size_t));
     auto counter = PerformanceCounter();
 
 	for(int i = 0; i < LOC_REPEAT; i++)
