@@ -680,7 +680,7 @@ void write_ep_info(FILE *fp, char class)
 
 
 /* 
- * This is a gross hack to allow the benchmarks to 
+ * This is a gross hack to allow the benchmarks to
  * print out how they were compiled. Various other ways
  * of doing this have been tried and they all fail on
  * some machine - due to a broken "make" program, or

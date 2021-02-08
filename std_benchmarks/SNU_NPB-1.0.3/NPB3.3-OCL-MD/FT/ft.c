@@ -251,7 +251,7 @@ int main(int argc, char *argv[])
 
   //---------------------------------------------------------------------
   // Start over from the beginning. Note that all operations must
-  // be timed, in contrast to other benchmarks. 
+  // be timed, in contrast to other benchmarks.
   //---------------------------------------------------------------------
   for (i = 0; i < T_max; i++) {
     timer_clear(i);

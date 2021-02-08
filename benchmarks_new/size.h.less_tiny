@@ -1,0 +1,255 @@
+//*****************************************************************************
+//                     FFT settings
+//*****************************************************************************
+
+#if defined(__BENCH_FFT) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     8 * 1024 // profile size ~ 0.7M accesses
+#endif
+
+//*****************************************************************************
+//                     K_MEANS settings
+//*****************************************************************************
+
+#if defined(__BENCH_K_MEANS) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     8*1024
+#endif
+
+//*****************************************************************************
+//                     TRIADA settings
+//*****************************************************************************
+
+#if defined(__BENCH_TRIADA) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     128 * 1024 // profile size for triada12~ 0.7M accesses
+#endif
+
+//*****************************************************************************
+//                     MATRIX_MULT settings
+//*****************************************************************************
+
+#if defined(__BENCH_MATRIX_MULT) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     64 // profile size ~ 0.5-0.8M accesses
+#endif
+
+//*****************************************************************************
+//                     POISSON settings
+//*****************************************************************************
+
+#if defined(__BENCH_POISSON) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     64 // profile size ~ 0.5-0.8M accesses
+#endif
+
+//*****************************************************************************
+//                     BLOCK_MATRIX_MULT settings
+//*****************************************************************************
+
+#if defined(__BENCH_BLOCK_MATRIX_MULT) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     64 // same as matrix mul
+	#define BLOCK_SIZE_PREDEF     8 //
+#endif
+
+//*****************************************************************************
+//                     MATRIX_TRANSP settings
+//*****************************************************************************
+
+#if defined(__BENCH_MATRIX_TRANSP) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     64 // same as matrix mul
+	#define BLOCK_SIZE_PREDEF     8 //
+#endif
+
+//*****************************************************************************
+//                     RAND settings
+//*****************************************************************************
+
+#if defined(__BENCH_RAND) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF 1024 * 32 // profile size ~ 0.5M accesses
+#endif
+
+//*****************************************************************************
+//                     VECTORS settings
+//*****************************************************************************
+
+#if defined(__BENCH_VECTORS) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF 256 * 1024 //  profile size for gorner ~ 0.8M accesses
+#endif
+
+//*****************************************************************************
+//                     LINPACK settings
+//*****************************************************************************
+
+#if defined(__BENCH_LINPACK) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     3 * 32 // input size // profile size ~ 0.9M accesses
+#endif
+
+//*****************************************************************************
+//                     DENSE MATRIX VECT MULT settings
+//*****************************************************************************
+
+#if defined(__BENCH_D_MATRIX_VECT_MULT) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     384 // input size // profile size ~ 0.5M accesses
+#endif
+
+//*****************************************************************************
+//                     DITHERING settings
+//*****************************************************************************
+
+#if defined(__BENCH_DITHERING) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     384 // input size // profile size ~ 0.5M accesses
+#endif
+
+//*****************************************************************************
+//                     HOLECKY settings
+//*****************************************************************************
+
+#if defined(__BENCH_HOLECKY) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     128 // input size // profile size ~ 0.7M accesses
+#endif
+
+//*****************************************************************************
+//                     TCP settings
+//*****************************************************************************
+
+#if defined(__BENCH_TCP) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     12 // input size // profile size ~ 0.7M accesses
+#endif
+
+//*****************************************************************************
+//                     GIVENS settings
+//*****************************************************************************
+
+#if defined(__BENCH_GIVENS) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     128 // input size // profile size ~ 0.7M accesses
+#endif
+
+//*****************************************************************************
+//                     HOUSEHOLDER settings
+//*****************************************************************************
+
+#if defined(__BENCH_HOUSEHOLDER) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     128 // input size // profile size ~ 0.7M accesses
+#endif
+
+//*****************************************************************************
+//                     GAUSS settings
+//*****************************************************************************
+
+#if defined(__BENCH_GAUSS) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     3 * 32 // input size // profile size ~ 0.9M accesses
+#endif
+
+//*****************************************************************************
+//                     PRIME settings
+//*****************************************************************************
+
+#if defined(__BENCH_PRIME) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     3 * 32 // input size // profile size ~ 0.9M accesses
+#endif
+
+//*****************************************************************************
+//                     JACOBI settings
+//*****************************************************************************
+
+#if defined(__BENCH_JACOBI) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     192 // input size profile size ~ 0.7M accesses
+#endif
+
+//*****************************************************************************
+//                     recursive FFT settings
+//*****************************************************************************
+
+#if defined(__BENCH_REC_FFT) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     16 * 1024 // profile size ~ 0.9M accesses
+#endif
+
+//*****************************************************************************
+//                     tridiagonal settings
+//*****************************************************************************
+
+#if defined(__BENCH_TRIDIAGONAL) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     16 * 1024 //
+#endif
+
+//*****************************************************************************
+//                     monosweep_repeated settings
+//*****************************************************************************
+
+#if defined(__BENCH_MONOSWEEP_REPEATED) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     16 * 1024 //
+#endif
+
+//*****************************************************************************
+//                     countersweep_repeated settings
+//*****************************************************************************
+
+#if defined(__BENCH_COUNTERSWEEP_REPEATED) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     16*1024 //
+#endif
+
+//*****************************************************************************
+//                     cyclic_reduction settings
+//*****************************************************************************
+
+#if defined(__BENCH_CYCLIC_REDUCTION) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     16*1024 //
+#endif
+
+//*****************************************************************************
+//                     vector_seqpar
+//*****************************************************************************
+
+#if defined(__BENCH_VECTORS_SEQPAR) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     2 * 1024 //
+	#define BLOCK_SIZE_PREDEF 8
+#endif
+
+//*****************************************************************************
+//                     sparse matrix vector mult
+//*****************************************************************************
+
+#if !defined(SIZE_PREDEF)
+	#if defined(__BENCH_S_MATRIX_VECT_MULT_COL) \
+		|| defined(__BENCH_S_MATRIX_VECT_MULT_STR) \
+		|| defined(__BENCH_S_MATRIX_VECT_MULT_DIAG) \
+		|| defined(__BENCH_S_MATRIX_VECT_MULT_SDIAG)
+		#define SIZE_PREDEF     2 * 1024 //
+	#endif
+#endif
+
+//*****************************************************************************
+//                     qubit_evolution
+//*****************************************************************************
+
+#if defined(__BENCH_QUBIT_EVOLUTION) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     12
+#endif
+
+//*****************************************************************************
+//                     dijkstra
+//*****************************************************************************
+
+#if defined(__BENCH_DIJKSTRA) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     12
+#endif
+
+//*****************************************************************************
+//                     bellman_ford
+//*****************************************************************************
+
+#if defined(__BENCH_BELLMAN_FORD) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     6
+#endif
+
+//*****************************************************************************
+//                     boruvka
+//*****************************************************************************
+
+#if defined(__BENCH_BORUVKA) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     6
+#endif
+
+//*****************************************************************************
+//                     HOLDERHOUSE settings
+//*****************************************************************************
+
+#if defined(__BENCH_HOLDERHOUSE) && !defined(SIZE_PREDEF)
+	#define SIZE_PREDEF     128 // input size
+#endif
