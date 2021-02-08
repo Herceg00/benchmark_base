@@ -27,8 +27,6 @@ bash make_omp.sh --prog=triada --length=2000000 --compiler=g++ --threads=48 --ra
 
 --prog - название директории с бенчмарком
 
---mode - последний режим ( не включая сам mode)
-
 --length - бывший параметр N в бенчмарках
 
 --radius -пока нужен для радиуса в stencil
