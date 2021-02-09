@@ -16,6 +16,6 @@ bash make_omp.sh --prog=triada --length=2000000 --compiler=g++ --threads=48 --ra
 
 --radius -пока нужен для радиуса в stencil
 
---lower_bound --right_bound - диапазон (оба краевых значения входят в интервал) изменения MODE за один вызов скрипта
+--lower_bound --higher_bound - диапазон (оба краевых значения входят в интервал) изменения MODE за один вызов скрипта
 
 --no_run - true - только сборка приложения, false - запуск
