@@ -8,12 +8,15 @@ using std::string;
 template<typename T, typename AT, typename AT_ind>
 void InitSeq(AT a, AT b, int size)
 {
-#pragma omp parallel for schedule(static)
-    for(int i = 0; i < size; i++)
-	{
-		a[i] = locality::utils::RRand(i << 3);
-		b[i] = locality::utils::RRand(i << 2);
-	}
+#pragma omp parallel
+    {
+        unsigned int myseed = omp_get_thread_num();
+#pragma omp for schedule(static)
+        for (int i = 0; i < size; i++) {
+            a[i] = rand_r(&myseed);
+            b[i] = rand_r(&myseed);
+        }
+    }
 }
 
 template<typename T, typename AT, typename AT_ind>

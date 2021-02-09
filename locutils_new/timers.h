@@ -1,5 +1,6 @@
 #ifndef TIMERS_H
 #define TIMERS_H
+#include <ios>
 
 class PerformanceCounter {
     double total_time = 0;
@@ -33,12 +34,14 @@ public:
     }
 
     void print_local_counters(void) {
+        std::cout << std::fixed;
         std::cout << "local_time: " << local_time << " s" << std::endl;
         std::cout << "local_bw: " << local_bw << " Gb/s" << std::endl;
         std::cout << "local_flops: " << local_flops << " GFlops" << std::endl;
     }
 
     void print_average_counters(bool flops_required) {
+        std::cout << std::fixed;
         std::cout << "avg_time: " << total_time/LOC_REPEAT << " s" << std::endl;
         std::cout << "avg_bw: " << total_bw/LOC_REPEAT << " Gb/s" << std::endl;
         if (flops_required) {

@@ -1,5 +1,6 @@
 #ifndef MATRIX_MULT
 #define MATRIX_MULT
+#include "omp.h"
 
 namespace matrix_mult {
 
@@ -17,13 +18,18 @@ const char* type_names[BENCH_COUNT] = {
 template <typename T, typename AT>
 void Init(AT a, AT b, AT c, int size)
 {
+#pragma omp parallel
+    {
+        unsigned int myseed = omp_get_thread_num();
+#pragma omp for schedule(static)
 	for(int i = 0; i < size; i++)
 		for(int j = 0; j < size; j++)
 		{
-			a[i][j] = locality::utils::RRand(i, j);
-			b[i][j] = locality::utils::RRand(j, i);
+			a[i][j] = rand_r(&myseed);
+			b[i][j] = rand_r(&myseed);
 			c[i][j] = 0.0;
 		}
+    }
 }
 
 template <typename T, typename AT>
@@ -43,7 +49,7 @@ T Check(AT c, int size)
 template <typename T, typename AT>
 void KernelIJK(AT a, AT b, AT c, int size)
 {
-#pragma omp parallel for num_threads(LOC_THREADS)
+#pragma omp parallel for
 	OUTER_LOOP(i)
 		OUTER_LOOP(j)
 		{
@@ -61,7 +67,7 @@ template <typename T, typename AT>
 void KernelIKJ(AT a, AT b, AT c, int size)
 {
 
-#pragma omp parallel for num_threads(LOC_THREADS)
+#pragma omp parallel for
 	OUTER_LOOP(i)
 		OUTER_LOOP(k)
 		{
@@ -76,7 +82,7 @@ template <typename T, typename AT>
 void KernelJIK(AT a, AT b, AT c, int size)
 {
 
-#pragma omp parallel for num_threads(LOC_THREADS)
+#pragma omp parallel for
 	OUTER_LOOP(j)
 		OUTER_LOOP(i)
 		{
@@ -93,7 +99,7 @@ template <typename T, typename AT>
 void KernelJKI(AT a, AT b, AT c, int size)
 {
 
-#pragma omp parallel for num_threads(LOC_THREADS)
+#pragma omp parallel for
 	OUTER_LOOP(j)
 		OUTER_LOOP(k)
 		{
@@ -109,7 +115,7 @@ template <typename T, typename AT>
 void KernelKIJ(AT a, AT b, AT c, int size)
 {
 
-#pragma omp parallel for num_threads(LOC_THREADS)
+#pragma omp parallel for
 	OUTER_LOOP(k)
 		OUTER_LOOP(i)
 		{
@@ -125,7 +131,7 @@ template <typename T, typename AT>
 void KernelKJI(AT a, AT b, AT c, int size)
 {
 
-#pragma omp parallel for num_threads(LOC_THREADS)
+#pragma omp parallel for
 	OUTER_LOOP(k)
 		OUTER_LOOP(j)
 		{

@@ -53,13 +53,13 @@ if [ $NO_RUN = "false" ]; then
 ./bin/$PROG_NAME""_np_STD > tmp_file_mode$i''.txt
 search_result=$(grep -R "$PERF_PATTERN_BW" tmp_file_mode$i''.txt)
 perf=`echo $search_result`
-echo "mode $i $perf" >> results.txt
+echo "$perf" >> results.txt
 search_result=$(grep -R "$PERF_PATTERN_TIME" tmp_file_mode$i''.txt)
 perf=`echo $search_result`
-echo "mode $i $perf" >> results.txt
+echo "$perf" >> results.txt
 search_result=$(grep -R "$PERF_PATTERN_FLOPS" tmp_file_mode$i''.txt)
 perf=`echo $search_result`
-echo "mode $i $perf " >> results.txt
+echo "$perf " >> results.txt
 echo "" >> results.txt
 fi
 done
