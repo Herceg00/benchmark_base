@@ -6,22 +6,15 @@ using std::string;
 
 
 template<typename T, typename AT, typename AT_ind>
-void InitSeq(AT a, int size)
+void InitSeq()
 {
-#pragma omp parallel
-    {
-        unsigned int myseed = omp_get_thread_num();
-#pragma omp for schedule(static)
-        for (int i = 0; i < size; i++) {
-            a[i] = rand_r(&myseed);
-        }
-    }
+
 }
 
 template<typename T, typename AT, typename AT_ind>
-void Init(AT a, int size)
+void Init()
 {
-    InitSeq<T, AT, AT_ind>(a, size);
+    InitSeq<T, AT, AT_ind>();
 }
 
 template<typename T, typename AT>
@@ -36,18 +29,17 @@ T Check(AT a, int size)
 }
 
 template<typename T, typename AT, typename AT_ind>
-void Kernel(AT a, AT b, int size)
+void Kernel(AT a, int size)
 {
 	LOC_PAPI_BEGIN_BLOCK
 
-#pragma omp parallel for schedule(static)
-    for(long int i = (long int )RADIUS; i < size - RADIUS; i++)
+#pragma omp parallel
     {
-        double local_sum = 0;
-        for (long int j = i - RADIUS; j < i + RADIUS + 1; j ++) {
-            local_sum += b[j];
+        unsigned int myseed = omp_get_thread_num();
+#pragma omp for schedule(static)
+        for (int i = 0; i < size; i++) {
+            a[i] = rand_r(&myseed);
         }
-        a[i] = local_sum;
     }
 
 	LOC_PAPI_END_BLOCK
