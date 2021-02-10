@@ -46,7 +46,7 @@ printf "\n" >> $file_name
 
 for ((radius=3;radius<=10;radius++)); do
     args="--length="$LINEAR_SIZE" --radius="$radius
-    name="stencil1D|S="$LINEAR_SIZE"|R="$radius
+    name="stencil_1D|S="$LINEAR_SIZE"|R="$radius
     bash ./benchmark_specific_app.sh "stencil_1D" "$args" "$name"
 done
 
@@ -65,6 +65,7 @@ printf " " >> $file_name
 printf "\n" >> $file_name
 
 ##################### MAT_TRANSPOSAL ########################
+MTX_SIZE=1024
 
 for ((mode=0;mode<=3;mode++)); do
     args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
@@ -98,12 +99,12 @@ done
 printf " " >> $file_name
 printf "\n" >> $file_name
 
-#####################GAUSS ########################
+#####################RAND_GENERATOR ########################
 mode=0
 for ((size=1048576 ;size<=16777216; size*=2)); do
     args="--length="$size" --lower_bound="$mode" --higher_bound="$mode
-    name="rand_gen|S="$size"|M="$mode
-    bash ./benchmark_specific_app.sh "rand_gen" "$args" "$name"
+    name="rand_generator|S="$size"|M="$mode
+    bash ./benchmark_specific_app.sh "rand_generator" "$args" "$name"
 done
 
 printf " " >> $file_name

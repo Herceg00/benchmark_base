@@ -13,7 +13,7 @@
       <change afterPath="$PROJECT_DIR$/benchmarks_new/stencil_1D/bin/omp_stencil_1D_np_STD" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bin/omp_bellman_ford_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bin/omp_bellman_ford_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_mult/bin/omp_matrix_mult_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_mult/bin/omp_matrix_mult_np_STD" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_transp/bin/omp_matrix_transp_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_transp/bin/omp_matrix_transp_np_STD" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" afterDir="false" />
@@ -55,9 +55,9 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
@@ -76,7 +76,7 @@
       <updated>1612934563332</updated>
       <workItem from="1612934564921" duration="839000" />
       <workItem from="1612953790074" duration="6514000" />
-      <workItem from="1612964156327" duration="10135000" />
+      <workItem from="1612964156327" duration="11202000" />
     </task>
     <task id="LOCAL-00001" summary="mult bug fixed and readme renewed">
       <created>1612954230116</created>
@@ -99,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612970735959</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="scripts renewed">
+      <created>1612975123987</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1612975123988</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
