@@ -9,10 +9,10 @@ MTX_SIZE="100"
 ##################### names init ########################
 
 declare -a column_names=("algorithm"
-			"Time"
+			                   "Time"
                          "Performance"
                          "Bandwidth" 
-		        ""
+		                     ""
                          "Time"
                          "Performance"
                          "Bandwidth")
@@ -59,6 +59,17 @@ for ((mode=1;mode<=6;mode++)); do
     args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
     name="matrix_mult|S="$MTX_SIZE"|M="$mode
     bash ./benchmark_specific_app.sh "matrix_mult" "$args" "$name"
+done
+
+printf " " >> $file_name
+printf "\n" >> $file_name
+
+##################### MAT_TRANSPOSAL ########################
+
+for ((mode=0;mode<=3;mode++)); do
+    args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
+    name="matrix_transp|S="$MTX_SIZE"|M="$mode
+    bash ./benchmark_specific_app.sh "matrix_transp" "$args" "$name"
 done
 
 printf " " >> $file_name

@@ -28,12 +28,16 @@ double CallKernel(int core_type)
 
 
 	double time = -1;
+	size_t flops_required = LENGTH * triad_step_size[(int)MODE - 1];// TODO
     size_t bytes_requested = LENGTH * (triad_step_size[(int)MODE - 1] * sizeof(size_t));
     auto counter = PerformanceCounter();
 
 	for(int i = 0; i < LOC_REPEAT; i++)
 	{
+	    double t1 = omp_get_wtime();
 		Init<base_type, array_type, helper_type>(core_type, a, b, c, x, ind, LENGTH);
+        double t2 = omp_get_wtime();
+        std::cout << "new init time: " << t2 - t1 << std::endl;
 
 		locality::utils::CacheAnnil(core_type);
 
@@ -41,16 +45,14 @@ double CallKernel(int core_type)
 
 		Kernel<base_type, array_type, helper_type> (core_type, a, b, c, x, ind, LENGTH);
 
-#pragma omp barrier
-
         counter.end_timing();
 
-        counter.update_counters(bytes_requested, 0);
+        counter.update_counters(bytes_requested, flops_required);
 
         counter.print_local_counters();
 
 	}
-    counter.print_average_counters(false);
+    counter.print_average_counters(true);
 	return time;
 }
 

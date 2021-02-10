@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/locality-master-65f2efb9104ac9c1e8de13512110d388b0129507.iml" filepath="$PROJECT_DIR$/.idea/locality-master-65f2efb9104ac9c1e8de13512110d388b0129507.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/benchmark_base.iml" filepath="$PROJECT_DIR$/.idea/benchmark_base.iml" />
     </modules>
   </component>
 </project>
