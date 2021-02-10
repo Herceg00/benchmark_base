@@ -9,11 +9,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/benchmarks_new/matrix_mult/bin/omp_matrix_mult_np_STD" afterDir="false" />
+    <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="mult bug fixed and readme renewed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/triada.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/triada.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/triada_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/triada_main.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,8 +66,16 @@
       <option name="presentableId" value="Default" />
       <updated>1612934563332</updated>
       <workItem from="1612934564921" duration="839000" />
-      <workItem from="1612953790074" duration="420000" />
+      <workItem from="1612953790074" duration="1504000" />
     </task>
+    <task id="LOCAL-00001" summary="mult bug fixed and readme renewed">
+      <created>1612954230116</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1612954230116</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,5 +94,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="mult bug fixed and readme renewed" />
+    <option name="LAST_COMMIT_MESSAGE" value="mult bug fixed and readme renewed" />
   </component>
 </project>

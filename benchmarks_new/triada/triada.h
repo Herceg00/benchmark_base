@@ -107,56 +107,56 @@ void Kernel(int core_type, AT a, AT b, AT c, AT x, AT_ind ind, int size)
 	T sc_x = x[0], sc_c = c[0];
 
 	switch (core_type) {
-		case  1:
+		case  0:
 #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(long int index =      i, a[index], b[index], sc_x    , sc_c)
 		break;
-		case  2:
+		case  1:
 #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(long int index =      i, a[index], b[index], x[index], sc_c)
 		break;
-		case  3:
+		case  2:
 #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(long int index =      i, a[index], b[index], sc_x    , c[index])
 		break;
-		case  4:
+		case  3:
 #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(long int index =      i, a[index], b[index], x[index], c[index])
 		break;
-		case  5:
-		case  9:
+		case  4:
+		case  8:
 #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(long int index = ind[i], a[index], b[index], sc_x    , sc_c)
 		break;
-		case  6:
-		case 10:
+		case  5:
+		case 9:
 #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(long int index = ind[i], a[index], b[index], x[index], sc_c)
+		break;
+		case 6:
+		case 10:
+#pragma omp parallel for schedule(static)
+			CALL_AND_PROFILE(long int index = ind[i], a[index], b[index], sc_x    , c[index])
 		break;
 		case  7:
 		case 11:
 #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(long int index = ind[i], a[index], b[index], sc_x    , c[index])
-		break;
-		case  8:
-		case 12:
-#pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(long int index = ind[i], a[index], b[index], x[index], c[index])
 		break;
 
-		case 13:
+		case 12:
 #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(long int index = i, a[index], b[index], 1, 0)
 		break;
-		case 14:
+		case 13:
 #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(long int index = i, a[index], b[index], sc_x, 0)
 		break;
-		case 15:
+		case 14:
 #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(long int index = i, a[index], b[index], 1, c[index])
 		break;
-		case 16:
+		case 15:
 #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(long int index = i, a[index], b[index], sc_x, c[index])
 		break;

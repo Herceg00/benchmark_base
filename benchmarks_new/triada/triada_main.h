@@ -28,8 +28,8 @@ double CallKernel(int core_type)
 
 
 	double time = -1;
-	size_t flops_required = LENGTH * triad_step_size[(int)MODE - 1];// TODO
-    size_t bytes_requested = LENGTH * (triad_step_size[(int)MODE - 1] * sizeof(size_t));
+	size_t flops_required = LENGTH * 2;
+    size_t bytes_requested = LENGTH * (triad_step_size[(int)MODE] * sizeof(double));
     auto counter = PerformanceCounter();
 
 	for(int i = 0; i < LOC_REPEAT; i++)
