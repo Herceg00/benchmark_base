@@ -17,13 +17,10 @@ rm info.txt
 lscpu >> info.txt
 
 lscpu_nodes=$(grep -R "NUMA node(s):" "./info.txt" | grep -Eo '[0-9]{1,3}')
-echo $lscpu_nodes
 
 lscpu_cpus=$(grep -R -m 1 "CPU(s):" "./info.txt" | grep -Eo '[0-9]{1,3}')
-echo $lscpu_cpus
 
 cpus_per_node=$(($lscpu_cpus/$lscpu_nodes))
-echo $cpus_per_node
 
 rm info.txt
 
@@ -35,7 +32,7 @@ printf $TEST_NAME"," >> $file_name
 ##################### single socket test ########################
 rm "./"$PROG_NAME"/results.txt"
 THREADS=" --threads=$cpus_per_node"
-echo $THREADS
+echo "Single-socket test: " $THREADS
 bash make_omp.sh --prog=$PROG_NAME $PROG_ARGS $COMMON_ARGS $THREADS
 
 search_result=$(grep -R "$TIME_PATTERN" "./"$PROG_NAME"/results.txt")
@@ -53,9 +50,10 @@ printf $dat"\tGB/s," >> $file_name
 printf "," >> $file_name
 
 ##################### dual socket test ########################
+if [ $lscpu_nodes = "2" ]; then
 rm "./"$PROG_NAME"/results.txt"
 THREADS=" --threads=$lscpu_cpus"
-echo $THREADS
+echo "Dual-socket test: "$THREADS
 bash make_omp.sh --prog=$PROG_NAME $PROG_ARGS $COMMON_ARGS $THREADS
 
 search_result=$(grep -R "$TIME_PATTERN" "./"$PROG_NAME"/results.txt")
@@ -73,6 +71,7 @@ printf $dat"\tGB/s," >> $file_name
 printf " " >> $file_name
 printf "\n" >> $file_name
 
+fi
 ##################### saving data ########################
 
 for ((row=1;row<=num_rows;row++)) do
