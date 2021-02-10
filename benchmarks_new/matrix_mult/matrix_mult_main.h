@@ -30,6 +30,7 @@ double CallKernel(int core_type)
 
 	double time = -1;
     size_t bytes_requested = sizeof(double) * bw_for_stat[core_type];
+    size_t flops_requested = (int)LENGTH * (int)LENGTH* (int)LENGTH * 2;
     auto counter = PerformanceCounter();
 
 	for(int i = 0; i < LOC_REPEAT; i++)
@@ -43,13 +44,13 @@ double CallKernel(int core_type)
 
         counter.end_timing();
 
-        counter.update_counters(bytes_requested, 0);
+        counter.update_counters(bytes_requested, flops_requested);
 
         counter.print_local_counters();
 
 	}
 
-    counter.print_average_counters(false);
+    counter.print_average_counters(true);
     return time;
 }
 
@@ -57,7 +58,7 @@ int main()
 {
 	LOC_PAPI_INIT
 
-	for(int core_type = 0; core_type < BENCH_COUNT; core_type++)
+	for(int core_type = (int)MODE; core_type < (int)MODE + 1; core_type++)
 	{
 		locality::plain::Rotate(type_names[core_type]);
 
