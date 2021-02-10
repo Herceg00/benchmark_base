@@ -37,14 +37,14 @@ string GetCoreName(int core_type)
 }
 
 template<typename T, typename AT, typename AT_ind>
-void InitSeq(AT a, AT b, AT c, AT x, int size)
+void InitSeq(AT a, AT b, AT c, AT x, AT_ind ind,int size)
 {
 #pragma omp parallel
     {
         unsigned int myseed = omp_get_thread_num();
 #pragma omp for schedule(static)
         for (int i = 0; i < size; i++) {
-            //ind[i] = i;
+            ind[i] = i;
             a[i] = 0;
             b[i] = rand_r(&myseed);
             c[i] = rand_r(&myseed);
@@ -72,7 +72,7 @@ template<typename T, typename AT, typename AT_ind>
 void Init(int core_type, AT a, AT b, AT c, AT x, AT_ind ind, int size)
 {
 	if(core_type < 9)
-		InitSeq<T, AT, AT_ind>(a, b, c, x, size);
+		InitSeq<T, AT, AT_ind>(a, b, c, x, ind ,size);
 	else
 		InitRand<T, AT, AT_ind>(a, b, c, x, ind, size);
 }

@@ -13,13 +13,29 @@ TIME_PATTERN="avg_time:"
 BAND_PATTERN="avg_bw:"
 PERF_PATTERN="avg_flops:"
 
+rm info.txt
+lscpu >> info.txt
+
+lscpu_nodes=$(grep -R "NUMA node(s):" "./info.txt" | grep -Eo '[0-9]{1,3}')
+echo $lscpu_nodes
+
+lscpu_cpus=$(grep -R -m 1 "CPU(s):" "./info.txt" | grep -Eo '[0-9]{1,3}')
+echo $lscpu_cpus
+
+cpus_per_node=$(($lscpu_cpus/$lscpu_nodes))
+echo $cpus_per_node
+
+rm info.txt
+
+
 ##################### test name print #########################
 
 printf $TEST_NAME"," >> $file_name
 
 ##################### single socket test ########################
 rm "./"$PROG_NAME"/results.txt"
-THREADS=" --threads=48"
+THREADS=" --threads=$cpus_per_node"
+echo $THREADS
 bash make_omp.sh --prog=$PROG_NAME $PROG_ARGS $COMMON_ARGS $THREADS
 
 search_result=$(grep -R "$TIME_PATTERN" "./"$PROG_NAME"/results.txt")
@@ -38,7 +54,8 @@ printf "," >> $file_name
 
 ##################### dual socket test ########################
 rm "./"$PROG_NAME"/results.txt"
-THREADS=" --threads=96"
+THREADS=" --threads=$lscpu_cpus"
+echo $THREADS
 bash make_omp.sh --prog=$PROG_NAME $PROG_ARGS $COMMON_ARGS $THREADS
 
 search_result=$(grep -R "$TIME_PATTERN" "./"$PROG_NAME"/results.txt")

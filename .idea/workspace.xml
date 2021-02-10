@@ -9,11 +9,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="mult bug fixed and readme renewed">
+    <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="triada renewed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/triada.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/triada.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/triada_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/triada_main.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,12 +44,18 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
@@ -66,7 +73,8 @@
       <option name="presentableId" value="Default" />
       <updated>1612934563332</updated>
       <workItem from="1612934564921" duration="839000" />
-      <workItem from="1612953790074" duration="1504000" />
+      <workItem from="1612953790074" duration="6514000" />
+      <workItem from="1612964156327" duration="5754000" />
     </task>
     <task id="LOCAL-00001" summary="mult bug fixed and readme renewed">
       <created>1612954230116</created>
@@ -75,7 +83,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612954230116</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="triada renewed">
+      <created>1612955331689</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1612955331689</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -91,10 +106,12 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="mult bug fixed and readme renewed" />
-    <option name="LAST_COMMIT_MESSAGE" value="mult bug fixed and readme renewed" />
+    <MESSAGE value="triada renewed" />
+    <option name="LAST_COMMIT_MESSAGE" value="triada renewed" />
   </component>
 </project>
