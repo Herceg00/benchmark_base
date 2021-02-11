@@ -31,7 +31,6 @@ double CallKernel(void )
 	{
 		Init<base_type, array_type, helper_type>();
 
-
 		locality::utils::CacheAnnil(3);
 
         counter.start_timing();
@@ -54,11 +53,9 @@ double CallKernel(void )
 int main()
 {
     std::cout << "Array size: " << (long int) LENGTH << std::endl;
-    std::cout << "Radius: " << (long int) RADIUS << std::endl;
 	LOC_PAPI_INIT
 
     double time = CallKernel();
 
     locality::plain::Print(LENGTH, time);
-
 }
