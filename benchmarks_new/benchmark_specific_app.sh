@@ -63,10 +63,10 @@ printf $dat"|" >> $roof_name
 printf "|single_socket|" >> $roof_name
 
 printf "," >> $file_name
-printf "\n" >> $file_name
+
 
 ##################### dual socket test ########################
-if [ $lscpu_nodes = "2" ]; then
+if [ $lscpu_nodes = "1" ]; then
 printf "\n" >> $roof_name
 printf $TEST_NAME"|" >> $roof_name
 rm "./"$PROG_NAME"/results.txt"
@@ -98,9 +98,10 @@ printf $dat"|" >> $roof_name
 printf "|dual_socket|" >> $roof_name
 
 printf " " >> $file_name
-printf "\n" >> $file_name
+
 
 fi
+printf "\n" >> $file_name
 ##################### saving data ########################
 
 for ((row=1;row<=num_rows;row++)) do

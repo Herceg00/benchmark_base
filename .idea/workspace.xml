@@ -11,13 +11,11 @@
   <component name="ChangeListManager">
     <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="scripts renewed to roofline model">
       <change afterPath="$PROJECT_DIR$/benchmarks_new/stencil_1D/bin/omp_stencil_1D_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bin/omp_bellman_ford_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bin/omp_bellman_ford_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/gauss/bin/omp_gauss_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/gauss/bin/omp_gauss_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_mult/bin/omp_matrix_mult_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_mult/bin/omp_matrix_mult_np_STD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_mult/bin/omp_matrix_mult_np_STD" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_transp/bin/omp_matrix_transp_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_transp/bin/omp_matrix_transp_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,9 +62,9 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
@@ -89,7 +87,7 @@
       <workItem from="1612977706289" duration="259000" />
       <workItem from="1612981244023" duration="961000" />
       <workItem from="1612998538719" duration="1674000" />
-      <workItem from="1613034098027" duration="12142000" />
+      <workItem from="1613034098027" duration="12413000" />
     </task>
     <task id="LOCAL-00001" summary="mult bug fixed and readme renewed">
       <created>1612954230116</created>
@@ -133,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613052812199</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="scripts renewed to roofline model">
+      <created>1613054772876</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1613054772876</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
