@@ -10,12 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="scripts renewed to roofline model">
-      <change afterPath="$PROJECT_DIR$/roofline/roofline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/benchmark_base.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/benchmark_base.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/triada.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/triada.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

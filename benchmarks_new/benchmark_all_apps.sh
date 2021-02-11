@@ -37,7 +37,7 @@ printf "\n" >> $file_name
 
 ##################### TRIAD ########################
 
-for ((mode=0;mode<=9;mode++)); do #15
+for ((mode=0;mode<=15;mode++)); do
     args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
     name="triada|S="$LINEAR_SIZE"|M="$mode"|"
     bash ./benchmark_specific_app.sh "triada" "$args" "$name"

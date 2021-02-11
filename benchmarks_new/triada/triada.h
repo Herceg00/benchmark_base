@@ -56,16 +56,20 @@ void InitSeq(AT a, AT b, AT c, AT x, AT_ind ind,int size)
 template<typename T, typename AT, typename AT_ind>
 void InitRand(AT a, AT b, AT c, AT x, AT_ind ind, int size)
 {
-    #pragma omp parallel for schedule(static)
-    for(int i = 0; i < size; i++)
-	{
-		ind[i] = (((long)i*CACHE_LINE_K)%size + ((long)i*CACHE_LINE_K/size))%size; // we try to make as much cache-misses as we can
+    #pragma omp parallel
+    {
+        unsigned int myseed = omp_get_thread_num();
 
-		a[i] = 0;
-		b[i] = locality::utils::RRand(i << 2);
-		c[i] = locality::utils::RRand(i << 3);
-		x[i] = locality::utils::RRand(i << 4);
-	}
+        #pragma omp for schedule(static)
+        for (int i = 0; i < size; i++) {
+            ind[i] = (((long)i*CACHE_LINE_K)%size + ((long)i*CACHE_LINE_K/size))%size; // we try to make as much cache-misses as we can
+
+            a[i] = 0;
+            b[i] = rand_r(&myseed);
+            c[i] = rand_r(&myseed);
+            x[i] = rand_r(&myseed);
+        }
+    }
 }
 
 template<typename T, typename AT, typename AT_ind>
