@@ -11,8 +11,7 @@
   <component name="ChangeListManager">
     <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="scripts renewed to roofline model">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/triada.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/triada.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult_main.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
