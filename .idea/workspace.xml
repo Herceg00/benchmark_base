@@ -9,22 +9,15 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="scripts renewed">
+    <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="scripts renewed to roofline model">
       <change afterPath="$PROJECT_DIR$/benchmarks_new/stencil_1D/bin/omp_stencil_1D_np_STD" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bellman_ford_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bellman_ford_main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bin/omp_bellman_ford_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bin/omp_bellman_ford_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/gauss/bin/omp_gauss_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/gauss/bin/omp_gauss_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/make_omp.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/make_omp.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_mult/bin/omp_matrix_mult_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_mult/bin/omp_matrix_mult_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult_main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_transp/bin/omp_matrix_transp_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_transp/bin/omp_matrix_transp_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_transp/matrix_transp_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_transp/matrix_transp_main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/rand_generator/rand_generator_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/rand_generator/rand_generator_main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/triada_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/triada_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +89,7 @@
       <workItem from="1612977706289" duration="259000" />
       <workItem from="1612981244023" duration="961000" />
       <workItem from="1612998538719" duration="1674000" />
-      <workItem from="1613034098027" duration="10088000" />
+      <workItem from="1613034098027" duration="12142000" />
     </task>
     <task id="LOCAL-00001" summary="mult bug fixed and readme renewed">
       <created>1612954230116</created>
@@ -133,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612977924094</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="scripts renewed to roofline model">
+      <created>1613052812199</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1613052812199</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +156,7 @@
     <MESSAGE value="mult bug fixed and readme renewed" />
     <MESSAGE value="triada renewed" />
     <MESSAGE value="scripts renewed" />
-    <option name="LAST_COMMIT_MESSAGE" value="scripts renewed" />
+    <MESSAGE value="scripts renewed to roofline model" />
+    <option name="LAST_COMMIT_MESSAGE" value="scripts renewed to roofline model" />
   </component>
 </project>

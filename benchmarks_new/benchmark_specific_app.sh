@@ -30,6 +30,7 @@ rm info.txt
 
 ##################### test name print #########################
 echo $TEST_NAME
+printf $TEST_NAME"," >> $file_name
 printf $TEST_NAME"|" >> $roof_name
 
 ##################### single socket test ########################
@@ -37,25 +38,31 @@ rm "./"$PROG_NAME"/results.txt"
 THREADS=" --threads=$cpus_per_node"
 echo "Single-socket test: " $THREADS
 bash make_omp.sh --prog=$PROG_NAME $PROG_ARGS $COMMON_ARGS $THREADS
-
 search_result=$(grep -R "$TIME_PATTERN" "./"$PROG_NAME"/results.txt")
 dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
-#printf $dat" | " >> $roof_name
+#########to_CSV##############
+printf $dat"\ts," >> $file_name
 
 search_result=$(grep -R "$PERF_PATTERN" "./"$PROG_NAME"/results.txt")
 dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
+#########to_CSV##############
+printf $dat"\tGFLOP/s," >> $file_name
+########to_roofline##########
 printf $dat"|" >> $roof_name
 
 search_result=$(grep -R "$BAND_PATTERN" "./"$PROG_NAME"/results.txt")
 dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
-#printf $dat"\tGB/s," >> $roof
+#########to_CSV##############
+printf $dat"\tGB/s," >> $file_name
 
 search_result=$(grep -R "$ROOF_PATTERN" "./"$PROG_NAME"/results.txt")
 dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
+########to_roofline##########
 printf $dat"|" >> $roof_name
 
 printf "|single_socket|" >> $roof_name
 
+printf "," >> $file_name
 printf "\n" >> $file_name
 
 ##################### dual socket test ########################
@@ -69,14 +76,19 @@ bash make_omp.sh --prog=$PROG_NAME $PROG_ARGS $COMMON_ARGS $THREADS
 
 search_result=$(grep -R "$TIME_PATTERN" "./"$PROG_NAME"/results.txt")
 dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
+#########to_CSV##############
 printf $dat"\ts," >> $file_name
 
 search_result=$(grep -R "$PERF_PATTERN" "./"$PROG_NAME"/results.txt")
 dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
+#########to_CSV##############
+printf $dat"\tGFLOP/s," >> $file_name
+########to_roofline##########
 printf $dat"|" >> $roof_name
 
 search_result=$(grep -R "$BAND_PATTERN" "./"$PROG_NAME"/results.txt")
 dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
+#########to_CSV##############
 printf $dat"\tGB/s," >> $file_name
 
 search_result=$(grep -R "$ROOF_PATTERN" "./"$PROG_NAME"/results.txt")
