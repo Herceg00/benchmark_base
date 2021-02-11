@@ -20,7 +20,8 @@ double CallKernel(int core_type)
 	static array_type b;
 
 	double time = -1;
-    size_t bytes_requested = 2 * sizeof(double) * LENGTH * LENGTH;
+    size_t bytes_requested = 2 * sizeof(double) * (int)LENGTH * (int)LENGTH;
+    size_t flops_requested = (int)LENGTH * (int)LENGTH;
     auto counter = PerformanceCounter();
 
 	for(int i = 0; i < LOC_REPEAT; i++)
@@ -34,13 +35,14 @@ double CallKernel(int core_type)
 
         counter.end_timing();
 
-        counter.update_counters(bytes_requested, 0);
+        counter.update_counters(bytes_requested, flops_requested);
 
         counter.print_local_counters();
 
 	}
 
-    counter.print_average_counters(false);
+    counter.print_average_counters(true);
+    std::cout << "Benchmark type: " << (double) flops_requested / (double) bytes_requested << " flops/byte";
     return time;
 }
 

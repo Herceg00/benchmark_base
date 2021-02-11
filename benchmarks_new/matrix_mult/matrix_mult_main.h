@@ -49,8 +49,8 @@ double CallKernel(int core_type)
         counter.print_local_counters();
 
 	}
-
     counter.print_average_counters(true);
+    std::cout << "Benchmark type: " << (double) flops_requested / (double) bytes_requested<< " flops/byte";
     return time;
 }
 

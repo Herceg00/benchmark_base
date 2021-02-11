@@ -28,7 +28,7 @@ double CallKernel(int core_type)
 
 
 	double time = -1;
-	size_t flops_required = LENGTH * 2;
+	size_t flops_requested = LENGTH * 2;
     size_t bytes_requested = LENGTH * (triad_step_size[(int)MODE] * sizeof(double));
     auto counter = PerformanceCounter();
 
@@ -47,12 +47,13 @@ double CallKernel(int core_type)
 
         counter.end_timing();
 
-        counter.update_counters(bytes_requested, flops_required);
+        counter.update_counters(bytes_requested, flops_requested);
 
         counter.print_local_counters();
 
 	}
     counter.print_average_counters(true);
+    std::cout << "Benchmark type: " << (double) flops_requested / (double) bytes_requested<< " flops/byte";
 	return time;
 }
 
@@ -62,8 +63,6 @@ int main()
 
 	for(int core_type = (int)MODE; core_type < (int)MODE + 1 ; core_type++)
 	{
-		//locality::plain::Rotate("triada_" +locality::utils::ToString(core_type));
-
 		double time = CallKernel(core_type);
 
 		locality::plain::Print(LENGTH, time);

@@ -3,6 +3,7 @@ export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/usr/local/lib64:/usr/lib64
 PERF_PATTERN_BW="avg_bw"
 PERF_PATTERN_TIME="avg_time"
 PERF_PATTERN_FLOPS="avg_flops"
+PERF_PATTERN_ROOF="flops/byte"
 PROG_NAME=$1
 LAST_MODE=$2
 LENGTH=$3
@@ -61,6 +62,9 @@ search_result=$(grep -R "$PERF_PATTERN_TIME" tmp_file_mode$i''.txt)
 perf=`echo $search_result`
 echo "$perf" >> results.txt
 search_result=$(grep -R "$PERF_PATTERN_FLOPS" tmp_file_mode$i''.txt)
+perf=`echo $search_result`
+echo "$perf " >> results.txt
+search_result=$(grep -R "$PERF_PATTERN_ROOF" tmp_file_mode$i''.txt)
 perf=`echo $search_result`
 echo "$perf " >> results.txt
 echo "" >> results.txt

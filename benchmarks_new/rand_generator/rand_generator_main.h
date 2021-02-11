@@ -25,7 +25,7 @@ double CallKernel(void )
 	auto counter = PerformanceCounter();
 
     size_t bytes_requested = (long int) LENGTH * ( sizeof(double));
-    size_t flops_requested = 0;
+    size_t flops_requested = (long int) LENGTH;
 
 	for(int i = 0; i < LOC_REPEAT; i++)
 	{

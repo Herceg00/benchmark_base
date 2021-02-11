@@ -40,6 +40,7 @@ double CallKernel()
 	double time = -1;
 
     size_t bytes_requested = edge_count * vertex_count * (4 * sizeof(int) + 2 * sizeof(size_t) + sizeof(int)) + vertex_count;
+    size_t flops_requested = edge_count * vertex_count * 4;
 
     auto counter = PerformanceCounter();
 
@@ -55,11 +56,12 @@ double CallKernel()
 
         counter.end_timing();
 
-        counter.update_counters(bytes_requested, 0);
+        counter.update_counters(bytes_requested, flops_requested);
 
         counter.print_local_counters();
 	}
-    counter.print_average_counters(false);
+    counter.print_average_counters(true);
+    std::cout << "Benchmark type: " << (double) flops_requested / (double) bytes_requested<< " flops/byte";
 	return time;
 }
 
