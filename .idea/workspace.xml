@@ -10,10 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="scripts renewed to roofline model">
+      <change afterPath="$PROJECT_DIR$/roofline/roofline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/benchmark_base.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/benchmark_base.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/rand_generator/rand_generator_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/rand_generator/rand_generator_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/triada.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/triada.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,8 +61,14 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -156,5 +165,11 @@
     <MESSAGE value="scripts renewed" />
     <MESSAGE value="scripts renewed to roofline model" />
     <option name="LAST_COMMIT_MESSAGE" value="scripts renewed to roofline model" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="149" y="25" width="982" height="701" key="SettingsEditor" timestamp="1613067947440">
+      <screen x="0" y="25" width="1280" height="701" />
+    </state>
+    <state x="149" y="25" width="982" height="701" key="SettingsEditor/0.25.1280.701@0.25.1280.701" timestamp="1613067947440" />
   </component>
 </project>

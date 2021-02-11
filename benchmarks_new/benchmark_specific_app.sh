@@ -6,9 +6,8 @@ PROG_ARGS=$2
 TEST_NAME=$3
 COMMON_ARGS="--compiler=g++ --no_run=false"
 
-file_name="./performance_stats.csv"
-roof_name="./roofline.txt"
-
+file_name="./output/performance_stats.csv"
+roof_name="./output/roofline.txt"
 
 TIME_PATTERN="avg_time:"
 BAND_PATTERN="avg_bw:"
@@ -32,7 +31,7 @@ echo $TEST_NAME
 printf $TEST_NAME"," >> $file_name
 
 ########to_roofline##########
-printf $TEST_NAME"|" >> $roof_name
+printf $TEST_NAME"," >> $roof_name
 
 ##################### single socket test ########################
 rm "./"$PROG_NAME"/results.txt"
@@ -61,13 +60,15 @@ dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
 ########to_roofline##########
 printf $dat"," >> $roof_name
 printf ",single_socket," >> $roof_name
+printf "\n" >> $roof_name
 
 printf "," >> $file_name
 
 ##################### dual socket test ########################
 if [ $lscpu_nodes = "2" ]; then
-printf "\n" >> $roof_name
-printf $TEST_NAME"|" >> $roof_name
+
+printf $TEST_NAME"," >> $roof_name
+
 rm "./"$PROG_NAME"/results.txt"
 THREADS=" --threads=$lscpu_cpus"
 echo "Dual-socket test: "$THREADS
@@ -95,8 +96,9 @@ dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
 printf $dat"," >> $roof_name
 
 printf ",dual_socket," >> $roof_name
+printf "\n" >> $roof_name
 
 fi
 
-printf " " >> $file_name
+#printf " " >> $file_name
 printf "\n" >> $file_name

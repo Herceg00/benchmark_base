@@ -1,13 +1,12 @@
 #!/bin/bash
 
-file_name="./performance_stats.csv"
-roof_name="./roofline.txt"
-
-rm $file_name
-rm $roof_name
+rm -rf ./output/
+mkdir ./output/
+file_name="./output/performance_stats.csv"
+roof_name="./output/roofline.txt"
 
 LINEAR_SIZE="2000000"
-MTX_SIZE="512"
+MTX_SIZE="1024"
 GRAPH_MIN_SIZE="5"
 GRAPH_MAX_SIZE="8"
 
@@ -38,11 +37,10 @@ printf "\n" >> $file_name
 
 ##################### TRIAD ########################
 
-for ((mode=0;mode<=7;mode++)); do #15
+for ((mode=0;mode<=9;mode++)); do #15
     args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
     name="triada|S="$LINEAR_SIZE"|M="$mode"|"
     bash ./benchmark_specific_app.sh "triada" "$args" "$name"
-    printf "\n" >> $roof_name
 done
 
 printf " " >> $file_name
@@ -54,7 +52,6 @@ for ((radius=3;radius<=10;radius++)); do
     args="--length="$LINEAR_SIZE" --radius="$radius
     name="stencil_1D|S="$LINEAR_SIZE"|R="$radius"|"
     bash ./benchmark_specific_app.sh "stencil_1D" "$args" "$name"
-    printf "\n" >> $roof_name
 done
 
 printf " " >> $file_name
@@ -66,7 +63,6 @@ for ((mode=0;mode<=5;mode++)); do
     args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
     name="matrix_mult|S="$MTX_SIZE"|M="$mode"|"
     bash ./benchmark_specific_app.sh "matrix_mult" "$args" "$name"
-    printf "\n" >> $roof_name
 done
 
 printf " " >> $file_name
@@ -78,7 +74,6 @@ for ((mode=0;mode<=3;mode++)); do
     args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
     name="matrix_transp|S="$MTX_SIZE"|M="$mode"|"
     bash ./benchmark_specific_app.sh "matrix_transp" "$args" "$name"
-    printf "\n" >> $roof_name
 done
 
 printf " " >> $file_name
@@ -90,12 +85,10 @@ for ((size=$GRAPH_MIN_SIZE;size<=$GRAPH_MAX_SIZE;size++)); do
     args="--length="$size
     name="bellman_ford|S="$size"|"
     bash ./benchmark_specific_app.sh "bellman_ford" "$args" "$name"
-    printf "\n" >> $roof_name
 done
 
 printf " " >> $file_name
 printf "\n" >> $file_name
-
 
 #####################GAUSS ########################
 mode=0
@@ -103,7 +96,6 @@ mode=0
 args="--length="$MTX_SIZE
 name="gauss|S="$MTX_SIZE"|"
 bash ./benchmark_specific_app.sh "gauss" "$args" "$name"
-printf "\n" >> $roof_name
 
 printf " " >> $file_name
 printf "\n" >> $file_name
@@ -113,9 +105,12 @@ printf "\n" >> $file_name
 args="--length="$LINEAR_SIZE
 name="rand_generator|S="$LINEAR_SIZE"|"
 bash ./benchmark_specific_app.sh "rand_generator" "$args" "$name"
-printf "\n" >> $roof_name
 
 printf " " >> $file_name
 printf "\n" >> $file_name
+
+################### generate roofline ######################
+
+python3 ./../roofline/roofline.py ./../benchmarks_new/output/roofline.txt
 
 
