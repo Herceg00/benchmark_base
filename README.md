@@ -27,6 +27,8 @@ bash make_omp.sh --prog=triada --length=2000000 --compiler=g++ --threads=48 --ra
 
 --metrics  true - запуск бенчмарка под perf с бОльшим числом итераций и без очистки кэша, false - обычный запуск
 
+--events - перечисление perf events для передачи в perf stat (при условии metrics = true)
+
 MODE в бенчмарках:
 
 для matrix_mult доступны 0-5 режима умножения матриц, отличающиеся порядком вложенных циклов

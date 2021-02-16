@@ -40,6 +40,9 @@ while [ $# -gt 0 ]; do
     --metrics=*)
       METRICS="${1#*=}"
       ;;
+    --events=*)
+      EVENTS="${1#*=}"
+      ;;
     *)
 
       printf "***************************\n"
@@ -65,7 +68,7 @@ export OMP_PROC_BIND=true
 export OMP_PROC_BIND=close
 
 if [[ $METRICS = "true" ]]; then
-perf stat -a -e instructions ./bin/omp_$PROG_NAME""_np_STD
+perf stat -a -e $EVENTS ./bin/omp_$PROG_NAME""_np_STD
 fi
 if [[ $METRICS = "false" ]]; then
 ./bin/omp_$PROG_NAME""_np_STD > tmp_file_mode$i''.txt

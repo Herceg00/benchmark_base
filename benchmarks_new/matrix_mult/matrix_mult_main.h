@@ -20,7 +20,7 @@ double CallKernel(int core_type)
 	static array_type a;
 	static array_type b;
 	static array_type c;
-    int bw_for_stat[6] = {(double)LENGTH * (double)LENGTH* (double)LENGTH * 2  + 2 * (double)LENGTH * (double)LENGTH,
+    double bw_for_stat[6] = {(double)LENGTH * (double)LENGTH* (double)LENGTH * 2  + 2 * (double)LENGTH * (double)LENGTH,
                               (double)LENGTH * (double)LENGTH* (double)LENGTH * 3  + 1 * (double)LENGTH * (double)LENGTH,
                               (double)LENGTH * (double)LENGTH* (double)LENGTH * 2  + 2 * (double)LENGTH * (double)LENGTH,
                               (double)LENGTH * (double)LENGTH* (double)LENGTH * 3  + 1 * (double)LENGTH * (double)LENGTH,
@@ -29,8 +29,8 @@ double CallKernel(int core_type)
 
 
 	double time = -1;
-    size_t bytes_requested = sizeof(double) * bw_for_stat[core_type];
-    size_t flops_requested = (double)LENGTH * (double)LENGTH* (double)LENGTH * 2;
+    double bytes_requested = sizeof(double) * bw_for_stat[core_type];
+    double flops_requested = (double)LENGTH * (double)LENGTH* (double)LENGTH * 2;
     auto counter = PerformanceCounter();
 
 	for(int i = 0; i < LOC_REPEAT; i++)
