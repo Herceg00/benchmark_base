@@ -37,7 +37,11 @@ while [ $# -gt 0 ]; do
     --no_run=*)
       NO_RUN="${1#*=}"
       ;;
+    --metrics=*)
+      METRICS="${1#*=}"
+      ;;
     *)
+
       printf "***************************\n"
       printf "* Error: Invalid argument.*\n"
       printf "***************************\n"
@@ -49,12 +53,23 @@ cd ./"$PROG_NAME" || return
 for ((i=L_BOUND; i < H_BOUND + 1; i++))
 do
 rm -r bin
-make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$i COMPILER=$COMPILER
+if [[ $METRICS = "false" ]]; then
+make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$i COMPILER=$COMPILER METRIC_FLAG=NULL
+fi
+if [[ $METRICS = "true" ]]; then
+make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$i COMPILER=$COMPILER METRIC_FLAG=METRIC_RUN
+fi
 if [ $NO_RUN = "false" ]; then
 export OMP_NUM_THREADS=$EXP_THREADS
 export OMP_PROC_BIND=true
 export OMP_PROC_BIND=close
+
+if [[ $METRICS = "true" ]]; then
+perf stat -a -e instructions ./bin/omp_$PROG_NAME""_np_STD
+fi
+if [[ $METRICS = "false" ]]; then
 ./bin/omp_$PROG_NAME""_np_STD > tmp_file_mode$i''.txt
+fi
 search_result=$(grep -R "$PERF_PATTERN_BW" tmp_file_mode$i''.txt)
 perf=`echo $search_result`
 echo "$perf" >> results.txt

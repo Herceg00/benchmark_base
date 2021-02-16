@@ -50,16 +50,16 @@ do
 rm -r bin
 make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$i COMPILER=$COMPILER
 if [ $NO_RUN = "false" ]; then
-./bin/$PROG_NAME""_np_STD > tmp_file_mode$i''.txt
-search_result=$(grep -R "$PERF_PATTERN_BW" tmp_file_mode$i''.txt)
-perf=`echo $search_result`
-echo "$perf" >> results.txt
-search_result=$(grep -R "$PERF_PATTERN_TIME" tmp_file_mode$i''.txt)
-perf=`echo $search_result`
-echo "$perf" >> results.txt
-search_result=$(grep -R "$PERF_PATTERN_FLOPS" tmp_file_mode$i''.txt)
-perf=`echo $search_result`
-echo "$perf " >> results.txt
-echo "" >> results.txt
+perf record -e cpu-clock ./bin/$PROG_NAME""_np_STD > tmp_file_mode$i''.txt
+#search_result=$(grep -R "$PERF_PATTERN_BW" tmp_file_mode$i''.txt)
+#perf=`echo $search_result`
+#echo "$perf" >> results.txt
+#search_result=$(grep -R "$PERF_PATTERN_TIME" tmp_file_mode$i''.txt)
+#perf=`echo $search_result`
+#echo "$perf" >> results.txt
+#search_result=$(grep -R "$PERF_PATTERN_FLOPS" tmp_file_mode$i''.txt)
+#perf=`echo $search_result`
+#echo "$perf " >> results.txt
+#echo "" >> results.txt
 fi
 done

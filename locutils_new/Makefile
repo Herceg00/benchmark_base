@@ -27,6 +27,7 @@ endif
 
 INC_DIR = ../../locutils_new
 OUT_DIR = bin
+METR = $(METRIC_FLAG)
 
 LOC_NP = $(BENCH)_np
 LOC_PAPI = $(BENCH)_papi
@@ -49,6 +50,7 @@ TGT_OMP_RECTS = $(OUT_DIR)/omp_$(LOC_RECTS)_$(SIZE)_$(W_SIZE)
 
 #TGT := $(TGT_OMP_NP) $(TGT_NP)
 TGT := $(TGT_OMP_NP)
+#TGT := $(TGT_NP)
 
 CMD := $(CXX) $(CPPFLAGS) $(CXXFLAGS) $(ADD_FLAGS) -I $(INC_DIR)
 
@@ -68,7 +70,7 @@ $(TGT_RECTS): $(LOC_RECTS).cpp size.h ../size.h $(BENCH)_p.h $(BENCH).h $(INC_DI
 
 $(TGT_OMP_NP): $(LOC_NP).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
 	mkdir bin
-	$(CMD) -DLOC_THREADS=$(THREADS) -DLOC_REPEAT=$(REPEAT) -DRADIUS=$(ELEMS) -DLENGTH=$(LENGTH) -DMODE=$(MODE) $< -fopenmp -pthread -o $@  $(ADD_SRC)
+	$(CMD) -DLOC_THREADS=$(THREADS) -DLOC_REPEAT=$(REPEAT) -D$(METR)=0 -DRADIUS=$(ELEMS) -DLENGTH=$(LENGTH) -DMODE=$(MODE) $< -fopenmp -pthread -o $@  $(ADD_SRC)
 
 $(TGT_OMP_PAPI): $(LOC_PAPI).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
 	$(CMD) -DLOC_THREADS=$(THREADS) -DLOC_REPEAT=1 -DLOC_PAPI=$(PAPI) $< -fopenmp -pthread -lpapi $(ADD_SRC) -o $@

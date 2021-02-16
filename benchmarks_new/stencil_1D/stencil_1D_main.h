@@ -5,6 +5,7 @@
 #include "size.h"
 #include "omp.h"
 #include <chrono>
+#include "../../locutils_new/perf_wrapper.h"
 
 
 typedef double base_type;
@@ -27,12 +28,24 @@ double CallKernel(void )
 
     size_t bytes_requested = (long int) LENGTH * (RADIUS + 1) * ( sizeof(double));
     size_t flops_requested = 2  * (RADIUS + 1) * (long int)LENGTH;
+    int iterations;
+#ifndef METRIC_RUN
+    iterations = LOC_REPEAT;
+#endif
+#ifdef METRIC_RUN
+        std::cout << "KEKEKEKE"<< std::endl;
+        iterations = 1000;
+        Init<base_type, array_type, helper_type>(a, b, LENGTH);
+#endif
 
-	for(int i = 0; i < LOC_REPEAT; i++)
+
+	for(int i = 0; i < iterations; i++)
 	{
+#ifndef METRIC_RUN
 		Init<base_type, array_type, helper_type>(a, b, LENGTH);
 
 		locality::utils::CacheAnnil(3);
+#endif
 
 		counter.start_timing();
 
@@ -42,7 +55,9 @@ double CallKernel(void )
 
 		counter.update_counters(bytes_requested, flops_requested);
 
+#ifndef METRIC_RUN
 		counter.print_local_counters();
+#endif
 
 		std::swap(a,b);
 	}
@@ -59,6 +74,9 @@ int main()
 
     double time = CallKernel();
 
+//	System sys;
+//	sys.profile(CallKernel);
+//
     locality::plain::Print(LENGTH, time);
 
 }

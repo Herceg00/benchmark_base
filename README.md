@@ -9,7 +9,7 @@ Requirements:
 
 ИНСТРУКЦИИ ПО ЗАПУСКУ из директории benchmarks_new
 
-bash make_omp.sh --prog=triada --length=2000000 --compiler=g++ --threads=48 --radius=10 --lower_bound=4 --higher_bound=4 --no_run=false
+bash make_omp.sh --prog=triada --length=2000000 --compiler=g++ --threads=48 --radius=10 --lower_bound=4 --higher_bound=4 --no_run=false --metrics=true
 
 --prog - название директории с бенчмарком
 
@@ -24,6 +24,8 @@ bash make_omp.sh --prog=triada --length=2000000 --compiler=g++ --threads=48 --ra
 --lower_bound --higher_bound - диапазон (оба краевых значения входят в интервал) изменения MODE за один вызов скрипта
 
 --no_run - true - только сборка приложения, false - запуск
+
+--metrics  true - запуск бенчмарка под perf с бОльшим числом итераций и без очистки кэша, false - обычный запуск
 
 MODE в бенчмарках:
 
