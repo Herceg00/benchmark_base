@@ -39,30 +39,46 @@ double CallKernel()
 
 	double time = -1;
 
-    size_t bytes_requested = edge_count * vertex_count * (4 * sizeof(int) + 2 * sizeof(size_t) + sizeof(int)) + vertex_count;
-    size_t flops_requested = edge_count * vertex_count * 4;
+#ifndef METRIC_RUN
+    double bytes_requested = edge_count * vertex_count * (4 * sizeof(int) + 2 * sizeof(size_t) + sizeof(int)) + vertex_count;
+    double flops_requested = edge_count * vertex_count * 4;
 
     auto counter = PerformanceCounter();
-
-	for(int i = 0; i < LOC_REPEAT; i++)
+#endif
+    int iterations;
+#ifndef METRIC_RUN
+    iterations = LOC_REPEAT * 20;
+    Init<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, LENGTH);
+#endif
+#ifdef METRIC_RUN
+    iterations = LOC_REPEAT;
+#endif
+    for(int i = 0; i < iterations; i++)
 	{
+#ifndef METRIC_RUN
 		Init<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, LENGTH);
 
 		locality::utils::CacheAnnil();
 
         counter.start_timing();
+#endif
 
         Kernel<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, d);
+
+#ifndef METRIC_RUN
 
         counter.end_timing();
 
         counter.update_counters(bytes_requested, flops_requested);
 
         counter.print_local_counters();
+#endif
 	}
+#ifndef METRIC_RUN
     counter.print_average_counters(true);
     std::cout << "Benchmark type: " << (double) flops_requested / (double) bytes_requested<< " flops/byte";
-	return time;
+#endif
+    return time;
 }
 
 int main()

@@ -24,18 +24,18 @@ double CallKernel(void )
 
 
 	double time = -1;
-	auto counter = PerformanceCounter();
-
+#ifndef METRIC_RUN
+    auto counter = PerformanceCounter();
     size_t bytes_requested = (long int) LENGTH * (RADIUS + 1) * ( sizeof(double));
     size_t flops_requested = 2  * (RADIUS + 1) * (long int)LENGTH;
+#endif
     int iterations;
 #ifndef METRIC_RUN
     iterations = LOC_REPEAT;
 #endif
 #ifdef METRIC_RUN
-        std::cout << "KEKEKEKE"<< std::endl;
-        iterations = 1000;
-        Init<base_type, array_type, helper_type>(a, b, LENGTH);
+    iterations = LOC_REPEAT * 20;
+    Init<base_type, array_type, helper_type>(a, b, LENGTH);
 #endif
 
 
@@ -45,24 +45,27 @@ double CallKernel(void )
 		Init<base_type, array_type, helper_type>(a, b, LENGTH);
 
 		locality::utils::CacheAnnil(3);
-#endif
 
 		counter.start_timing();
+#endif
 
 		Kernel<base_type, array_type, helper_type> (a, b, LENGTH);
 
+#ifndef METRIC_RUN
 		counter.end_timing();
 
 		counter.update_counters(bytes_requested, flops_requested);
 
-#ifndef METRIC_RUN
+
 		counter.print_local_counters();
 #endif
 
 		std::swap(a,b);
 	}
+#ifndef METRIC_RUN
 	counter.print_average_counters(true);
     std::cout << "Benchmark type: " << (double) flops_requested / (double) bytes_requested<< " flops/byte";
+#endif
 	return time;
 }
 

@@ -29,28 +29,42 @@ double CallKernel(int core_type)
 
 
 	double time = -1;
+#ifndef METRIC_RUN
     double bytes_requested = sizeof(double) * bw_for_stat[core_type];
     double flops_requested = (double)LENGTH * (double)LENGTH* (double)LENGTH * 2;
     auto counter = PerformanceCounter();
+#endif
+    int iterations;
+#ifdef METRIC_RUN
+    iterations = LOC_REPEAT * 20;
+    Init<base_type, array_type>(a, b, c, LENGTH);
+#endif
+#ifndef METRIC_RUN
+    iterations = LOC_REPEAT;
+#endif
 
-	for(int i = 0; i < LOC_REPEAT; i++)
+	for(int i = 0; i < iterations; i++)
 	{
+#ifndef METRIC_RUN
 		Init<base_type, array_type>(a, b, c, LENGTH);
 		locality::utils::CacheAnnil(core_type);
 
         counter.start_timing();
-
+#endif
 		CallKernel<base_type, array_type> (core_type, a, b, c, LENGTH);
-
+#ifndef METRIC_RUN
         counter.end_timing();
 
         counter.update_counters(bytes_requested, flops_requested);
 
         counter.print_local_counters();
+#endif
 
 	}
+#ifndef METRIC_RUN
     counter.print_average_counters(true);
     std::cout << "Benchmark type: " << (double) flops_requested / (double) bytes_requested<< " flops/byte";
+#endif
     return time;
 }
 

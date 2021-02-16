@@ -10,13 +10,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="New perf interface">
+      <change afterPath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bin/omp_bellman_ford_np_STD" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/benchmarks_new/rand_generator/bin/omp_rand_generator_np_STD" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmarks_new/stencil_1D/perf.data" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmarks_new/triada/perf.data" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bellman_ford_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bellman_ford_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/gauss/bin/omp_gauss_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/gauss/bin/omp_gauss_np_STD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/gauss/gauss_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/gauss/gauss_main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_mult/bin/omp_matrix_mult_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_mult/bin/omp_matrix_mult_np_STD" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult_main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/stencil_1D/bin/omp_stencil_1D_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/stencil_1D/bin/omp_stencil_1D_np_STD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_transp/bin/omp_matrix_transp_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_transp/bin/omp_matrix_transp_np_STD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_transp/matrix_transp_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_transp/matrix_transp_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/rand_generator/rand_generator_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/rand_generator/rand_generator_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/stencil_1D/stencil_1D_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/stencil_1D/stencil_1D_main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/triada_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/triada_main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/locutils_new/papi_wrapper.h" beforeDir="false" afterPath="$PROJECT_DIR$/locutils_new/papi_wrapper.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -95,7 +104,9 @@
       <workItem from="1613300491443" duration="1230000" />
       <workItem from="1613416639707" duration="9095000" />
       <workItem from="1613472755210" duration="127000" />
-      <workItem from="1613475176845" duration="9211000" />
+      <workItem from="1613475176845" duration="9493000" />
+      <workItem from="1613492551238" duration="3658000" />
+      <workItem from="1613497640492" duration="2206000" />
     </task>
     <task id="LOCAL-00001" summary="mult bug fixed and readme renewed">
       <created>1612954230116</created>
@@ -153,7 +164,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613483042740</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="New perf interface">
+      <created>1613485609788</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1613485609788</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

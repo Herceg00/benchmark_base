@@ -9,7 +9,6 @@
 #include <stdint.h>
 #include <iostream>
 #include <sstream>
-
 #include "utils.h"
 
 typedef long long int counter_type;
