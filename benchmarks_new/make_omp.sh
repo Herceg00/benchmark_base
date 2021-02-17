@@ -43,6 +43,9 @@ while [ $# -gt 0 ]; do
     --events=*)
       EVENTS="${1#*=}"
       ;;
+    --output=*)
+      OUTPUT="${1#*=}"
+      ;;
     *)
 
       printf "***************************\n"
@@ -52,7 +55,7 @@ while [ $# -gt 0 ]; do
   esac
   shift
 done
-cd ./"$PROG_NAME" || return
+cd ./"$PROG_NAME"
 for ((i=L_BOUND; i < H_BOUND + 1; i++))
 do
 rm -r bin
@@ -68,7 +71,7 @@ export OMP_PROC_BIND=true
 export OMP_PROC_BIND=close
 
 if [[ $METRICS = "true" ]]; then
-perf stat -a -e $EVENTS ./bin/omp_$PROG_NAME""_np_STD
+perf stat -o $OUTPUT -a -e $EVENTS ./bin/omp_$PROG_NAME""_np_STD
 fi
 if [[ $METRICS = "false" ]]; then
 ./bin/omp_$PROG_NAME""_np_STD > tmp_file_mode$i''.txt
@@ -88,5 +91,6 @@ echo "$perf " >> results.txt
 echo "" >> results.txt
 fi
 done
+cd ../
 
 

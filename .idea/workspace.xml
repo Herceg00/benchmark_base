@@ -9,24 +9,22 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="New perf interface">
+    <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="New perf interface with ifndef">
       <change afterPath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bin/omp_bellman_ford_np_STD" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/benchmarks_new/file_name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/benchmarks_new/file_name_extra" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/benchmarks_new/metrics.sh" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmarks_new/rand_generator/bin/omp_rand_generator_np_STD" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/benchmarks_new/rand_generator/file_name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/benchmarks_new/rand_generator/file_name_extra" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmarks_new/stencil_1D/perf.data" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/benchmarks_new/triada/perf.data" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bellman_ford_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bellman_ford_main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/gauss/bin/omp_gauss_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/gauss/bin/omp_gauss_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/gauss/gauss_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/gauss/gauss_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/make_omp.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/make_omp.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_mult/bin/omp_matrix_mult_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_mult/bin/omp_matrix_mult_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult_main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_transp/bin/omp_matrix_transp_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_transp/bin/omp_matrix_transp_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_transp/matrix_transp_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_transp/matrix_transp_main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/rand_generator/rand_generator_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/rand_generator/rand_generator_main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/stencil_1D/stencil_1D_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/stencil_1D/stencil_1D_main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/triada_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/triada_main.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locutils_new/papi_wrapper.h" beforeDir="false" afterPath="$PROJECT_DIR$/locutils_new/papi_wrapper.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,11 +69,12 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Rainbow Brackets" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
@@ -106,7 +105,8 @@
       <workItem from="1613472755210" duration="127000" />
       <workItem from="1613475176845" duration="9493000" />
       <workItem from="1613492551238" duration="3658000" />
-      <workItem from="1613497640492" duration="2206000" />
+      <workItem from="1613497640492" duration="2935000" />
+      <workItem from="1613569614831" duration="21201000" />
     </task>
     <task id="LOCAL-00001" summary="mult bug fixed and readme renewed">
       <created>1612954230116</created>
@@ -171,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613485609788</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="New perf interface with ifndef">
+      <created>1613499891826</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1613499891827</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +203,7 @@
     <MESSAGE value="scripts renewed" />
     <MESSAGE value="scripts renewed to roofline model" />
     <MESSAGE value="New perf interface" />
-    <option name="LAST_COMMIT_MESSAGE" value="New perf interface" />
+    <MESSAGE value="New perf interface with ifndef" />
+    <option name="LAST_COMMIT_MESSAGE" value="New perf interface with ifndef" />
   </component>
 </project>
