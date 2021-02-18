@@ -1,7 +1,7 @@
 #!/bin/bash
 
 file_name_prefix="./output/metrics"
-tmp_metrics_file_name="metrics.txt"
+tmp_metrics_file_name="metrics.csv"
 
 declare -a event_names=("instructions"
     "armv8_pmuv3_0/cpu_cycles/"

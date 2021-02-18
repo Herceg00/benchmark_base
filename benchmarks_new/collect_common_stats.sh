@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file_name="./output/performance_stats2.csv"
+file_name="./output/performance_stats.csv"
 TIME_PATTERN="avg_time:"
 BAND_PATTERN="avg_bw:"
 PERF_PATTERN="avg_flops:"
@@ -20,7 +20,7 @@ function init {
                          "Performance"
                          "Bandwidth")
 
-    printf ",one_socket,,,,duo_socket," >> $file_name
+    printf ",one_socket,,,,dual_socket," >> $file_name
 
     add_separator
 

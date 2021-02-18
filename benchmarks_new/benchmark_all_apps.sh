@@ -2,16 +2,9 @@
 
 rm -rf ./output/
 mkdir ./output/
-file_name="./output/performance_stats.csv"
-roof_name="./output/roofline.txt"
 
-#LINEAR_SIZE="2000000"
-#MTX_SIZE="1024"
-#GRAPH_MIN_SIZE="5"
-#GRAPH_MAX_SIZE="8"
-
-LINEAR_SIZE="2000"
-MTX_SIZE="128"
+LINEAR_SIZE="2000000"
+MTX_SIZE="1024"
 GRAPH_MIN_SIZE="5"
 GRAPH_MAX_SIZE="8"
 
@@ -23,13 +16,24 @@ bash ./collect_roofline.sh init "dual_socket"
 
 ##################### TRIAD ########################
 
-for ((mode=0;mode<=15;mode++)); do
+for ((mode=0;mode<=0;mode++)); do
     args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
     name="triada|S="$LINEAR_SIZE"|M="$mode"|"
     bash ./benchmark_specific_app.sh "triada" "$args" "$name"
 done
 
+python3 ./../roofline/roofline.py ./../benchmarks_new/output/roofline_single_socket.txt
+python3 ./../roofline/roofline.py ./../benchmarks_new/output/roofline_dual_socket.txt
+
 exit 0
+
+##################### TRIAD ########################
+
+for ((mode=0;mode<=15;mode++)); do
+    args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
+    name="triada|S="$LINEAR_SIZE"|M="$mode"|"
+    bash ./benchmark_specific_app.sh "triada" "$args" "$name"
+done
 
 ##################### STENCIL ########################
 
@@ -39,9 +43,6 @@ for ((radius=3;radius<=10;radius++)); do
     bash ./benchmark_specific_app.sh "stencil_1D" "$args" "$name"
 done
 
-printf " " >> $file_name
-printf "\n" >> $file_name
-
 ##################### MAT_MUL ########################
 
 for ((mode=0;mode<=5;mode++)); do
@@ -49,9 +50,6 @@ for ((mode=0;mode<=5;mode++)); do
     name="matrix_mult|S="$MTX_SIZE"|M="$mode"|"
     bash ./benchmark_specific_app.sh "matrix_mult" "$args" "$name"
 done
-
-printf " " >> $file_name
-printf "\n" >> $file_name
 
 ##################### MAT_TRANSPOSAL ########################
 
@@ -61,9 +59,6 @@ for ((mode=0;mode<=3;mode++)); do
     bash ./benchmark_specific_app.sh "matrix_transp" "$args" "$name"
 done
 
-printf " " >> $file_name
-printf "\n" >> $file_name
-
 ##################### BELLMAN_FORD ########################
 mode=0
 for ((size=$GRAPH_MIN_SIZE;size<=$GRAPH_MAX_SIZE;size++)); do
@@ -72,18 +67,11 @@ for ((size=$GRAPH_MIN_SIZE;size<=$GRAPH_MAX_SIZE;size++)); do
     bash ./benchmark_specific_app.sh "bellman_ford" "$args" "$name"
 done
 
-printf " " >> $file_name
-printf "\n" >> $file_name
-
 #####################GAUSS ########################
 mode=0
-
 args="--length="$MTX_SIZE
 name="gauss|S="$MTX_SIZE"|"
 bash ./benchmark_specific_app.sh "gauss" "$args" "$name"
-
-printf " " >> $file_name
-printf "\n" >> $file_name
 
 #####################RAND_GENERATOR ########################
 
@@ -91,11 +79,9 @@ args="--length="$LINEAR_SIZE
 name="rand_generator|S="$LINEAR_SIZE"|"
 bash ./benchmark_specific_app.sh "rand_generator" "$args" "$name"
 
-printf " " >> $file_name
-printf "\n" >> $file_name
-
 ################### generate roofline ######################
 
-python3 ./../roofline/roofline.py ./../benchmarks_new/output/roofline.txt
+python3 ./../roofline/roofline.py ./../benchmarks_new/output/roofline_single_socket.txt
+python3 ./../roofline/roofline.py ./../benchmarks_new/output/roofline_single_socket.txt
 
 

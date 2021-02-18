@@ -8,22 +8,25 @@ import sys
 
 tmp_data_prefix = "prof_data/"
 
-last_band = "DRAM (dual_socket)"
-last_perf = "float_vector_FMA (dual_socket)"
+last_band = "DRAM"
+last_perf = "float_vector_FMA"
 
-kunpeng_characteristics = {"bandwidths": {"DRAM (single_socket)": 93.5,         # GB/s
-                                          "DRAM (dual_socket)": 186},
-                           "peak_performances": {"float_no_vector_noFMA": 124,
-                                                 "float_vector_noFMA": 499,
-                                                 "float_vector_FMA": 1996,
-                                                 "float_vector_FMA (dual_socket)": 3993}}  # GFLOP/s
+kunpeng_characteristics_single_socket = {"bandwidths": {"DRAM": 93.5},
+                                          "peak_performances": {"float_no_vector_noFMA": 124,
+                                                                "float_vector_noFMA": 499,
+                                                                "float_vector_FMA": 1996}}  # GFLOP/s
+
+kunpeng_characteristics_dual_socket = {"bandwidths": {"DRAM": 187},
+                                          "peak_performances": {"float_no_vector_noFMA": 248,
+                                                                "float_vector_noFMA": 1000,
+                                                                "float_vector_FMA": 3992}}  # GFLOP/s
 
 x_data_first = 1.0 / 256.0
 x_data_last = 1024
 
 
 class RooflinePlotter:
-    def __init__(self, name, platform_characteristics, precision):
+    def __init__(self, name, platform_characteristics):
         self.platform_characteristics = platform_characteristics
         self.total_execution_time = 0.0
         self.name = name
@@ -76,7 +79,7 @@ class RooflinePlotter:
             x_data_name = [(x_intersection - x_data_first)/64 + x_data_first]
             y_data_name = [self.get_bandwidth_roof(x_data_name[0], cur_band)]
             data.append(go.Scatter(x=x_data_name, y=y_data_name, mode="lines+text", name=str(mem_key), text=[mem_key],
-                                   textposition="top center", showlegend=False))
+                               textposition="top center", showlegend=False))
 
         return data
 
@@ -90,11 +93,8 @@ class RooflinePlotter:
         closest_roof_val = 0
         closest_roof_name = ""
         point_val = profiling_data["gflops"]
-        mem_key = "DRAM (single_socket)"
+        mem_key = "DRAM"
         perf_key = "float_no_vector_noFMA"
-        if profiling_data["sockets"] == "dual_socket":
-            perf_key = "float_vector_FMA (dual_socket)"
-            mem_key = "DRAM (dual_socket)"
 
         min_distance = self.platform_characteristics["peak_performances"][perf_key]
         roof_val = self.get_compute_roof(self.platform_characteristics["bandwidths"][mem_key], x, "float_no_vector_noFMA") # TODO
@@ -142,7 +142,7 @@ class RooflinePlotter:
             additional_x_points.append(profiling_data["ops_per_byte"])
         return additional_x_points
 
-    def draw_plot(self, profiling_data_array):
+    def draw_plot(self, profiling_data_array, sockets):
         profiling_points_x_data = [] #self.get_profiling_points_x_data(profiling_data_array)
         plots_data = self.generate_CARM_roof_plots(profiling_points_x_data)
 
@@ -156,23 +156,28 @@ class RooflinePlotter:
         yaxis = dict(autorange=True, showgrid=True, zeroline=True, showline=True, ticks='',
                      showticklabels=True, type='log', title=y_title)
 
+        current_file_name='./../benchmarks_new/output/roofline_'+sockets+'.html'
         plotly.offline.plot({
             "data": plots_data,
             "layout": go.Layout(title=self.name, xaxis=xaxis, yaxis=yaxis)
-        }, filename='./../benchmarks_new/output/roofline.html') #
+        }, filename=current_file_name) # filename='./../benchmarks_new/output/roofline.html') #
 
 
-def generate_roofline_from_profiling_data(file_name, roofline_name, platform_characteristics):
+def generate_roofline_from_profiling_data(file_name, roofline_name):
     # read CMD file
     profiling_file = open(file_name, 'r')
     profiling_data = []
 
-    precision = ""
     line_pos = 0
     for line in profiling_file:
         line_pos += 1
         if line_pos == 1:
-            precision = line
+            if "single_socket" in line:
+                platform_characteristics = kunpeng_characteristics_single_socket
+                sockets="single_socket"
+            if "dual_socket" in line:
+                platform_characteristics = kunpeng_characteristics_dual_socket
+                sockets="dual_socket"
             continue
         if line.startswith("#") or line.startswith("//"):
             continue
@@ -180,17 +185,15 @@ def generate_roofline_from_profiling_data(file_name, roofline_name, platform_cha
         name = line_split[0]
         ops_number = float(line_split[1])
         ops_per_byte = float(line_split[2])
-        sockets = line_split[3]
         profiling_data.append({"name": name,
                                "ops_per_byte": ops_per_byte,
-                               "gflops": ops_number,
-                               "sockets": sockets})
+                               "gflops": ops_number})
     profiling_file.close()
 
     # initialize and draw roofline
-    roofline = RooflinePlotter(roofline_name, platform_characteristics, precision)
-    roofline.draw_plot(profiling_data)
+    roofline = RooflinePlotter(roofline_name, platform_characteristics)
+    roofline.draw_plot(profiling_data, sockets)
 
-generate_roofline_from_profiling_data(sys.argv[1], "Kunpeng Roofline Model", kunpeng_characteristics)
+generate_roofline_from_profiling_data(sys.argv[1], "Kunpeng Roofline Model")
 
 
