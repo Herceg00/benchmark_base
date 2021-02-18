@@ -4,7 +4,7 @@ declare -A matrix
 PROG_NAME=$1
 PROG_ARGS=$2
 TEST_NAME=$3
-COMMON_ARGS="--compiler=g++ --no_run=false"
+COMMON_ARGS="--compiler=g++ --no_run=false --metrics=false"
 
 file_name="./output/performance_stats.csv"
 roof_name="./output/roofline.txt"
