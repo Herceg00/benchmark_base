@@ -15,32 +15,9 @@ MTX_SIZE="128"
 GRAPH_MIN_SIZE="5"
 GRAPH_MAX_SIZE="8"
 
-bash ./collect_metrics.sh init_metrics_table
-
-##################### names init ########################
-
-declare -a column_names=("algorithm"
-			                   "Time"
-                         "Performance"
-                         "Bandwidth" 
-		                     ""
-                         "Time"
-                         "Performance"
-                         "Bandwidth")
-
-printf ",one_socket,,,,duo_socket," >> $file_name
-printf " " >> $file_name
-printf "\n" >> $file_name
-
-it="1"
-for name in "${column_names[@]}"
-do
-    it=$((it+1))
-    printf $name"," >> $file_name
-done
-
-printf " " >> $file_name
-printf "\n" >> $file_name
+bash ./collect_common_stats.sh init
+bash ./collect_metrics.sh init
+bash ./collect_roofline.sh init
 
 ##################### TRIAD ########################
 
@@ -51,8 +28,8 @@ for ((mode=0;mode<=15;mode++)); do
     exit 0
 done
 
-printf " " >> $file_name
-printf "\n" >> $file_name
+bash ./collect_common_stats.sh add_separator
+bash ./collect_metrics.sh add_separator
 
 ##################### STENCIL ########################
 
