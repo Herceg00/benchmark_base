@@ -67,7 +67,7 @@ function init {
             printf $event_name"," >> $file_name
         done
     fi
-    
+
     if [ $arch = "intel" ]; then
         for event_name in "${intel_event_names[@]}"
         do

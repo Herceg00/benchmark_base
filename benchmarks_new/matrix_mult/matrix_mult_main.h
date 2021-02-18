@@ -20,16 +20,16 @@ double CallKernel(int core_type)
 	static array_type a;
 	static array_type b;
 	static array_type c;
-    double bw_for_stat[6] = {(double)LENGTH * (double)LENGTH* (double)LENGTH * 2  + 2 * (double)LENGTH * (double)LENGTH,
-                              (double)LENGTH * (double)LENGTH* (double)LENGTH * 3  + 1 * (double)LENGTH * (double)LENGTH,
-                              (double)LENGTH * (double)LENGTH* (double)LENGTH * 2  + 2 * (double)LENGTH * (double)LENGTH,
-                              (double)LENGTH * (double)LENGTH* (double)LENGTH * 3  + 1 * (double)LENGTH * (double)LENGTH,
-                              (double)LENGTH * (double)LENGTH* (double)LENGTH * 3  + 1 * (double)LENGTH * (double)LENGTH,
-                              (double)LENGTH * (double)LENGTH* (double)LENGTH * 3  + 1 * (double)LENGTH * (double)LENGTH};
-
 
 	double time = -1;
 #ifndef METRIC_RUN
+    double bw_for_stat[6] = {(double)LENGTH * (double)LENGTH* (double)LENGTH * 2  + 2 * (double)LENGTH * (double)LENGTH,
+                             (double)LENGTH * (double)LENGTH* (double)LENGTH * 3  + 1 * (double)LENGTH * (double)LENGTH,
+                             (double)LENGTH * (double)LENGTH* (double)LENGTH * 2  + 2 * (double)LENGTH * (double)LENGTH,
+                             (double)LENGTH * (double)LENGTH* (double)LENGTH * 3  + 1 * (double)LENGTH * (double)LENGTH,
+                             (double)LENGTH * (double)LENGTH* (double)LENGTH * 3  + 1 * (double)LENGTH * (double)LENGTH,
+                             (double)LENGTH * (double)LENGTH* (double)LENGTH * 3  + 1 * (double)LENGTH * (double)LENGTH};
+
     double bytes_requested = sizeof(double) * bw_for_stat[core_type];
     double flops_requested = (double)LENGTH * (double)LENGTH* (double)LENGTH * 2;
     auto counter = PerformanceCounter();
