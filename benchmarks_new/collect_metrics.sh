@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file_name="./output/event_counters.csv"
+file_name_prefix="./output/metrics"
 tmp_metrics_file_name="metrics.txt"
 
 declare -a event_names=("instructions"
@@ -13,6 +13,8 @@ declare -a event_names=("instructions"
 )
 
 function add_separator() {
+    SOCKETS=$1
+    file_name=$file_name_prefix"_"$SOCKETS".txt"
     printf " " >> $file_name
     printf "\n" >> $file_name
 }
@@ -42,6 +44,9 @@ function join_by {
 }
 
 function init {
+    SOCKETS=$1
+    file_name=$file_name_prefix"_"$SOCKETS".txt"
+
     printf "benchmark name," >> $file_name
     for event_name in "${event_names[@]}"
     do
@@ -55,7 +60,10 @@ function collect_stats() {
     PROG_ARGS=$2
     TEST_NAME=$3
     THREADS=$4
+    SOCKETS=$5
     COMMON_ARGS="--compiler=g++ --no_run=false --metrics=true --output=$tmp_metrics_file_name"
+
+    file_name=$file_name_prefix"_"$SOCKETS".txt"
 
     # get list of events as a param
     events_param="--events="$(join_by , "${event_names[@]}")
@@ -71,7 +79,7 @@ function collect_stats() {
       printf $parsed_number"," >> $file_name
     done
 
-    add_separator
+    add_separator $SOCKETS
 
     # remove tmp metrics file
     rm ./$PROG_NAME/$tmp_metrics_file_name
