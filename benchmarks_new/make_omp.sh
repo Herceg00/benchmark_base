@@ -1,5 +1,6 @@
 #!/bin/bash
 export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/usr/local/lib64:/usr/lib64
+
 PERF_PATTERN_BW="avg_bw"
 PERF_PATTERN_TIME="avg_time"
 PERF_PATTERN_FLOPS="avg_flops"
@@ -55,30 +56,30 @@ while [ $# -gt 0 ]; do
   esac
   shift
 done
+
 cd ./"$PROG_NAME"
 for ((i=L_BOUND; i < H_BOUND + 1; i++))
 do
 rm -r bin
 
 if [[ $METRICS = "false" ]]; then
-  make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$i COMPILER=$COMPILER METRIC_FLAG=NULL
+    make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$i COMPILER=$COMPILER METRIC_FLAG=NULL
 fi
 
 if [[ $METRICS = "true" ]]; then
-  make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$i COMPILER=$COMPILER METRIC_FLAG=METRIC_RUN
+    make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$i COMPILER=$COMPILER METRIC_FLAG=METRIC_RUN
 fi
 
 if [ $NO_RUN = "false" ]; then
-export OMP_NUM_THREADS=$EXP_THREADS
-export OMP_PROC_BIND=true
-export OMP_PROC_BIND=close
-  if [[ $METRICS = "true" ]]; then
-    #perf stat -a -e $EVENTS ./bin/omp_$PROG_NAME""_np_STD 2>temp.out 1>temp1.out
-    perf stat -o $OUTPUT -a -e $EVENTS ./bin/omp_$PROG_NAME""_np_STD
-  fi
-  if [[ $METRICS = "false" ]]; then
-    ./bin/omp_$PROG_NAME""_np_STD > tmp_file_mode$i''.txt
-    #cat tmp_file_mode$i''.txt
+    export OMP_NUM_THREADS=$EXP_THREADS
+    export OMP_PROC_BIND=true
+    export OMP_PROC_BIND=close
+    if [[ $METRICS = "true" ]]; then
+        perf stat -o $OUTPUT -a -e $EVENTS ./bin/omp_$PROG_NAME""_np_STD
+    fi
+    if [[ $METRICS = "false" ]]; then
+        ./bin/omp_$PROG_NAME""_np_STD > tmp_file_mode$i''.txt
+        #cat tmp_file_mode$i''.txt
 fi
 
 search_result=$(grep -R "$PERF_PATTERN_BW" tmp_file_mode$i''.txt)

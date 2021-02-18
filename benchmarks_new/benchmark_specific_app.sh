@@ -1,10 +1,9 @@
 #!/bin/bash
 
-declare -A matrix
 PROG_NAME=$1
 PROG_ARGS=$2
 TEST_NAME=$3
-COMMON_ARGS="--compiler=g++ --no_run=false --metrics=false"
+COMMON_ARGS=" --compiler=g++ --no_run=false --metrics=false "
 
 file_name="./output/performance_stats.csv"
 roof_name="./output/roofline.txt"
@@ -14,16 +13,13 @@ BAND_PATTERN="avg_bw:"
 PERF_PATTERN="avg_flops:"
 ARITHMETIC_INTENSITY_PATTERN="flops/byte"
 
+
+#################### obtain CPU info ##########################
 lscpu >> info.txt
-
 lscpu_nodes=$(grep -R "NUMA node(s):" "./info.txt" | grep -Eo '[0-9]{1,3}')
-
 lscpu_cpus=$(grep -R -m 1 "CPU(s):" "./info.txt" | grep -Eo '[0-9]{1,3}')
-
 cpus_per_node=$(($lscpu_cpus/$lscpu_nodes))
-
 rm info.txt
-
 
 ##################### test name print #########################
 echo $TEST_NAME
@@ -37,7 +33,10 @@ printf $TEST_NAME"," >> $roof_name
 rm "./"$PROG_NAME"/results.txt"
 THREADS=" --threads=$cpus_per_node"
 echo "Single-socket test: " $THREADS
+
+
 bash make_omp.sh --prog=$PROG_NAME $PROG_ARGS $COMMON_ARGS $THREADS
+
 search_result=$(grep -R "$TIME_PATTERN" "./"$PROG_NAME"/results.txt")
 dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
 #########to_CSV##############
@@ -63,6 +62,8 @@ printf ",single_socket," >> $roof_name
 printf "\n" >> $roof_name
 
 printf "," >> $file_name
+
+bash ./collect_metrics.sh collect_metrics_for_benchmark "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME"
 
 ##################### dual socket test ########################
 if [ $lscpu_nodes = "2" ]; then

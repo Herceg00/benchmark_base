@@ -15,6 +15,8 @@ MTX_SIZE="128"
 GRAPH_MIN_SIZE="5"
 GRAPH_MAX_SIZE="8"
 
+bash ./collect_metrics.sh init_metrics_table
+
 ##################### names init ########################
 
 declare -a column_names=("algorithm"
@@ -46,6 +48,7 @@ for ((mode=0;mode<=15;mode++)); do
     args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
     name="triada|S="$LINEAR_SIZE"|M="$mode"|"
     bash ./benchmark_specific_app.sh "triada" "$args" "$name"
+    exit 0
 done
 
 printf " " >> $file_name
