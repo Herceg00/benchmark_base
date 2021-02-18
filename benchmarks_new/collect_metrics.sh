@@ -1,7 +1,7 @@
 #!/bin/bash
 
 file_name_prefix="./output/metrics"
-tmp_metrics_file_name="metrics.csv"
+tmp_metrics_file_name="metrics.txt"
 
 declare -a event_names=("instructions"
     "armv8_pmuv3_0/cpu_cycles/"
@@ -10,18 +10,21 @@ declare -a event_names=("instructions"
     "armv8_pmuv3_0/ll_cache/"
     "armv8_pmuv3_0/mem_access/"
     "armv8_pmuv3_0/remote_access/"
+    "duration_time"
+    "armv8_pmuv3_0/stall_backend/"
+    "armv8_pmuv3_0/stall_frontend/"
 )
 
 function add_separator() {
     SOCKETS=$1
-    file_name=$file_name_prefix"_"$SOCKETS".txt"
+    file_name=$file_name_prefix"_"$SOCKETS".csv"
     printf " " >> $file_name
     printf "\n" >> $file_name
 }
 
 function remove_spaces() {
     var=$1
-    echo "${var//+([[:space:]])/}"
+    echo ${var//[[:blank:]]/}
 }
 
 function replace_backslash() {
@@ -45,7 +48,7 @@ function join_by {
 
 function init {
     SOCKETS=$1
-    file_name=$file_name_prefix"_"$SOCKETS".txt"
+    file_name=$file_name_prefix"_"$SOCKETS".csv"
 
     printf "benchmark name," >> $file_name
     for event_name in "${event_names[@]}"
@@ -55,7 +58,11 @@ function init {
     printf "\n" >> $file_name
 }
 
-function collect_stats() {
+function compute_additional_data {
+    echo "hehe"
+}
+
+function collect_stats {
     PROG_NAME=$1
     PROG_ARGS=$2
     TEST_NAME=$3
@@ -63,7 +70,7 @@ function collect_stats() {
     SOCKETS=$5
     COMMON_ARGS="--compiler=g++ --no_run=false --metrics=true --output=$tmp_metrics_file_name"
 
-    file_name=$file_name_prefix"_"$SOCKETS".txt"
+    file_name=$file_name_prefix"_"$SOCKETS".csv"
 
     # get list of events as a param
     events_param="--events="$(join_by , "${event_names[@]}")
@@ -74,9 +81,10 @@ function collect_stats() {
     printf $TEST_NAME"," >> $file_name
     for current_name in "${event_names[@]}"
     do
-      parsed_number=$(parse_events $current_name)
-      #echo $parsed_number
-      printf $parsed_number"," >> $file_name
+        parsed_number=$(parse_events $current_name)
+        #echo $parsed_number
+        printf $parsed_number"," >> $file_name
+        remove_spaces $parsed_number
     done
 
     add_separator $SOCKETS
