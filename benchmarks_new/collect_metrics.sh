@@ -3,16 +3,16 @@
 file_name_prefix="./output/metrics"
 tmp_metrics_file_name="metrics.txt"
 
-declare -a event_names=("instructions"
-    "armv8_pmuv3_0/cpu_cycles/"
-    "armv8_pmuv3_0/inst_retired/"
-    "armv8_pmuv3_0/ll_cache_miss/"
-    "armv8_pmuv3_0/ll_cache/"
-    "armv8_pmuv3_0/mem_access/"
-    "armv8_pmuv3_0/remote_access/"
-    "duration_time"
-    "armv8_pmuv3_0/stall_backend/"
-    "armv8_pmuv3_0/stall_frontend/"
+declare -a kunpeng_event_names=("instructions"
+        "armv8_pmuv3_0/cpu_cycles/"
+        "armv8_pmuv3_0/inst_retired/"
+        "armv8_pmuv3_0/ll_cache_miss/"
+        "armv8_pmuv3_0/ll_cache/"
+        "armv8_pmuv3_0/mem_access/"
+        "armv8_pmuv3_0/remote_access/"
+        "duration_time"
+        "armv8_pmuv3_0/stall_backend/"
+        "armv8_pmuv3_0/stall_frontend/"
 )
 
 function add_separator() {
@@ -24,7 +24,7 @@ function add_separator() {
 
 function remove_spaces() {
     var=$1
-    echo ${var//[[:blank:]]/}
+    echo $var | sed 's/[^0-9]*//g'
 }
 
 function replace_backslash() {
@@ -51,10 +51,15 @@ function init {
     file_name=$file_name_prefix"_"$SOCKETS".csv"
 
     printf "benchmark name," >> $file_name
-    for event_name in "${event_names[@]}"
-    do
-        printf $event_name"," >> $file_name
-    done
+
+    arch=$(bash ./cpu_info.sh get_arch)
+    if [ $arch = "aarch64" ]; then
+        for event_name in "${kunpeng_event_names[@]}"
+        do
+            printf $event_name"," >> $file_name
+        done
+    fi
+
     printf "\n" >> $file_name
 }
 
@@ -73,19 +78,28 @@ function collect_stats {
     file_name=$file_name_prefix"_"$SOCKETS".csv"
 
     # get list of events as a param
-    events_param="--events="$(join_by , "${event_names[@]}")
+    arch=$(bash ./cpu_info.sh get_arch)
+    if [ $arch = "aarch64" ]; then
+        events_param="--events="$(join_by , "${kunpeng_event_names[@]}")
+    fi
 
     # collect basic events
     bash make_omp.sh --prog=$PROG_NAME $PROG_ARGS $COMMON_ARGS $THREADS $events_param
 
     printf $TEST_NAME"," >> $file_name
-    for current_name in "${event_names[@]}"
-    do
-        parsed_number=$(parse_events $current_name)
-        #echo $parsed_number
-        printf $parsed_number"," >> $file_name
-        remove_spaces $parsed_number
-    done
+
+    declare -A event_values
+    arch=$(bash ./cpu_info.sh get_arch)
+    if [ $arch = "aarch64" ]; then
+        for current_name in "${kunpeng_event_names[@]}"
+        do
+            parsed_number=$(parse_events $current_name)
+            printf $parsed_number"," >> $file_name
+            event_values["$current_name"]="$parsed_number"
+        done
+    fi
+
+    echo "${event_values["instructions"]}"
 
     add_separator $SOCKETS
 

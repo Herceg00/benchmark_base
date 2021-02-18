@@ -7,6 +7,13 @@ function get_sockets_count() {
     echo $sockets
 }
 
+function get_arch() {
+    lscpu >> info.txt
+    line=$(grep -R "Architecture:" "./info.txt")
+    rm info.txt
+    echo "${line#*:}"
+}
+
 function get_cores_count() {
     lscpu >> info.txt
     lscpu_nodes=$(grep -R "NUMA node(s):" "./info.txt" | grep -Eo '[0-9]{1,3}')
