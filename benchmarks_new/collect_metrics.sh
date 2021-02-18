@@ -5,9 +5,8 @@ then
 fi
 
 file_name="./output/event_counters.csv"
-file_name_extra="../output/event_counters.csv"
 
-
+COMMON_ARGS=" --threads=48 --no_run=false --metrics=true --output=metrics.txt " # TODO threads
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -35,15 +34,6 @@ while [ $# -gt 0 ]; do
     --higher_bound=*)
       H_BOUND="${1#*=}"
       ;;
-    --no_run=*)
-      NO_RUN="${1#*=}"
-      ;;
-    --metrics=*)
-      METRICS="${1#*=}"
-      ;;
-    --events=*)
-      EVENTS="${1#*=}"
-      ;;
     *)
 
       printf "***************************\n"
@@ -54,33 +44,55 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-
-function parse_events() {
-    search_result=$(grep -R "$current_event" "./$PROG_NAME'/metrics.txt")
-    parsed_number=`echo $search_result | sed -e "s/L1-dcache-loads//"`
+function remove_spaces() {
+    var=$1
+    echo "${var//+([[:space:]])/}"
 }
 
+function parse_events() {
+    search_result=$(grep -R "$1" "./$PROG_NAME/metrics.txt")
+    echo $search_result
 
-declare -a event_columns=("instructions"
-			                   "L1-dcache-loads"
-                         )
+    parsed_number=`echo $search_result | sed -e "s/"$1"//"`
 
-#print leading row
-it="1"
+    result=$(remove_spaces $parsed_number)
+    echo $result
+}
+
+function join_by {
+    local IFS="$1"; shift; echo "$*";
+}
+
+declare -a event_names=("instructions"
+"armv8_pmuv3_0/cpu_cycles/"
+"armv8_pmuv3_0/inst_retired/"
+"armv8_pmuv3_0/ll_cache_miss/"
+"armv8_pmuv3_0/ll_cache/"
+"armv8_pmuv3_0/mem_access/"
+"armv8_pmuv3_0/remote_access/"
+)
+
+# add header
 echo $PROG_NAME"," >> file_name
-for name in "${event_columns[@]}"
+for event_name in "${event_names[@]}"
 do
-    it=$((it+1))
-    printf $name"," >> $file_name
+    printf $event_name"," >> $file_name
 done
+printf "\n" >> $file_name
+
+# get list of events as a param
+list_of_events=$(join_by , "${event_names[@]}")
+echo $list_of_events
 
 
-bash make_omp.sh --prog=$PROG_NAME --events=$name --length=$LENGTH --compiler=$COMPILER --threads="8" --radius=$ELEMS --lower_bound=$L_BOUND --higher_bound=$H_BOUND --no_run=$NO_RUN --metrics="true" --output="metrics.txt"
+# collect basic events
+echo "--prog=$PROG_NAME --events=$list_of_events --length=$LENGTH --compiler=$COMPILER --radius=$ELEMS --lower_bound=$L_BOUND --higher_bound=$H_BOUND $COMMON_ARGS"
+bash make_omp.sh --prog=$PROG_NAME --events=$list_of_events --length=$LENGTH --compiler=$COMPILER --radius=$ELEMS --lower_bound=$L_BOUND --higher_bound=$H_BOUND $COMMON_ARGS
 
-it="0"
-for name in "${event_columns[@]}"
+for current_name in "${event_names[@]}"
 do
-  THREADS="$cpus_per_node"
-  current_event=name
+  parsed_number=$(parse_events $current_name)
+  echo $parsed_number
   printf $parsed_number"," >> $file_name
 done
+printf "\n" >> $file_name

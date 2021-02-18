@@ -73,6 +73,7 @@ export OMP_NUM_THREADS=$EXP_THREADS
 export OMP_PROC_BIND=true
 export OMP_PROC_BIND=close
   if [[ $METRICS = "true" ]]; then
+    #perf stat -a -e $EVENTS ./bin/omp_$PROG_NAME""_np_STD 2>temp.out 1>temp1.out
     perf stat -o $OUTPUT -a -e $EVENTS ./bin/omp_$PROG_NAME""_np_STD
   fi
   if [[ $METRICS = "false" ]]; then
