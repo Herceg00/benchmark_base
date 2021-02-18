@@ -5,8 +5,13 @@ mkdir ./output/
 file_name="./output/performance_stats.csv"
 roof_name="./output/roofline.txt"
 
-LINEAR_SIZE="2000000"
-MTX_SIZE="1024"
+#LINEAR_SIZE="2000000"
+#MTX_SIZE="1024"
+#GRAPH_MIN_SIZE="5"
+#GRAPH_MAX_SIZE="8"
+
+LINEAR_SIZE="2000"
+MTX_SIZE="128"
 GRAPH_MIN_SIZE="5"
 GRAPH_MAX_SIZE="8"
 

@@ -66,12 +66,5 @@ double CallKernel(int core_type)
 
 int main()
 {
-	LOC_PAPI_INIT
-
-	for(int core_type = (int)MODE; core_type < (int)MODE + 1 ; core_type++)
-	{
-		double time = CallKernel(core_type);
-
-		locality::plain::Print(LENGTH, time);
-	}
+    CallKernel((int)MODE);
 }

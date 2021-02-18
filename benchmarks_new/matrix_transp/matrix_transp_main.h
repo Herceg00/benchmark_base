@@ -20,18 +20,18 @@ double CallKernel(int core_type)
 	static array_type b;
 
 	double time = -1;
+
 #ifndef METRIC_RUN
-    double bytes_requested = 2 * sizeof(double) * (int)LENGTH * (int)LENGTH;
-    double flops_requested = (int)LENGTH * (int)LENGTH;
+    double bytes_requested = 2.0 * sizeof(double) * (int)LENGTH * (int)LENGTH;
+    double flops_requested = (double)LENGTH * (double)LENGTH;
     auto counter = PerformanceCounter();
 #endif
-    int iterations;
+
 #ifdef METRIC_RUN
-    iterations = LOC_REPEAT * 20;
+    int iterations = LOC_REPEAT * 20;
     Init<base_type, array_type>(a, b, LENGTH);
-#endif
-#ifndef METRIC_RUN
-    iterations = LOC_REPEAT;
+#else
+    int iterations = LOC_REPEAT;
 #endif
 
 	for(int i = 0; i < iterations; i++)
@@ -61,15 +61,6 @@ double CallKernel(int core_type)
 
 int main()
 {
-	LOC_PAPI_INIT
-
-	for(int core_type = (int)MODE; core_type < (int)MODE + 1; core_type++)
-	{
-		locality::plain::Rotate(type_names[core_type]);
-
-		double time = CallKernel(core_type);
-
-locality::plain::Print(LENGTH, time);
-	}
+    CallKernel((int)MODE);
 }
 

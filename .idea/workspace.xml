@@ -11,8 +11,17 @@
   <component name="ChangeListManager">
     <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="New perf interface with ifndef">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bellman_ford_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bellman_ford_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/gauss/gauss_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/gauss/gauss_main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/make_omp.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/make_omp.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_transp/matrix_transp_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_transp/matrix_transp_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/metrics.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/collect_metrics.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/rand_generator/rand_generator_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/rand_generator/rand_generator_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/stencil_1D/stencil_1D_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/stencil_1D/stencil_1D_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/triada_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/triada_main.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +99,7 @@
       <workItem from="1613492551238" duration="3658000" />
       <workItem from="1613497640492" duration="2935000" />
       <workItem from="1613569614831" duration="21201000" />
-      <workItem from="1613631016445" duration="1120000" />
+      <workItem from="1613631016445" duration="2649000" />
     </task>
     <task id="LOCAL-00001" summary="mult bug fixed and readme renewed">
       <created>1612954230116</created>
@@ -189,5 +198,11 @@
     <MESSAGE value="New perf interface" />
     <MESSAGE value="New perf interface with ifndef" />
     <option name="LAST_COMMIT_MESSAGE" value="New perf interface with ifndef" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="341" y="128" width="597" height="490" key="find.popup" timestamp="1613633226862">
+      <screen x="0" y="25" width="1280" height="701" />
+    </state>
+    <state x="341" y="128" width="597" height="490" key="find.popup/0.25.1280.701@0.25.1280.701" timestamp="1613633226862" />
   </component>
 </project>

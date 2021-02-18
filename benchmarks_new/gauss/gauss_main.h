@@ -33,23 +33,19 @@ double CallKernel()
     double local_performance = (double)LENGTH*(double)LENGTH*(double)LENGTH/2 + (double)LENGTH*(double)LENGTH * 3.5 + 2 *(double)LENGTH;
     auto counter = PerformanceCounter();
 #endif
-    int iterations;
-#ifdef METRIC_RUN
-    Init<base_type, vec_type, matrix_type, indx_type>(b, x, matrix, indx, LENGTH);
-    iterations = 20 * LOC_REPEAT;
-#endif
-#ifndef METRIC_RUN
-    iterations = LOC_REPEAT;
-#endif
 
+#ifdef METRIC_RUN
+    int iterations = LOC_REPEAT * 20;
+    Init<base_type, vec_type, matrix_type, indx_type>(b, x, matrix, indx, LENGTH);
+#else
+    int iterations = LOC_REPEAT;
+#endif
 
 	for(int i = 0; i < iterations; i++)
 	{
 #ifndef METRIC_RUN
         Init<base_type, vec_type, matrix_type, indx_type>(b, x, matrix, indx, LENGTH);
-
 		locality::utils::CacheAnnil();
-
         counter.start_timing();
 #endif
 
@@ -57,26 +53,20 @@ double CallKernel()
 
 #ifndef METRIC_RUN
         counter.end_timing();
-
         counter.update_counters(bytes_requested, local_performance);
-
         counter.print_local_counters();
 #endif
 	}
+
 #ifndef METRIC_RUN
     counter.print_average_counters(true);
     std::cout << "Benchmark type: " << (double) local_performance / (double) bytes_requested<< " flops/byte";
 #endif
+
     return time;
 }
 
 int main()
 {
-	LOC_PAPI_INIT
-
-	double time = CallKernel();
-
-locality::plain::Print(LENGTH, time);
-
-	return 0;
+    CallKernel();
 }

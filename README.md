@@ -9,7 +9,7 @@ Requirements:
 
 ИНСТРУКЦИИ ПО ЗАПУСКУ из директории benchmarks_new
 
-bash make_omp.sh --prog=triada --length=2000000 --compiler=g++ --threads=48 --radius=10 --lower_bound=4 --higher_bound=4 --no_run=false --metrics=true
+bash make_omp.sh --prog=triada --length=2000000 --compiler=g++ --threads=48 --radius=10 --lower_bound=4 --higher_bound=4 --no_run=false --metrics=false
 
 --prog - название директории с бенчмарком
 

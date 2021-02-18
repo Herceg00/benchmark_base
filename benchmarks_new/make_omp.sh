@@ -77,7 +77,7 @@ export OMP_PROC_BIND=close
   fi
   if [[ $METRICS = "false" ]]; then
     ./bin/omp_$PROG_NAME""_np_STD > tmp_file_mode$i''.txt
-    cat tmp_file_mode$i''.txt
+    #cat tmp_file_mode$i''.txt
 fi
 
 search_result=$(grep -R "$PERF_PATTERN_BW" tmp_file_mode$i''.txt)
