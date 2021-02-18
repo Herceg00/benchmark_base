@@ -10,13 +10,13 @@ GRAPH_MAX_SIZE="8"
 
 bash ./collect_common_stats.sh init
 bash ./collect_metrics.sh init "single_socket"
-bash ./collect_metrics.sh init "dual_socket"
+#bash ./collect_metrics.sh init "dual_socket"
 bash ./collect_roofline.sh init "single_socket"
-bash ./collect_roofline.sh init "dual_socket"
+#bash ./collect_roofline.sh init "dual_socket"
 
 ##################### TRIAD ########################
 
-for ((mode=0;mode<=5;mode++)); do #15
+for ((mode=0;mode<=15;mode++)); do
     args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
     name="triada|S="$LINEAR_SIZE"|M="$mode"|"
     bash ./benchmark_specific_app.sh "triada" "$args" "$name"
@@ -69,6 +69,6 @@ bash ./benchmark_specific_app.sh "rand_generator" "$args" "$name"
 ################### generate roofline ######################
 
 python3 ./../roofline/roofline.py ./../benchmarks_new/output/roofline_single_socket.txt
-python3 ./../roofline/roofline.py ./../benchmarks_new/output/roofline_single_socket.txt
+#python3 ./../roofline/roofline.py ./../benchmarks_new/output/roofline_dual_socket.txt
 
 
