@@ -11,7 +11,16 @@ function get_arch() {
     lscpu >> info.txt
     line=$(grep -R "Architecture:" "./info.txt")
     rm info.txt
-    echo "${line#*:}"
+
+    arch=$(echo "${line#*:}")
+
+    if [ $arch = "aarch64" ]; then
+        echo "aarch64"
+    fi
+
+    if [ $arch = "x86_64" ]; then
+        echo "intel"
+    fi
 }
 
 function get_cores_count() {

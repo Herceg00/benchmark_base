@@ -22,8 +22,8 @@ if [ $sockets_num = "2" ]; then
     echo $cores_num
     THREADS=" --threads=$cores_num"
     bash ./collect_common_stats.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS"
-    bash ./collect_roofline.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS" "dual_socket"
-    bash ./collect_metrics.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS" "dual_socket"
+    #bash ./collect_roofline.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS" "dual_socket"
+    #bash ./collect_metrics.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS" "dual_socket"
 fi
 
 bash ./collect_common_stats.sh add_separator

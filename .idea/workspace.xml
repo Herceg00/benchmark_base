@@ -11,6 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="New perf interface with ifndef">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_specific_app.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/collect_metrics.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/collect_metrics.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/cpu_info.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/cpu_info.sh" afterDir="false" />
     </list>
@@ -96,7 +98,7 @@
       <workItem from="1613497640492" duration="2935000" />
       <workItem from="1613569614831" duration="21201000" />
       <workItem from="1613631016445" duration="4760000" />
-      <workItem from="1613636084301" duration="20048000" />
+      <workItem from="1613636084301" duration="23821000" />
     </task>
     <task id="LOCAL-00001" summary="mult bug fixed and readme renewed">
       <created>1612954230116</created>
