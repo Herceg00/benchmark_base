@@ -6,15 +6,15 @@ fi
 
 file_name="./output/event_counters.csv"
 
-COMMON_ARGS=" --threads=48 --no_run=false --metrics=true --output=metrics.txt " # TODO threads
+COMMON_ARGS="--no_run=false --metrics=true --output=metrics.txt " # TODO threads
 
 while [ $# -gt 0 ]; do
   case "$1" in
     --prog=*)
       PROG_NAME="${1#*=}"
       ;;
-    --mode=*)
-      LAST_MODE="${1#*=}"
+    --test_name=*)
+      TEST_NAME="${1#*=}"
       ;;
     --length=*)
       LENGTH="${1#*=}"
@@ -49,11 +49,16 @@ function remove_spaces() {
     echo "${var//+([[:space:]])/}"
 }
 
+function replace_backslash() {
+    echo "$1" | tr '/' '*'
+}
+
 function parse_events() {
     search_result=$(grep -R "$1" "./$PROG_NAME/metrics.txt")
-    echo $search_result
+    search_result=$(replace_backslash $search_result)
+    loc_event_name=$(replace_backslash $1)
 
-    parsed_number=`echo $search_result | sed -e "s/"$1"//"`
+    parsed_number=`echo $search_result | sed -e "s/"$loc_event_name"//"`
 
     result=$(remove_spaces $parsed_number)
     echo $result
@@ -73,7 +78,7 @@ declare -a event_names=("instructions"
 )
 
 # add header
-echo $PROG_NAME"," >> file_name
+printf "benchmark name," >> $file_name
 for event_name in "${event_names[@]}"
 do
     printf $event_name"," >> $file_name
@@ -87,8 +92,9 @@ echo $list_of_events
 
 # collect basic events
 echo "--prog=$PROG_NAME --events=$list_of_events --length=$LENGTH --compiler=$COMPILER --radius=$ELEMS --lower_bound=$L_BOUND --higher_bound=$H_BOUND $COMMON_ARGS"
-bash make_omp.sh --prog=$PROG_NAME --events=$list_of_events --length=$LENGTH --compiler=$COMPILER --radius=$ELEMS --lower_bound=$L_BOUND --higher_bound=$H_BOUND $COMMON_ARGS
+bash make_omp.sh --prog=$PROG_NAME --events=$list_of_events --length=$LENGTH --compiler=$COMPILER --radius=$ELEMS --lower_bound=$L_BOUND --higher_bound=$H_BOUND --threads=$EXP_THREADS $COMMON_ARGS
 
+printf $TEST_NAME"," >> $file_name
 for current_name in "${event_names[@]}"
 do
   parsed_number=$(parse_events $current_name)
