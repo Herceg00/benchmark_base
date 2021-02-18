@@ -12,7 +12,6 @@ declare -a arm_event_names=("instructions"
         "armv8_pmuv3_0/ll_cache/"
         "armv8_pmuv3_0/mem_access/"
         "armv8_pmuv3_0/remote_access/"
-        "duration_time"
         "armv8_pmuv3_0/stall_backend/"
         "armv8_pmuv3_0/stall_frontend/"
         "branch-misses"
@@ -20,6 +19,17 @@ declare -a arm_event_names=("instructions"
 
 declare -a intel_event_names=("instructions"
         "branch-misses"
+        "LLC-load-misses"
+        "LLC-loads"
+        "LLC-store-misses"
+        "LLC-stores"
+        "L1-dcache-load-misses"
+        "L1-dcache-loads"
+        "L1-dcache-stores"
+        "cpu-cycles"
+        "mem-loads"
+        "mem-stores"
+        "cache-misses"
 )
 
 function add_separator() {
@@ -83,15 +93,20 @@ function analyse_events {
 
     arch=$(bash ./cpu_info.sh get_arch)
     if [ $arch = "aarch64" ]; then
-        instructions="${event_values['instructions']}"
-        cycles="${event_values['armv8_pmuv3_0/cpu_cycles/']}"
-        branch_misses="${event_values['branch-misses']}"
-        l1_misses="${event_values['armv8_pmuv3_0/ll_cache_miss/']}"
-        l1_total="${event_values['armv8_pmuv3_0/ll_cache/']}"
+        analyse_values['ipc']=$(echo "scale=4; ${event_values['instructions']}/${event_values['armv8_pmuv3_0/cpu_cycles/']}" | bc -l)
+        analyse_values['branch_misses']=$(echo "scale=4; ${event_values['branch-misses']}/${event_values['instructions']}" | bc -l)
+        analyse_values['L1_hit_rate']=$(echo "scale=4; 100.0*(${event_values['armv8_pmuv3_0/ll_cache/']} - ${event_values['armv8_pmuv3_0/ll_cache_miss/']})/${event_values['armv8_pmuv3_0/ll_cache/']}" | bc -l)
 
-        analyse_values['ipc']=$(echo "scale=4; $instructions/$cycles" | bc -l)
-        analyse_values['branch_misses']=$(echo "scale=4; $branch_misses/$instructions" | bc -l)
-        analyse_values['l1_hit_rate']=$(echo "scale=4; 100.0*($l1_total - $l1_misses)/$l1_total" | bc -l)
+        analyse_values['mem accesses per instruction']=$(echo "scale=4; ${event_values['armv8_pmuv3_0/mem_access/']}/${event_values['instructions']}" | bc -l)
+    fi
+
+    if [ $arch = "intel" ]; then
+        analyse_values['ipc']=$(echo "scale=4; ${event_values['instructions']}/${event_values['cpu-cycles']}" | bc -l)
+        analyse_values['branch_misses']=$(echo "scale=4; ${event_values['branch-misses']}/${event_values['instructions']}" | bc -l)
+        analyse_values['L1_hit_rate']=$(echo "scale=4; (${event_values['L1-dcache-loads']} - ${event_values['L1-dcache-load-misses']})/${event_values['L1-dcache-loads']}" | bc -l)
+        analyse_values['LLC_hit_rate']=$(echo "scale=4; (${event_values['LLC-loads']} - ${event_values['LLC-load-misses']})/${event_values['LLC-loads']}" | bc -l)
+
+        analyse_values['mem accesses per instruction']=$(echo "scale=4; (${event_values['mem-loads']} + ${event_values['mem-loads']})/${event_values['instructions']}" | bc -l)
     fi
 
     printf "," >> $file_name
