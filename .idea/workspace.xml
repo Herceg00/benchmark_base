@@ -9,22 +9,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="Typical kernel done">
+    <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="rec_fft done">
       <change afterPath="$PROJECT_DIR$/benchmarks_new/lc_kernel/bin/omp_lc_kernel_np_STD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/benchmarks_new/rec_fft/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/benchmarks_new/rec_fft/bin/omp_rec_fft_np_STD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/benchmarks_new/rec_fft/rec_fft.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/benchmarks_new/rec_fft/rec_fft_files.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/benchmarks_new/rec_fft/rec_fft_main.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/benchmarks_new/rec_fft/rec_fft_np.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/benchmarks_new/rec_fft/rec_fft_p.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/benchmarks_new/rec_fft/rec_fft_papi.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/benchmarks_new/rec_fft/rec_fft_rects.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/benchmarks_new/rec_fft/size.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/collect_metrics.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/collect_metrics.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/lc_kernel/lc_kernel.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/lc_kernel/lc_kernel.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/lc_kernel/lc_kernel_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/lc_kernel/lc_kernel_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/rec_fft/bin/omp_rec_fft_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/rec_fft/bin/omp_rec_fft_np_STD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/rec_fft/rec_fft.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/rec_fft/rec_fft.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/rec_fft/rec_fft_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/rec_fft/rec_fft_main.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/triada/bin/omp_triada_np_STD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locutils_new/timers.h" beforeDir="false" afterPath="$PROJECT_DIR$/locutils_new/timers.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +60,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CLionProjects/lc-cuda" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -123,7 +117,7 @@
       <workItem from="1613667122838" duration="26000" />
       <workItem from="1613680155435" duration="4711000" />
       <workItem from="1613722962678" duration="9851000" />
-      <workItem from="1613737997487" duration="12540000" />
+      <workItem from="1613737997487" duration="20144000" />
     </task>
     <task id="LOCAL-00001" summary="mult bug fixed and readme renewed">
       <created>1612954230116</created>
@@ -202,7 +196,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613752014130</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="rec_fft done">
+      <created>1613752828352</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1613752828352</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,6 +230,7 @@
     <MESSAGE value="New perf interface" />
     <MESSAGE value="New perf interface with ifndef" />
     <MESSAGE value="Typical kernel done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Typical kernel done" />
+    <MESSAGE value="rec_fft done" />
+    <option name="LAST_COMMIT_MESSAGE" value="rec_fft done" />
   </component>
 </project>

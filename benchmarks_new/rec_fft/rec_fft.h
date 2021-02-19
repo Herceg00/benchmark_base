@@ -76,8 +76,8 @@ void Kernel(int offset, int delta,
 				{
 					k00 = offset + k*delta;    k01 = k00 + N2*delta;
 					k10 = offset + 2*k*delta;  k11 = k10 + delta;
-					//cs = cos(TWO_PI*k/(double)size); sn = sin(TWO_PI*k/(double)size);
-					cs = 0.77; sn = 0.6; // we think that this functions are bad for actual results
+					cs = cos(TWO_PI*k/(double)size); sn = sin(TWO_PI*k/(double)size);
+					//cs = 0.77; sn = 0.6; // we think that this functions are bad for actual results
 					T k11_0 = XX[k11][0], k11_1 = XX[k11][1], k10_0 = XX[k10][0], k10_1 = XX[k10][1];
 					tmp0 = cs * k11_0 + sn * k11_1;
 					tmp1 = cs * k11_1 - sn * k11_0;

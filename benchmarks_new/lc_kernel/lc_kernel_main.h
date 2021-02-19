@@ -32,32 +32,30 @@ double CallKernel(void )
 
 #ifndef METRIC_RUN
     auto counter = PerformanceCounter();
-    size_t bytes_requested = (long int) LENGTH * (RADIUS + 1) * ( sizeof(double));
-    size_t flops_requested = 2  * (RADIUS + 1) * (long int)LENGTH;
+    size_t bytes_requested = 16 * sizeof(float) * (int)LENGTH / 8;
+    size_t flops_requested = 16 * 182 * (int)LENGTH / 8;
 #endif
 
 #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * 20;
-    slpointers *sldata_array = new slpointers [iterations];
-    tlpointers *tldata_array = new tlpointers [iterations];
-    for (int j = 0; j < iterations; j++){
-        Init(tldata_array[j], sldata_array[j], plsize, half_plsize);
-    }
-#else
-    int iterations = LOC_REPEAT;
-    slpointers *sldata_array = new slpointers [iterations];
-    tlpointers *tldata_array = new tlpointers [iterations];
 #endif
+
+#ifndef METRIC_RUN
+    int iterations = LOC_REPEAT;
+#endif
+    slpointers *sldata_array = new slpointers [1];
+    tlpointers *tldata_array = new tlpointers [1];
+    Init(tldata_array[0], sldata_array[0], plsize, half_plsize);
 
     for(int i = 0; i < iterations; i++)
 	{
 #ifndef METRIC_RUN
-        Init(tldata_array[i], sldata_array[i], plsize, half_plsize);
+//        Init(tldata_array[0], sldata_array[0], plsize, half_plsize);
 		locality::utils::CacheAnnil(3);
 		counter.start_timing();
 #endif
 
-		Kernel(plsize, half_plsize,tick, &sldata_array[i], &tldata_array[i]);
+		Kernel(plsize, half_plsize,tick, &sldata_array[0], &tldata_array[0]);
 
 #ifndef METRIC_RUN
 		counter.end_timing();

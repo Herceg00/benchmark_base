@@ -384,14 +384,10 @@ void Kernel(cusizevector plsize,
         if ((tx != (half_plsize.x - 1)) && (ty != (half_plsize.y - 1)) && (ty != (half_plsize.y - 1))) {
             const int poffset = get_new_poffset(i, tick.x, tick.y, tick.z, 0, 0, 0, plsize);
 
-            const int poffsetxm = get_new_poffset(i, tick.x, tick.y, tick.z, -1, 0, 0, plsize);
             const int poffsetxp = get_new_poffset(i, tick.x, tick.y, tick.z, +1, 0, 0, plsize);
-            const int poffsetym = get_new_poffset(i, tick.x, tick.y, tick.z, 0, -1, 0, plsize);
+
             const int poffsetyp = get_new_poffset(i, tick.x, tick.y, tick.z, 0, +1, 0, plsize);
 
-            const int poffsetxmym = get_new_poffset(i, tick.x, tick.y, tick.z, -1, -1, 0, plsize);
-            const int poffsetxmyp = get_new_poffset(i, tick.x, tick.y, tick.z, -1, +1, 0, plsize);
-            const int poffsetxpym = get_new_poffset(i, tick.x, tick.y, tick.z, +1, -1, 0, plsize);
 
             float avg12;
             float avg1_x, avg1_y, avg1_z;
@@ -410,50 +406,6 @@ void Kernel(cusizevector plsize,
                               &tldata->tlxyc_unrolled_y[poffset], &tldata->tlxyc_unrolled_z[poffset]);
 
             tldata->tlxymac[poffset] = 1.00 - avg12 * avg12;
-
-            arcavgXYZ(sldata->slyc_unrolled_x[poffsetxm], sldata->slyc_unrolled_y[poffsetxm],
-                      sldata->slyc_unrolled_z[poffsetxm], sldata->slyc_unrolled_x[poffset],
-                      sldata->slyc_unrolled_y[poffset],
-                      sldata->slyc_unrolled_z[poffset], &avg1_x, &avg1_y, &avg1_z);
-            arcavgXYZ(sldata->slxc_unrolled_x[poffsetxm], sldata->slxc_unrolled_y[poffsetxm],
-                      sldata->slxc_unrolled_z[poffsetxm], sldata->slxc_unrolled_x[poffsetxmyp],
-                      sldata->slxc_unrolled_y[poffsetxmyp], sldata->slxc_unrolled_z[poffsetxmyp], &avg2_x,
-                      &avg2_y,
-                      &avg2_z);
-            avg12 = arcavgXYZ(avg1_x, avg1_y, avg1_z, avg2_x, avg2_y, avg2_z,
-                              &tldata->tlxyc_unrolled_x[poffsetxm],
-                              &tldata->tlxyc_unrolled_y[poffsetxm], &tldata->tlxyc_unrolled_z[poffsetxm]);
-
-            tldata->tlxymac[poffsetxm] = 1.00 - avg12 * avg12;
-
-            arcavgXYZ(sldata->slyc_unrolled_x[poffsetym], sldata->slyc_unrolled_y[poffsetym],
-                      sldata->slyc_unrolled_z[poffsetym], sldata->slyc_unrolled_x[poffsetxpym],
-                      sldata->slyc_unrolled_y[poffsetxpym], sldata->slyc_unrolled_z[poffsetxpym], &avg1_x,
-                      &avg1_y,
-                      &avg1_z);
-            arcavgXYZ(sldata->slxc_unrolled_x[poffsetym], sldata->slxc_unrolled_y[poffsetym],
-                      sldata->slxc_unrolled_z[poffsetym], sldata->slxc_unrolled_x[poffset],
-                      sldata->slxc_unrolled_y[poffset],
-                      sldata->slxc_unrolled_z[poffset], &avg2_x, &avg2_y, &avg2_z);
-            avg12 = arcavgXYZ(avg1_x, avg1_y, avg1_z, avg2_x, avg2_y, avg2_z,
-                              &tldata->tlxyc_unrolled_x[poffsetym],
-                              &tldata->tlxyc_unrolled_y[poffsetym], &tldata->tlxyc_unrolled_z[poffsetym]);
-
-            tldata->tlxymac[poffsetym] = 1.00 - avg12 * avg12;
-
-            arcavgXYZ(sldata->slyc_unrolled_x[poffsetxmym], sldata->slyc_unrolled_y[poffsetxmym],
-                      sldata->slyc_unrolled_z[poffsetxmym], sldata->slyc_unrolled_x[poffsetym],
-                      sldata->slyc_unrolled_y[poffsetym], sldata->slyc_unrolled_z[poffsetym], &avg1_x, &avg1_y,
-                      &avg1_z);
-            arcavgXYZ(sldata->slxc_unrolled_x[poffsetxmym], sldata->slxc_unrolled_y[poffsetxmym],
-                      sldata->slxc_unrolled_z[poffsetxmym], sldata->slxc_unrolled_x[poffsetxm],
-                      sldata->slxc_unrolled_y[poffsetxm], sldata->slxc_unrolled_z[poffsetxm], &avg2_x, &avg2_y,
-                      &avg2_z);
-            avg12 = arcavgXYZ(avg1_x, avg1_y, avg1_z, avg2_x, avg2_y, avg2_z,
-                              &tldata->tlxyc_unrolled_x[poffsetxmym],
-                              &tldata->tlxyc_unrolled_y[poffsetxmym], &tldata->tlxyc_unrolled_z[poffsetxmym]);
-
-            tldata->tlxymac[poffsetxmym] = 1.00 - avg12 * avg12;
         }
     }
 }
