@@ -12,10 +12,13 @@ class PerformanceCounter {
     double local_bw = 0;
     double local_time = 0;
     double local_flops = 0;
-
+    size_t bytes_requested;
+    size_t flops_executed;
+    double type = 0;
 public:
-
-
+    PerformanceCounter(size_t bytes, size_t flops):bytes_requested(bytes), flops_executed(flops) {
+        type = flops_executed / bytes_requested;
+    }
     void start_timing(void) {
         start_time = std::chrono::steady_clock::now();
     }
@@ -24,7 +27,7 @@ public:
         end_time = std::chrono::steady_clock::now();
     }
 
-    void update_counters(size_t bytes_requested, size_t flops_executed) {
+    void update_counters() {
         std::chrono::duration<double> elapsed_seconds = end_time - start_time;
         local_time = elapsed_seconds.count();
         local_bw = bytes_requested * 1e-9 / local_time;
@@ -48,6 +51,7 @@ public:
         if (flops_required) {
             std::cout << "avg_flops: " << total_flops/LOC_REPEAT << " GFlops" << std::endl;
         }
+        std::cout << "Benchmark type: " << (double) flops_executed / (double) bytes_requested << " flops/byte";
     }
 };
 

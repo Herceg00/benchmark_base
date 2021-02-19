@@ -11,6 +11,7 @@ hpl*
 *.csv
 *.txt
 
+omp*
 *unified.log*
 *united.log*
 *virt.log*

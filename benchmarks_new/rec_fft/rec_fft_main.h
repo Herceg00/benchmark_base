@@ -26,9 +26,9 @@ double CallKernel()
 	static array_type XX;
 
 #ifndef METRIC_RUN
-    auto counter = PerformanceCounter();
     size_t bytes_requested = 8 * sizeof(base_type) * ((size_t)LENGTH / 2  + (log2((size_t)LENGTH) - 1) * (size_t)LENGTH / 2);
     size_t flops_requested = 5 * (size_t)LENGTH / 2 + 18 * (log2((int)LENGTH) - 1) * (size_t)LENGTH / 2;
+    auto counter = PerformanceCounter(bytes_requested, flops_requested);
 #endif
 
     int iterations;
@@ -54,21 +54,20 @@ double CallKernel()
 
 #ifndef METRIC_RUN
         counter.end_timing();
-        counter.update_counters(bytes_requested, flops_requested);
+        counter.update_counters();
         counter.print_local_counters();
 #endif
 
     }
 #ifndef METRIC_RUN
     counter.print_average_counters(true);
-    std::cout << "Benchmark type: " << (double) flops_requested / (double) bytes_requested<< " flops/byte";
 #endif
     return time;
 }
 
 int main()
 {
-	double time = CallKernel();
+	CallKernel();
 	
 	return 0;
 }

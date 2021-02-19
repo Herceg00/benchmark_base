@@ -30,8 +30,8 @@ double CallKernel()
 	double time = -1;
 #ifndef METRIC_RUN
     double bytes_requested = 3 * (double)LENGTH * (double)LENGTH * (double)LENGTH * sizeof(double)/4  + 8 * sizeof(double)*(double)LENGTH*(double)LENGTH + 17 * sizeof(double)*(double)LENGTH ;
-    double local_performance = (double)LENGTH*(double)LENGTH*(double)LENGTH/2 + (double)LENGTH*(double)LENGTH * 3.5 + 2 *(double)LENGTH;
-    auto counter = PerformanceCounter();
+    double flops_requested = (double)LENGTH*(double)LENGTH*(double)LENGTH/2 + (double)LENGTH*(double)LENGTH * 3.5 + 2 *(double)LENGTH;
+    auto counter = PerformanceCounter(bytes_requested, flops_requested);
 #endif
 
 #ifdef METRIC_RUN
@@ -53,14 +53,13 @@ double CallKernel()
 
 #ifndef METRIC_RUN
         counter.end_timing();
-        counter.update_counters(bytes_requested, local_performance);
+        counter.update_counters();
         counter.print_local_counters();
 #endif
 	}
 
 #ifndef METRIC_RUN
     counter.print_average_counters(true);
-    std::cout << "Benchmark type: " << (double) local_performance / (double) bytes_requested<< " flops/byte";
 #endif
 
     return time;

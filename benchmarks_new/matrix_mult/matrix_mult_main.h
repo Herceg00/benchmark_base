@@ -30,9 +30,9 @@ double CallKernel(int core_type)
                              (double)LENGTH * (double)LENGTH* (double)LENGTH * 3  + 1 * (double)LENGTH * (double)LENGTH,
                              (double)LENGTH * (double)LENGTH* (double)LENGTH * 3  + 1 * (double)LENGTH * (double)LENGTH};
 
-    double bytes_requested = sizeof(double) * bw_for_stat[core_type];
-    double flops_requested = (double)LENGTH * (double)LENGTH* (double)LENGTH * 2;
-    auto counter = PerformanceCounter();
+    size_t bytes_requested = sizeof(double) * bw_for_stat[core_type];
+    size_t flops_requested = (double)LENGTH * (double)LENGTH* (double)LENGTH * 2;
+    auto counter = PerformanceCounter(bytes_requested, flops_requested);
 #endif
 
 #ifdef METRIC_RUN
@@ -54,14 +54,13 @@ double CallKernel(int core_type)
 
 #ifndef METRIC_RUN
         counter.end_timing();
-        counter.update_counters(bytes_requested, flops_requested);
+        counter.update_counters();
         counter.print_local_counters();
 #endif
 	}
 
 #ifndef METRIC_RUN
     counter.print_average_counters(true);
-    std::cout << "Benchmark type: " << (double) flops_requested / (double) bytes_requested<< " flops/byte";
 #endif
     return time;
 }
