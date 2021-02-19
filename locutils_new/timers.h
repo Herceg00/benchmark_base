@@ -1,6 +1,7 @@
 #ifndef TIMERS_H
 #define TIMERS_H
 #include <ios>
+#include <chrono>
 
 class PerformanceCounter {
     double total_time = 0;
