@@ -14,5 +14,6 @@ hpl*
 *unified.log*
 *united.log*
 *virt.log*
+./benchmark_base/idea/*
 
 /benchmarks/rand_generator/bin/
