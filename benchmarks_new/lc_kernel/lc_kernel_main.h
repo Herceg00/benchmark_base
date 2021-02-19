@@ -32,8 +32,9 @@ double CallKernel(void )
 
 #ifndef METRIC_RUN
     auto counter = PerformanceCounter();
-    size_t bytes_requested = 16 * sizeof(float) * (int)LENGTH / 8;
-    size_t flops_requested = 16 * 182 * (int)LENGTH / 8;
+    size_t problem_size = (size_t)LENGTH * (size_t)LENGTH * (size_t)LENGTH;
+    size_t bytes_requested = 16 * sizeof(float) * problem_size / 8;
+    size_t flops_requested = 182 * problem_size / 8;
 #endif
 
 #ifdef METRIC_RUN
@@ -50,7 +51,7 @@ double CallKernel(void )
     for(int i = 0; i < iterations; i++)
 	{
 #ifndef METRIC_RUN
-//        Init(tldata_array[0], sldata_array[0], plsize, half_plsize);
+        Init(tldata_array[0], sldata_array[0], plsize, half_plsize);
 		locality::utils::CacheAnnil(3);
 		counter.start_timing();
 #endif

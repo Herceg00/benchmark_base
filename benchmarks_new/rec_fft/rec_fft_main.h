@@ -27,8 +27,8 @@ double CallKernel()
 
 #ifndef METRIC_RUN
     auto counter = PerformanceCounter();
-    size_t bytes_requested = 8 * sizeof(base_type) * ((int)LENGTH / 2  + (log2((int)LENGTH) - 1) * (int)LENGTH / 2);
-    size_t flops_requested = 5 * (int)LENGTH / 2 + 18 * (log2((int)LENGTH) - 1) * (int)LENGTH / 2;
+    size_t bytes_requested = 8 * sizeof(base_type) * ((size_t)LENGTH / 2  + (log2((size_t)LENGTH) - 1) * (size_t)LENGTH / 2);
+    size_t flops_requested = 5 * (size_t)LENGTH / 2 + 18 * (log2((int)LENGTH) - 1) * (size_t)LENGTH / 2;
 #endif
 
     int iterations;
