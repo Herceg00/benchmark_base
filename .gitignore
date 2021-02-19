@@ -17,4 +17,12 @@ omp*
 *virt.log*
 ./benchmark_base/idea/*
 
-/benchmarks/rand_generator/bin/
+./benchmarks_new/gauss/bin/
+./benchmarks_new/rand_generator/bin/
+./benchmarks_new/matrix_mult/bin/
+./benchmarks_new/matrix_transp/bin/
+./benchmarks_new/triada/bin/
+./benchmarks_new/stencil_1D/bin/
+./benchmarks_new/lc_kernel/bin/
+./benchmarks_new/rec_fft/bin/
+./benchmarks_new/bellman_ford/bin/
