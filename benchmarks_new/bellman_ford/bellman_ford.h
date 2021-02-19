@@ -149,8 +149,8 @@ long Check(WEIGHT_AT result, size_t vertex_count)
 	return sum;
 }
 
-template <typename EDGES_AT, typename INDEX_AT, typename WEIGHT_AT>
-void Kernel(EDGES_AT edges, size_t edge_count, INDEX_AT, WEIGHT_AT weights, size_t vertex_count, WEIGHT_AT d)
+template <typename EDGES_AT, typename WEIGHT_AT>
+void kernel_sequential(EDGES_AT edges, size_t edge_count, WEIGHT_AT weights, size_t vertex_count, WEIGHT_AT d)
 {
 	for(size_t i = 0; i < vertex_count; i++)
 		d[i] = -1; 
@@ -164,7 +164,58 @@ void Kernel(EDGES_AT edges, size_t edge_count, INDEX_AT, WEIGHT_AT weights, size
 			if(d[i] == -1 || d[edges[h][1]] > tmp)
 				d[i] = tmp;
 		}
+}
 
+template <typename EDGES_AT, typename WEIGHT_AT>
+void kernel_parallel(EDGES_AT edges, size_t edge_count, WEIGHT_AT weights, size_t vertex_count, WEIGHT_AT d)
+{
+    #pragma omp parallel for
+    for(size_t i = 0; i < vertex_count; i++)
+        d[i] = -1;
+
+    d[0] = 0;
+
+    int changes = 0;
+    do
+    {
+        changes = 0;
+        #pragma omp parallel shared(changes)
+        {
+            int local_changes = 0;
+            #pragma omp for
+            for(size_t h = 0; h < edge_count; h++)
+            {
+                int src_id = edges[h][0];
+                int dst_id = edges[h][1];
+
+                int weight = weights[h];
+
+                if(d[dst_id] > d[src_id] + weight)
+                {
+                    d[dst_id] = d[src_id] + weight;
+                    local_changes = 1;
+                }
+            }
+
+            #pragma omp atomic
+            changes += local_changes;
+        }
+    } while (changes);
+}
+
+template <typename EDGES_AT, typename WEIGHT_AT>
+void kernel_wrapper(int core_type, EDGES_AT edges, size_t edge_count, WEIGHT_AT weights, size_t vertex_count, WEIGHT_AT d)
+{
+    switch(core_type)
+    {
+        // seq
+        case 0: kernel_parallel(edges, edge_count, weights, vertex_count, d); break;
+
+            // parallel
+        case 1: kernel_sequential(edges, edge_count, weights, vertex_count, d); break;
+
+        default: fprintf(stderr, "unexpected core type");
+    }
 }
 
 #endif

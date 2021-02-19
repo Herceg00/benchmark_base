@@ -5,8 +5,13 @@ TIME_PATTERN="avg_time:"
 BAND_PATTERN="avg_bw:"
 PERF_PATTERN="avg_flops:"
 
-function add_separator() {
+function add_separator {
     printf " " >> $file_name
+    printf "\n" >> $file_name
+}
+
+function add_separating_line {
+    printf ",,,,,,,,,,,,,,,,,,,," >> $file_name
     printf "\n" >> $file_name
 }
 
@@ -49,7 +54,8 @@ function collect_stats {
 
     search_result=$(grep -R "$TIME_PATTERN" "./"$PROG_NAME"/results.txt")
     dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
-    printf $dat"\ts," >> $file_name
+    dat=$(echo "scale=4; 1000.0*$dat" | bc -l)
+    printf $dat"\tms," >> $file_name
 
     search_result=$(grep -R "$PERF_PATTERN" "./"$PROG_NAME"/results.txt")
     dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`

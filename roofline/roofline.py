@@ -8,18 +8,18 @@ import sys
 
 tmp_data_prefix = "prof_data/"
 
-last_band = "DRAM"
+last_band = "L1"
 last_perf = "float_vector_FMA"
 
-kunpeng_characteristics_single_socket = {"bandwidths": {"DRAM": 93.5},
-                                          "peak_performances": {"float_no_vector_noFMA": 124,
-                                                                "float_vector_noFMA": 499,
-                                                                "float_vector_FMA": 1996}}  # GFLOP/s
+kunpeng_characteristics_single_socket = {"bandwidths": {"DRAM": 93.5, "L2": 1256, "L1": 1766},
+                                         "peak_performances": {"float_no_vector_noFMA": 124,
+                                                               "float_vector_noFMA": 499,
+                                                               "float_vector_FMA": 1996}}  # GFLOP/s
 
-kunpeng_characteristics_dual_socket = {"bandwidths": {"DRAM": 187},
-                                          "peak_performances": {"float_no_vector_noFMA": 248,
-                                                                "float_vector_noFMA": 1000,
-                                                                "float_vector_FMA": 3992}}  # GFLOP/s
+kunpeng_characteristics_dual_socket = {"bandwidths": {"DRAM": 187, "L2": 2512, "L1": 3532},
+                                       "peak_performances": {"float_no_vector_noFMA": 248,
+                                                             "float_vector_noFMA": 1000,
+                                                             "float_vector_FMA": 3992}}  # GFLOP/s
 
 x_data_first = 1.0 / 256.0
 x_data_last = 1024
@@ -71,6 +71,7 @@ class RooflinePlotter:
         for mem_key in self.platform_characteristics["bandwidths"]:
             y_data = []
             cur_band = self.platform_characteristics["bandwidths"][mem_key]
+            x_intersection = max_perf / self.platform_characteristics["bandwidths"][mem_key]
             for x in x_data:
                 if x < x_intersection:
                     y_data.append(self.get_bandwidth_roof(x, cur_band))
@@ -79,7 +80,7 @@ class RooflinePlotter:
             x_data_name = [(x_intersection - x_data_first)/64 + x_data_first]
             y_data_name = [self.get_bandwidth_roof(x_data_name[0], cur_band)]
             data.append(go.Scatter(x=x_data_name, y=y_data_name, mode="lines+text", name=str(mem_key), text=[mem_key],
-                               textposition="top center", showlegend=False))
+                                   textposition="top center", showlegend=False))
 
         return data
 
@@ -157,10 +158,11 @@ class RooflinePlotter:
                      showticklabels=True, type='log', title=y_title)
 
         current_file_name='./../benchmarks_new/output/roofline_'+sockets+'.html'
+        #current_file_name = 'roofline_' + sockets + '.html'
         plotly.offline.plot({
             "data": plots_data,
             "layout": go.Layout(title=self.name, xaxis=xaxis, yaxis=yaxis)
-        }, filename=current_file_name) # filename='./../benchmarks_new/output/roofline.html') #
+        }, filename=current_file_name)
 
 
 def generate_roofline_from_profiling_data(file_name, roofline_name):

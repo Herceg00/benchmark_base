@@ -146,8 +146,6 @@ void KernelKJI(AT a, AT b, AT c, int size)
 template <typename T, typename AT>
 void CallKernel(int core_type, AT a, AT b, AT c, int size)
 {
-	LOC_PAPI_BEGIN_BLOCK
-
 	switch(core_type)
 	{
 		//ijk
@@ -170,8 +168,6 @@ void CallKernel(int core_type, AT a, AT b, AT c, int size)
 
 		default: fprintf(stderr, "unexpected core type");
 	}
-
-	LOC_PAPI_END_BLOCK
 }
 
 } /*namespace*/

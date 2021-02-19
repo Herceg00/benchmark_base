@@ -21,8 +21,7 @@ typedef int* weight_type;
 #include "../../locutils_new/timers.h"
 
 
-
-double CallKernel()
+double CallKernel(int core_type)
 {
 	size_t edge_count = std::pow(2, LENGTH) * EDGES_PER_VERTEX;
 	size_t vertex_count = std::pow(2, LENGTH);
@@ -60,7 +59,7 @@ double CallKernel()
         counter.start_timing();
 #endif
 
-        Kernel<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, d);
+        kernel_wrapper<edge_type, weight_type>(core_type, edges, edge_count, weights, vertex_count, d);
 
 #ifndef METRIC_RUN
         counter.end_timing();
@@ -79,5 +78,5 @@ double CallKernel()
 
 int main()
 {
-    CallKernel();
+    CallKernel((int)MODE);
 }

@@ -10,8 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77dd978e-8962-43e5-870f-18a96d063ab8" name="Default Changelist" comment="New perf interface with ifndef">
+      <change afterPath="$PROJECT_DIR$/benchmarks_new/apps_test.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bellman_ford.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bellman_ford.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bellman_ford_main.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/bellman_ford/bellman_ford_main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/benchmark_all_apps.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/collect_common_stats.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/collect_common_stats.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/benchmarks_new/collect_metrics.sh" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/collect_metrics.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult.h" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks_new/matrix_mult/matrix_mult.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/roofline/roofline.py" beforeDir="false" afterPath="$PROJECT_DIR$/roofline/roofline.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +55,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/benchmarks_new" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -59,16 +66,35 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Rainbow Brackets" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/benchmarks_new" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/roofline" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="benchmark_all_apps.sh" type="ShConfigurationType" temporary="true">
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="$PROJECT_DIR$/benchmarks_new/apps_test.sh" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$/benchmarks_new" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="/bin/zsh" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Shell Script.benchmark_all_apps.sh" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -95,7 +121,8 @@
       <workItem from="1613497640492" duration="2935000" />
       <workItem from="1613569614831" duration="21201000" />
       <workItem from="1613631016445" duration="4760000" />
-      <workItem from="1613636084301" duration="27314000" />
+      <workItem from="1613636084301" duration="32842000" />
+      <workItem from="1613724661237" duration="2683000" />
     </task>
     <task id="LOCAL-00001" summary="mult bug fixed and readme renewed">
       <created>1612954230116</created>
