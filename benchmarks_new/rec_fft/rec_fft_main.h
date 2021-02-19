@@ -60,20 +60,15 @@ double CallKernel()
 
     }
 #ifndef METRIC_RUN
-    counter.end_timing();
-    counter.update_counters(bytes_requested, flops_requested);
-    counter.print_local_counters();
+    counter.print_average_counters(true);
+    std::cout << "Benchmark type: " << (double) flops_requested / (double) bytes_requested<< " flops/byte";
 #endif
     return time;
 }
 
 int main()
 {
-	LOC_PAPI_INIT
-
 	double time = CallKernel();
-
-locality::plain::Print(LENGTH, time);
-
+	
 	return 0;
 }
