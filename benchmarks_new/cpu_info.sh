@@ -14,11 +14,11 @@ function get_arch() {
 
     arch=$(echo "${line#*:}")
 
-    if [ $arch = "aarch64" ]; then
+    if [[ $arch = "aarch64" ]]; then
         echo "aarch64"
     fi
 
-    if [ $arch = "x86_64" ]; then
+    if [[ $arch = "x86_64" ]]; then
         echo "intel"
     fi
 }

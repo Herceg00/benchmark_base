@@ -81,14 +81,14 @@ function init {
     printf "benchmark name," >> $file_name
 
     arch=$(bash ./cpu_info.sh get_arch)
-    if [ $arch = "aarch64" ]; then
+    if [[ $arch = "aarch64" ]]; then
         for event_name in "${arm_event_names[@]}"
         do
             printf $event_name"," >> $file_name
         done
     fi
 
-    if [ $arch = "intel" ]; then
+    if [[ $arch = "intel" ]]; then
         for event_name in "${intel_event_names[@]}"
         do
             printf $event_name"," >> $file_name
@@ -102,7 +102,7 @@ function analyse_events {
     declare -A analyse_values
 
     arch=$(bash ./cpu_info.sh get_arch)
-    if [ $arch = "aarch64" ]; then
+    if [[ $arch = "aarch64" ]]; then
         analyse_values['ipc']=$(echo "scale=4; ${event_values['instructions']}/${event_values['armv8_pmuv3_0/cpu_cycles/']}" | bc -l)
         analyse_values['branch_misses percent']=$(echo "scale=4; ${event_values['branch-misses']}/${event_values['instructions']}" | bc -l)
         analyse_values['L1_hit_rate']=$(echo "scale=4; 100.0*(${event_values['armv8_pmuv3_0/ll_cache/']} - ${event_values['armv8_pmuv3_0/ll_cache_miss/']})/${event_values['armv8_pmuv3_0/ll_cache/']}" | bc -l)
@@ -111,7 +111,7 @@ function analyse_events {
         analyse_values['mem instructions per sec']=$(echo "scale=4; ${event_values['armv8_pmuv3_0/ll_cache/']}/${event_values['cpu-clock']}" | bc -l)
     fi
 
-    if [ $arch = "intel" ]; then
+    if [[ $arch = "intel" ]]; then
         analyse_values['ipc']=$(echo "scale=4; ${event_values['instructions']}/${event_values['cpu-cycles']}" | bc -l)
         analyse_values['branch_misses percent']=$(echo "scale=4; ${event_values['branch-misses']}/${event_values['instructions']}" | bc -l)
         analyse_values['L1_hit_rate']=$(echo "scale=4; 100.0*(${event_values['L1-dcache-loads']})/(${event_values['L1-dcache-loads']} + ${event_values['L1-dcache-load-misses']})" | bc -l)
@@ -143,11 +143,11 @@ function collect_stats {
 
     # get list of events as a param
     arch=$(bash ./cpu_info.sh get_arch)
-    if [ $arch = "aarch64" ]; then
+    if [[ $arch = "aarch64" ]]; then
         events_param="--events="$(join_by , "${arm_event_names[@]}")
     fi
 
-    if [ $arch = "intel" ]; then
+    if [[ $arch = "intel" ]]; then
         events_param="--events="$(join_by , "${intel_event_names[@]}")
     fi
 
@@ -157,7 +157,7 @@ function collect_stats {
     printf $TEST_NAME"," >> $file_name
 
     arch=$(bash ./cpu_info.sh get_arch)
-    if [ $arch = "aarch64" ]; then
+    if [[ $arch = "aarch64" ]]; then
         for current_name in "${arm_event_names[@]}"
         do
             parsed_number=$(parse_events $current_name)
@@ -166,7 +166,7 @@ function collect_stats {
         done
     fi
 
-    if [ $arch = "intel" ]; then
+    if [[ $arch = "intel" ]]; then
         for current_name in "${intel_event_names[@]}"
         do
             parsed_number=$(parse_events $current_name)

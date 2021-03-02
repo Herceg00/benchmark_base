@@ -32,13 +32,14 @@ template<typename T, typename AT, typename AT_ind>
 void Kernel(AT a, int size)
 {
 	LOC_PAPI_BEGIN_BLOCK
-
+	T k = a[0];
+	T sum = 0;
 #pragma omp parallel
     {
         unsigned int myseed = omp_get_thread_num();
-#pragma omp for schedule(static)
+#pragma omp for schedule(static) reduction(+: sum)
         for (int i = 0; i < size; i++) {
-            a[i] = rand_r(&myseed);
+           sum += rand_r(&myseed) - k;
         }
     }
 
