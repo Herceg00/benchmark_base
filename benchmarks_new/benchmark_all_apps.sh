@@ -4,7 +4,7 @@ rm -rf ./output/
 mkdir ./output/
 
 LINEAR_SIZE="2000000"
-MIN_MTX_SIZE="128"
+MIN_MTX_SIZE="512"
 MAX_MTX_SIZE="512"
 GRAPH_MIN_SIZE="6"
 GRAPH_MAX_SIZE="12"
@@ -60,15 +60,15 @@ add_separator
 add_separator
 
 ##################### MAT_TRANSPOSAL ########################
-#for (( MTX_SIZE=MIN_MTX_SIZE; MTX_SIZE<=MAX_MTX_SIZE; MTX_SIZE*=2 )); do
-#    for ((mode=0;mode<=3;mode++)); do
-#        args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
-#        name="matrix_transp|S="$MTX_SIZE"|M="$mode"|"
-#        bash ./benchmark_specific_app.sh "matrix_transp" "$args" "$name"
-#    done
-#
-#    add_separator
-#done
+for (( MTX_SIZE=MIN_MTX_SIZE; MTX_SIZE<=MAX_MTX_SIZE; MTX_SIZE*=2 )); do
+    for ((mode=0;mode<=3;mode++)); do
+        args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
+        name="matrix_transp|S="$MTX_SIZE"|M="$mode"|"
+        bash ./benchmark_specific_app.sh "matrix_transp" "$args" "$name"
+    done
+
+    add_separator
+done
 
 add_separator
 
@@ -102,9 +102,14 @@ add_separator
 add_separator
 
 #####################RAND_GENERATOR ########################
+mode=0 #storage
+args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
+name="rand_generator|S="$LINEAR_SIZE"|M="$mode
+bash ./benchmark_specific_app.sh "rand_generator" "$args" "$name"
 
-args="--length="$LINEAR_SIZE
-name="rand_generator|S="$LINEAR_SIZE"|"
+mode=1 #reduction
+args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
+name="rand_generator|S="$LINEAR_SIZE"|M="$mode
 bash ./benchmark_specific_app.sh "rand_generator" "$args" "$name"
 
 add_separator

@@ -7,7 +7,7 @@
 #include <chrono>
 
 
-typedef double base_type;
+typedef float base_type;
 typedef base_type array_type[LENGTH];
 typedef size_t helper_type[LENGTH];
 
@@ -15,7 +15,7 @@ typedef size_t helper_type[LENGTH];
 
 #include "../../locutils_new/timers.h"
 
-double CallKernel(void )
+double CallKernel(int rand_type)
 {
 	static array_type a;
 	static array_type b;
@@ -41,7 +41,11 @@ double CallKernel(void )
 		locality::utils::CacheAnnil(3);
         counter.start_timing();
 #endif
-		Kernel<base_type, array_type, helper_type> (a, LENGTH);
+        if (rand_type == 0){
+            Kernel_storage<base_type, array_type, helper_type> (a, LENGTH);
+        } else {
+            Kernel_reduction<base_type, array_type, helper_type> (a, LENGTH);
+        }
 
 #ifndef METRIC_RUN
         counter.end_timing();
@@ -61,5 +65,5 @@ double CallKernel(void )
 
 int main()
 {
-	CallKernel();
+	CallKernel((int)MODE);
 }
