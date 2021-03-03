@@ -6,8 +6,7 @@
 #include <chrono>
 #include "../../locutils_new/timers.h"
 
-
-#define BLOCK_SIZE BLOCK_SIZE_PREDEF
+#define BLOCK_SIZE 16
 
 typedef double base_type;
 typedef base_type* array_type;

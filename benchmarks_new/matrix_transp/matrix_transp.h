@@ -52,13 +52,12 @@ void KernelTranspIJ(AT a, AT b, int size)
 {
     #pragma omp parallel
     {
+        #pragma omp for schedule(static)
         for (int i = 0; i < size; i++)
         {
-            #pragma omp for schedule(static)
             for(int j = 0; j < size; j++)
             {
-                //b[i][j] = a[j][i];
-                b[i * size + j] = a[j * size + i];
+                b[i * size + j] = a[j * size + i]; // sequential writes (stores)
             }
         }
     }
@@ -69,13 +68,12 @@ void KernelTranspJI(AT a, AT b, int size)
 {
     #pragma omp parallel
     {
+        #pragma omp for schedule(static)
         for (int i = 0; i < size; i++)
         {
-            #pragma omp for schedule(static)
             for(int j = 0; j < size; j++)
             {
-                //b[i][j] = a[j][i];
-                b[j * size + i] = a[i * size + j];
+                b[j * size + i] = a[i * size + j]; // sequential reads (loads)
             }
         }
     }
@@ -84,35 +82,50 @@ void KernelTranspJI(AT a, AT b, int size)
 template <typename T, typename AT>
 void KernelBlockTranspIJ(AT a, AT b, int block_size, int size)
 {
-	/*LOC_PAPI_BEGIN_BLOCK
-
     #pragma omp parallel for schedule(static)
-	OUTER_LOOP(i)
-		OUTER_LOOP(j)
-			INNER_LOOP(i)
-				INNER_LOOP(j)
-				{
-					b[i_b][j_b] = a[j_b][i_b];
-				}
-
-	LOC_PAPI_END_BLOCK*/
+    for(int ii = 0; ii < size; ii += block_size)
+    {
+        for(int jj = 0; jj < size; jj += block_size)
+        {
+            for (int j = jj; j < jj+block_size; j++)
+            {
+                #pragma simd
+                for (int i = ii; i < ii+block_size; i++)
+                {
+                    b[jj*size + ii] = a[ii*size + jj];
+                }
+            }
+        }
+    }
 }
 
 template <typename T, typename AT>
 void KernelBlockTranspJI(AT a, AT b, int block_size, int size)
 {
-	/*LOC_PAPI_BEGIN_BLOCK
-
     #pragma omp parallel for schedule(static)
-	OUTER_LOOP(j)
-		OUTER_LOOP(i)
-			INNER_LOOP(j)
-				INNER_LOOP(i)
-				{
-					b[i_b][j_b] = a[j_b][i_b];
-				}
+    for(int ii = 0; ii < size; ii += block_size)
+    {
+        for(int jj = 0; jj < size; jj += block_size)
+        {
+            for (int j = jj; j < jj+block_size; j++)
+            {
+                #pragma simd
+                for (int i = ii; i < ii+block_size; i++)
+                {
+                    b[jj*size + ii] = a[ii*size + jj];
+                }
+            }
+        }
+    }
 
-	LOC_PAPI_END_BLOCK*/
+    for (int i = 0; i < size; i++)
+    {
+        for(int j = 0; j < size; j++)
+        {
+            if(b[i * size + j] != a[j * size + i])
+                throw "ERROR";
+        }
+    }
 }
 
 
