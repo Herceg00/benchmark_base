@@ -10,19 +10,19 @@
 #define BLOCK_SIZE BLOCK_SIZE_PREDEF
 
 typedef double base_type;
-typedef base_type array_type[LENGTH][LENGTH];
+typedef base_type* array_type;
 
 #include "matrix_transp.h"
 
 double CallKernel(int core_type)
 {
-	static array_type a;
-	static array_type b;
+    array_type a = new base_type[LENGTH*LENGTH];
+    array_type b = new base_type[LENGTH*LENGTH];
 
 	double time = -1;
 
 #ifndef METRIC_RUN
-    double bytes_requested = 2.0 * sizeof(double) * (int)LENGTH * (int)LENGTH;
+    double bytes_requested = 2.0 * sizeof(base_type) * (int)LENGTH * (int)LENGTH;
     double flops_requested = (double)LENGTH * (double)LENGTH;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
 #endif
@@ -42,7 +42,9 @@ double CallKernel(int core_type)
 
         counter.start_timing();
 #endif
+
 		CallKernel<base_type, array_type> (core_type, a, b, BLOCK_SIZE, LENGTH);
+
 #ifndef METRIC_RUN
         counter.end_timing();
 
@@ -55,6 +57,10 @@ double CallKernel(int core_type)
 #ifndef METRIC_RUN
     counter.print_average_counters(true);
 #endif
+
+	delete[]a;
+	delete[]b;
+
     return time;
 }
 

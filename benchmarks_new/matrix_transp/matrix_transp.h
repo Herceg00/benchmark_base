@@ -3,6 +3,8 @@
 
 const int BENCH_COUNT = 4;
 
+#include <omp.h>
+
 const char* type_names[BENCH_COUNT] = {
 	"ij", // 0
 	"ji", // 1
@@ -13,12 +15,19 @@ const char* type_names[BENCH_COUNT] = {
 template <typename T, typename AT>
 void Init(AT a, AT b, int size)
 {
-	for(int i = 0; i < size; i++)
-		for(int j = 0; j < size; j++)
-		{
-			a[i][j] = locality::utils::RRand(i, j);
-			b[i][j] = 0.0;
-		}
+    #pragma omp parallel
+    {
+        unsigned int seed = omp_get_thread_num();
+        #pragma omp for schedule(static)
+        for(int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                b[i * size + j] = 0.0;
+                a[i * size + j] = rand_r(&seed);
+            }
+        }
+    }
 }
 
 template <typename T, typename AT>
@@ -26,9 +35,9 @@ T Check(AT c, int size)
 {
 	T s = 0.0;
 
-	for(int i = 0; i < size; i++)
+	/*for(int i = 0; i < size; i++)
 		for(int j = 0; j < size; j++)
-			s += c[i][j] / size / size;
+			s += c[i][j] / size / size;*/
 
 	return s;
 }
@@ -41,39 +50,43 @@ T Check(AT c, int size)
 template <typename T, typename AT>
 void KernelTranspIJ(AT a, AT b, int size)
 {
-	LOC_PAPI_BEGIN_BLOCK
-
-#pragma omp parallel for schedule(static)
-	LOOP(i)
-		LOOP(j)
-		{
-			b[i][j] = a[j][i];
-		}
-
-	LOC_PAPI_END_BLOCK
+    #pragma omp parallel
+    {
+        for (int i = 0; i < size; i++)
+        {
+            #pragma omp for schedule(static)
+            for(int j = 0; j < size; j++)
+            {
+                //b[i][j] = a[j][i];
+                b[i * size + j] = a[j * size + i];
+            }
+        }
+    }
 }
 
 template <typename T, typename AT>
 void KernelTranspJI(AT a, AT b, int size)
 {
-	LOC_PAPI_BEGIN_BLOCK
-
-#pragma omp parallel for schedule(static)
-	LOOP(j)
-		LOOP(i)
-		{
-			b[i][j] = a[j][i];
-		}
-
-	LOC_PAPI_END_BLOCK
+    #pragma omp parallel
+    {
+        for (int i = 0; i < size; i++)
+        {
+            #pragma omp for schedule(static)
+            for(int j = 0; j < size; j++)
+            {
+                //b[i][j] = a[j][i];
+                b[j * size + i] = a[i * size + j];
+            }
+        }
+    }
 }
 
 template <typename T, typename AT>
 void KernelBlockTranspIJ(AT a, AT b, int block_size, int size)
 {
-	LOC_PAPI_BEGIN_BLOCK
+	/*LOC_PAPI_BEGIN_BLOCK
 
-#pragma omp parallel for schedule(static)
+    #pragma omp parallel for schedule(static)
 	OUTER_LOOP(i)
 		OUTER_LOOP(j)
 			INNER_LOOP(i)
@@ -82,15 +95,15 @@ void KernelBlockTranspIJ(AT a, AT b, int block_size, int size)
 					b[i_b][j_b] = a[j_b][i_b];
 				}
 
-	LOC_PAPI_END_BLOCK
+	LOC_PAPI_END_BLOCK*/
 }
 
 template <typename T, typename AT>
 void KernelBlockTranspJI(AT a, AT b, int block_size, int size)
 {
-	LOC_PAPI_BEGIN_BLOCK
+	/*LOC_PAPI_BEGIN_BLOCK
 
-#pragma omp parallel for schedule(static)
+    #pragma omp parallel for schedule(static)
 	OUTER_LOOP(j)
 		OUTER_LOOP(i)
 			INNER_LOOP(j)
@@ -99,7 +112,7 @@ void KernelBlockTranspJI(AT a, AT b, int block_size, int size)
 					b[i_b][j_b] = a[j_b][i_b];
 				}
 
-	LOC_PAPI_END_BLOCK
+	LOC_PAPI_END_BLOCK*/
 }
 
 

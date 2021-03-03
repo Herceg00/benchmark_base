@@ -22,20 +22,15 @@ function add_separator {
     bash ./collect_metrics.sh add_separating_line "single_socket"
 }
 
-##################### LC ########################
-for ((size=$LC_MIN_SIZE;size<=$LC_MAX_SIZE;size*=2 )); do
-    args="--length="$size
-    name="lc_kernel|S="$size"|"
-    bash ./benchmark_specific_app.sh "lc_kernel" "$args" "$name"
+for (( MTX_SIZE=MIN_MTX_SIZE; MTX_SIZE<=MAX_MTX_SIZE; MTX_SIZE*=2 )); do
+    for ((mode=0;mode<=3;mode++)); do
+        args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
+        name="matrix_transp|S="$MTX_SIZE"|M="$mode"|"
+        bash ./benchmark_specific_app.sh "matrix_transp" "$args" "$name"
+    done
+
+    add_separator
 done
-
-add_separator
-
-##################### FFT ########################
-
-args="--length="$FFT_SIZE
-name="rec_fft|S="$FFT_SIZE"|"
-bash ./benchmark_specific_app.sh "rec_fft" "$args" "$name"
 
 add_separator
 

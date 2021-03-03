@@ -13,9 +13,9 @@ CXX := $(COMPILER)
 CXX ?= g++
 
 ifdef DEBUG
-	CXXFLAGS := -g  -std=c++11 -Wall -Wextra -Werror -Wno-error=unknown-pragmas -Wno-unknown-pragmas
+	CXXFLAGS := -g  -std=c++11 -Wall -Wextra -Wno-error=unknown-pragmas -Wno-unknown-pragmas
 else
-	CXXFLAGS := -O3 -std=c++11 -Wall -Wextra -Werror -Wno-error=unknown-pragmas -Wno-unknown-pragmas
+	CXXFLAGS := -O3 -std=c++11 -Wall -Wextra -Wno-error=unknown-pragmas -Wno-unknown-pragmas
 endif
 
 ifdef SIZE
