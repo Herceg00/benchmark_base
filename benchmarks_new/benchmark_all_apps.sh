@@ -3,9 +3,11 @@
 rm -rf ./output/
 mkdir ./output/
 
-LINEAR_SIZE="2000000"
-MIN_MTX_SIZE="512"
-MAX_MTX_SIZE="512"
+LINEAR_SIZE="200000000"
+MIN_MTX_SIZE="2048"
+MAX_MTX_SIZE="8192"
+MIN_MTX_TRANSPOSE_SIZE="512"
+MAX_MTX_TRANSPOSE_SIZE="32768"
 GRAPH_MIN_SIZE="6"
 GRAPH_MAX_SIZE="12"
 STENCIL_MIN_RAD="3"
@@ -15,9 +17,8 @@ LC_MAX_SIZE="128"
 FFT_SIZE="8192"
 
 #sizes in KB
-RA_RADIUS="2"
-RA_MAX_RAD="512"
-RA_SIZE="2000000"
+RA_RADIUS="2" # 2 KB
+RA_MAX_RAD="524288" # 524 MB
 
 bash ./collect_common_stats.sh init
 bash ./collect_metrics.sh init "single_socket"
@@ -65,7 +66,7 @@ done
 add_separator
 
 ##################### MAT_TRANSPOSAL ########################
-for (( MTX_SIZE=MIN_MTX_SIZE; MTX_SIZE<=MAX_MTX_SIZE; MTX_SIZE*=2 )); do
+for (( MTX_SIZE=MIN_MTX_TRANSPOSE_SIZE; MTX_SIZE<=MAX_MTX_TRANSPOSE_SIZE; MTX_SIZE*=2 )); do
     for ((mode=0;mode<=3;mode++)); do
         args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
         name="matrix_transp|S="$MTX_SIZE"|M="$mode"|"
@@ -138,8 +139,8 @@ add_separator
 ##################### RANDOM_ACCESS ########################
 
 for ((size=$RA_RADIUS;size<=$RA_MAX_RAD;size*=2 )); do
-  args="--length="$RA_SIZE" --radius="$size
-  name="rec_fft|S="$RA_SIZE
+  args="--length="$LINEAR_SIZE" --radius="$size
+  name="rec_fft|R="$size
   bash ./benchmark_specific_app.sh "random_access" "$args" "$name"
 done
 

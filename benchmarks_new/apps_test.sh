@@ -3,9 +3,11 @@
 rm -rf ./output/
 mkdir ./output/
 
-LINEAR_SIZE="2000000"
-MIN_MTX_SIZE="1024"
-MAX_MTX_SIZE="1024"
+LINEAR_SIZE="200000000"
+MIN_MTX_SIZE="2048"
+MAX_MTX_SIZE="8192"
+MIN_MTX_TRANSPOSE_SIZE="512"
+MAX_MTX_TRANSPOSE_SIZE="32768"
 GRAPH_MIN_SIZE="6"
 GRAPH_MAX_SIZE="12"
 STENCIL_MIN_RAD="3"
@@ -13,6 +15,10 @@ STENCIL_MAX_RAD="10"
 LC_MIN_SIZE="32"
 LC_MAX_SIZE="128"
 FFT_SIZE="8192"
+
+#sizes in KB
+RA_RADIUS="2" # 2 KB
+RA_MAX_RAD="524288" # 524 MB
 
 bash ./collect_common_stats.sh init
 bash ./collect_metrics.sh init "single_socket"
@@ -25,14 +31,12 @@ function add_separator {
     bash ./collect_metrics.sh add_separating_line "single_socket"
 }
 
-for (( MTX_SIZE=MIN_MTX_SIZE; MTX_SIZE<=MAX_MTX_SIZE; MTX_SIZE*=2 )); do
-    for ((mode=0;mode<=3;mode++)); do
-        args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
-        name="matrix_transp|S="$MTX_SIZE"|M="$mode"|"
-        bash ./benchmark_specific_app.sh "matrix_transp" "$args" "$name"
-    done
+##################### RANDOM_ACCESS ########################
 
-    add_separator
+for ((size=$RA_RADIUS;size<=$RA_MAX_RAD;size*=2 )); do
+  args="--length="$LINEAR_SIZE" --radius="$size
+  name="rec_fft|R="$size
+  bash ./benchmark_specific_app.sh "random_access" "$args" "$name"
 done
 
 add_separator
