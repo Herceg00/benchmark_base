@@ -9,9 +9,10 @@
 
 
 typedef double base_type;
+typedef int index_type;
 typedef base_type array_type[(int)LENGTH];
-typedef base_type indirect_type[(int)RADIUS];
-typedef size_t helper_type[(int)LENGTH];
+typedef index_type indirect_type[(int)LENGTH];
+typedef base_type data_type[(int)RADIUS];
 
 #include "random_access.h"
 #include "../../locutils_new/timers.h"
@@ -21,8 +22,8 @@ typedef size_t helper_type[(int)LENGTH];
 double CallKernel(void )
 {
 	static array_type a;
-	static array_type index;
-    static indirect_type data;
+	static indirect_type index;
+    static data_type data;
 
 	double time = -1;
 
@@ -34,7 +35,7 @@ double CallKernel(void )
 
 #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * 20;
-    Init<base_type, array_type,indirect_type,  helper_type>(a, index, data , (int)LENGTH);
+    Init<base_type, array_type, indirect_type, data_type>(a, index, data , (int)LENGTH);
 #else
     int iterations = LOC_REPEAT;
 #endif
@@ -42,12 +43,12 @@ double CallKernel(void )
     for(int i = 0; i < iterations; i++)
 	{
 #ifndef METRIC_RUN
-        Init<base_type, array_type,indirect_type,  helper_type>(a, index, data , (int)LENGTH);
+        Init<base_type, array_type, indirect_type, data_type>(a, index, data , (int)LENGTH);
 		locality::utils::CacheAnnil(3);
 		counter.start_timing();
 #endif
 
-		Kernel<base_type, array_type, indirect_type, helper_type> (a, index, data, (int)LENGTH);
+		Kernel<base_type, array_type, indirect_type, data_type> (a, index, data, (int)LENGTH);
 
 #ifndef METRIC_RUN
 		counter.end_timing();
