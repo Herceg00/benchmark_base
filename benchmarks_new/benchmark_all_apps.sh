@@ -13,8 +13,9 @@ STENCIL_MAX_RAD="10"
 LC_MIN_SIZE="32"
 LC_MAX_SIZE="128"
 FFT_SIZE="8192"
-RA_SIZE="8192"
-RA_RADIUS="4096"
+RA_RADIUS="262144"
+RA_MAX_RAD="5000000"
+RA_SIZE="8388608"
 
 bash ./collect_common_stats.sh init
 bash ./collect_metrics.sh init "single_socket"
@@ -133,9 +134,12 @@ function add_separator {
 #add_separator
 
 ##################### RANDOM_ACCESS ########################
-args="--length="$RA_SIZE" --radius="$RA_RADIUS
-name="rec_fft|S="$RA_SIZE
-bash ./benchmark_specific_app.sh "random_access" "$args" "$name"
+
+for ((size=$RA_RADIUS;size<=$RA_MAX_RAD;size*=2 )); do
+  args="--length="$RA_SIZE" --radius="$RA_RADIUS
+  name="rec_fft|S="$RA_SIZE
+  bash ./benchmark_specific_app.sh "random_access" "$args" "$name"
+done
 
 add_separator
 

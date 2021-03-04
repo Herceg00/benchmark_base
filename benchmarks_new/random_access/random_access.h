@@ -47,10 +47,7 @@ void Kernel(AT a, IT b, DT c, int size)
 #pragma omp parallel for schedule(static)
     for(long int i = 0; i < size; i++)
     {
-	    a[i] = c[(int)b[i]];
-//	    printf("%d\n", b[i]);
-//        a[i] = c[i] + b[i];
-//        std::cout << b[i] << std::endl;
+	    a[i] = c[b[i]];
     }
 
 	LOC_PAPI_END_BLOCK

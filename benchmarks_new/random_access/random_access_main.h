@@ -28,8 +28,8 @@ double CallKernel(void )
 	double time = -1;
 
 #ifndef METRIC_RUN
-    size_t bytes_requested = (long int) LENGTH * (RADIUS + 1) * ( sizeof(double));
-    size_t flops_requested = 2  * (RADIUS + 1) * (long int)LENGTH;
+    size_t bytes_requested = (int)LENGTH * (2 * sizeof(base_type) + sizeof(index_type));
+    size_t flops_requested =(int)LENGTH;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
 #endif
 
