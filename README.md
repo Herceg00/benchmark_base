@@ -19,7 +19,7 @@ bash make_omp.sh --prog=triada --length=2000000 --compiler=g++ --threads=48 --ra
 
 --threads - число потоков, явно экспортируемых в переменную окружения перед запуском бенчмарка
 
---radius -пока нужен для радиуса в stencil
+--radius - нужен для радиуса в stencil, нужен для размера MAX_INDIRECT в random_access
 
 --lower_bound --higher_bound - диапазон (оба краевых значения входят в интервал) изменения MODE за один вызов скрипта
 

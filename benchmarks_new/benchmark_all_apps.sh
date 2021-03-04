@@ -14,6 +14,11 @@ LC_MIN_SIZE="32"
 LC_MAX_SIZE="128"
 FFT_SIZE="8192"
 
+#sizes in KB
+RA_RADIUS="2"
+RA_MAX_RAD="512"
+RA_SIZE="2000000"
+
 bash ./collect_common_stats.sh init
 bash ./collect_metrics.sh init "single_socket"
 #bash ./collect_metrics.sh init "dual_socket"
@@ -25,7 +30,7 @@ function add_separator {
     bash ./collect_metrics.sh add_separating_line "single_socket"
 }
 
-##################### TRIAD ########################
+#################### TRIAD ########################
 
 for ((mode=0;mode<=15;mode++)); do
     args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
@@ -127,6 +132,16 @@ add_separator
 args="--length="$FFT_SIZE
 name="rec_fft|S="$FFT_SIZE
 bash ./benchmark_specific_app.sh "rec_fft" "$args" "$name"
+
+add_separator
+
+##################### RANDOM_ACCESS ########################
+
+for ((size=$RA_RADIUS;size<=$RA_MAX_RAD;size*=2 )); do
+  args="--length="$RA_SIZE" --radius="$size
+  name="rec_fft|S="$RA_SIZE
+  bash ./benchmark_specific_app.sh "random_access" "$args" "$name"
+done
 
 add_separator
 
