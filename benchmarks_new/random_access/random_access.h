@@ -14,7 +14,7 @@ void InitSeq(AT a, IT b, DT c, int size)
 #pragma omp for schedule(static)
         for (int i = 0; i < size; i++) {
             a[i] = 0;
-            b[i] = (int)rand_r(&myseed) % RADIUS;
+            b[i] = (int)rand_r(&myseed) % RAD_SIZE;
             if(i < (int)RADIUS) {
                 c[i] = rand_r(&myseed);
             }

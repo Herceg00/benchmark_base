@@ -7,12 +7,13 @@
 #include <chrono>
 #include "../../locutils_new/perf_wrapper.h"
 
-
 typedef double base_type;
 typedef int index_type;
 typedef base_type array_type[(int)LENGTH];
 typedef index_type indirect_type[(int)LENGTH];
-typedef base_type data_type[(int)RADIUS];
+
+#define RAD_SIZE (int)((int)RADIUS * 1024 / sizeof(base_type))
+typedef base_type data_type[RAD_SIZE];
 
 #include "random_access.h"
 #include "../../locutils_new/timers.h"
