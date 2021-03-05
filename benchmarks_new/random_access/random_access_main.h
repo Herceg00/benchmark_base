@@ -23,39 +23,39 @@ double CallKernel(void )
 
 	double time = -1;
 
-#ifndef METRIC_RUN
+    #ifndef METRIC_RUN
     size_t bytes_requested = ((size_t)LENGTH) * (2 * sizeof(base_type) + sizeof(index_type));
     size_t flops_requested = (size_t)LENGTH;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
-#endif
+    #endif
 
-#ifdef METRIC_RUN
+    #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * 20;
     Init(a, index, data, (size_t)LENGTH);
-#else
+    #else
     int iterations = LOC_REPEAT;
-#endif
+    #endif
 
     for(int i = 0; i < iterations; i++)
 	{
-#ifndef METRIC_RUN
+        #ifndef METRIC_RUN
         Init(a, index, data, (size_t)LENGTH);
 		locality::utils::CacheAnnil(3);
 		counter.start_timing();
-#endif
+        #endif
 
 		Kernel(a, index, data, (size_t)LENGTH);
 
-#ifndef METRIC_RUN
+        #ifndef METRIC_RUN
 		counter.end_timing();
 		counter.update_counters();
 		counter.print_local_counters();
-#endif
+        #endif
 	}
 
-#ifndef METRIC_RUN
+	#ifndef METRIC_RUN
 	counter.print_average_counters(true);
-#endif
+    #endif
 
     delete []a;
     delete []index;

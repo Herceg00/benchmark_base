@@ -2,10 +2,8 @@
 
 using std::string;
 
-#define CACHE_LINE_K 256 // CACHE_LINE_K should be bigger than size of cache string
-
 template<typename AT,typename IT, typename DT>
-void InitSeq(AT a, IT b, DT c, size_t size)
+void InitSeq(AT *a, IT *b, DT *c, size_t size)
 {
     #pragma omp parallel
     {
@@ -26,19 +24,13 @@ void InitSeq(AT a, IT b, DT c, size_t size)
 }
 
 template<typename AT,typename IT, typename DT>
-void Init(AT a, IT b, DT c, size_t size)
+void Init(AT *a, IT *b, DT *c, size_t size)
 {
     InitSeq(a, b, c, size);
 }
 
-template<typename T, typename AT>
-T Check(AT a, size_t size)
-{
-	return 0;
-}
-
 template<typename AT,typename IT, typename DT>
-void Kernel(AT a, IT b, DT c, size_t size)
+void Kernel(AT *a, IT *b, DT *c, size_t size)
 {
 	#pragma omp parallel for schedule(static)
     for(size_t i = 0; i < size; i++)
