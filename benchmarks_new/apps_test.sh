@@ -33,27 +33,13 @@ function add_separator {
 
 ##################### RANDOM_ACCESS ########################
 
-mode=0 #storage
-args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
-name="rand_generator|S="$LINEAR_SIZE"|M="$mode
-bash ./benchmark_specific_app.sh "rand_generator" "$args" "$name"
-
-mode=1 #reduction
-args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
-name="rand_generator|S="$LINEAR_SIZE"|M="$mode
-bash ./benchmark_specific_app.sh "rand_generator" "$args" "$name"
-
-for ((mode=0;mode<=1;mode++)); do
+for ((mode=0;mode<=15;mode++)); do
     args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
     name="triada|S="$LINEAR_SIZE"|M="$mode"|"
     bash ./benchmark_specific_app.sh "triada" "$args" "$name"
 done
 
-#for ((size=$RA_RADIUS;size<=$RA_MAX_RAD;size*=2 )); do
-#  args="--length="$LINEAR_SIZE" --radius="$size
-#  name="rec_fft|R="$size
-#  bash ./benchmark_specific_app.sh "random_access" "$args" "$name"
-#done
+add_separator
 
 add_separator
 
