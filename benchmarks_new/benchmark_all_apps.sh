@@ -3,7 +3,7 @@
 rm -rf ./output/
 mkdir ./output/
 
-LINEAR_SIZE="200000000"
+LINEAR_SIZE="800000000" # 6.4 GB in double, 3.2 GB in float
 MIN_MTX_SIZE="2048"
 MAX_MTX_SIZE="8192"
 MIN_MTX_TRANSPOSE_SIZE="512"
@@ -18,7 +18,7 @@ FFT_SIZE="8192"
 
 #sizes in KB
 RA_RADIUS="2" # 2 KB
-RA_MAX_RAD="524288" # 524 MB
+RA_MAX_RAD="2097152" # 2 GB
 
 bash ./collect_common_stats.sh init
 bash ./collect_metrics.sh init "single_socket"
