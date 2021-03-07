@@ -7,21 +7,22 @@
 #include <chrono>
 #include "../../locutils_new/perf_wrapper.h"
 
+
 typedef double base_type;
 
-#include "stencil_1D.h"
+#include "stencil_2D.h"
 #include "../../locutils_new/timers.h"
 
 double CallKernel(void)
 {
-    base_type *a = new base_type[LENGTH*LENGTH];
-    base_type *b = new base_type[LENGTH*LENGTH];
+    base_type *a = new base_type[LENGTH];
+    base_type *b = new base_type[LENGTH];
 
 	double time = -1;
 
     #ifndef METRIC_RUN
-    size_t bytes_requested = (size_t) LENGTH*LENGTH * (2*RADIUS + 1) * sizeof(double);
-    size_t flops_requested = (2*RADIUS + 1) * LENGTH*LENGTH;
+    size_t bytes_requested = (size_t) LENGTH * (2*RADIUS + 1) * sizeof(double);
+    size_t flops_requested = (2*RADIUS + 1) * (size_t)LENGTH;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
 

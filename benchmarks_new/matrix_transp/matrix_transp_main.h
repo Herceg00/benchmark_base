@@ -6,9 +6,9 @@
 #include <chrono>
 #include "../../locutils_new/timers.h"
 
-#define BLOCK_SIZE 16
-
 #include "matrix_transp.h"
+
+#define BLOCK_SIZE 16
 
 typedef double base_type;
 
@@ -20,7 +20,7 @@ double CallKernel(int core_type)
 	double time = -1;
 
     #ifndef METRIC_RUN
-    size_t bytes_requested = 2.0 * sizeof(base_type) * (size_t)LENGTH * (size_t)LENGTH;
+    size_t bytes_requested = 2.0 * (sizeof(base_type) * (size_t)LENGTH * (size_t)LENGTH);
     size_t flops_requested = (size_t)LENGTH * (size_t)LENGTH;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif

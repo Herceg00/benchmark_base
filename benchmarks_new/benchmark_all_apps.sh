@@ -41,12 +41,26 @@ done
 
 add_separator
 
-##################### STENCIL ########################
+##################### STENCIL 1D ########################
 
 for ((radius=STENCIL_MIN_RAD;radius<=STENCIL_MAX_RAD;radius++)); do
     args="--length="$LINEAR_SIZE" --radius="$radius
     name="stencil_1D|S="$LINEAR_SIZE"|R="$radius"|"
     bash ./benchmark_specific_app.sh "stencil_1D" "$args" "$name"
+done
+
+add_separator
+
+##################### STENCIL 2D ########################
+
+for ((mode=0;mode<=1;mode++)); do
+    for (( MTX_SIZE=MIN_MTX_TRANSPOSE_SIZE; MTX_SIZE<=MAX_MTX_TRANSPOSE_SIZE; MTX_SIZE*=2 )); do
+        args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
+        name="stencil_2D|S="$MTX_SIZE"|M="$mode"|"
+        bash ./benchmark_specific_app.sh "stencil_1D" "$args" "$name"
+    done
+
+    add_separator
 done
 
 add_separator
@@ -66,8 +80,8 @@ done
 add_separator
 
 ##################### MAT_TRANSPOSAL ########################
-for (( MTX_SIZE=MIN_MTX_TRANSPOSE_SIZE; MTX_SIZE<=MAX_MTX_TRANSPOSE_SIZE; MTX_SIZE*=2 )); do
-    for ((mode=0;mode<=3;mode++)); do
+for ((mode=0;mode<=3;mode++)); do
+    for (( MTX_SIZE=MIN_MTX_TRANSPOSE_SIZE; MTX_SIZE<=MAX_MTX_TRANSPOSE_SIZE; MTX_SIZE*=2 )); do
         args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
         name="matrix_transp|S="$MTX_SIZE"|M="$mode"|"
         bash ./benchmark_specific_app.sh "matrix_transp" "$args" "$name"

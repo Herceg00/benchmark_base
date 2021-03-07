@@ -6,7 +6,7 @@ mkdir ./output/
 LINEAR_SIZE="800000000" # 6.4 GB in double, 3.2 GB in float
 MIN_MTX_SIZE="2048"
 MAX_MTX_SIZE="8192"
-MIN_MTX_TRANSPOSE_SIZE="512"
+MIN_MTX_TRANSPOSE_SIZE="256"
 MAX_MTX_TRANSPOSE_SIZE="32768"
 GRAPH_MIN_SIZE="6"
 GRAPH_MAX_SIZE="12"
@@ -35,24 +35,16 @@ function add_separator {
 
 ##################### BENCH ########################
 
-mode=0 #load
-for ((size=$RA_RADIUS;size<=$RA_MAX_RAD;size*=2 )); do
-  args="--length="$LINEAR_SIZE" --radius="$size" --lower_bound="$mode" --higher_bound="$mode
-  name="rec_fft|R="$size"|mode=load"
-  bash ./benchmark_specific_app.sh "random_access" "$args" "$name"
+for ((mode=0;mode<=3;mode++)); do
+    for (( MTX_SIZE=MIN_MTX_TRANSPOSE_SIZE; MTX_SIZE<=MAX_MTX_TRANSPOSE_SIZE; MTX_SIZE*=2 )); do
+        args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
+        name="matrix_transp|S="$MTX_SIZE"|M="$mode"|"
+        bash ./benchmark_specific_app.sh "matrix_transp" "$args" "$name"
+    done
+
+    add_separator
 done
 
-add_separator
-add_separator
-
-mode=1 #store
-for ((size=$RA_RADIUS;size<=$RA_MAX_RAD;size*=2 )); do
-  args="--length="$LINEAR_SIZE" --radius="$size" --lower_bound="$mode" --higher_bound="$mode
-  name="rec_fft|R="$size"|mode=store"
-  bash ./benchmark_specific_app.sh "random_access" "$args" "$name"
-done
-
-add_separator
 add_separator
 
 ##################### Roofline ########################
