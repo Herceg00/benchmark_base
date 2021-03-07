@@ -11,7 +11,7 @@ void InitSeq(AT *a, IT *b, DT *c, size_t size)
         #pragma omp for schedule(static)
         for (size_t i = 0; i < size; i++)
         {
-            a[i] = 0;
+            a[i] = rand_r(&myseed);
             b[i] = (int)rand_r(&myseed) % RADIUS_IN_ELEMENTS;
         }
 
@@ -30,11 +30,37 @@ void Init(AT *a, IT *b, DT *c, size_t size)
 }
 
 template<typename AT,typename IT, typename DT>
-void Kernel(AT *a, IT *b, DT *c, size_t size)
+void Kernel_load(AT *large, IT *indexes, DT *small, size_t size)
+{
+    #pragma omp parallel for schedule(static)
+    for(size_t i = 0; i < size; i++)
+    {
+        large[i] = small[indexes[i]];
+    }
+}
+
+template<typename AT,typename IT, typename DT>
+void Kernel_store(AT *large, IT *indexes, DT *small, size_t size)
 {
 	#pragma omp parallel for schedule(static)
     for(size_t i = 0; i < size; i++)
     {
-	    a[i] = c[b[i]];
+        small[indexes[i]] = large[i];
+    }
+}
+
+template<typename AT,typename IT, typename DT>
+void Kernel(int core_type, AT *large, IT *indexes, DT *small, size_t size)
+{
+    switch (core_type)
+    {
+        case  0:
+            Kernel_load(large, indexes, small, size);
+            break;
+        case  1:
+            Kernel_store(large, indexes, small, size);
+            break;
+
+        default: fprintf(stderr, "Wrong core type of random access!\n");
     }
 }

@@ -38,7 +38,7 @@ double CallKernel(int mode)
 		locality::utils::CacheAnnil(3);
         counter.start_timing();
         #endif
-        Kernel(data, LENGTH, mode);
+        Kernel(mode, data, LENGTH);
 
         #ifndef METRIC_RUN
         counter.end_timing();

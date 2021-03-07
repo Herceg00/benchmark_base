@@ -10,8 +10,8 @@ MIN_MTX_TRANSPOSE_SIZE="512"
 MAX_MTX_TRANSPOSE_SIZE="32768"
 GRAPH_MIN_SIZE="6"
 GRAPH_MAX_SIZE="12"
-STENCIL_MIN_RAD="3"
-STENCIL_MAX_RAD="10"
+STENCIL_MIN_RAD="1"
+STENCIL_MAX_RAD="12"
 LC_MIN_SIZE="32"
 LC_MAX_SIZE="128"
 FFT_SIZE="8192"
@@ -138,9 +138,19 @@ add_separator
 
 ##################### RANDOM_ACCESS ########################
 
+mode=0 #load
 for ((size=$RA_RADIUS;size<=$RA_MAX_RAD;size*=2 )); do
-  args="--length="$LINEAR_SIZE" --radius="$size
-  name="rec_fft|R="$size
+  args="--length="$LINEAR_SIZE" --radius="$size" --lower_bound="$mode" --higher_bound="$mode
+  name="rec_fft|R="$size"|mode=load"
+  bash ./benchmark_specific_app.sh "random_access" "$args" "$name"
+done
+
+add_separator
+
+mode=1 #store
+for ((size=$RA_RADIUS;size<=$RA_MAX_RAD;size*=2 )); do
+  args="--length="$LINEAR_SIZE" --radius="$size" --lower_bound="$mode" --higher_bound="$mode
+  name="rec_fft|R="$size"|mode=store"
   bash ./benchmark_specific_app.sh "random_access" "$args" "$name"
 done
 

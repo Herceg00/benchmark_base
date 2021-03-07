@@ -15,7 +15,7 @@ typedef int index_type;
 #include "random_access.h"
 #include "../../locutils_new/timers.h"
 
-double CallKernel(void )
+double CallKernel(int mode)
 {
     base_type *a = new base_type[LENGTH];
     index_type *index = new index_type[LENGTH];
@@ -44,7 +44,7 @@ double CallKernel(void )
 		counter.start_timing();
         #endif
 
-		Kernel(a, index, data, (size_t)LENGTH);
+		Kernel(mode, a, index, data, (size_t)LENGTH);
 
         #ifndef METRIC_RUN
 		counter.end_timing();
@@ -66,5 +66,5 @@ double CallKernel(void )
 
 int main()
 {
-    CallKernel();
+    CallKernel((int)MODE);
 }

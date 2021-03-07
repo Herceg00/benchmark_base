@@ -38,14 +38,17 @@ void Kernel_storage(AT *a, size_t size)
 }
 
 template<typename AT>
-void Kernel(AT *a, size_t size, int mode)
+void Kernel(int core_type, AT *a, size_t size)
 {
-    if (mode == 0)
+    switch (core_type)
     {
-        Kernel_storage(a, size);
-    }
-    else
-    {
-        Kernel_reduction(a, size);
+        case  0:
+            Kernel_reduction(a, size);
+            break;
+        case  1:
+            Kernel_storage(a, size);
+            break;
+
+        default: fprintf(stderr, "Wrong core type of random generator!\n");
     }
 }

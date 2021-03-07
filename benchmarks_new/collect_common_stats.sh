@@ -55,15 +55,15 @@ function collect_stats {
     search_result=$(grep -R "$TIME_PATTERN" "./"$PROG_NAME"/results.txt")
     dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
     dat=$(echo "scale=4; 1000.0*$dat" | bc -l)
-    printf $dat"\tms," >> $file_name
+    printf $dat"," >> $file_name
 
     search_result=$(grep -R "$PERF_PATTERN" "./"$PROG_NAME"/results.txt")
     dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
-    printf $dat"\tGFLOP/s," >> $file_name
+    printf $dat"," >> $file_name
 
     search_result=$(grep -R "$BAND_PATTERN" "./"$PROG_NAME"/results.txt")
     dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
-    printf $dat"\tGB/s," >> $file_name
+    printf $dat"," >> $file_name
 }
 
 "$@"
