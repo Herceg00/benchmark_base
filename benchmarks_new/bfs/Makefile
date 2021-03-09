@@ -1,3 +1,3 @@
-BENCH=bellman_ford
+BENCH=bfs
 include ../../locutils_new/Makefile
 

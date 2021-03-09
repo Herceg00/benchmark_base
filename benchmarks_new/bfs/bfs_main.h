@@ -25,10 +25,10 @@ double CallKernel(int core_type)
 {
 	size_t edge_count = std::pow(2, LENGTH) * EDGES_PER_VERTEX;
 	size_t vertex_count = std::pow(2, LENGTH);
-    index_type *v_array;
-    index_type *e_array;
-    e_array = new int[edges_count];
-    v_array = new int[vertices_count + 1];
+    index_type v_array;
+    index_type e_array;
+    e_array = new size_t[edge_count];
+    v_array = new size_t[vertex_count + 1];
 
 	edge_type edges = new size_t*[edge_count];
 
@@ -37,7 +37,11 @@ double CallKernel(int core_type)
 
 	index_type index = new size_t[vertex_count];
 
+    weight_type weights = new int[edge_count];
+
 	weight_type levels = new int[vertex_count]; //for visited-unvisited
+
+	int* d = NULL;
 
 	double time = -1;
 
@@ -49,7 +53,7 @@ double CallKernel(int core_type)
 
 #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * 20;
-    Init<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, LENGTH);
+    Init<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, LENGTH, v_array, e_array);
 #else
     int iterations = LOC_REPEAT;
 #endif
