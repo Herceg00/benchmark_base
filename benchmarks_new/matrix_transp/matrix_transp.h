@@ -109,7 +109,7 @@ void KernelBlockTranspJI(AT *a, AT *b, size_t block_size, size_t size)
 
 
 template <typename AT>
-void CallKernel(int core_type, AT *a, AT *b, size_t block_size, size_t size)
+void Kernel(int core_type, AT *a, AT *b, size_t block_size, size_t size)
 {
 	switch(core_type)
 	{
@@ -125,7 +125,7 @@ void CallKernel(int core_type, AT *a, AT *b, size_t block_size, size_t size)
 		//ji block
 		case 3: KernelBlockTranspJI(a, b, block_size, size); break;
 
-		default: fprintf(stderr, "unexpected core type");
+		default: fprintf(stderr, "unexpected core type in matrix transpose");
 	}
 }
 

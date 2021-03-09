@@ -10,13 +10,13 @@
 
 typedef double base_type;
 
-#include "stencil_2D.h"
+#include "stencil_3D.h"
 #include "../../locutils_new/timers.h"
 
 double CallKernel(int mode)
 {
-    base_type *a = new base_type[LENGTH * LENGTH];
-    base_type *b = new base_type[LENGTH * LENGTH];
+    base_type *a = new base_type[LENGTH * LENGTH * LENGTH];
+    base_type *b = new base_type[LENGTH * LENGTH * LENGTH];
 
 	double time = -1;
 
@@ -27,15 +27,15 @@ double CallKernel(int mode)
     {
         size_t bytes_per_element = (2*RADIUS + 1)*(2*RADIUS + 1)*sizeof(base_type); // no *2 since only 1 array in inner loop
         size_t flops_per_element = (2*RADIUS + 1)*(2*RADIUS + 1);
-        bytes_requested = bytes_per_element * LENGTH* LENGTH;
-        flops_requested = flops_per_element * LENGTH* LENGTH;
+        bytes_requested = bytes_per_element * LENGTH* LENGTH * LENGTH;
+        flops_requested = flops_per_element * LENGTH* LENGTH * LENGTH;
     }
     else if(mode == 1) // cross
     {
         size_t bytes_per_element = (2*RADIUS + 2*RADIUS + 1)*sizeof(base_type); // no *2 since only 1 array in inner loop
         size_t flops_per_element = (2*RADIUS + 2*RADIUS);
-        bytes_requested = bytes_per_element * LENGTH* LENGTH;
-        flops_requested = flops_per_element * LENGTH* LENGTH;
+        bytes_requested = bytes_per_element * LENGTH* LENGTH * LENGTH;
+        flops_requested = flops_per_element * LENGTH* LENGTH * LENGTH;
     }
 
     auto counter = PerformanceCounter(bytes_requested, flops_requested);

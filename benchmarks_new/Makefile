@@ -1,4 +1,4 @@
-BENCHS= stencil_2D stencil_1D random_access bellman_ford block_matrix_mult dijkstra d_matrix_vect_mult fft_complex fft_real gauss gauss_back gauss_forward gauss_simple_forward givens holecky householder jacobi k_means matrix_mult matrix_transp prime poisson qubit_evolution rand rec_fft s_matrix_vect_mult_col s_matrix_vect_mult_diag s_matrix_vect_mult_row s_matrix_vect_mult_sdiag stencil_1D strassen tsp triada tridiagonal tridiagonal_other vectors vectors_seqpar monosweep_repeated countersweep_repeated cyclic_reduction boruvka holderhouse
+BENCHS= stencil_3D stencil_2D stencil_1D random_access bellman_ford block_matrix_mult dijkstra d_matrix_vect_mult fft_complex fft_real gauss gauss_back gauss_forward gauss_simple_forward givens holecky householder jacobi k_means matrix_mult matrix_transp prime poisson qubit_evolution rand rec_fft s_matrix_vect_mult_col s_matrix_vect_mult_diag s_matrix_vect_mult_row s_matrix_vect_mult_sdiag stencil_1D strassen tsp triada tridiagonal tridiagonal_other vectors vectors_seqpar monosweep_repeated countersweep_repeated cyclic_reduction boruvka holderhouse
 
 all:
 	$(foreach bench, $(BENCHS), $(MAKE) -C $(bench) ;)

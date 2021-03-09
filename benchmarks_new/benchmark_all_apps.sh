@@ -4,21 +4,28 @@ rm -rf ./output/
 mkdir ./output/
 
 LINEAR_SIZE="800000000" # 6.4 GB in double, 3.2 GB in float
-MIN_MTX_SIZE="2048"
-MAX_MTX_SIZE="8192"
-MIN_MTX_TRANSPOSE_SIZE="512"
+MIN_MTX_TRANSPOSE_SIZE="256"
 MAX_MTX_TRANSPOSE_SIZE="32768"
 GRAPH_MIN_SIZE="6"
 GRAPH_MAX_SIZE="12"
-STENCIL_MIN_RAD="1"
-STENCIL_MAX_RAD="12"
 LC_MIN_SIZE="32"
 LC_MAX_SIZE="128"
 FFT_SIZE="8192"
 
+# stencil params
+STENCIL_1D_MIN_RAD="1"
+STENCIL_1D_MAX_RAD="12"
+
+MIN_2D_GRID_SIZE="256"
+MAX_2D_GRID_SIZE="32768"
+
+MIN_3D_GRID_SIZE="16"
+MAX_3D_GRID_SIZE="512"
+
 #sizes in KB
 RA_RADIUS="2" # 2 KB
 RA_MAX_RAD="2097152" # 2 GB
+
 
 bash ./collect_common_stats.sh init
 bash ./collect_metrics.sh init "single_socket"
@@ -43,7 +50,7 @@ add_separator
 
 ##################### STENCIL 1D ########################
 
-for ((radius=STENCIL_MIN_RAD;radius<=STENCIL_MAX_RAD;radius++)); do
+for ((radius=STENCIL_1D_MIN_RAD;radius<=STENCIL_1D_MAX_RAD;radius++)); do
     args="--length="$LINEAR_SIZE" --radius="$radius
     name="stencil_1D|S="$LINEAR_SIZE"|R="$radius"|"
     bash ./benchmark_specific_app.sh "stencil_1D" "$args" "$name"
@@ -53,13 +60,51 @@ add_separator
 
 ##################### STENCIL 2D ########################
 
-for ((mode=0;mode<=1;mode++)); do
-    for (( MTX_SIZE=MIN_MTX_TRANSPOSE_SIZE; MTX_SIZE<=MAX_MTX_TRANSPOSE_SIZE; MTX_SIZE*=2 )); do
-        args="--length="$MTX_SIZE" --lower_bound="$mode" --higher_bound="$mode
-        name="stencil_2D|S="$MTX_SIZE"|M="$mode"|"
-        bash ./benchmark_specific_app.sh "stencil_1D" "$args" "$name"
+mode=0 # rectangle
+for ((radius=1;radius<=3;radius++)); do
+    for (( GRID_SIZE=MIN_2D_GRID_SIZE; GRID_SIZE<=MAX_2D_GRID_SIZE; GRID_SIZE*=2 )); do
+        args="--length="$GRID_SIZE" --lower_bound="$mode" --higher_bound="$mode" --radius="$radius
+        name="stencil_2D|S="$GRID_SIZE"|R="$radius"|""|M="$mode"|"
+        bash ./benchmark_specific_app.sh "stencil_2D" "$args" "$name"
     done
+    add_separator
+done
 
+add_separator
+
+mode=1 # cross
+for ((radius=1;radius<=3;radius++)); do
+    for (( GRID_SIZE=MIN_2D_GRID_SIZE; GRID_SIZE<=MAX_2D_GRID_SIZE; GRID_SIZE*=2 )); do
+        args="--length="$GRID_SIZE" --lower_bound="$mode" --higher_bound="$mode" --radius="$radius
+        name="stencil_2D|S="$GRID_SIZE"|R="$radius"|""|M="$mode"|"
+        bash ./benchmark_specific_app.sh "stencil_2D" "$args" "$name"
+    done
+    add_separator
+done
+
+add_separator
+
+##################### 3D STENCIL ########################
+
+mode=0 # rectangle
+for ((radius=1;radius<=3;radius++)); do
+    for (( GRID_SIZE=MIN_3D_GRID_SIZE; GRID_SIZE<=MAX_3D_GRID_SIZE; GRID_SIZE*=2 )); do
+        args="--length="$GRID_SIZE" --lower_bound="$mode" --higher_bound="$mode" --radius="$radius
+        name="stencil_3D|S="$GRID_SIZE"|R="$radius"|""|M="$mode"|"
+        bash ./benchmark_specific_app.sh "stencil_3D" "$args" "$name"
+    done
+    add_separator
+done
+
+add_separator
+
+mode=1 # cross
+for ((radius=1;radius<=3;radius++)); do
+    for (( GRID_SIZE=MIN_3D_GRID_SIZE; GRID_SIZE<=MAX_3D_GRID_SIZE; GRID_SIZE*=2 )); do
+        args="--length="$GRID_SIZE" --lower_bound="$mode" --higher_bound="$mode" --radius="$radius
+        name="stencil_3D|S="$GRID_SIZE"|R="$radius"|""|M="$mode"|"
+        bash ./benchmark_specific_app.sh "stencil_3D" "$args" "$name"
+    done
     add_separator
 done
 

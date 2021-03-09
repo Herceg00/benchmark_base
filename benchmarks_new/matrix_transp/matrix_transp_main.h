@@ -8,7 +8,7 @@
 
 #include "matrix_transp.h"
 
-#define BLOCK_SIZE 16
+#define BLOCK_SIZE 32
 
 typedef double base_type;
 
@@ -41,7 +41,7 @@ double CallKernel(int core_type)
         counter.start_timing();
         #endif
 
-		CallKernel(core_type, a, b, BLOCK_SIZE, LENGTH);
+		Kernel(core_type, a, b, BLOCK_SIZE, LENGTH);
 
         #ifndef METRIC_RUN
         counter.end_timing();

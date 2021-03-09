@@ -14,14 +14,14 @@ typedef double base_type;
 
 double CallKernel(void)
 {
-    base_type *a = new base_type[LENGTH*LENGTH];
-    base_type *b = new base_type[LENGTH*LENGTH];
+    base_type *a = new base_type[LENGTH];
+    base_type *b = new base_type[LENGTH];
 
 	double time = -1;
 
     #ifndef METRIC_RUN
-    size_t bytes_requested = (size_t) LENGTH*LENGTH * (2*RADIUS + 1) * sizeof(double);
-    size_t flops_requested = (2*RADIUS + 1) * LENGTH*LENGTH;
+    size_t bytes_requested = LENGTH * (2*RADIUS + 1) * sizeof(base_type); // no *2 since only 1 array in inner loop
+    size_t flops_requested = (2*RADIUS + 1) * LENGTH;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
 
