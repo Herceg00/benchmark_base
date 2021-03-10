@@ -13,8 +13,8 @@ echo "SOCKETS NUMBER=$sockets_num"
 ##################### single socket test ########################
 THREADS=" --threads=$cores_num"
 bash ./collect_common_stats.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS"
-bash ./collect_roofline.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS" "single_socket"
-bash ./collect_metrics.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS" "single_socket"
+#bash ./collect_roofline.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS" "single_socket"
+#bash ./collect_metrics.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS" "single_socket"
 
 ##################### dual socket test ########################
 if [ $sockets_num = "2" ]; then

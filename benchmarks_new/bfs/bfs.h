@@ -5,6 +5,9 @@
 #include <cmath>
 #include <limits>
 #include <list>
+#include <cstring>
+#include <array>
+#include <vector>
 
 template<typename EDGES_AT>
 void GenEdges(EDGES_AT edges, size_t edge_count, size_t graph_scale)
@@ -147,7 +150,7 @@ void Init(EDGES_AT edges, size_t edge_count, INDEX_AT index, size_t vertex_count
 }
 
 template <typename EDGES_AT, typename WEIGHT_AT, typename INDEX_AT>
-void Kernel(size_t vertex_count, INDEX_AT v_array, INDEX_AT e_array, WEIGHT_AT _levels)
+void Kernel(int mode, size_t vertex_count, INDEX_AT v_array, INDEX_AT e_array, WEIGHT_AT _levels)
 {
     int _source_vertex;
     while(true) {
@@ -159,32 +162,86 @@ void Kernel(size_t vertex_count, INDEX_AT v_array, INDEX_AT e_array, WEIGHT_AT _
     for(size_t i = 0; i < vertex_count; i++)
         _levels[i] = 0;
 
-    // Create a queue for BFS
-    std::list<int> queue;
+    if (mode == 0) { // sequential
 
-    // Mark the current node as visited and enqueue it
-    _levels[_source_vertex] = -1;
-    queue.push_back(_source_vertex);
+        // Create a queue for BFS
+        std::list<int> queue;
 
-    while(!queue.empty())
-    {
-        // Dequeue a vertex from queue and print it
-        int s = queue.front();
-        queue.pop_front();
+        // Mark the current node as visited and enqueue it
+        _levels[_source_vertex] = -1;
+        queue.push_back(_source_vertex);
 
-        const long long edge_start = v_array[s];
-        const int connections_count = v_array[s + 1] - v_array[s];
+        while (!queue.empty()) {
+            // Dequeue a vertex from queue and print it
+            int s = queue.front();
+            queue.pop_front();
 
-        for(int edge_pos = 0; edge_pos < connections_count; edge_pos++)
-        {
-            long long int global_edge_pos = edge_start + edge_pos;
-            int v = e_array[global_edge_pos];
-            if (_levels[v] == -1)
-            {
-                _levels[v] = _levels[s] + 1;
-                queue.push_back(v);
+            const long long edge_start = v_array[s];
+            const int connections_count = v_array[s + 1] - v_array[s];
+
+            for (int edge_pos = 0; edge_pos < connections_count; edge_pos++) {
+                long long int global_edge_pos = edge_start + edge_pos;
+                int v = e_array[global_edge_pos];
+                if (_levels[v] == -1) {
+                    _levels[v] = _levels[s] + 1;
+                    queue.push_back(v);
+                }
             }
         }
+    } else { //parallel
+        int shifts_array[(int)LOC_THREADS];
+        std::vector<int> global_queue;
+        global_queue.push_back(_source_vertex);
+        while(!global_queue.empty())
+        {
+#pragma omp parallel
+            {
+                std::vector<int> local_queue;
+                int thread_num = omp_get_thread_num();
+#pragma omp for schedule(static)
+                for(size_t i = 0; i < global_queue.size(); i++)
+                {
+                    int s = global_queue[i];
+                    const long long edge_start = v_array[s];
+                    const int connections_count = v_array[s + 1] - v_array[s];
+
+                    for(int edge_pos = 0; edge_pos < connections_count; edge_pos++)
+                    {
+                        long long int global_edge_pos = edge_start + edge_pos;
+                        int v = e_array[global_edge_pos];
+                        if (_levels[v] == -1)
+                        {
+                            _levels[v] = _levels[s] + 1;
+                            local_queue.push_back(v);
+                        }
+                    }
+                }
+                int local_size = local_queue.size();
+                shifts_array[thread_num] = local_size;
+#pragma omp barrier
+#pragma omp master
+                {
+                    for(int i = 1; i < (int)LOC_THREADS; i++)
+                    {
+                        shifts_array[i] += shifts_array[i - 1];
+                    }
+
+                    int elements_count = shifts_array[(int)LOC_THREADS - 1];
+
+                    for(int i = ((int)LOC_THREADS - 1); i >= 1; i--)
+                    {
+                        shifts_array[i] = shifts_array[i - 1];
+                    }
+                    shifts_array[0] = 0;
+                    global_queue.reserve(elements_count);
+                }
+#pragma omp barrier
+                int tid_shift = shifts_array[thread_num];
+                int *where_to_write_ptr = &((global_queue.data())[tid_shift]);
+                std::memcpy(where_to_write_ptr, local_queue.data(), sizeof(int) * local_queue.size());
+            }
+        }
+
     }
 }
 
