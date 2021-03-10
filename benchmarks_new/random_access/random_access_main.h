@@ -9,63 +9,62 @@
 
 typedef double base_type;
 typedef int index_type;
-typedef base_type array_type[(int)LENGTH];
-typedef index_type indirect_type[(int)LENGTH];
 
-#define RAD_SIZE (int)((int)RADIUS * 1024 / sizeof(base_type))
-typedef base_type data_type[RAD_SIZE];
+#define RADIUS_IN_ELEMENTS (size_t)((size_t)RADIUS * 1024 / sizeof(base_type))
 
 #include "random_access.h"
 #include "../../locutils_new/timers.h"
 
-
-
-double CallKernel(void )
+double CallKernel(int mode)
 {
-	static array_type a;
-	static indirect_type index;
-    static data_type data;
+    base_type *a = new base_type[LENGTH];
+    index_type *index = new index_type[LENGTH];
+    base_type *data = new base_type[RADIUS_IN_ELEMENTS];
 
 	double time = -1;
 
-#ifndef METRIC_RUN
-    size_t bytes_requested = (int)LENGTH * (2 * sizeof(base_type) + sizeof(index_type));
-    size_t flops_requested =(int)LENGTH;
+    #ifndef METRIC_RUN
+    size_t bytes_requested = ((size_t)LENGTH) * (2 * sizeof(base_type) + sizeof(index_type));
+    size_t flops_requested = (size_t)LENGTH;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
-#endif
+    #endif
 
-#ifdef METRIC_RUN
+    #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * 20;
-    Init<base_type, array_type, indirect_type, data_type>(a, index, data , (int)LENGTH);
-#else
+    Init(a, index, data, (size_t)LENGTH);
+    #else
     int iterations = LOC_REPEAT;
-#endif
+    #endif
 
     for(int i = 0; i < iterations; i++)
 	{
-#ifndef METRIC_RUN
-        Init<base_type, array_type, indirect_type, data_type>(a, index, data , (int)LENGTH);
+        #ifndef METRIC_RUN
+        Init(a, index, data, (size_t)LENGTH);
 		locality::utils::CacheAnnil(3);
 		counter.start_timing();
-#endif
+        #endif
 
-		Kernel<base_type, array_type, indirect_type, data_type> (a, index, data, (int)LENGTH);
+		Kernel(mode, a, index, data, (size_t)LENGTH);
 
-#ifndef METRIC_RUN
+        #ifndef METRIC_RUN
 		counter.end_timing();
 		counter.update_counters();
 		counter.print_local_counters();
-#endif
-
+        #endif
 	}
 
-#ifndef METRIC_RUN
+	#ifndef METRIC_RUN
 	counter.print_average_counters(true);
-#endif
+    #endif
+
+    delete []a;
+    delete []index;
+    delete []data;
+
 	return time;
 }
 
 int main()
 {
-    CallKernel();
+    CallKernel((int)MODE);
 }

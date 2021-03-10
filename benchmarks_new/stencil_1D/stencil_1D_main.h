@@ -7,59 +7,57 @@
 #include <chrono>
 #include "../../locutils_new/perf_wrapper.h"
 
-
 typedef double base_type;
-typedef base_type array_type[LENGTH];
-typedef size_t helper_type[LENGTH];
 
 #include "stencil_1D.h"
 #include "../../locutils_new/timers.h"
 
-
-
-double CallKernel(void )
+double CallKernel(void)
 {
-	static array_type a;
-	static array_type b;
+    base_type *a = new base_type[LENGTH];
+    base_type *b = new base_type[LENGTH];
 
 	double time = -1;
 
-#ifndef METRIC_RUN
-    size_t bytes_requested = (long int) LENGTH * (RADIUS + 1) * ( sizeof(double));
-    size_t flops_requested = 2  * (RADIUS + 1) * (long int)LENGTH;
+    #ifndef METRIC_RUN
+    size_t bytes_requested = LENGTH * (2*RADIUS + 1) * sizeof(base_type); // no *2 since only 1 array in inner loop
+    size_t flops_requested = (2*RADIUS + 1) * LENGTH;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
-#endif
+    #endif
 
-#ifdef METRIC_RUN
+    #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * 20;
-    Init<base_type, array_type, helper_type>(a, b, LENGTH);
-#else
+    Init(a, b, LENGTH);
+    #else
     int iterations = LOC_REPEAT;
-#endif
+    #endif
 
     for(int i = 0; i < iterations; i++)
 	{
-#ifndef METRIC_RUN
-		Init<base_type, array_type, helper_type>(a, b, LENGTH);
+        #ifndef METRIC_RUN
+		Init(a, b, LENGTH);
 		locality::utils::CacheAnnil(3);
 		counter.start_timing();
-#endif
+        #endif
 
-		Kernel<base_type, array_type, helper_type> (a, b, LENGTH);
+		Kernel(a, b, LENGTH);
 
-#ifndef METRIC_RUN
+        #ifndef METRIC_RUN
 		counter.end_timing();
 		counter.update_counters();
 		counter.print_local_counters();
-#endif
+        #endif
 
 		std::swap(a,b);
 	}
 
-#ifndef METRIC_RUN
+    #ifndef METRIC_RUN
 	counter.print_average_counters(true);
-#endif
+    #endif
 	return time;
+
+	delete []a;
+	delete []b;
 }
 
 int main()
