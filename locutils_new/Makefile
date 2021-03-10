@@ -35,7 +35,7 @@ LOC_FILES = $(BENCH)_files
 LOC_RECTS = $(BENCH)_rects
 
 PAPI ?= 1
-THREADS ?= 2
+THREADS ?= 4
 REPEAT ?= 8
 
 TGT_NP = $(OUT_DIR)/$(LOC_NP)_$(SIZE)

@@ -66,7 +66,12 @@ double CallKernel(int mode)
 		locality::utils::CacheAnnil();
         counter.start_timing();
 #endif
-        Kernel<edge_type, weight_type, index_type>(mode, vertex_count, v_array, e_array, levels);
+        if(mode == 1) {
+            Kernel_parallel<edge_type, weight_type, index_type>(vertex_count, v_array, e_array, levels);
+        }
+        if(mode == 0) {
+            Kernel_sequential<edge_type, weight_type, index_type>(vertex_count, v_array, e_array, levels);
+        }
 
 #ifndef METRIC_RUN
         counter.end_timing();

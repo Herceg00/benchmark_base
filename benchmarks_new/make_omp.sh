@@ -71,7 +71,7 @@ if [[ $METRICS = "true" ]]; then
 fi
 
 if [ $NO_RUN = "false" ]; then
-    export OMP_NUM_THREADS=$EXP_THREADS
+    export OMP_NUM_THREADS="4"
     export OMP_PROC_BIND=true
     export OMP_PROC_BIND=close
     if [[ $METRICS = "true" ]]; then
