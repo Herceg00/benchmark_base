@@ -5,7 +5,6 @@
 #include <cmath>
 #include <limits>
 #include <list>
-typedef std::pair<int, float> edge;
 
 template<typename EDGES_AT>
 void GenEdges(EDGES_AT edges, size_t edge_count, size_t graph_scale)
@@ -119,40 +118,27 @@ void GenEdgeIndex(EDGES_AT edges, size_t edge_count, size_t vertex_count, INDEX_
 	}
 }
 
-static const int MAX_WEIGHT = 100;
-
-template<typename WEIGHT_AT>
-void GenWeights(WEIGHT_AT weights, size_t vertex_count)
-{
-	for(size_t i = 0; i < vertex_count; i++)
-		weights[i] = locality::utils::RRand(i) * MAX_WEIGHT + 1;
-}
-
-template<typename EDGES_AT, typename INDEX_AT, typename WEIGHT_AT>
-void Init(EDGES_AT edges, size_t edge_count, INDEX_AT index, WEIGHT_AT weights, size_t vertex_count, size_t graph_scale,INDEX_AT v_array,INDEX_AT e_array)
+template<typename EDGES_AT, typename INDEX_AT>
+void Init(EDGES_AT edges, size_t edge_count, INDEX_AT index, size_t vertex_count, size_t graph_scale, INDEX_AT v_array,INDEX_AT e_array)
 {
 	GenEdges(edges, edge_count, graph_scale);
-	GenWeights(weights, edge_count);
 	SortEdges(edges, edge_count);
 	GenEdgeIndex(edges, edge_count, vertex_count, index);
 
-    std::vector<std::vector<edge> > graph_info(vertex_count + 1);
+    std::vector<std::vector<int>> graph_info(vertex_count + 1);
 
-    for (long long int i = 0; i < edge_count; i++) {
+    for (size_t i = 0; i < edge_count; i++) {
         int src_id = edges[i][0];
         int dst_id = edges[i][1];
-        float weight = weights[i];
-        graph_info[src_id].push_back(std::pair<int, float>(dst_id, weight));
+        graph_info[src_id].push_back(dst_id);
     }
 
     int current_edge = 0;
     e_array[0] = 0;
-    for (int cur_vertex = 0; cur_vertex < vertex_count; cur_vertex++) {
+    for (size_t cur_vertex = 0; cur_vertex < vertex_count; cur_vertex++) {
         int src_id = cur_vertex;
-
-        for (int i = 0; i < graph_info[src_id].size(); i++) {
-            e_array[current_edge] = graph_info[src_id][i].first;
-            weights[current_edge] = graph_info[src_id][i].second;
+        for (std::vector<int>::size_type i = 0; i < graph_info[src_id].size(); i++) {
+            e_array[current_edge] = graph_info[src_id][i];
             current_edge++;
         }
         v_array[cur_vertex + 1] = current_edge;
@@ -160,23 +146,8 @@ void Init(EDGES_AT edges, size_t edge_count, INDEX_AT index, WEIGHT_AT weights, 
     v_array[0] = 0;
 }
 
-template <typename WEIGHT_AT>
-long Check(WEIGHT_AT result, size_t vertex_count)
-{
-	long sum = 0;
-
-	for(size_t i = 0; i < vertex_count; i++)
-	{
-		sum += result[i];
-		sum = sum % 0xffff;
-	}
-
-	return sum;
-}
-
-
 template <typename EDGES_AT, typename WEIGHT_AT, typename INDEX_AT>
-void Kernel(int core_type, EDGES_AT edges, size_t edge_count, WEIGHT_AT weights, size_t vertex_count, WEIGHT_AT d, INDEX_AT v_array, INDEX_AT e_array, WEIGHT_AT _levels)
+void Kernel(size_t vertex_count, INDEX_AT v_array, INDEX_AT e_array, WEIGHT_AT _levels)
 {
     int _source_vertex;
     while(true) {
@@ -185,7 +156,7 @@ void Kernel(int core_type, EDGES_AT edges, size_t edge_count, WEIGHT_AT weights,
             break;
     }
     // Mark all the vertices as not visited
-    for(int i = 0; i < vertex_count; i++)
+    for(size_t i = 0; i < vertex_count; i++)
         _levels[i] = 0;
 
     // Create a queue for BFS
@@ -215,7 +186,6 @@ void Kernel(int core_type, EDGES_AT edges, size_t edge_count, WEIGHT_AT weights,
             }
         }
     }
-
 }
 
 #endif

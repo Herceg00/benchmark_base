@@ -15,58 +15,57 @@ static const int EDGES_PER_VERTEX = 16;
 
 typedef size_t** edge_type;
 typedef size_t* index_type;
+typedef size_t* array_type;
 typedef int* weight_type;
 
 #include "bfs.h"
 #include "../../locutils_new/timers.h"
 
 
-double CallKernel(int core_type)
+double CallKernel()
 {
 	size_t edge_count = std::pow(2, LENGTH) * EDGES_PER_VERTEX;
 	size_t vertex_count = std::pow(2, LENGTH);
     index_type v_array;
     index_type e_array;
+    array_type edges_all;
+    edges_all = new size_t[2*edge_count];
     e_array = new size_t[edge_count];
     v_array = new size_t[vertex_count + 1];
 
 	edge_type edges = new size_t*[edge_count];
 
 	for(size_t i = 0; i < edge_count; i++)
-		edges[i] = new size_t[2];
+		edges[i] = &edges_all[2*i];
 
 	index_type index = new size_t[vertex_count];
 
-    weight_type weights = new int[edge_count];
-
 	weight_type levels = new int[vertex_count]; //for visited-unvisited
 
-	int* d = NULL;
 
 	double time = -1;
 
 #ifndef METRIC_RUN
-    double bytes_requested = edge_count * vertex_count * (4 * sizeof(int) + 2 * sizeof(size_t) + sizeof(int)) + vertex_count;
-    double flops_requested = edge_count * vertex_count * 4;
+    double bytes_requested = edge_count * (sizeof(e_array) + sizeof(levels));
+    double flops_requested = edge_count;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
 #endif
 
 #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * 20;
-    Init<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, LENGTH, v_array, e_array);
 #else
     int iterations = LOC_REPEAT;
 #endif
+    Init<edge_type, index_type>(edges, edge_count, index, vertex_count, LENGTH, v_array, e_array);
 
     for(int i = 0; i < iterations; i++)
 	{
 #ifndef METRIC_RUN
-		Init<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, LENGTH, v_array, e_array);
 		locality::utils::CacheAnnil();
         counter.start_timing();
 #endif
 
-        Kernel<edge_type, weight_type, index_type>(core_type, edges, edge_count, weights, vertex_count, d, v_array, e_array, levels);
+        Kernel<edge_type, weight_type, index_type>(vertex_count, v_array, e_array, levels);
 
 #ifndef METRIC_RUN
         counter.end_timing();
@@ -84,5 +83,5 @@ double CallKernel(int core_type)
 
 int main()
 {
-    CallKernel((int)MODE);
+    CallKernel();
 }
