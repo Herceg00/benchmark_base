@@ -3,6 +3,7 @@
 rm -rf ./output/
 mkdir ./output/
 
+
 LINEAR_SIZE="800000000" # 6.4 GB in double, 3.2 GB in float
 MIN_MTX_TRANSPOSE_SIZE="256"
 MAX_MTX_TRANSPOSE_SIZE="32768"
@@ -150,18 +151,8 @@ add_separator
 mode=1 # sequential
 for ((size=$GRAPH_MIN_SIZE;size<="9";size++)); do # upper bound is different since this algorithm is long
     args="--length="$size" --lower_bound="$mode" --higher_bound="$mode
-    name="bellman_ford|S="$size"|M="$mode"|"
-    bash ./benchmark_specific_app.sh "bellman_ford" "$args" "$name"
-done
-
-add_separator
-
-#####################GAUSS ########################
-
-for (( MTX_SIZE=MIN_MTX_SIZE; MTX_SIZE<=MAX_MTX_SIZE; MTX_SIZE*=2 )); do
-    args="--length="$MTX_SIZE
-    name="gauss|S="$MTX_SIZE"|"
-    bash ./benchmark_specific_app.sh "gauss" "$args" "$name"
+    name="bfs|S="$size"|M="$mode"|"
+    bash ./benchmark_specific_app.sh "bfs" "$args" "$name"
 done
 
 add_separator
@@ -214,6 +205,27 @@ for ((size=$RA_RADIUS;size<=$RA_MAX_RAD;size*=2 )); do
 done
 
 add_separator
+
+#####################BFS##############################
+
+mode=0 #sequential
+for ((size=$GRAPH_MIN_SIZE;size<=$GRAPH_MAX_SIZE;size++)); do
+    args="--length="$size" --lower_bound="$mode" --higher_bound="$mode
+    name="bfs|S="$size"|M="$mode"|"
+    bash ./benchmark_specific_app.sh "bfs" "$args" "$name"
+done
+
+add_separator
+
+mode=1 #parallel
+for ((size=$GRAPH_MIN_SIZE;size<=$GRAPH_MAX_SIZE;size++)); do
+    args="--length="$size" --lower_bound="$mode" --higher_bound="$mode
+    name="bfs|S="$size"|M="$mode"|"
+    bash ./benchmark_specific_app.sh "bfs" "$args" "$name"
+done
+
+add_separator
+
 
 ##################### Roofline ########################
 
