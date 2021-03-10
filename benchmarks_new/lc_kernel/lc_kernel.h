@@ -356,17 +356,6 @@ void Init(tlpointers &tldata, slpointers &sldata, cusizevector plsize, cusizevec
     InitSeq(tldata.tlxymac, plsize, half_plsize);
 }
 
-template<typename T, typename AT>
-T Check(AT a, int size)
-{
-	T sum = 0;
-
-	for(int i = 0; i < size; i++)
-		sum += a[i] / size;
-
-	return sum;
-}
-
 void Kernel(cusizevector plsize,
             cusizevector half_plsize,
             cusizevector tick,
@@ -376,7 +365,7 @@ void Kernel(cusizevector plsize,
     tick.y = rand()%2;
     tick.z = rand()%2;
 
-#pragma omp parallel for schedule(static)
+    #pragma omp parallel for schedule(static)
     for (size_t i = 0; i < half_plsize.x * half_plsize.y * half_plsize.z; i++) {
         size_t tz = i / (half_plsize.x * half_plsize.y);
         size_t ty = (i - tz * half_plsize.x * half_plsize.y) / half_plsize.z;

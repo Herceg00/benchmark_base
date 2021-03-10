@@ -8,7 +8,7 @@ MIN_MTX_TRANSPOSE_SIZE="256"
 MAX_MTX_TRANSPOSE_SIZE="32768"
 GRAPH_MIN_SIZE="6"
 GRAPH_MAX_SIZE="12"
-LC_MIN_SIZE="32"
+LC_MIN_SIZE="16"
 LC_MAX_SIZE="128"
 FFT_SIZE="8192"
 
@@ -37,54 +37,12 @@ function add_separator {
     bash ./collect_metrics.sh add_separating_line "single_socket"
 }
 
-##################### 3D STENCIL ########################
 
-mode=0 # rectangle
-for ((radius=1;radius<=3;radius++)); do
-    for (( GRID_SIZE=MIN_3D_GRID_SIZE; GRID_SIZE<=MAX_3D_GRID_SIZE; GRID_SIZE*=2 )); do
-        args="--length="$GRID_SIZE" --lower_bound="$mode" --higher_bound="$mode" --radius="$radius
-        name="stencil_3D|S="$GRID_SIZE"|R="$radius"|""|M="$mode"|"
-        bash ./benchmark_specific_app.sh "stencil_3D" "$args" "$name"
-    done
-    add_separator
-done
-
-add_separator
-
-mode=1 # cross
-for ((radius=1;radius<=3;radius++)); do
-    for (( GRID_SIZE=MIN_3D_GRID_SIZE; GRID_SIZE<=MAX_3D_GRID_SIZE; GRID_SIZE*=2 )); do
-        args="--length="$GRID_SIZE" --lower_bound="$mode" --higher_bound="$mode" --radius="$radius
-        name="stencil_3D|S="$GRID_SIZE"|R="$radius"|""|M="$mode"|"
-        bash ./benchmark_specific_app.sh "stencil_3D" "$args" "$name"
-    done
-    add_separator
-done
-
-add_separator
-
-##################### 2D STENCIL ########################
-
-mode=0 # rectangle
-for ((radius=1;radius<=3;radius++)); do
-    for (( GRID_SIZE=MIN_2D_GRID_SIZE; GRID_SIZE<=MAX_2D_GRID_SIZE; GRID_SIZE*=2 )); do
-        args="--length="$GRID_SIZE" --lower_bound="$mode" --higher_bound="$mode" --radius="$radius
-        name="stencil_2D|S="$GRID_SIZE"|R="$radius"|""|M="$mode"|"
-        bash ./benchmark_specific_app.sh "stencil_2D" "$args" "$name"
-    done
-    add_separator
-done
-
-add_separator
-
-mode=1 # cross
-for ((radius=1;radius<=3;radius++)); do
-    for (( GRID_SIZE=MIN_2D_GRID_SIZE; GRID_SIZE<=MAX_2D_GRID_SIZE; GRID_SIZE*=2 )); do
-        args="--length="$GRID_SIZE" --lower_bound="$mode" --higher_bound="$mode" --radius="$radius
-        name="stencil_2D|S="$GRID_SIZE"|R="$radius"|""|M="$mode"|"
-        bash ./benchmark_specific_app.sh "stencil_2D" "$args" "$name"
-    done
-    add_separator
+##################### LC ########################
+for ((size=$LC_MIN_SIZE;size<=$LC_MAX_SIZE;size*=2 )); do
+    args="--length="$size
+    name="lc_kernel|S="$size
+    bash ./benchmark_specific_app.sh "lc_kernel" "$args" "$name"
 done
 
 add_separator
