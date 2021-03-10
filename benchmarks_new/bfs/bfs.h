@@ -8,6 +8,7 @@
 #include <cstring>
 #include <array>
 #include <vector>
+#define UNVISITED_VERTEX -1
 
 template<typename EDGES_AT>
 void GenEdges(EDGES_AT edges, size_t edge_count, size_t graph_scale)
@@ -160,15 +161,18 @@ void Kernel_parallel(size_t vertex_count, INDEX_AT v_array, INDEX_AT e_array, WE
     }
     // Mark all the vertices as not visited
     for(size_t i = 0; i < vertex_count; i++){
-        _levels[i] = 0;
+        _levels[i] = UNVISITED_VERTEX;
     }
 
     int shifts_array[(int)LOC_THREADS];
     int iterations = 0;
+
     std::vector<int> global_queue;
-    int elements_count = 1;
-    _levels[_source_vertex] = -1;
+
+    int elements_count;
+    _levels[_source_vertex] = UNVISITED_VERTEX;
     global_queue.push_back(_source_vertex);
+
     while(!global_queue.empty())
     {
         iterations++;
@@ -176,7 +180,7 @@ void Kernel_parallel(size_t vertex_count, INDEX_AT v_array, INDEX_AT e_array, WE
         {
             std::vector<int> local_queue;
             int thread_num = omp_get_thread_num();
-#pragma omp for schedule(static)
+#pragma omp for schedule(guided)
             for(size_t i = 0; i < global_queue.size(); i++)
             {
                 int s = global_queue[i];
@@ -187,7 +191,7 @@ void Kernel_parallel(size_t vertex_count, INDEX_AT v_array, INDEX_AT e_array, WE
                 {
                     long long int global_edge_pos = edge_start + edge_pos;
                     int v = e_array[global_edge_pos];
-                    if (_levels[v] == -1)
+                    if (_levels[v] == UNVISITED_VERTEX)
                     {
                         _levels[v] = _levels[s] + 1;
                         local_queue.push_back(v);
@@ -207,9 +211,6 @@ void Kernel_parallel(size_t vertex_count, INDEX_AT v_array, INDEX_AT e_array, WE
                 elements_count = shifts_array[(int)LOC_THREADS - 1];
 
                 global_queue.resize(elements_count);
-                if(global_queue.empty()){
-                    std::cout << "EMPTY" << iterations << std:: endl;
-                }
 
                 for(int i = ((int)LOC_THREADS - 1); i >= 1; i--)
                 {
@@ -238,14 +239,14 @@ void Kernel_sequential(size_t vertex_count, INDEX_AT v_array, INDEX_AT e_array, 
     }
     // Mark all the vertices as not visited
     for(size_t i = 0; i < vertex_count; i++) {
-        _levels[i] = 0;
+        _levels[i] = UNVISITED_VERTEX;
     }
 
         // Create a queue for BFS
         std::list<int> queue;
 
         // Mark the current node as visited and enqueue it
-        _levels[_source_vertex] = -1;
+        _levels[_source_vertex] = UNVISITED_VERTEX;
         queue.push_back(_source_vertex);
 
         while (!queue.empty()) {
@@ -259,7 +260,7 @@ void Kernel_sequential(size_t vertex_count, INDEX_AT v_array, INDEX_AT e_array, 
             for (int edge_pos = 0; edge_pos < connections_count; edge_pos++) {
                 long long int global_edge_pos = edge_start + edge_pos;
                 int v = e_array[global_edge_pos];
-                if (_levels[v] == -1) {
+                if (_levels[v] == UNVISITED_VERTEX) {
                     _levels[v] = _levels[s] + 1;
                     queue.push_back(v);
                 }

@@ -59,7 +59,6 @@ double CallKernel(int mode)
 #endif
     Init<edge_type, index_type>(edges, edge_count, index, vertex_count, LENGTH, v_array, e_array);
 
-    double start_time_1 = omp_get_wtime();
     for(int i = 0; i < iterations; i++)
 	{
 #ifndef METRIC_RUN
@@ -79,8 +78,6 @@ double CallKernel(int mode)
         counter.print_local_counters();
 #endif
 	}
-    double end_time_1 = omp_get_wtime();
-    std::cout << "8xKernel time"<<  end_time_1 - start_time_1 << std::endl;
 
 #ifndef METRIC_RUN
     counter.print_average_counters(true);
@@ -91,8 +88,5 @@ double CallKernel(int mode)
 
 int main()
 {
-    double start_time = omp_get_wtime();
-    CallKernel(1);
-    double end_time = omp_get_wtime();
-    std::cout << "Main time" << end_time - start_time << std::endl;
+    CallKernel((int)MODE);
 }
