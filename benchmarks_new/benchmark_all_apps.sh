@@ -3,8 +3,9 @@
 rm -rf ./output/
 mkdir ./output/
 
-
 LINEAR_SIZE="800000000" # 6.4 GB in double, 3.2 GB in float
+MIN_MTX_SIZE="128"
+MAX_MTX_SIZE="1024"
 MIN_MTX_TRANSPOSE_SIZE="256"
 MAX_MTX_TRANSPOSE_SIZE="32768"
 GRAPH_MIN_SIZE="6"
@@ -41,7 +42,7 @@ function add_separator {
 
 #################### TRIAD ########################
 
-for ((mode=0;mode<=15;mode++)); do
+for ((mode=0;mode<10;mode++)); do
     args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
     name="triada|S="$LINEAR_SIZE"|M="$mode"|"
     bash ./benchmark_specific_app.sh "triada" "$args" "$name"
@@ -138,25 +139,6 @@ done
 
 add_separator
 
-##################### BELLMAN_FORD ########################
-mode=0 # parallel
-for ((size=$GRAPH_MIN_SIZE;size<=$GRAPH_MAX_SIZE;size++)); do
-    args="--length="$size" --lower_bound="$mode" --higher_bound="$mode
-    name="bellman_ford|S="$size"|M="$mode"|"
-    bash ./benchmark_specific_app.sh "bellman_ford" "$args" "$name"
-done
-
-add_separator
-
-mode=1 # sequential
-for ((size=$GRAPH_MIN_SIZE;size<="9";size++)); do # upper bound is different since this algorithm is long
-    args="--length="$size" --lower_bound="$mode" --higher_bound="$mode
-    name="bfs|S="$size"|M="$mode"|"
-    bash ./benchmark_specific_app.sh "bfs" "$args" "$name"
-done
-
-add_separator
-
 #####################RAND_GENERATOR ########################
 mode=0 #storage
 args="--length="$LINEAR_SIZE" --lower_bound="$mode" --higher_bound="$mode
@@ -208,23 +190,23 @@ add_separator
 
 #####################BFS##############################
 
-mode=0 #sequential
-for ((size=$GRAPH_MIN_SIZE;size<=$GRAPH_MAX_SIZE;size++)); do
-    args="--length="$size" --lower_bound="$mode" --higher_bound="$mode
-    name="bfs|S="$size"|M="$mode"|"
-    bash ./benchmark_specific_app.sh "bfs" "$args" "$name"
-done
+#mode=0 #sequential
+#for ((size=$GRAPH_MIN_SIZE;size<=$GRAPH_MAX_SIZE;size++)); do
+#    args="--length="$size" --lower_bound="$mode" --higher_bound="$mode
+#    name="bfs|S="$size"|M="$mode"|"
+#    bash ./benchmark_specific_app.sh "bfs" "$args" "$name"
+#done
 
-add_separator
+#add_separator
 
-mode=1 #parallel
-for ((size=$GRAPH_MIN_SIZE;size<=$GRAPH_MAX_SIZE;size++)); do
-    args="--length="$size" --lower_bound="$mode" --higher_bound="$mode
-    name="bfs|S="$size"|M="$mode"|"
-    bash ./benchmark_specific_app.sh "bfs" "$args" "$name"
-done
+#mode=1 #parallel
+#for ((size=$GRAPH_MIN_SIZE;size<=$GRAPH_MAX_SIZE;size++)); do
+#    args="--length="$size" --lower_bound="$mode" --higher_bound="$mode
+#    name="bfs|S="$size"|M="$mode"|"
+#    bash ./benchmark_specific_app.sh "bfs" "$args" "$name"
+#done
 
-add_separator
+#add_separator
 
 
 ##################### Roofline ########################

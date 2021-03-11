@@ -5,29 +5,25 @@ using std::string;
 
 #define CACHE_LINE_K 256 // CACHE_LINE_K should be bigger than size of cache string
 
-const int CORE_TYPES = 16;
+const int CORE_TYPES = 10;
 
 /** starting from 1 */
 string GetCoreName(int core_type)
 {
 	string type_names[CORE_TYPES] =
 	{
-		"A[i] = B[i]*X + C", // 2
-		"A[i] = B[i]*X[i] + C", // 3
-		"A[i] = B[i]*X + C[i]", // 3
-		"A[i] = B[i]*X[i] + C[i]", // 4
-		"A[ind[i]] = B[ind[i]]*X + C",  // 3
-		"A[ind[i]] = B[ind[i]]*X[ind[i]] + C",  // 4
-		"A[ind[i]] = B[ind[i]]*X + C[ind[i]]", // 4
-		"A[ind[i]] = B[ind[i]]*X[ind[i]]] + C[ind[i]]", // 5
-		"A[ind[i]] = B[ind[i]]*X + C",  // 3
-		"A[ind[i]] = B[ind[i]]*X[ind[i]] + C", // 4
-		"A[ind[i]] = B[ind[i]]*X + C[ind[i]]", // 4
-		"A[ind[i]] = B[ind[i]]*X[ind[i]]] + C[ind[i]]", // 5
-		"A[i] = B[i] * 1 + 0", // 2
-		"A[i] = B[i] * X + 0", // 2
-		"A[i] = B[i] * 1 + C[i]", // 3
-		"A[i] = B[i] * X + C[i]" // 4
+	        "A[i] = B[i]*X + C", // 2
+            "A[i] = B[i]*X[i] + C", // 3
+            "A[i] = B[i]*X + C[i]", // 3
+            "A[i] = B[i]*X[i] + C[i]", // 4
+
+            "A[i] = B[ind[i]]*X + C", // 3
+            "A[ind[i]] = B[i]*X + C", // 3
+            "A[ind[i]] = B[ind[i]]*X + C", // 3
+
+            "A[i] = B[ind[i]]*X + C", // 3
+            "A[ind[i]] = B[i]*X + C", // 3
+            "A[ind[i]] = B[ind[i]]*X + C", // 3
 	};
 
 	if(core_type < 1 || core_type > CORE_TYPES)
@@ -75,16 +71,10 @@ void InitRand(AT *a, AT *b, AT *c, AT *x, AT_ind *ind, size_t size)
 template<typename AT, typename AT_ind>
 void Init(int core_type, AT *a, AT *b, AT *c, AT *x, AT_ind *ind, size_t size)
 {
-	if(core_type < 9)
+	if(core_type < 7)
 		InitSeq(a, b, c, x, ind ,size);
 	else
 		InitRand(a, b, c, x, ind, size);
-}
-
-template<typename T, typename AT>
-T Check(AT a, size_t size)
-{
-	return 0;
 }
 
 #define VAR(ASSIGN, _A, _B, _X, _C) ASSIGN; _A = _B * _X + _C;
@@ -107,56 +97,45 @@ void Kernel(int core_type, AT *a, AT *b, AT *c, AT *x, AT_ind *ind, size_t size)
 		case  0:
             #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(size_t index =      i, a[index], b[index], sc_x    , sc_c)
-		break;
+		    break;
 		case  1:
             #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(size_t index =      i, a[index], b[index], x[index], sc_c)
-		break;
+		    break;
 		case  2:
             #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(size_t index =      i, a[index], b[index], sc_x    , c[index])
-		break;
+		    break;
 		case  3:
             #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(size_t index =      i, a[index], b[index], x[index], c[index])
-		break;
-		case  4:
-		case  8:
-            #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(size_t index = ind[i], a[index], b[index], sc_x    , sc_c)
-		break;
-		case  5:
-		case 9:
-            #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(size_t index = ind[i], a[index], b[index], x[index], sc_c)
-		break;
-		case 6:
-		case 10:
-            #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(size_t index = ind[i], a[index], b[index], sc_x    , c[index])
-		break;
-		case  7:
-		case 11:
-            #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(size_t index = ind[i], a[index], b[index], x[index], c[index])
-		break;
+		    break;
 
-		case 12:
+		case  4:
             #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(size_t index = i, a[index], b[index], 1, 0)
-		break;
-		case 13:
+			CALL_AND_PROFILE(size_t index = ind[i], a[i], b[index], sc_x    , sc_c)
+		    break;
+        case  5:
             #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(size_t index = i, a[index], b[index], sc_x, 0)
-		break;
-		case 14:
+            CALL_AND_PROFILE(size_t index = ind[i], a[index], b[i], sc_x    , sc_c)
+            break;
+        case  6:
             #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(size_t index = i, a[index], b[index], 1, c[index])
-		break;
-		case 15:
+            CALL_AND_PROFILE(size_t index = ind[i], a[index], b[index], sc_x    , sc_c)
+            break;
+
+        case  7:
             #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(size_t index = i, a[index], b[index], sc_x, c[index])
-		break;
+            CALL_AND_PROFILE(size_t index = ind[i], a[i], b[index], sc_x    , sc_c)
+            break;
+        case  8:
+            #pragma omp parallel for schedule(static)
+            CALL_AND_PROFILE(size_t index = ind[i], a[index], b[i], sc_x    , sc_c)
+            break;
+        case  9:
+            #pragma omp parallel for schedule(static)
+            CALL_AND_PROFILE(size_t index = ind[i], a[index], b[index], sc_x    , sc_c)
+            break;
 
 		default: fprintf(stderr, "Wrong core type of triad!\n");
 	}

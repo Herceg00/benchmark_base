@@ -25,7 +25,7 @@ double CallKernel(int core_type)
 
 	double time = -1;
     #ifndef METRIC_RUN
-    int triad_step_size[16] = {2,3,3,4,3,4,4,5,3,4,4,5,2,2,3,4};
+    int triad_step_size[CORE_TYPES] = {2,3,3,4,3,3,3,3,3,3};
     size_t flops_requested = LENGTH * 2;
     size_t bytes_requested = LENGTH * (triad_step_size[(int)MODE] * sizeof(double));
     auto counter = PerformanceCounter(bytes_requested, flops_requested);

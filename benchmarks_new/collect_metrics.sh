@@ -104,21 +104,21 @@ function analyse_events {
     arch=$(bash ./cpu_info.sh get_arch)
     if [[ $arch = "aarch64" ]]; then
         analyse_values['ipc']=$(echo "scale=4; ${event_values['instructions']}/${event_values['armv8_pmuv3_0/cpu_cycles/']}" | bc -l)
-        analyse_values['branch_misses percent']=$(echo "scale=4; ${event_values['branch-misses']}/${event_values['instructions']}" | bc -l)
+        analyse_values['branch_misses_percent']=$(echo "scale=4; ${event_values['branch-misses']}/${event_values['instructions']}" | bc -l)
         analyse_values['L1_hit_rate']=$(echo "scale=4; 100.0*(${event_values['armv8_pmuv3_0/ll_cache/']} - ${event_values['armv8_pmuv3_0/ll_cache_miss/']})/${event_values['armv8_pmuv3_0/ll_cache/']}" | bc -l)
 
-        analyse_values['mem accesses per instruction']=$(echo "scale=4; ${event_values['armv8_pmuv3_0/ll_cache/']}/${event_values['instructions']}" | bc -l)
-        analyse_values['mem instructions per sec']=$(echo "scale=4; ${event_values['armv8_pmuv3_0/ll_cache/']}/${event_values['cpu-clock']}" | bc -l)
+        analyse_values['mem_accesses_per_instruction']=$(echo "scale=4; ${event_values['armv8_pmuv3_0/ll_cache/']}/${event_values['instructions']}" | bc -l)
+        analyse_values['mem_instructions_per_sec']=$(echo "scale=4; ${event_values['armv8_pmuv3_0/ll_cache/']}/${event_values['cpu-clock']}" | bc -l)
     fi
 
     if [[ $arch = "intel" ]]; then
         analyse_values['ipc']=$(echo "scale=4; ${event_values['instructions']}/${event_values['cpu-cycles']}" | bc -l)
-        analyse_values['branch_misses percent']=$(echo "scale=4; ${event_values['branch-misses']}/${event_values['instructions']}" | bc -l)
+        analyse_values['branch_misses_percent']=$(echo "scale=4; ${event_values['branch-misses']}/${event_values['instructions']}" | bc -l)
         analyse_values['L1_hit_rate']=$(echo "scale=4; 100.0*(${event_values['L1-dcache-loads']})/(${event_values['L1-dcache-loads']} + ${event_values['L1-dcache-load-misses']})" | bc -l)
         analyse_values['LLC_hit_rate']=$(echo "scale=4; 100.0*(${event_values['LLC-loads']})/(${event_values['LLC-loads']} + ${event_values['LLC-load-misses']})" | bc -l)
 
-        analyse_values['mem accesses per instruction']=$(echo "scale=4; (${event_values['L1-dcache-loads']} + ${event_values['L1-dcache-load-misses']})/${event_values['instructions']}" | bc -l)
-        analyse_values['mem instructions per sec']=$(echo "scale=4; (${event_values['L1-dcache-loads']} + ${event_values['L1-dcache-load-misses']})/${event_values['cpu-clock']}" | bc -l)
+        analyse_values['mem_accesses_per_instruction']=$(echo "scale=4; (${event_values['L1-dcache-loads']} + ${event_values['L1-dcache-load-misses']})/${event_values['instructions']}" | bc -l)
+        analyse_values['mem_instructions_per_sec']=$(echo "scale=4; (${event_values['L1-dcache-loads']} + ${event_values['L1-dcache-load-misses']})/${event_values['cpu-clock']}" | bc -l)
     fi
 
     printf "," >> $file_name
@@ -143,6 +143,7 @@ function collect_stats {
 
     # get list of events as a param
     arch=$(bash ./cpu_info.sh get_arch)
+    echo $arch
     if [[ $arch = "aarch64" ]]; then
         events_param="--events="$(join_by , "${arm_event_names[@]}")
     fi

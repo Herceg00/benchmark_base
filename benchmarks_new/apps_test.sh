@@ -6,8 +6,8 @@ mkdir ./output/
 LINEAR_SIZE="800000000" # 6.4 GB in double, 3.2 GB in float
 MIN_MTX_TRANSPOSE_SIZE="256"
 MAX_MTX_TRANSPOSE_SIZE="32768"
-GRAPH_MIN_SIZE="6"
-GRAPH_MAX_SIZE="12"
+GRAPH_MIN_SIZE="15"
+GRAPH_MAX_SIZE="20"
 LC_MIN_SIZE="16"
 LC_MAX_SIZE="128"
 FFT_SIZE="8192"
@@ -37,15 +37,16 @@ function add_separator {
     bash ./collect_metrics.sh add_separating_line "single_socket"
 }
 
+##################### STENCIL 1D ########################
 
-##################### LC ########################
-for ((size=$LC_MIN_SIZE;size<=$LC_MAX_SIZE;size*=2 )); do
-    args="--length="$size
-    name="lc_kernel|S="$size
-    bash ./benchmark_specific_app.sh "lc_kernel" "$args" "$name"
+for ((radius=STENCIL_1D_MIN_RAD;radius<=STENCIL_1D_MAX_RAD;radius++)); do
+    args="--length="$LINEAR_SIZE" --radius="$radius
+    name="stencil_1D|S="$LINEAR_SIZE"|R="$radius"|"
+    bash ./benchmark_specific_app.sh "stencil_1D" "$args" "$name"
 done
 
 add_separator
+
 
 ##################### Roofline ########################
 

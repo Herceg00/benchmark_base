@@ -19,11 +19,27 @@ bash ./collect_common_stats.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NA
 ##################### dual socket test ########################
 if [ $sockets_num = "2" ]; then
     cores_num=$(( 2*cores_num))
-    echo $cores_num
     THREADS=" --threads=$cores_num"
     bash ./collect_common_stats.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS"
     #bash ./collect_roofline.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS" "dual_socket"
     #bash ./collect_metrics.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS" "dual_socket"
+fi
+
+if [ $sockets_num = "4" ]; then
+    cores_num=$(bash ./cpu_info.sh get_cores_count)
+    cores_num=$(( 2*cores_num))
+    THREADS=" --threads=$cores_num"
+    bash ./collect_common_stats.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS"
+
+    cores_num=$(bash ./cpu_info.sh get_cores_count)
+    cores_num=$(( 3*cores_num))
+    THREADS=" --threads=$cores_num"
+    bash ./collect_common_stats.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS"
+
+    cores_num=$(bash ./cpu_info.sh get_cores_count)
+    cores_num=$(( 4*cores_num))
+    THREADS=" --threads=$cores_num"
+    bash ./collect_common_stats.sh collect_stats "$PROG_NAME" "$PROG_ARGS" "$TEST_NAME" "$THREADS"
 fi
 
 bash ./collect_common_stats.sh add_separator

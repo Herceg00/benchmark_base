@@ -20,20 +20,28 @@ function init {
 			                   "Time"
                          "Performance"
                          "Bandwidth"
-		                     "algorithm"
-                         "Time"
-                         "Performance"
-                         "Bandwidth")
+                         "")
 
-    printf ",one_socket,,,,dual_socket," >> $file_name
+    sockets_num=$(bash ./cpu_info.sh get_sockets_count)
+    if [ $sockets_num = "1" ]; then
+        printf ",one_socket," >> $file_name
+    fi
+    if [ $sockets_num = "2" ]; then
+        printf ",one_socket,,,,,two sockets," >> $file_name
+    fi
+    if [ $sockets_num = "4" ]; then
+        printf ",one_socket,,,,,two sockets,,,,,three_sockets,,,,,four_socket," >> $file_name
+    fi
 
     add_separator
 
-    it="1"
-    for name in "${column_names[@]}"
-    do
-        it=$((it+1))
-        printf $name"," >> $file_name
+    for ((socket=0;socket<$sockets_num;socket++)); do
+        it="1"
+        for name in "${column_names[@]}"
+        do
+            it=$((it+1))
+            printf $name"," >> $file_name
+        done
     done
 
     add_separator
@@ -64,6 +72,7 @@ function collect_stats {
     search_result=$(grep -R "$BAND_PATTERN" "./"$PROG_NAME"/results.txt")
     dat=`echo $search_result | grep -Eo '[+-]?[0-9]+([.][0-9]+)?'`
     printf $dat"," >> $file_name
+    printf "," >> $file_name
 }
 
 "$@"

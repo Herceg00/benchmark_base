@@ -20,8 +20,8 @@ double CallKernel(void)
 	double time = -1;
 
     #ifndef METRIC_RUN
-    size_t bytes_requested = LENGTH * (2*RADIUS + 1) * sizeof(base_type); // no *2 since only 1 array in inner loop
-    size_t flops_requested = (2*RADIUS + 1) * LENGTH;
+    size_t bytes_requested = (size_t)LENGTH * sizeof(base_type) * (2*RADIUS + 1); // no *2 since only 1 array in inner loop
+    size_t flops_requested = (size_t)LENGTH * (2*RADIUS + 1);
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
 
