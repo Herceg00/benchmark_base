@@ -51,8 +51,9 @@ double CallKernel(int mode)
     counter.print_average_counters(true);
     #endif
 
-	return time;
 	delete []data;
+
+    return time;
 }
 
 int main()

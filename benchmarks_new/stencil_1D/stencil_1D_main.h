@@ -54,10 +54,11 @@ double CallKernel(void)
     #ifndef METRIC_RUN
 	counter.print_average_counters(true);
     #endif
-	return time;
 
 	delete []a;
 	delete []b;
+
+    return time;
 }
 
 int main()

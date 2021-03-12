@@ -37,16 +37,34 @@ function add_separator {
     bash ./collect_metrics.sh add_separating_line "single_socket"
 }
 
-##################### STENCIL 1D ########################
+##################### cache benchmarks ########################
 
-for ((radius=STENCIL_1D_MIN_RAD;radius<=STENCIL_1D_MAX_RAD;radius++)); do
-    args="--length="$LINEAR_SIZE" --radius="$radius
-    name="stencil_1D|S="$LINEAR_SIZE"|R="$radius"|"
-    bash ./benchmark_specific_app.sh "stencil_1D" "$args" "$name"
-done
+MODE=0
 
-add_separator
+L1_LENGTH=4096
+args="--length="$L1_LENGTH
+name="cache_bandwidths|S="$L1_LENGTH
+bash ./benchmark_specific_app.sh "cache_bandwidths" "$args" "$name"
 
+L1_LENGTH=2048
+args="--length="$L1_LENGTH
+name="cache_bandwidths|S="$L1_LENGTH
+bash ./benchmark_specific_app.sh "cache_bandwidths" "$args" "$name"
+
+L1_LENGTH=8192
+args="--length="$L1_LENGTH
+name="cache_bandwidths|S="$L1_LENGTH
+bash ./benchmark_specific_app.sh "cache_bandwidths" "$args" "$name"
+
+L1_LENGTH=16384
+args="--length="$L1_LENGTH
+name="cache_bandwidths|S="$L1_LENGTH
+bash ./benchmark_specific_app.sh "cache_bandwidths" "$args" "$name"
+
+L2_LENGTH=131072
+args="--length="$L1_LENGTH
+name="cache_bandwidths|S="$L1_LENGTH
+bash ./benchmark_specific_app.sh "cache_bandwidths" "$args" "$name"
 
 ##################### Roofline ########################
 
