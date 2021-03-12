@@ -21,7 +21,8 @@ def code(event_code):
              "MEM_ACCESS_LD": "r0066",
              "MEM_ACCESS_ST": "r0067",
              "LL_CACHE": "r0032",
-             "LL_CACHE_MISS": "r0033"
+             "LL_CACHE_MISS": "r0033",
+             "fetch_bubble": "r2014"
     }
     return codes[event_code]
 
@@ -59,7 +60,7 @@ def get_no_conflict_events_list(architecture):
 
 def get_conflicted_events_list(architecture):
     if architecture == "kunpeng920":
-        events = ["fetch_bubble",
+        events = ["r2014", #"fetch_bubble"
                   "CPU_CYCLES",
                   "INST_SPEC",
                   "INST_RETIRED"
