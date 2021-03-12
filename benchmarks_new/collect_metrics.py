@@ -92,7 +92,7 @@ def collect_list_of_events(prog_name, prog_args, event_list): # can collect grou
 
     subprocess.check_call(["bash"] + ['./make_omp.sh'] + all_args)
 
-    a_file = open("./stencil_1D/metrics.txt")
+    a_file = open("./"+prog_name+"/"+metrics_file_name)
 
     lines = a_file.readlines()
     for line in lines:
@@ -107,7 +107,7 @@ def analyse_events(architecture, hardware_events):
     all = copy.deepcopy(hardware_events)
 
     if architecture == "kunpeng920":
-        all["Frontend_Bound"] = all["fetch_bubble"]/(4.0 * all["CPU_CYCLES"])
+        all["Frontend_Bound"] = all[code("fetch_bubble")]/(4.0 * all["CPU_CYCLES"])
         all["Bad_Speculation"] = (all["INST_SPEC"] - all["INST_RETIRED"])/(4.0 * all["CPU_CYCLES"])
         all["Retiring"] = all["INST_RETIRED"] / (4.0 * all["CPU_CYCLES"])
         all["Backend_Bound"] = 1.0 - (all["Frontend_Bound"] + all["Bad_Speculation"] + all["Retiring"])

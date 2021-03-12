@@ -15,7 +15,6 @@ args="--length="$length" --radius="$radius
 name="stencil_1D|S="$length"|R="$radius"|"
 bash ./benchmark_specific_app.sh "stencil_1D" "$args" "$name" "profile"
 
-
 length=8000000
 mode=0
 args="--length="$length" --lower_bound="$mode" --higher_bound="$mode
