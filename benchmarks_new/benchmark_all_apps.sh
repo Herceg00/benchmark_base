@@ -28,16 +28,12 @@ MAX_3D_GRID_SIZE="512"
 RA_RADIUS="2" # 2 KB
 RA_MAX_RAD="2097152" # 2 GB
 
-
+rm -rf ./output/metrics.csv
 bash ./collect_common_stats.sh init
-bash ./collect_metrics.sh init "single_socket"
-#bash ./collect_metrics.sh init "dual_socket"
 bash ./collect_roofline.sh init "single_socket"
-#bash ./collect_roofline.sh init "dual_socket"
 
 function add_separator {
     bash ./collect_common_stats.sh add_separating_line
-    bash ./collect_metrics.sh add_separating_line "single_socket"
 }
 
 #################### TRIAD ########################

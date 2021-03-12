@@ -26,45 +26,20 @@ MAX_3D_GRID_SIZE="512"
 RA_RADIUS="2" # 2 KB
 RA_MAX_RAD="2097152" # 2 GB
 
+rm -rf ./output/metrics.csv
 bash ./collect_common_stats.sh init
-bash ./collect_metrics.sh init "single_socket"
-#bash ./collect_metrics.sh init "dual_socket"
 bash ./collect_roofline.sh init "single_socket"
-#bash ./collect_roofline.sh init "dual_socket"
 
 function add_separator {
     bash ./collect_common_stats.sh add_separating_line
-    bash ./collect_metrics.sh add_separating_line "single_socket"
 }
 
 ##################### cache benchmarks ########################
 
-MODE=0
-
-L1_LENGTH=4096
-args="--length="$L1_LENGTH
-name="cache_bandwidths|S="$L1_LENGTH
-bash ./benchmark_specific_app.sh "cache_bandwidths" "$args" "$name"
-
-L1_LENGTH=2048
-args="--length="$L1_LENGTH
-name="cache_bandwidths|S="$L1_LENGTH
-bash ./benchmark_specific_app.sh "cache_bandwidths" "$args" "$name"
-
-L1_LENGTH=8192
-args="--length="$L1_LENGTH
-name="cache_bandwidths|S="$L1_LENGTH
-bash ./benchmark_specific_app.sh "cache_bandwidths" "$args" "$name"
-
-L1_LENGTH=16384
-args="--length="$L1_LENGTH
-name="cache_bandwidths|S="$L1_LENGTH
-bash ./benchmark_specific_app.sh "cache_bandwidths" "$args" "$name"
-
-L2_LENGTH=131072
-args="--length="$L1_LENGTH
-name="cache_bandwidths|S="$L1_LENGTH
-bash ./benchmark_specific_app.sh "cache_bandwidths" "$args" "$name"
+radius="3"
+args="--length="$LINEAR_SIZE" --radius="$radius
+name="stencil_1D|S="$LINEAR_SIZE"|R="$radius"|"
+bash ./benchmark_specific_app.sh "stencil_1D" "$args" "$name"
 
 ##################### Roofline ########################
 
