@@ -1,5 +1,5 @@
-from scripts.get_profile_metrics import run_profiling
-from scripts.get_timings import run_timings
+from scripts.get_profile_metrics import run_profiling, profiling_add_separator
+from scripts.get_timings import run_timings, timings_add_separator
 from scripts.arch_properties import get_threads_count, get_cores_count, get_sockets_count
 import os
 import optparse
@@ -10,23 +10,23 @@ from scripts.arch_properties import get_arch
 linear_length = 800000000
 
 all_tests_data = {"triada": {"mode": {"min": 0, "max": 9, "step": 1},
-                              "length": linear_length},
+                             "length": linear_length},
                   "stencil_1D": {"mode": 0,
                                  "length": linear_length,
                                  "radius": {"min": 1, "max": 12, "step": 1}},
                   "stencil_2D": {"mode": {"min": 0, "max": 1, "step": 1},
-                                  "length": {"min": 256, "max": 32768, "step": "2_pow"},
-                                  "radius": {"min": 1, "max": 3, "step": 1}},
+                                 "radius": {"min": 1, "max": 3, "step": 1},
+                                 "length": {"min": 256, "max": 32768, "step": "2_pow"}},
                   "stencil_3D": {"mode": {"min": 0, "max": 1, "step": 1},
-                                  "length": {"min": 64, "max": 512, "step": "2_pow"},
-                                  "radius": {"min": 1, "max": 3, "step": 1}},
+                                 "radius": {"min": 1, "max": 3, "step": 1},
+                                 "length": {"min": 64, "max": 512, "step": "2_pow"}},
                   "matrix_transp": {"mode": {"min": 0, "max": 3, "step": 1},
-                                  "length": {"min": 256, "max": 32768, "step": "2_pow"}},
+                                    "length": {"min": 256, "max": 32768, "step": "2_pow"}},
                   "matrix_mul": {"mode": {"min": 0, "max": 6, "step": 1},
-                                  "length": {"min": 256, "max": 2048, "step": "2_pow"}},
+                                 "length": {"min": 256, "max": 2048, "step": "2_pow"}},
                   "lc_kernel": {"length": {"min": 16, "max": 256, "step": "2_pow"}},
                   "random_access": {"mode": {"min": 0, "max": 1, "step": 1},
-                                     "length": linear_length}
+                                    "length": linear_length}
                   }
 
 def get_bench_table_name(bench_name, parameters_string):
@@ -80,6 +80,10 @@ def run_tests_across_specific_parameter(bench_name, parameter_name, all_paramete
         else:
             run_tests_across_specific_parameter(bench_name, next_parameter, all_parameters_data, parameters_string, options)
 
+        if i == get_max(parameter_info):
+            timings_add_separator()
+            profiling_add_separator()
+
         i = get_step(parameter_info, i)
 
 
@@ -130,13 +134,14 @@ if __name__ == "__main__":
     parser = optparse.OptionParser()
     parser.add_option('-b', '--bench',
                       action="store", dest="bench",
-                      help="specify benchmark to test (or all for testing all)", default="all")
+                      help="specify benchmark to test (or all for testing all available benchmarks)", default="all")
     parser.add_option('-f', '--force',
                       action="store", dest="force",
-                      help="specify parameters for running a single benchmark", default="")
+                      help="specify parameters for running a single benchmark, for example --mode=0 --length=1000 "
+                           "--radius=3 for 1D stencil", default="")
     parser.add_option('-p', '--profile',
                       action="store_true", dest="profile",
-                      help="set true if metrics profiling is needed", default=False)
+                      help="use to collect hardware events available (including top-down analysis)", default=False)
     parser.add_option('-s', '--sockets',
                       action="store", dest="sockets",
                       help="set number of sockets used", default=1)

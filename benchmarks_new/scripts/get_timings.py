@@ -36,7 +36,7 @@ def init_table(output_file_name, timings):  # add header if file does not exist
     if not os.path.exists(output_file_name):
         with open(output_file_name, 'w') as output_file:
             output_file.write("test_name,")
-            for key in sorted(timings):
+            for key in timings:
                 output_file.write(str(key) + ",")
             output_file.write("\n")
 
@@ -44,7 +44,7 @@ def init_table(output_file_name, timings):  # add header if file does not exist
 def add_timings_to_file(output_file_name, test_name, timings):
     with open(output_file_name, 'a') as output_file:
         output_file.write(test_name + ",")
-        for key in sorted(timings):
+        for key in timings:
             output_file.write(str(timings[key]) + ",")
         output_file.write("\n")
 
@@ -59,6 +59,13 @@ def add_roofline_data(roofline_file_name, test_name, timings):
         output_file.write(test_name + ",")
         output_file.write(str(timings["avg_flops"]) + ",")
         output_file.write(str(timings["flops_per_byte"]) + ",")
+        output_file.write("\n")
+
+
+def timings_add_separator():
+    arch = get_arch()
+    file_name = "./output/" + arch + "_timings.csv"
+    with open(file_name, 'a') as output_file:
         output_file.write("\n")
 
 

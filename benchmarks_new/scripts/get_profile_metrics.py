@@ -117,7 +117,7 @@ def init_table(output_file_name, metrics): # add header if file does not exist
     if not os.path.exists(output_file_name):
         with open(output_file_name, 'w') as output_file:
             output_file.write("test_name,")
-            for key in sorted(metrics):
+            for key in metrics:
                 output_file.write(str(key) + ",")
             output_file.write("\n")
 
@@ -125,8 +125,15 @@ def init_table(output_file_name, metrics): # add header if file does not exist
 def add_metrics_to_file(output_file_name, test_name, metrics):
     with open(output_file_name, 'a') as output_file:
         output_file.write(test_name + ",")
-        for key in sorted(metrics):
+        for key in metrics:
             output_file.write(str(metrics[key]) + ",")
+        output_file.write("\n")
+
+
+def profiling_add_separator():
+    arch = get_arch()
+    file_name = "./output/" + arch + "_profile_metrics.csv"
+    with open(file_name, 'a') as output_file:
         output_file.write("\n")
 
 

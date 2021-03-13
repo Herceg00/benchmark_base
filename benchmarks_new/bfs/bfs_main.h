@@ -46,25 +46,25 @@ double CallKernel(int mode)
 
 	double time = -1;
 
-#ifndef METRIC_RUN
+    #ifndef METRIC_RUN
     double bytes_requested = edge_count * (sizeof(e_array) + sizeof(levels));
     double flops_requested = edge_count;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
-#endif
+    #endif
 
-#ifdef METRIC_RUN
+    #ifdef METRIC_RUN
     int iterations = LOC_REPEAT;
-#else
+    #else
     int iterations = LOC_REPEAT;
-#endif
+    #endif
     Init<edge_type, index_type>(edges, edge_count, index, vertex_count, LENGTH, v_array, e_array);
 
     for(int i = 0; i < iterations; i++)
 	{
-#ifndef METRIC_RUN
+        #ifndef METRIC_RUN
 		locality::utils::CacheAnnil();
         counter.start_timing();
-#endif
+        #endif
         if(mode == 1) {
             Kernel_parallel<edge_type, weight_type, index_type>(vertex_count, v_array, e_array, levels);
         }
@@ -72,16 +72,16 @@ double CallKernel(int mode)
             Kernel_sequential<edge_type, weight_type, index_type>(vertex_count, v_array, e_array, levels);
         }
 
-#ifndef METRIC_RUN
+        #ifndef METRIC_RUN
         counter.end_timing();
         counter.update_counters();
         counter.print_local_counters();
-#endif
+        #endif
 	}
 
-#ifndef METRIC_RUN
+    #ifndef METRIC_RUN
     counter.print_average_counters(true);
-#endif
+    #endif
 
     return time;
 }
