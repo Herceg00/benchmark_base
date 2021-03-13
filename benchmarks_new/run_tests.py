@@ -97,6 +97,19 @@ def run_benchmark(bench_name, bench_params, options):  # benchmarks a specified 
     run_tests_across_specific_parameter(bench_name, first_parameter, bench_params, list_of_params, options)
 
 
+def run_single_benchmark(bench_name, options):
+    threads = get_cores_count()
+    if options.sockets > 1:
+        threads = options.sockets * threads
+    parameters_string = "--threads=" + str(threads) + " " + options.force
+
+    bench_table_name = get_bench_table_name(bench_name, parameters_string)
+
+    run_timings(bench_name, bench_table_name, parameters_string.split(" "))
+    if options.profile:
+        run_profiling(bench_name, bench_table_name, parameters_string.split(" "))
+
+
 def init():
     if os.path.exists("./output/"):
         shutil.rmtree("./output/")
@@ -129,13 +142,14 @@ if __name__ == "__main__":
                       help="set number of sockets used", default=1)
 
     options, args = parser.parse_args()
-    
-    print(options.force)
 
-    # run tests
-    for current_test, test_parameters in all_tests_data.items():
-        if options.bench == "all" or current_test in options.bench:
-            run_benchmark(current_test, test_parameters, options)
+    if options.force != "":  # run single test
+        print("FORCE RUN")
+        run_single_benchmark(options.bench, options)
+    else:  # run tests
+        for current_test, test_parameters in all_tests_data.items():
+            if options.bench == "all" or current_test in options.bench:
+                run_benchmark(current_test, test_parameters, options)
 
     # generate roofline model
     generate_roofline()
