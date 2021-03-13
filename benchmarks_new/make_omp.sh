@@ -66,6 +66,7 @@ if [ $NO_RUN = "false" ]; then
     fi
     if [[ $METRICS = "false" ]]; then
         ./bin/omp_$PROG_NAME""_np_STD > $OUTPUT
+        cp $OUTPUT ./test.txt
 fi
 
 fi

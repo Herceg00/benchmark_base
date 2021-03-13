@@ -75,7 +75,7 @@ def run_tests_across_specific_parameter(bench_name, parameter_name, all_paramete
             bench_table_name = get_bench_table_name(bench_name, parameters_string)
 
             run_timings(bench_name, bench_table_name, parameters_string.split(" "))
-            if options.profile == "True":
+            if options.profile:
                 run_profiling(bench_name, bench_table_name, parameters_string.split(" "))
         else:
             run_tests_across_specific_parameter(bench_name, next_parameter, all_parameters_data, parameters_string, options)
@@ -87,15 +87,19 @@ def run_benchmark(bench_name, bench_params, options):  # benchmarks a specified 
     # get first parameter (usually mode)
     first_parameter = next(iter(bench_params))
 
-    # generate list of parameters to be passed into benchmark
-    list_of_params = "--threads=" + str(get_cores_count())
+    # generate list of parameters to be passed into benchmark (currently only threads)
+    threads = get_cores_count()
+    if options.sockets > 1:
+        threads = options.sockets * threads
+    list_of_params = "--threads=" + str(threads)
 
     # recursively run benchmark for all combinations of input params
     run_tests_across_specific_parameter(bench_name, first_parameter, bench_params, list_of_params, options)
 
 
 def init():
-    shutil.rmtree("./output/")
+    if os.path.exists("./output/"):
+        shutil.rmtree("./output/")
     os.makedirs("./output/", exist_ok=True)
 
 
@@ -116,7 +120,10 @@ if __name__ == "__main__":
                       help="specify benchmark to test (or all for testing all)", default="all")
     parser.add_option('-p', '--profile',
                       action="store_false", dest="profile",
-                      help="set true if metrics profiling is needed", default=True)
+                      help="set true if metrics profiling is needed", default=False)
+    parser.add_option('-s', '--sockets',
+                      action="store", dest="sockets",
+                      help="set number of sockets used", default=1)
 
     options, args = parser.parse_args()
 

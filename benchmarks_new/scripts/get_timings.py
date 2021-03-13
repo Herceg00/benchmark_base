@@ -16,7 +16,7 @@ def get_timing_from_file_line(line, timings):
     return timings
 
 
-def run_test_and_parse_timings(prog_name, prog_args): # collect time, perf and BW values
+def run_test_and_parse_timings(prog_name, prog_args):  # collect time, perf and BW values
     result = {}
     prog_name_arg = ["--prog=" + prog_name]
     profiling_args = ["--compiler=g++", "--no_run=false", "--metrics=false", "--output="+tmp_timings_file_name]
@@ -32,12 +32,11 @@ def run_test_and_parse_timings(prog_name, prog_args): # collect time, perf and B
     return timings
 
 
-def init_table(output_file_name, timings): # add header if file does not exist
+def init_table(output_file_name, timings):  # add header if file does not exist
     if not os.path.exists(output_file_name):
         with open(output_file_name, 'w') as output_file:
             output_file.write("test_name,")
-            output_file.write("test_name" + ",")
-            for key in timings:
+            for key in sorted(timings):
                 output_file.write(str(key) + ",")
             output_file.write("\n")
 
@@ -45,9 +44,8 @@ def init_table(output_file_name, timings): # add header if file does not exist
 def add_timings_to_file(output_file_name, test_name, timings):
     with open(output_file_name, 'a') as output_file:
         output_file.write(test_name + ",")
-        for key in timings:
+        for key in sorted(timings):
             output_file.write(str(timings[key]) + ",")
-        output_file.write("\n")
         output_file.write("\n")
 
 
