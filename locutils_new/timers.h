@@ -51,7 +51,7 @@ public:
         if (flops_required) {
             std::cout << "avg_flops: " << total_flops/LOC_REPEAT << " GFlops" << std::endl;
         }
-        std::cout << "Benchmark type: " << (double) flops_executed / (double) bytes_requested << " flops/byte";
+        std::cout << "flops_per_byte: " << (double) flops_executed / (double) bytes_requested << std::endl;
     }
 };
 

@@ -3,6 +3,7 @@ from scripts.get_timings import run_timings
 from scripts.arch_properties import get_threads_count, get_cores_count, get_sockets_count
 import os
 import optparse
+import shutil
 
 
 all_tests_data = {"triada" : {"mode": 0,
@@ -16,9 +17,7 @@ common_params = ""
 
 
 def get_bench_table_name(bench_name, parameters_string):
-    formated_string = parameters_string
-    formated_string.replace(" ", "|")
-    return bench_name + "|" + formated_string
+    return bench_name + "|" + parameters_string.replace(" ", "")
 
 
 def next_key(dict, key):
@@ -48,7 +47,7 @@ def get_step(parameter_info):
         return 1
 
 
-def run_tests_across_specific_parameter(bench_name, parameter_name, all_parameters_data, prev_params):
+def run_tests_across_specific_parameter(bench_name, parameter_name, all_parameters_data, prev_params, options):
     parameter_info = all_parameters_data[parameter_name]
     for i in range(get_min(parameter_info), get_max(parameter_info), get_step(parameter_info)):
         parameters_string = prev_params + " " + "--"+parameter_name+"="+str(i)
@@ -58,12 +57,13 @@ def run_tests_across_specific_parameter(bench_name, parameter_name, all_paramete
             bench_table_name = get_bench_table_name(bench_name, parameters_string)
 
             run_timings(bench_name, bench_table_name, parameters_string.split(" "))
-            run_profiling(bench_name, bench_table_name, parameters_string.split(" "))
+            if options.profile:
+                run_profiling(bench_name, bench_table_name, parameters_string.split(" "))
         else:
-            run_tests_across_specific_parameter(bench_name, next_parameter, all_parameters_data, parameters_string)
+            run_tests_across_specific_parameter(bench_name, next_parameter, all_parameters_data, parameters_string, options)
 
 
-def run_benchmark(bench_name, bench_params):  # benchmarks a specified application
+def run_benchmark(bench_name, bench_params, options):  # benchmarks a specified application
     # get first parameter (usually mode)
     first_parameter = next(iter(bench_params))
 
@@ -71,10 +71,11 @@ def run_benchmark(bench_name, bench_params):  # benchmarks a specified applicati
     list_of_params = "--threads=" + str(get_cores_count())
 
     # recursively run benchmark for all combinations of input params
-    run_tests_across_specific_parameter(bench_name, first_parameter, bench_params, list_of_params)
+    run_tests_across_specific_parameter(bench_name, first_parameter, bench_params, list_of_params, options)
 
 
 def init():
+    shutil.rmtree("./output/")
     os.makedirs("./output/", exist_ok=True)
 
 
@@ -95,4 +96,4 @@ if __name__ == "__main__":
     # run tests
     for current_test, test_parameters in all_tests_data.items():
         if options.bench == "all" or current_test in options.bench:
-            run_benchmark(current_test, test_parameters)
+            run_benchmark(current_test, test_parameters, options)

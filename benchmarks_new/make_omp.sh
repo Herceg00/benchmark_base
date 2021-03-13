@@ -1,11 +1,6 @@
 #!/bin/bash
 export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/usr/local/lib64:/usr/lib64
 
-PERF_PATTERN_BW="avg_bw"
-PERF_PATTERN_TIME="avg_time"
-PERF_PATTERN_FLOPS="avg_flops"
-PERF_PATTERN_ROOF="flops/byte"
-
 while [ $# -gt 0 ]; do
   case "$1" in
     --prog=*)
