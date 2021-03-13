@@ -11,9 +11,8 @@ linear_length = 800000000
 
 all_tests_data = {"triada": {"mode": {"min": 0, "max": 9, "step": 1},
                               "length": linear_length},
-                  "stencil_1D": {"mode": {"min": 0, "max": 4, "step": 1},
-                                  "length": linear_length,
-                                  "radius": {"min": 1, "max": 12, "step": 1}},
+                  "stencil_1D": {"length": linear_length,
+                                 "radius": {"min": 1, "max": 12, "step": 1}},
                   "stencil_2D": {"mode": {"min": 0, "max": 1, "step": 1},
                                   "length": {"min": 256, "max": 32768, "step": "2_pow"},
                                   "radius": {"min": 1, "max": 3, "step": 1}},
