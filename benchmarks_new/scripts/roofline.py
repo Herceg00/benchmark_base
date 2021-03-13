@@ -174,12 +174,7 @@ def generate_roofline_from_profiling_data(file_name, roofline_name):
     for line in profiling_file:
         line_pos += 1
         if line_pos == 1:
-            if "single_socket" in line:
-                platform_characteristics = kunpeng_characteristics_single_socket
-                sockets="single_socket"
-            if "dual_socket" in line:
-                platform_characteristics = kunpeng_characteristics_dual_socket
-                sockets="dual_socket"
+            platform_characteristics = kunpeng_characteristics_single_socket # TODO
             continue
         if line.startswith("#") or line.startswith("//"):
             continue
@@ -194,8 +189,6 @@ def generate_roofline_from_profiling_data(file_name, roofline_name):
 
     # initialize and draw roofline
     roofline = RooflinePlotter(roofline_name, platform_characteristics)
-    roofline.draw_plot(profiling_data, sockets)
-
-generate_roofline_from_profiling_data(sys.argv[1], "Kunpeng Roofline Model")
+    roofline.draw_plot(profiling_data, "single_socket")
 
 

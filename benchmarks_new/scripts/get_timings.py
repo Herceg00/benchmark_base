@@ -57,7 +57,7 @@ def add_roofline_data(roofline_file_name, test_name, timings):
     else:
         write_mode = 'a'
 
-    with open(roofline_file_name, 'a') as output_file:
+    with open(roofline_file_name, write_mode) as output_file:
         output_file.write(test_name + ",")
         output_file.write(str(timings["avg_flops"]) + ",")
         output_file.write(str(timings["flops_per_byte"]) + ",")

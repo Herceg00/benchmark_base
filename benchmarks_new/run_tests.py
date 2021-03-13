@@ -4,6 +4,8 @@ from scripts.arch_properties import get_threads_count, get_cores_count, get_sock
 import os
 import optparse
 import shutil
+from scripts.roofline import generate_roofline_from_profiling_data
+from scripts.arch_properties import get_arch
 
 
 all_tests_data = {"triada" : {"mode": 0,
@@ -12,8 +14,6 @@ all_tests_data = {"triada" : {"mode": 0,
                                   "length": {"min": 1024, "max": 2048, "step": 256},
                                   "radius": 4}
                   }
-
-common_params = ""
 
 
 def get_bench_table_name(bench_name, parameters_string):
@@ -57,7 +57,7 @@ def run_tests_across_specific_parameter(bench_name, parameter_name, all_paramete
             bench_table_name = get_bench_table_name(bench_name, parameters_string)
 
             run_timings(bench_name, bench_table_name, parameters_string.split(" "))
-            if options.profile:
+            if options.profile == "True":
                 run_profiling(bench_name, bench_table_name, parameters_string.split(" "))
         else:
             run_tests_across_specific_parameter(bench_name, next_parameter, all_parameters_data, parameters_string, options)
@@ -79,6 +79,12 @@ def init():
     os.makedirs("./output/", exist_ok=True)
 
 
+def generate_roofline():
+    arch = get_arch()
+    roofline_file_name = "./output/" + arch + "_roofline.csv"
+    generate_roofline_from_profiling_data(roofline_file_name, "Kunpeng Roofline Model")
+
+
 if __name__ == "__main__":
     # create .csv files
     init()
@@ -89,11 +95,15 @@ if __name__ == "__main__":
                       action="store", dest="bench",
                       help="specify benchmark to test (or all for testing all)", default="all")
     parser.add_option('-p', '--profile',
-                      action="store", dest="profile",
-                      help="set true if metrics profiling is needed", default="False")
+                      action="store_false", dest="profile",
+                      help="set true if metrics profiling is needed", default=True)
+
     options, args = parser.parse_args()
 
     # run tests
     for current_test, test_parameters in all_tests_data.items():
         if options.bench == "all" or current_test in options.bench:
             run_benchmark(current_test, test_parameters, options)
+
+    # generate roofline model
+    generate_roofline()
