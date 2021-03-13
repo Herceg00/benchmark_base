@@ -118,14 +118,19 @@ if __name__ == "__main__":
     parser.add_option('-b', '--bench',
                       action="store", dest="bench",
                       help="specify benchmark to test (or all for testing all)", default="all")
+    parser.add_option('-f', '--force',
+                      action="store", dest="force",
+                      help="specify parameters for running a single benchmark", default="")
     parser.add_option('-p', '--profile',
-                      action="store_false", dest="profile",
+                      action="store_true", dest="profile",
                       help="set true if metrics profiling is needed", default=False)
     parser.add_option('-s', '--sockets',
                       action="store", dest="sockets",
                       help="set number of sockets used", default=1)
 
     options, args = parser.parse_args()
+    
+    print(options.force)
 
     # run tests
     for current_test, test_parameters in all_tests_data.items():
