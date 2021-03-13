@@ -5,10 +5,8 @@ import re
 import pprint
 import copy
 import os
-
-
-metrics_file_name = "metrics.txt"
-output_file_name = "./output/metrics.csv"
+from .arch_properties import get_arch
+from .files import *
 
 
 def code(event_code):
@@ -25,20 +23,6 @@ def code(event_code):
              "fetch_bubble": "r2014"
     }
     return codes[event_code]
-
-
-def get_arch():
-    architecture = "unknown"
-    output = subprocess.check_output(["lscpu"])
-    for item in output.decode().split("\n"):
-        if "Architecture:" in item:
-            arch_line = item.strip()
-            arch_str = arch_line.split(":")[1]
-            if "aarch64" in arch_str:
-                architecture = "kunpeng920"
-            if "x86_64" in arch_str:
-                architecture = "intel"
-    return architecture
 
 
 def get_no_conflict_events_list(architecture):
@@ -86,13 +70,13 @@ def merge_two_dicts(x, y):
 def collect_list_of_events(prog_name, prog_args, event_list): # can collect groups of events or single events
     result = {}
     prog_name_arg = ["--prog=" + prog_name]
-    profiling_args = ["--compiler=g++", "--no_run=false", "--metrics=true", "--output="+metrics_file_name]
+    profiling_args = ["--compiler=g++", "--no_run=false", "--metrics=true", "--output="+tmp_perf_metrics_file_name]
     events_args = ["--events=" + ','.join(event_list)]
     all_args = prog_name_arg  + profiling_args + events_args + prog_args
 
     subprocess.check_call(["bash"] + ['./make_omp.sh'] + all_args)
 
-    a_file = open("./"+prog_name+"/"+metrics_file_name)
+    a_file = open("./"+prog_name+"/"+tmp_perf_metrics_file_name)
 
     lines = a_file.readlines()
     for line in lines:
@@ -129,21 +113,17 @@ def analyse_events(architecture, hardware_events):
     return all
 
 
-def add_metrics_to_file(test_name, metrics):
-    need_header = False
-    if os.path.exists(output_file_name):
-        append_write = 'a' # append if already exists
-    else:
-        append_write = 'w' # make a new file if not
-        need_header = True
-
-    with open(output_file_name, append_write) as output_file:
-        if need_header:
+def init_table(output_file_name, metrics): # add header if file does not exist
+    if not os.path.exists(output_file_name):
+        with open(output_file_name, 'w') as output_file:
             output_file.write("test_name,")
             for key in metrics:
                 output_file.write(str(key) + ",")
             output_file.write("\n")
 
+
+def add_metrics_to_file(output_file_name, test_name, metrics):
+    with open(output_file_name, 'a') as output_file:
         output_file.write(test_name + ",")
         for key in metrics:
             output_file.write(str(metrics[key]) + ",")
@@ -151,24 +131,9 @@ def add_metrics_to_file(test_name, metrics):
         output_file.write("\n")
 
 
-if __name__ == "__main__":
-    pos = 0
-    prog_name = ""
-    test_name = ""
-    prog_args = []
-    for arg in sys.argv:
-        if pos == 1:
-            prog_name = str(arg)
-        elif pos == 2:
-            test_name = str(arg)
-        elif pos > 0: # if not a script name
-            tmp_list = str(arg).split(" ")
-            if '' in tmp_list:
-                tmp_list.remove('')
-            prog_args += tmp_list
-        pos += 1
-
+def run_profiling(prog_name, test_name, prog_args):
     arch = get_arch()
+    output_file_name = "./output/" + arch + "_profile_metrics.csv"
 
     no_conflict_event_list = get_no_conflict_events_list(arch)
     conflicted_event_list = get_conflicted_events_list(arch)
@@ -179,6 +144,5 @@ if __name__ == "__main__":
         hardware_events = merge_two_dicts(hardware_events, collect_list_of_events(prog_name, prog_args, [conflicted_event]))
 
     app_metrics = analyse_events(arch, hardware_events)
-    add_metrics_to_file(test_name, app_metrics)
-
-
+    init_table(output_file_name, app_metrics)
+    add_metrics_to_file(output_file_name, test_name, app_metrics)

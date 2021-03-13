@@ -32,7 +32,7 @@ double CallKernel()
 
     #ifndef METRIC_RUN
     size_t problem_size = (size_t)LENGTH * (size_t)LENGTH * (size_t)LENGTH;
-    size_t bytes_requested = 16 * sizeof(float) * problem_size / 8;
+    size_t bytes_requested = 16 * sizeof(base_type) * problem_size / 8;
     size_t flops_requested = 182 * problem_size / 8;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif

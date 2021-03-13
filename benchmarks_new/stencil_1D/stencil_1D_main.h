@@ -12,7 +12,7 @@ typedef double base_type;
 #include "stencil_1D.h"
 #include "../../locutils_new/timers.h"
 
-double CallKernel(void)
+double CallKernel(int mode)
 {
     base_type *a = new base_type[LENGTH];
     base_type *b = new base_type[LENGTH];
@@ -40,7 +40,7 @@ double CallKernel(void)
 		counter.start_timing();
         #endif
 
-		Kernel(a, b, LENGTH);
+		Kernel(mode, a, b, LENGTH);
 
         #ifndef METRIC_RUN
 		counter.end_timing();
@@ -63,5 +63,5 @@ double CallKernel(void)
 
 int main()
 {
-    CallKernel();
+    CallKernel((int)MODE);
 }
