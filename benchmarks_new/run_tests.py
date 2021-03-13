@@ -7,14 +7,27 @@ import shutil
 from scripts.roofline import generate_roofline_from_profiling_data
 from scripts.arch_properties import get_arch
 
+linear_length = 800000000
 
-all_tests_data = {"triada" : {"mode": 0,
-                              "length": 800000},
-                  "stencil_1D" : {"mode": {"min": 0, "max": 4, "step": 1},
-                                  "length": {"min": 1024, "max": 2048, "step": 256},
-                                  "radius": 4}
+all_tests_data = {"triada": {"mode": {"min": 0, "max": 9, "step": 1},
+                              "length": linear_length},
+                  "stencil_1D": {"mode": {"min": 0, "max": 4, "step": 1},
+                                  "length": linear_length,
+                                  "radius": {"min": 1, "max": 12, "step": 1}},
+                  "stencil_2D": {"mode": {"min": 0, "max": 1, "step": 1},
+                                  "length": {"min": 256, "max": 32768, "step": "2_pow"},
+                                  "radius": {"min": 1, "max": 3, "step": 1}},
+                  "stencil_3D": {"mode": {"min": 0, "max": 1, "step": 1},
+                                  "length": {"min": 64, "max": 512, "step": "2_pow"},
+                                  "radius": {"min": 1, "max": 3, "step": 1}},
+                  "matrix_transp": {"mode": {"min": 0, "max": 3, "step": 1},
+                                  "length": {"min": 256, "max": 32768, "step": "2_pow"}},
+                  "matrix_mul": {"mode": {"min": 0, "max": 6, "step": 1},
+                                  "length": {"min": 256, "max": 2048, "step": "2_pow"}},
+                  "lc_kernel": {"length": {"min": 16, "max": 256, "step": "2_pow"}},
+                  "random_access": {"mode": {"min": 0, "max": 1, "step": 1},
+                                     "length": linear_length}
                   }
-
 
 def get_bench_table_name(bench_name, parameters_string):
     return bench_name + "|" + parameters_string.replace(" ", "")
@@ -37,19 +50,24 @@ def get_max(parameter_info):
     if isinstance(parameter_info, dict):
         return parameter_info["max"]
     else:
-        return parameter_info + 1
+        return parameter_info
 
 
-def get_step(parameter_info):
+def get_step(parameter_info, i):
     if isinstance(parameter_info, dict):
-        return parameter_info["step"]
+        if parameter_info["step"] == "2_pow":
+            return i*2
+        else:
+            return i + parameter_info["step"]
     else:
-        return 1
+        return i + 1
 
 
 def run_tests_across_specific_parameter(bench_name, parameter_name, all_parameters_data, prev_params, options):
     parameter_info = all_parameters_data[parameter_name]
-    for i in range(get_min(parameter_info), get_max(parameter_info), get_step(parameter_info)):
+
+    i = get_min(parameter_info)
+    while i <= get_max(parameter_info):
         parameters_string = prev_params + " " + "--"+parameter_name+"="+str(i)
 
         next_parameter = next_key(all_parameters_data, parameter_name)
@@ -61,6 +79,8 @@ def run_tests_across_specific_parameter(bench_name, parameter_name, all_paramete
                 run_profiling(bench_name, bench_table_name, parameters_string.split(" "))
         else:
             run_tests_across_specific_parameter(bench_name, next_parameter, all_parameters_data, parameters_string, options)
+
+        i = get_step(parameter_info, i)
 
 
 def run_benchmark(bench_name, bench_params, options):  # benchmarks a specified application
