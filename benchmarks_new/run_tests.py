@@ -26,8 +26,11 @@ all_tests_data = {"triada": {"mode": {"min": 0, "max": 9, "step": 1},
                                  "length": {"min": 256, "max": 2048, "step": "2_pow"}},
                   "lc_kernel": {"length": {"min": 16, "max": 256, "step": "2_pow"}},
                   "random_access": {"mode": {"min": 0, "max": 1, "step": 1},
-                                    "length": linear_length}
+                                    "length": linear_length},
+                  "cache_bandwidths": {"length": 1024*1024*2,
+                                       "mode": 0}
                   }
+
 
 def get_bench_table_name(bench_name, parameters_string):
     return bench_name + "|" + parameters_string.replace(" ", "")
@@ -157,4 +160,4 @@ if __name__ == "__main__":
                 run_benchmark(current_test, test_parameters, options)
 
     # generate roofline model
-    generate_roofline()
+    # generate_roofline()

@@ -43,7 +43,6 @@ double CallKernel(int mode)
 
 	weight_type levels = new int[vertex_count]; //for visited-unvisited
 
-
 	double time = -1;
 
     #ifndef METRIC_RUN

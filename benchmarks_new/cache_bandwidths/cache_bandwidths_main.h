@@ -11,36 +11,36 @@ typedef double base_type;
 #include "cache_bandwidths.h"
 #include "../../locutils_new/timers.h"
 
-double CallKernel(int core_type)
+double CallKernel()
 {
-    const int threads = omp_get_max_threads();
-    base_type **private_caches_data = new base_type*[threads];
-    for(int tid = 0; tid < threads; tid++)
-        private_caches_data[tid] = new base_type[LENGTH];
+    int threads_count = omp_get_max_threads();
+    cout << threads_count << endl;
+    base_type *caches_data = new base_type[LENGTH*threads_count];
 
 	double time = -1;
     #ifndef METRIC_RUN
-    size_t flops_requested = (size_t)threads * LENGTH * STEPS_COUNT;
-    size_t bytes_requested = (size_t)threads * LENGTH * STEPS_COUNT * sizeof(base_type);
+    size_t flops_requested = (size_t)LENGTH * STEPS_COUNT;
+    size_t bytes_requested = (size_t)LENGTH * STEPS_COUNT * sizeof(base_type);
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
 
     #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * 20;
-    Init(private_cache, LENGTH);
+    Init(caches_data, LENGTH);
     #else
     int iterations = LOC_REPEAT;
     #endif
 
+    iterations = 1;
 	for(int i = 0; i < iterations; i++)
 	{
         #ifndef METRIC_RUN
-        Init(private_caches_data, LENGTH);
-		locality::utils::CacheAnnil(core_type);
+        Init(caches_data, LENGTH);
+		locality::utils::CacheAnnil();
         counter.start_timing();
         #endif
 
-        Kernel(0, private_caches_data, LENGTH);
+        Kernel(caches_data, LENGTH);
 
         #ifndef METRIC_RUN
         counter.end_timing();
@@ -53,16 +53,12 @@ double CallKernel(int core_type)
     counter.print_average_counters(true);
     #endif
 
-    for(int tid = 0; tid < threads; tid++)
-        delete []private_caches_data[tid];
-    delete []private_caches_data;
-
-    std::cout << glob_accum << std::endl;
+    delete []caches_data;
 
     return time;
 }
 
 int main()
 {
-    CallKernel((int)MODE);
+    CallKernel();
 }
