@@ -44,7 +44,6 @@ void Kernel(AT *data, size_t size)
     size_t TRIALS = 64;
     double global_min_bw = 0;
     int max_threads = omp_get_max_threads();
-    cout << "max threads: " << max_threads << endl;
     #pragma omp parallel shared(global_min_bw)
     {
         unsigned int tid = omp_get_thread_num();
@@ -63,7 +62,6 @@ void Kernel(AT *data, size_t size)
                 double t2 = omp_get_wtime();
                 bytes_requested += n * t * sizeof(AT);
                 total_time += t2 - t1;
-                // stop timer here
                 #pragma omp barrier
             }
             #pragma omp barrier

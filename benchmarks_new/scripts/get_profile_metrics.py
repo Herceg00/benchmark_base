@@ -7,6 +7,7 @@ import copy
 import os
 from .arch_properties import get_arch
 from .files import *
+from .roofline import kunpeng920_characteristics
 
 
 def code(event_code):
@@ -20,7 +21,12 @@ def code(event_code):
              "MEM_ACCESS_ST": "r0067",
              "LL_CACHE": "r0032",
              "LL_CACHE_MISS": "r0033",
-             "fetch_bubble": "r2014"
+             "fetch_bubble": "r2014",
+             "L1D_CACHE": "r0004",
+             "L2D_CACHE": "r0016",
+             "rd_spipe": "r20",
+             "flux_rd": "r01",
+             "flux_wr": "r00"
     }
     return codes[event_code]
 
@@ -36,7 +42,8 @@ def get_no_conflict_events_list(architecture):
                   "r0066", # MEM_ACCESS_LD
                   "r0067", # MEM_ACCESS_ST
                   "r0032", # LL_CACHE
-                  "r0033"  # LL_CACHE_MISS
+                  "r0033",  # LL_CACHE_MISS
+                  "duration_time"
                   ]
         return events
     return []
@@ -47,7 +54,12 @@ def get_conflicted_events_list(architecture):
         events = ["r2014", #"fetch_bubble"
                   "CPU_CYCLES",
                   "INST_SPEC",
-                  "INST_RETIRED"
+                  "INST_RETIRED",
+                  "r0004", #"L1D_CACHE":
+                  "r0016", #"L2D_CACHE":
+                  "r20", #"rd_spipe":
+                  "r01", #"flux_rd":
+                  "r00" #"flux_wr"
                   ]
         return events
     return []
@@ -104,6 +116,18 @@ def analyse_events(architecture, hardware_events):
 
         all["LL_hit_rate"] = 1.0 - all[code("LL_CACHE_MISS")]/all[code("LL_CACHE")]
         all["Remote_accesses"] = all[code("REMOTE_ACCESS")]/(all[code("MEM_ACCESS_LD")] + all[code("MEM_ACCESS_ST")])
+
+        all["L1_SBW"] = all[code("L1D_CACHE")] * 16 / (all["duration_time"])
+        all["L1_SBW_percent"] = 100.0 * all["L1_SBW"] / kunpeng920_characteristics["bandwidths"]["L1"]
+
+        all["L2_SBW"] = all[code("L2D_CACHE")] * 64 / (all["duration_time"])
+        all["L2_SBW_percent"] = 100.0 * all["L2_SBW"] / kunpeng920_characteristics["bandwidths"]["L2"]
+
+        all["L3_SBW"] = all[code("rd_spipe")] * 64 / (all["duration_time"])
+        all["L3_SBW_percent"] = 100.0 * all["L3_SBW"] * 64 / kunpeng920_characteristics["bandwidths"]["L3"]
+
+        all["DRAM_SBW"] = (all[code("flux_rd")] + all[code("flux_wr")]) * 32 / (all["duration_time"])
+        all["DRAM_SBW_percent"] = 100.0 * all["DRAM_SBW"] / kunpeng920_characteristics["bandwidths"]["DRAM"]
 
     # remove hardware events from resulting dict
     for key in all.copy():

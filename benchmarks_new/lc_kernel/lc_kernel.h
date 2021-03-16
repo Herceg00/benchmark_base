@@ -366,11 +366,13 @@ void Kernel(cusizevector plsize,
     tick.z = rand()%2;
 
     #pragma omp parallel for schedule(static)
-    for (size_t i = 0; i < half_plsize.x * half_plsize.y * half_plsize.z; i++) {
+    for (size_t i = 0; i < half_plsize.x * half_plsize.y * half_plsize.z; i++)
+    {
         size_t tz = i / (half_plsize.x * half_plsize.y);
         size_t ty = (i - tz * half_plsize.x * half_plsize.y) / half_plsize.z;
         size_t tx = (i - tz * half_plsize.x * half_plsize.y) % half_plsize.z;
-        if ((tx != (half_plsize.x - 1)) && (ty != (half_plsize.y - 1)) && (ty != (half_plsize.y - 1))) {
+        if ((tx != (half_plsize.x - 1)) && (ty != (half_plsize.y - 1)) && (ty != (half_plsize.y - 1)))
+        {
             const int poffset = get_new_poffset(i, tick.x, tick.y, tick.z, 0, 0, 0, plsize);
 
             const int poffsetxp = get_new_poffset(i, tick.x, tick.y, tick.z, +1, 0, 0, plsize);

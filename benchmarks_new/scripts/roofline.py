@@ -11,15 +11,10 @@ tmp_data_prefix = "prof_data/"
 last_band = "L1"
 last_perf = "float_vector_FMA"
 
-kunpeng_characteristics_single_socket = {"bandwidths": {"DRAM": 93.5, "L2": 1256, "L1": 1766},
+kunpeng920_characteristics = {"bandwidths": {"DRAM": 130, "L3": 1060, "L2": 1800, "L1": 2200},
                                          "peak_performances": {"float_no_vector_noFMA": 124,
                                                                "float_vector_noFMA": 499,
                                                                "float_vector_FMA": 1996}}  # GFLOP/s
-
-kunpeng_characteristics_dual_socket = {"bandwidths": {"DRAM": 187, "L2": 2512, "L1": 3532},
-                                       "peak_performances": {"float_no_vector_noFMA": 248,
-                                                             "float_vector_noFMA": 1000,
-                                                             "float_vector_FMA": 3992}}  # GFLOP/s
 
 x_data_first = 1.0 / 256.0
 x_data_last = 1024
@@ -174,7 +169,7 @@ def generate_roofline_from_profiling_data(file_name, roofline_name):
     for line in profiling_file:
         line_pos += 1
         if line_pos == 1:
-            platform_characteristics = kunpeng_characteristics_single_socket # TODO
+            platform_characteristics = kunpeng920_characteristics
             continue
         if line.startswith("#") or line.startswith("//"):
             continue
