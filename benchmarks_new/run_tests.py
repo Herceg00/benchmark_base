@@ -25,11 +25,17 @@ all_tests_data = {"triada": {"mode": {"min": 0, "max": 9, "step": 1},
                   "matrix_mul": {"mode": {"min": 0, "max": 6, "step": 1},
                                  "length": {"min": 256, "max": 2048, "step": "2_pow"}},
                   "lc_kernel": {"length": {"min": 16, "max": 256, "step": "2_pow"}},
-                  "random_access": {"mode": {"min": 0, "max": 1, "step": 1},
-                                    "length": {"min": 0, "max": 1, "step": 1}},
+                  "random_access": {"length": linear_length,
+                                    "mode": {"min": 0, "max": 1, "step": 1},
+                                    "radius": {"min": 2, "max": 2097152, "step": "2_pow"}}, # from 2 KB to 2 GB
                   "cache_bandwidths": {"length": 1024*1024*2,
-                                       "mode": 0}
+                                       "mode": 0},
+                  "rand_generator": {"length": linear_length,
+                                     "mode": 0}
                   }
+
+RA_RADIUS="2" # 2 KB
+RA_MAX_RAD="2097152" # 2 GB
 
 
 def get_bench_table_name(bench_name, parameters_string):
@@ -108,6 +114,7 @@ def run_single_benchmark(bench_name, options):
     threads = get_cores_count()
     if options.sockets > 1:
         threads = options.sockets * threads
+    print("using " + str(threads) + " threads")
     parameters_string = "--threads=" + str(threads) + " " + options.force
 
     bench_table_name = get_bench_table_name(bench_name, parameters_string)
