@@ -9,14 +9,12 @@
 #include "../../locutils_new/perf_wrapper.h"
 
 
-typedef double base_type;
-typedef base_type array_type[LENGTH];
-typedef size_t helper_type[LENGTH];
+typedef float base_type;
 
-#include "lc_kernel.h"
+#include "lc_kernel_generic.h"
 #include "../../locutils_new/timers.h"
 
-double CallKernel()
+double CallKernel(int mode)
 {
 	double time = -1;
     cusizevector plsize, tick, half_plsize;
@@ -30,10 +28,13 @@ double CallKernel()
     half_plsize.y = plsize.y/2;
     half_plsize.z = plsize.z/2;
 
+    base_type *in_data = new base_type [(plsize.x+1)*(plsize.y+1)*(plsize.z+1)];
+    base_type *out_data = new base_type [(plsize.x+1)*(plsize.y+1)*(plsize.z+1)];
+
     #ifndef METRIC_RUN
     size_t problem_size = (size_t)LENGTH * (size_t)LENGTH * (size_t)LENGTH;
-    size_t bytes_requested = 16 * sizeof(base_type) * problem_size / 8;
-    size_t flops_requested = 182 * problem_size / 8;
+    size_t bytes_requested = 8 * sizeof(base_type) * problem_size / 8;
+    size_t flops_requested = 8 * problem_size / 8;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
 
@@ -44,19 +45,17 @@ double CallKernel()
     #ifndef METRIC_RUN
     int iterations = LOC_REPEAT;
     #endif
-    slpointers *sldata_array = new slpointers [1];
-    tlpointers *tldata_array = new tlpointers [1];
-    Init(tldata_array[0], sldata_array[0], plsize, half_plsize);
+    Init(in_data, out_data, plsize, half_plsize);
 
     for(int i = 0; i < iterations; i++)
 	{
         #ifndef METRIC_RUN
-        Init(tldata_array[0], sldata_array[0], plsize, half_plsize);
+        Init(in_data, out_data, plsize, half_plsize);
 		locality::utils::CacheAnnil(3);
 		counter.start_timing();
         #endif
 
-		Kernel(plsize, half_plsize,tick, &sldata_array[0], &tldata_array[0]);
+		Kernel(mode, plsize, half_plsize,tick, in_data, out_data);
 
         #ifndef METRIC_RUN
 		counter.end_timing();
@@ -68,10 +67,14 @@ double CallKernel()
     #ifndef METRIC_RUN
 	counter.print_average_counters(true);
     #endif
+
+    delete []in_data;
+    delete []out_data;
+
 	return time;
 }
 
 int main()
 {
-    CallKernel();
+    CallKernel((int)MODE);
 }

@@ -356,10 +356,10 @@ void Init(tlpointers &tldata, slpointers &sldata, cusizevector plsize, cusizevec
     InitSeq(tldata.tlxymac, plsize, half_plsize);
 }
 
-void Kernel(cusizevector plsize,
-            cusizevector half_plsize,
-            cusizevector tick,
-            slpointers *sldata, tlpointers *tldata)
+void Kernel_splitted(cusizevector plsize,
+                     cusizevector half_plsize,
+                     cusizevector tick,
+                     slpointers *sldata, tlpointers *tldata)
 {
     tick.x = rand()%2;
     tick.y = rand()%2;
@@ -398,5 +398,71 @@ void Kernel(cusizevector plsize,
 
             tldata->tlxymac[poffset] = 1.00 - avg12 * avg12;
         }
+    }
+}
+
+void Kernel_original(cusizevector plsize,
+                     cusizevector half_plsize,
+                     cusizevector tick,
+                     slpointers *sldata, tlpointers *tldata)
+{
+    tick.x = rand()%2;
+    tick.y = rand()%2;
+    tick.z = rand()%2;
+
+    #pragma omp parallel for schedule(static)
+    for (size_t tz = 0; tz < (half_plsize.z); tz++)
+    {
+        for (size_t ty = 0; ty < (half_plsize.y); ty++)
+        {
+            for (size_t tx = 0; tx < (half_plsize.x); tx++)
+            {
+                const int pnx=tx*2+tick.x+1;
+                const int pny=ty*2+tick.y+1;
+                const int pnz=tz*2+tick.z+1;
+
+                size_t poffset=pnz*plsize.y*plsize.x+pny*plsize.x+pnx;
+
+                size_t poffsetxp=(pnz)*plsize.y*plsize.x+pny*plsize.x+pnx+1,
+                       poffsetyp=pnz*plsize.y*plsize.x+(pny+1)*plsize.x+pnx;
+
+                float avg12;
+                float avg1_x, avg1_y, avg1_z;
+                float avg2_x, avg2_y, avg2_z;
+                // 3.4.1. tlxy points
+                arcavgXYZ(sldata->slyc_unrolled_x[poffset], sldata->slyc_unrolled_y[poffset],
+                          sldata->slyc_unrolled_z[poffset],
+                          sldata->slyc_unrolled_x[poffsetxp], sldata->slyc_unrolled_y[poffsetxp],
+                          sldata->slyc_unrolled_z[poffsetxp], &avg1_x, &avg1_y, &avg1_z);
+                arcavgXYZ(sldata->slxc_unrolled_x[poffset], sldata->slxc_unrolled_y[poffset],
+                          sldata->slxc_unrolled_z[poffset],
+                          sldata->slxc_unrolled_x[poffsetyp], sldata->slxc_unrolled_y[poffsetyp],
+                          sldata->slxc_unrolled_z[poffsetyp], &avg2_x, &avg2_y, &avg2_z);
+                avg12 = arcavgXYZ(avg1_x, avg1_y, avg1_z, avg2_x, avg2_y, avg2_z,
+                                  &tldata->tlxyc_unrolled_x[poffset],
+                                  &tldata->tlxyc_unrolled_y[poffset], &tldata->tlxyc_unrolled_z[poffset]);
+
+                tldata->tlxymac[poffset] = 1.00 - avg12 * avg12;
+            }
+        }
+    }
+}
+
+void Kernel(int core_type,
+            cusizevector plsize,
+            cusizevector half_plsize,
+            cusizevector tick,
+            slpointers *sldata, tlpointers *tldata)
+{
+    switch (core_type)
+    {
+        case  0:
+            Kernel_original(plsize, half_plsize, tick, sldata, tldata);
+            break;
+        case  1:
+            Kernel_splitted(plsize, half_plsize, tick, sldata, tldata);
+            break;
+
+        default: fprintf(stderr, "Wrong core type of lc_kernel_arcavgxyz!\n");
     }
 }
