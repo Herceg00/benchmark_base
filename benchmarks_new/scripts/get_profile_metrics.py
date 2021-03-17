@@ -46,6 +46,13 @@ def get_no_conflict_events_list(architecture):
                   "duration_time"
                   ]
         return events
+    if architecture == "intel_xeon":
+        events = ["L1-dcache-loads",
+                  "LLC-loads",
+                  "LLC-stores",
+                  "LLC-store-misses",
+                  "LLC-load-misses"]
+        return events
     return []
 
 
@@ -128,6 +135,9 @@ def analyse_events(architecture, hardware_events):
 
         all["DRAM_SBW"] = (all[code("flux_rd")] + all[code("flux_wr")]) * 32 / (all["duration_time"])
         all["DRAM_SBW_percent"] = 100.0 * all["DRAM_SBW"] / kunpeng920_characteristics["bandwidths"]["DRAM"]
+
+    if architecture == "intel_xeon":
+        all["LLC_hit_rate"] = 1.0 - (all["LLC-store-misses"] + all["LLC-load-misses"])/(all["LLC-stores"] + all["LLC-loads"])
 
     # remove hardware events from resulting dict
     for key in all.copy():

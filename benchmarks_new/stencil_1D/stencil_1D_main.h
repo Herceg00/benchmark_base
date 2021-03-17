@@ -35,6 +35,7 @@ double CallKernel(int mode)
     for(int i = 0; i < iterations; i++)
 	{
         #ifndef METRIC_RUN
+        std::cout << "cache anych" << std::endl;
 		Init(a, b, LENGTH);
 		locality::utils::CacheAnnil(3);
 		counter.start_timing();

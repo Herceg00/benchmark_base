@@ -82,10 +82,10 @@ void Init(AT *in_data, AT *out_data, cusizevector plsize, cusizevector half_plsi
 }
 
 template <typename AT>
-void Kernel_splitted(cusizevector plsize,
-                     cusizevector half_plsize,
-                     cusizevector tick,
-                     AT *in_data, AT *out_data)
+void Kernel_splitted_7_point(cusizevector plsize,
+                             cusizevector half_plsize,
+                             cusizevector tick,
+                             AT *in_data, AT *out_data)
 {
     tick.x = rand()%2;
     tick.y = rand()%2;
@@ -123,10 +123,10 @@ void Kernel_splitted(cusizevector plsize,
 }
 
 template <typename AT>
-void Kernel_original(cusizevector plsize,
-                     cusizevector half_plsize,
-                     cusizevector tick,
-                     AT *in_data, AT *out_data)
+void Kernel_original_7_point(cusizevector plsize,
+                             cusizevector half_plsize,
+                             cusizevector tick,
+                             AT *in_data, AT *out_data)
 {
     tick.x = rand()%2;
     tick.y = rand()%2;
@@ -177,10 +177,10 @@ void Kernel(int core_type,
     switch (core_type)
     {
         case  0:
-            Kernel_original(plsize, half_plsize, tick, in_data, out_data);
+            Kernel_original_7_point(plsize, half_plsize, tick, in_data, out_data);
             break;
         case  1:
-            Kernel_splitted(plsize, half_plsize, tick, in_data, out_data);
+            Kernel_splitted_7_point(plsize, half_plsize, tick, in_data, out_data);
             break;
 
         default: fprintf(stderr, "Wrong core type of lc_kernel_generic!\n");
