@@ -23,54 +23,42 @@ typedef int* weight_type;
 
 double CallKernel(int core_type)
 {
-	size_t edge_count = std::pow(2, LENGTH) * EDGES_PER_VERTEX;
-	size_t vertex_count = std::pow(2, LENGTH);
+    // Declare graph in optimized Vect CSR representation
+    VectCSRGraph graph;
 
-	edge_type edges = new size_t*[edge_count];
+    double time = -1;
 
-	for(size_t i = 0; i < edge_count; i++)
-		edges[i] = new size_t[2];
-
-	index_type index = new size_t[vertex_count];
-
-	weight_type weights = new int[edge_count];
-	weight_type d = new int[vertex_count];
-
-	double time = -1;
-
-#ifndef METRIC_RUN
-    double bytes_requested = edge_count * vertex_count * (4 * sizeof(int) + 2 * sizeof(size_t) + sizeof(int)) + vertex_count;
-    double flops_requested = edge_count * vertex_count * 4;
-    auto counter = PerformanceCounter(bytes_requested, flops_requested);
-#endif
-
-#ifdef METRIC_RUN
-    int iterations = LOC_REPEAT * 20;
-    Init<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, LENGTH);
-#else
+    #ifdef METRIC_RUN
+    int iterations = LOC_REPEAT * GRAPH_METRICS_REPEAT;
+    #else
     int iterations = LOC_REPEAT;
-#endif
+    #endif
+    Init(graph, LENGTH);
+    VerticesArray<float> distances(graph);
+    EdgesArray_Vect<float> weights(graph);
+    weights.set_all_random(1.0);
+
+    #ifndef METRIC_RUN
+    auto counter = PerformanceCounter(INT_ELEMENTS_PER_EDGE, 1);
+    #endif
 
     for(int i = 0; i < iterations; i++)
-	{
-#ifndef METRIC_RUN
-		Init<edge_type, index_type, weight_type>(edges, edge_count, index, weights, vertex_count, LENGTH);
-		locality::utils::CacheAnnil();
-        counter.start_timing();
-#endif
+    {
+        #ifndef METRIC_RUN
+        locality::utils::CacheAnnil();
+        #endif
 
-        kernel_wrapper<edge_type, weight_type>(core_type, edges, edge_count, weights, vertex_count, d);
+        AlgorithmStats stats = Kernel(graph, distances, weights);
 
-#ifndef METRIC_RUN
-        counter.end_timing();
-        counter.update_counters();
+        #ifndef METRIC_RUN
+        counter.force_update_counters(stats.wall_time, stats.band_per_iteration, stats.wall_perf);
         counter.print_local_counters();
-#endif
-	}
+        #endif
+    }
 
-#ifndef METRIC_RUN
+    #ifndef METRIC_RUN
     counter.print_average_counters(true);
-#endif
+    #endif
 
     return time;
 }

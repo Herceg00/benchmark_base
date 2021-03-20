@@ -35,7 +35,7 @@ double CallKernel()
 #endif
 
 #ifdef METRIC_RUN
-    int iterations = LOC_REPEAT * 20;
+    int iterations = LOC_REPEAT * USUAL_METRICS_REPEAT;
     Init<base_type, vec_type, matrix_type, indx_type>(b, x, matrix, indx, LENGTH);
 #else
     int iterations = LOC_REPEAT;

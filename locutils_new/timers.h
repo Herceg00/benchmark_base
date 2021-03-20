@@ -3,6 +3,9 @@
 #include <ios>
 #include <chrono>
 
+#define GRAPH_METRICS_REPEAT 1000
+#define USUAL_METRICS_REPEAT 20
+
 class PerformanceCounter {
     double total_time = 0;
     double total_bw = 0;
@@ -25,6 +28,16 @@ public:
 
     void end_timing(void) {
         end_time = std::chrono::steady_clock::now();
+    }
+
+    void force_update_counters(double force_time, double force_bw, double force_flops)
+    {
+        local_time = force_time;
+        local_bw = force_bw;
+        local_flops = force_flops;
+        total_bw += local_bw;
+        total_time += local_time;
+        total_flops += local_flops;
     }
 
     void update_counters() {

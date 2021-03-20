@@ -34,7 +34,13 @@ all_tests_data = {"triada": {"mode": {"min": 0, "max": 9, "step": 1},
                   "cache_bandwidths": {"length": 1024*1024*2,
                                        "mode": 0},
                   "rand_generator": {"length": linear_length,
-                                     "mode": 0}
+                                     "mode": 0},
+                  "bfs": {"mode": 0,
+                          "length": {"min": 15, "max": 23, "step": 1}
+                          },
+                  "bellman_ford": {"mode": 0,
+                          "length": {"min": 15, "max": 23, "step": 1}
+                          },
                   }
 
 RA_RADIUS="2" # 2 KB
@@ -139,6 +145,13 @@ def generate_roofline():
     generate_roofline_from_profiling_data(roofline_file_name, "Kunpeng Roofline Model")
 
 
+def check_target_bench_correctness(bench_name):
+    subfolders = [ f.name for f in os.scandir("./") if f.is_dir() ]
+    print(subfolders)
+    if not (bench_name in subfolders):
+        raise ValueError('Incorrect benchmark name!')
+
+
 if __name__ == "__main__":
     # create .csv files
     init()
@@ -163,10 +176,12 @@ if __name__ == "__main__":
 
     if options.force != "":  # run single test
         print("FORCE RUN")
+        check_target_bench_correctness(options.bench)
         run_single_benchmark(options.bench, options)
     else:  # run tests
         for current_test, test_parameters in all_tests_data.items():
             if options.bench == "all" or current_test in options.bench:
+                check_target_bench_correctness(current_test)
                 run_benchmark(current_test, test_parameters, options)
 
     # generate roofline model

@@ -25,7 +25,7 @@ double CallKernel()
     #endif
 
     #ifdef METRIC_RUN
-    int iterations = LOC_REPEAT * 20;
+    int iterations = LOC_REPEAT * USUAL_METRICS_REPEAT;
     Init(caches_data, LENGTH);
     #else
     int iterations = LOC_REPEAT;
