@@ -16,31 +16,34 @@ all_tests_data = {"triada": {"mode": {"min": 0, "max": 9, "step": 1},
                                  "radius": {"min": 1, "max": 12, "step": 1}},
                   "stencil_2D": {"mode": {"min": 0, "max": 1, "step": 1},
                                  "radius": {"min": 1, "max": 3, "step": 1},
-                                 "length": {"min": 256, "max": 32768, "step": "2_pow"}},
+                                 "length": {"min": 256, "max": 32768, "step": "mult", "step_val": 2}},
                   "stencil_3D": {"mode": {"min": 0, "max": 1, "step": 1},
                                  "radius": {"min": 1, "max": 3, "step": 1},
-                                 "length": {"min": 64, "max": 512, "step": "2_pow"}},
+                                 "length": {"min": 64, "max": 512, "step": "mult", "step_val": 1.2}},
                   "matrix_transp": {"mode": {"min": 0, "max": 3, "step": 1},
-                                    "length": {"min": 256, "max": 32768, "step": "2_pow"}},
+                                    "length": {"min": 256, "max": 32768, "step": "mult", "step_val": 2}},
                   "matrix_mul": {"mode": {"min": 0, "max": 6, "step": 1},
-                                 "length": {"min": 256, "max": 2048, "step": "2_pow"}},
+                                 "length": {"min": 256, "max": 2048, "step": "mult", "step_val": 2}},
                   "lc_kernel_arcavgxyz": {"mode": {"min": 0, "max": 1, "step": 1},
-                                          "length": {"min": 16, "max": 512, "step": "2_pow"}},
+                                          "length": {"min": 64, "max": 512, "step": "mult", "step_val": 1.2}},
                   "lc_kernel_generic": {"mode": {"min": 0, "max": 1, "step": 1},
-                                        "length": {"min": 32, "max": 512, "step": "2_pow"}},
+                                        "length": {"min": 64, "max": 512, "step": "mult", "step_val": 1.2}},
                   "random_access": {"length": linear_length,
                                     "mode": {"min": 0, "max": 1, "step": 1},
-                                    "radius": {"min": 2, "max": 2097152, "step": "2_pow"}}, # from 2 KB to 2 GB
+                                    "radius": {"min": 2, "max": 2097152, "step": "mult", "step_val": 2}}, # from 2 KB to 2 GB
                   "cache_bandwidths": {"length": 1024*1024*2,
                                        "mode": 0},
                   "rand_generator": {"length": linear_length,
                                      "mode": 0},
                   "bfs": {"mode": 0,
-                          "length": {"min": 15, "max": 23, "step": 1}
+                          "length": {"min": 12, "max": 23, "step": 1}
                           },
-                  "bellman_ford": {"mode": 0,
-                          "length": {"min": 15, "max": 23, "step": 1}
+                  "bellman_ford": {"mode": {"min": 0, "max": 1, "step": 1},
+                          "length": {"min": 12, "max": 23, "step": 1}
                           },
+                  "page_rank": {"mode": {"min": 0, "max": 1, "step": 1},
+                                "length": {"min": 12, "max": 23, "step": 1}
+                                }
                   }
 
 RA_RADIUS="2" # 2 KB
@@ -73,8 +76,9 @@ def get_max(parameter_info):
 
 def get_step(parameter_info, i):
     if isinstance(parameter_info, dict):
-        if parameter_info["step"] == "2_pow":
-            return i*2
+        if parameter_info["step"] == "mult":
+            mult_val = parameter_info["step_val"]
+            return int(i*mult_val)
         else:
             return i + parameter_info["step"]
     else:
@@ -98,11 +102,11 @@ def run_tests_across_specific_parameter(bench_name, parameter_name, all_paramete
         else:
             run_tests_across_specific_parameter(bench_name, next_parameter, all_parameters_data, parameters_string, options)
 
-        if i == get_max(parameter_info):
+        i = get_step(parameter_info, i)
+
+        if i > get_max(parameter_info):
             timings_add_separator()
             profiling_add_separator()
-
-        i = get_step(parameter_info, i)
 
 
 def run_benchmark(bench_name, bench_params, options):  # benchmarks a specified application
@@ -147,7 +151,6 @@ def generate_roofline():
 
 def check_target_bench_correctness(bench_name):
     subfolders = [ f.name for f in os.scandir("./") if f.is_dir() ]
-    print(subfolders)
     if not (bench_name in subfolders):
         raise ValueError('Incorrect benchmark name!')
 

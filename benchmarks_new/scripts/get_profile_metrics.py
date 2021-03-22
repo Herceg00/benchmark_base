@@ -110,19 +110,19 @@ def analyse_events(architecture, hardware_events):
     all = copy.deepcopy(hardware_events)
 
     if architecture == "kunpeng920":
-        all["Frontend_Bound"] = all[code("fetch_bubble")]/(4.0 * all["CPU_CYCLES"])
-        all["Bad_Speculation"] = (all["INST_SPEC"] - all["INST_RETIRED"])/(4.0 * all["CPU_CYCLES"])
-        all["Retiring"] = all["INST_RETIRED"] / (4.0 * all["CPU_CYCLES"])
-        all["Backend_Bound"] = 1.0 - (all["Frontend_Bound"] + all["Bad_Speculation"] + all["Retiring"])
-        all["Memory_Bound"] = (all[code("MEM_STALL_ANY_LOAD")] + all[code("MEM_STALL_ANY_STORE")])/all[code("EXEC_STALL_CYCLE")]
-        all["L1_Bound"] = (all[code("MEM_STALL_ANY_LOAD")] - all[code("MEM_STALL_L1MISS")])/all[code("EXEC_STALL_CYCLE")]
-        all["L2_Bound"] = (all[code("MEM_STALL_L1MISS")] - all[code("MEM_STALL_L2MISS")])/all[code("EXEC_STALL_CYCLE")]
-        all["L3_Bound_or_DRAM"] = all[code("MEM_STALL_L2MISS")]/all[code("EXEC_STALL_CYCLE")]
-        all["Store_Bound"] = all[code("MEM_STALL_ANY_STORE")]/all[code("EXEC_STALL_CYCLE")]
-        all["Core_Bound"] = (all[code("EXEC_STALL_CYCLE")] - all[code("MEM_STALL_ANY_LOAD")] - all[code("MEM_STALL_ANY_STORE")])/all[code("EXEC_STALL_CYCLE")]
+        all["Frontend_Bound"] = 100.0* (all[code("fetch_bubble")]/(4.0 * all["CPU_CYCLES"]))
+        all["Bad_Speculation"] = 100.0* ((all["INST_SPEC"] - all["INST_RETIRED"])/(4.0 * all["CPU_CYCLES"]))
+        all["Retiring"] = 100.0* (all["INST_RETIRED"] / (4.0 * all["CPU_CYCLES"]))
+        all["Backend_Bound"] = (100.0 - (all["Frontend_Bound"] + all["Bad_Speculation"] + all["Retiring"]))
+        all["Memory_Bound"] = 100.0* ((all[code("MEM_STALL_ANY_LOAD")] + all[code("MEM_STALL_ANY_STORE")])/all[code("EXEC_STALL_CYCLE")])
+        all["L1_Bound"] = 100.0* ((all[code("MEM_STALL_ANY_LOAD")] - all[code("MEM_STALL_L1MISS")])/all[code("EXEC_STALL_CYCLE")])
+        all["L2_Bound"] = 100.0* ((all[code("MEM_STALL_L1MISS")] - all[code("MEM_STALL_L2MISS")])/all[code("EXEC_STALL_CYCLE")])
+        all["L3_Bound_or_DRAM"] = 100.0* (all[code("MEM_STALL_L2MISS")]/all[code("EXEC_STALL_CYCLE")])
+        all["Store_Bound"] = 100.0* (all[code("MEM_STALL_ANY_STORE")]/all[code("EXEC_STALL_CYCLE")])
+        all["Core_Bound"] = 100.0* ((all[code("EXEC_STALL_CYCLE")] - all[code("MEM_STALL_ANY_LOAD")] - all[code("MEM_STALL_ANY_STORE")])/all[code("EXEC_STALL_CYCLE")])
 
-        all["LL_hit_rate"] = 1.0 - all[code("LL_CACHE_MISS")]/all[code("LL_CACHE")]
-        all["Remote_accesses"] = all[code("REMOTE_ACCESS")]/(all[code("MEM_ACCESS_LD")] + all[code("MEM_ACCESS_ST")])
+        all["LL_hit_rate"] = 100.0* (1.0 - all[code("LL_CACHE_MISS")]/all[code("LL_CACHE")])
+        all["Remote_accesses"] = 100.0* (all[code("REMOTE_ACCESS")]/(all[code("MEM_ACCESS_LD")] + all[code("MEM_ACCESS_ST")]))
 
         all["L1_SBW"] = all[code("L1D_CACHE")] * 16 / (all["duration_time"])
         all["L1_SBW_percent"] = 100.0 * all["L1_SBW"] / kunpeng920_characteristics["bandwidths"]["L1"]

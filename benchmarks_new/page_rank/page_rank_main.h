@@ -9,19 +9,13 @@
 
 #include "locality.h"
 #include "size.h"
+#include "omp.h"
 
-
-static const int EDGES_PER_VERTEX = 16;
-
-typedef size_t** edge_type;
-typedef size_t* index_type;
-typedef int* weight_type;
-
-#include "bellman_ford.h"
+#include "page_rank.h"
 #include "../../locutils_new/timers.h"
 
 
-double CallKernel(int core_type)
+double CallKernel(int mode)
 {
     // Declare graph in optimized Vect CSR representation
     VectCSRGraph graph;
@@ -34,27 +28,25 @@ double CallKernel(int core_type)
     int iterations = LOC_REPEAT;
     #endif
     Init(graph, LENGTH);
-    VerticesArray<float> distances(graph);
-    EdgesArray_Vect<float> weights(graph);
-    weights.set_all_random(1.0);
+    VerticesArray<float> page_ranks(graph);
 
     #ifndef METRIC_RUN
     auto counter = PerformanceCounter(INT_ELEMENTS_PER_EDGE, 1);
     #endif
 
     for(int i = 0; i < iterations; i++)
-    {
+	{
         #ifndef METRIC_RUN
-        locality::utils::CacheAnnil();
+		locality::utils::CacheAnnil();
         #endif
 
-        AlgorithmStats stats = Kernel(core_type, graph, distances, weights);
+        AlgorithmStats stats = Kernel(mode, graph, page_ranks);
 
         #ifndef METRIC_RUN
         counter.force_update_counters(stats.wall_time, stats.band_per_iteration, stats.wall_perf);
         counter.print_local_counters();
         #endif
-    }
+	}
 
     #ifndef METRIC_RUN
     counter.print_average_counters(true);
