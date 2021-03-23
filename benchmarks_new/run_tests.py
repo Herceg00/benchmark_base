@@ -43,7 +43,8 @@ all_tests_data = {"triada": {"mode": {"min": 0, "max": 9, "step": 1},
                           },
                   "page_rank": {"mode": {"min": 0, "max": 1, "step": 1},
                                 "length": {"min": 12, "max": 23, "step": 1}
-                                }
+                                },
+                  "n_body": {"length": 10000}
                   }
 
 RA_RADIUS="2" # 2 KB
@@ -115,8 +116,8 @@ def run_benchmark(bench_name, bench_params, options):  # benchmarks a specified 
 
     # generate list of parameters to be passed into benchmark (currently only threads)
     threads = get_cores_count()
-    if options.sockets > 1:
-        threads = options.sockets * threads
+    if int(options.sockets) > 1:
+        threads = int(options.sockets) * threads
     list_of_params = "--threads=" + str(threads)
 
     # recursively run benchmark for all combinations of input params
