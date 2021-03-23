@@ -15,8 +15,9 @@ typedef double base_type;
 
 double CallKernel(int mode)
 {
-    base_type *a = new base_type[LENGTH * LENGTH];
-    base_type *b = new base_type[LENGTH * LENGTH];
+    base_type *a = new base_type[(size_t)LENGTH * (size_t)LENGTH];
+    base_type *b = new base_type[(size_t)LENGTH * (size_t)LENGTH];
+    std::cout << "array sizes: " << ((size_t)LENGTH * (size_t)LENGTH / 1e9) * sizeof(base_type)* 2 << std::endl;
 
 	double time = -1;
 

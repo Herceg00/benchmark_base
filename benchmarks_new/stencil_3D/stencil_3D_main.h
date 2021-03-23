@@ -15,8 +15,8 @@ typedef double base_type;
 
 double CallKernel(int mode)
 {
-    base_type *a = new base_type[LENGTH * LENGTH * LENGTH];
-    base_type *b = new base_type[LENGTH * LENGTH * LENGTH];
+    base_type *a = new base_type[(size_t)LENGTH * (size_t)LENGTH * (size_t)LENGTH];
+    base_type *b = new base_type[(size_t)LENGTH * (size_t)LENGTH * (size_t)LENGTH];
 
 	double time = -1;
 
