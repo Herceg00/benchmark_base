@@ -11,7 +11,7 @@
 
 #include "../../locutils_new/timers.h"
 
-double CallKernel()
+double CallKernel(int mode)
 {
     const int nTimeSteps = 100;
     const double Mass = 1e12;
@@ -22,8 +22,8 @@ double CallKernel()
 
 	double time = -1;
     #ifndef METRIC_RUN
-    double bytes_requested = (size_t) LENGTH * (size_t) LENGTH * 3 * sizeof(double);
-    double flops_requested = (size_t) LENGTH * (size_t) LENGTH * 17;
+    double bytes_requested = (size_t) numParticles * (size_t) numParticles * 3 * sizeof(double) * nTimeSteps;
+    double flops_requested = (size_t) numParticles * (size_t) numParticles * 17 * nTimeSteps;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
 
@@ -39,7 +39,7 @@ double CallKernel()
 		locality::utils::CacheAnnil(3);
         counter.start_timing();
         #endif
-        Kernel(problem, nTimeSteps);
+        Kernel(mode, problem, nTimeSteps);
 
         #ifndef METRIC_RUN
         counter.end_timing();
@@ -57,5 +57,5 @@ double CallKernel()
 
 int main()
 {
-	CallKernel();
+	CallKernel((int)MODE);
 }

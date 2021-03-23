@@ -44,7 +44,8 @@ all_tests_data = {"triada": {"mode": {"min": 0, "max": 9, "step": 1},
                   "page_rank": {"mode": {"min": 0, "max": 1, "step": 1},
                                 "length": {"min": 12, "max": 23, "step": 1}
                                 },
-                  "n_body": {"length": 10000}
+                  "n_body": {"mode": 0, # non-vector mode
+                             "length": 10000}
                   }
 
 RA_RADIUS="2" # 2 KB

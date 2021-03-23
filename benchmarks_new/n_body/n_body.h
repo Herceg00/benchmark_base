@@ -149,10 +149,17 @@ void Problem::integrate()
     }
 }
 
-void Kernel(Problem &problem, int nTimeSteps)
+void Kernel(int core_type, Problem &problem, int nTimeSteps)
 {
     for (int ts = 0; ts < nTimeSteps; ts++)
     {
-        problem.integrate();
+        switch (core_type)
+        {
+            case  0:
+                problem.integrate();
+                break;
+
+            default: fprintf(stderr, "Wrong core type of random generator!\n");
+        }
     }
 }
