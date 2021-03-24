@@ -7,7 +7,7 @@
 #include <chrono>
 
 
-typedef double base_type;
+typedef long long base_type;
 
 #include "rand_generator.h"
 
