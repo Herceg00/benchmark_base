@@ -6,6 +6,7 @@
 #include "omp.h"
 #include <chrono>
 
+typedef float base_type;
 
 #include "n_body.h"
 
@@ -13,7 +14,7 @@
 
 double CallKernel(int mode)
 {
-    const int nTimeSteps = 100;
+    const int nTimeSteps = 5;
     const double Mass = 1e12;
     const double dt = 1e-4;
     const unsigned numParticles = LENGTH;
@@ -23,7 +24,7 @@ double CallKernel(int mode)
 	double time = -1;
     #ifndef METRIC_RUN
     double bytes_requested = (size_t) numParticles * (size_t) numParticles * 3 * sizeof(double) * nTimeSteps;
-    double flops_requested = (size_t) numParticles * (size_t) numParticles * 17 * nTimeSteps;
+    double flops_requested = (size_t) numParticles * (size_t) numParticles * 20 * nTimeSteps;
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
 

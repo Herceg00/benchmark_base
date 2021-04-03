@@ -21,12 +21,12 @@ all_tests_data = {"triada": {"mode": {"min": 0, "max": 9, "step": 1},
                                  "radius": {"min": 3, "max": 3, "step": 1},
                                  "length": {"min": 64, "max": 1800, "step": "mult", "step_val": 1.2}},
                   "matrix_transp": {"mode": {"min": 0, "max": 3, "step": 1},
-                                    "length": {"min": 256, "max": 32768, "step": "mult", "step_val": 2}},
+                                    "length": {"min": 256, "max": 131072, "step": "mult", "step_val": 2}},
                   "matrix_mul": {"mode": {"min": 0, "max": 6, "step": 1},
                                  "length": {"min": 256, "max": 2048, "step": "mult", "step_val": 2}},
                   "lc_kernel_arcavgxyz": {"mode": {"min": 0, "max": 1, "step": 1},
                                           "length": {"min": 64, "max": 512, "step": "mult", "step_val": 1.2}},
-                  "lc_kernel_generic": {"mode": {"min": 0, "max": 1, "step": 1},
+                  "lc_kernel_generic": {"mode": {"min": 0, "max": 3, "step": 1},
                                         "length": {"min": 64, "max": 512, "step": "mult", "step_val": 1.2}},
                   "random_access": {"length": linear_length,
                                     "mode": {"min": 0, "max": 1, "step": 1},
@@ -44,8 +44,10 @@ all_tests_data = {"triada": {"mode": {"min": 0, "max": 9, "step": 1},
                   "page_rank": {"mode": {"min": 0, "max": 1, "step": 1},
                                 "length": {"min": 12, "max": 23, "step": 1}
                                 },
-                  "n_body": {"mode": 0, # non-vector mode
-                             "length": 10000}
+                  "n_body": {"mode": {"min": 0, "max": 1, "step": 1}, # non-vector mode
+                             "length": {"min": 1024, "max": 32768, "step": "mult", "step_val": 2}},
+                  "atomic_graphs": {"length": {"min": 12, "max": 18, "step": 1},
+                                    "mode": {"min": 0, "max": 1, "step": 1}}
                   }
 
 RA_RADIUS="2" # 2 KB

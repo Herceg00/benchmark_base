@@ -9,13 +9,15 @@ W_SIZE ?= 512
 
 #####
 
-CXX := $(COMPILER)
-CXX ?= g++
+CXX=g++
+# VECTOR_FLAGS=-O3 -funroll-loops -ftree-vectorize -ffast-math -march=armv8.1-a #-march=skylake-avx512 -mavx512f -mavx512cd  #-fopt-info-vec-all
+VECTOR_FLAGS=-O3 -fno-tree-vectorize -funroll-loops -ffast-math #-mno-sse -mno-avx
+
 
 ifdef DEBUG
-	CXXFLAGS := -g  -std=c++11 -w -Wall -Wextra -Wno-error=unused-parameter -Wno-error=unknown-pragmas -Wno-unknown-pragmas -Wno-misleading-indentation -I ../../external_libraries/VectorGraphLibrary/
+	CXXFLAGS := $(VECTOR_FLAGS) -std=c++11 -w -Wall -Wextra -Wno-error=unused-parameter -Wno-error=unknown-pragmas -Wno-unknown-pragmas -Wno-misleading-indentation -I ../../external_libraries/VectorGraphLibrary/
 else
-	CXXFLAGS := -O3 -std=c++11 -w -Wall -Wextra -Wno-error=unused-parameter -Wno-error=unknown-pragmas -Wno-unknown-pragmas -Wno-misleading-indentation -I ../../external_libraries/VectorGraphLibrary/
+	CXXFLAGS := $(VECTOR_FLAGS) -std=c++11 -w -Wall -Wextra -Wno-error=unused-parameter -Wno-error=unknown-pragmas -Wno-unknown-pragmas -Wno-misleading-indentation -I ../../external_libraries/VectorGraphLibrary/
 endif
 
 ifdef SIZE

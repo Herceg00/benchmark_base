@@ -167,20 +167,53 @@ void Kernel_original_7_point(cusizevector plsize,
     }
 }
 
-template <typename AT>
+struct Coord
+{
+    base_type x, y, z;
+
+    Coord(int val)
+    {
+        x = val;
+        y = val;
+        z = val;
+    }
+
+    Coord()
+    {
+        x = 0;
+        y = 0;
+        z = 0;
+    }
+
+    inline Coord& operator+=(const Coord& rhs){
+        this->x += rhs.x;
+        this->y += rhs.y;
+        this->z += rhs.z;
+        return *this;
+    }
+};
+
+template <typename LT, typename CT>
 void Kernel(int core_type,
             cusizevector plsize,
             cusizevector half_plsize,
             cusizevector tick,
-            AT *in_data, AT *out_data)
+            LT *in_data_linear, LT *out_data_linear,
+            CT *in_data_coord, CT *out_data_coord)
 {
     switch (core_type)
     {
         case  0:
-            Kernel_original_7_point(plsize, half_plsize, tick, in_data, out_data);
+            Kernel_original_7_point(plsize, half_plsize, tick, in_data_linear, out_data_linear);
             break;
         case  1:
-            Kernel_splitted_7_point(plsize, half_plsize, tick, in_data, out_data);
+            Kernel_splitted_7_point(plsize, half_plsize, tick, in_data_linear, out_data_linear);
+            break;
+        case  2:
+            Kernel_original_7_point(plsize, half_plsize, tick, in_data_coord, out_data_coord);
+            break;
+        case  3:
+            Kernel_splitted_7_point(plsize, half_plsize, tick, in_data_coord, out_data_coord);
             break;
 
         default: fprintf(stderr, "Wrong core type of lc_kernel_generic!\n");
