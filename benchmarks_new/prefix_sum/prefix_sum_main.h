@@ -9,7 +9,7 @@
 
 typedef double base_type;
 
-#include "prefix_function.h"
+#include "prefix_sum.h"
 
 #include "../../locutils_new/timers.h"
 

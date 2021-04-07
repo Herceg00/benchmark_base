@@ -9,7 +9,7 @@ from scripts.arch_properties import get_arch
 
 linear_length = 800000000
 
-all_tests_data = {"prefix_function": {"mode": {"min": 0, "max": 0, "step": 1}, 
+all_tests_data = {"prefix_sum": {"mode": {"min": 0, "max": 0, "step": 1}, 
                              "length": {"min": 100000, "max": 100000000, "step": "mult", "step_val": 2}},
                   "atomic": {"mode": {"min": 0, "max": 2, "step": 1},
                              "length": {"min": 100000, "max": 100000000, "step": "mult", "step_val": 2}},

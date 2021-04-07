@@ -1,3 +1,3 @@
-BENCH=prefix_function
+BENCH=prefix_sum
 
 include ../../locutils_new/Makefile
