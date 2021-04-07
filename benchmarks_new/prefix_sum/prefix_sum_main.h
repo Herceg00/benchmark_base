@@ -19,8 +19,9 @@ double CallKernel(int mode)
 
 	double time = -1;
     #ifndef METRIC_RUN
-    double bytes_requested = (size_t) LENGTH * sizeof(double);
-    double flops_requested = (size_t) LENGTH;
+    int NTHREADS = omp_get_max_threads();
+    double bytes_requested = (1 + (3 * LENGTH) + ((2 + NTHREADS) * (NTHREADS + 1) / 2)) * sizeof(double);
+    double flops_requested = ((2 * LENGTH) + ((2 + NTHREADS) * (NTHREADS + 1) / 2)) * sizeof(double);
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
 
