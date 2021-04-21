@@ -69,7 +69,7 @@ static double x[2*NK];
 static double q[NQ]; 
 
 
-int main() 
+extern "C" int main()
 {
   double Mops, t1, t2, t3, t4, x1, x2;
   double sx, sy, tm, an, tt, gc;

@@ -65,7 +65,7 @@ double CallKernel()
     return time;
 }
 
-int main()
+extern "C" int main()
 {
 	CallKernel();
 	

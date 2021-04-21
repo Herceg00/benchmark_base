@@ -62,7 +62,7 @@ double CallKernel(int core_type)
     return time;
 }
 
-int main()
+extern "C" int main()
 {
     CallKernel((int)MODE);
 }

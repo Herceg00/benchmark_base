@@ -64,7 +64,7 @@ locality::profiler::Logging(false);
 }
 
 
-int main()
+extern "C" int main()
 {
 #ifdef LOC_LOG_PATH
 	locality::memory_trace::Init(LOC_LOG_PATH);

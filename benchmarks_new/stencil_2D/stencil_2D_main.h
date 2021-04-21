@@ -78,7 +78,7 @@ double CallKernel(int mode)
     return time;
 }
 
-int main()
+extern "C" int main()
 {
     CallKernel((int)MODE);
 }

@@ -3,7 +3,7 @@
 
 #include "locality.h"
 #include "size.h"
-#include "omp.h"
+#include <omp.h>
 #include <chrono>
 #include "../../locutils_new/perf_wrapper.h"
 
@@ -62,7 +62,7 @@ double CallKernel(int mode)
     return time;
 }
 
-int main()
+extern "C" int main()
 {
     CallKernel((int)MODE);
 }

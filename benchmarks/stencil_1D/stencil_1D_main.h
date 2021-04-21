@@ -94,7 +94,7 @@ double CallKernel(void )
 	return time;
 }
 
-int main()
+extern "C" int main()
 {
     std::cout << "Array size: " << (long int) LENGTH << std::endl;
     std::cout << "Radius: " << (long int) RADIUS << std::endl;

@@ -204,16 +204,16 @@ void Kernel(int core_type,
     switch (core_type)
     {
         case  0:
-            Kernel_original_7_point(plsize, half_plsize, tick, in_data_linear, out_data_linear);
+            Kernel_original_7_point(plsize, half_plsize, tick, in_data_linear, out_data_linear); // old pattern, flt
             break;
         case  1:
-            Kernel_splitted_7_point(plsize, half_plsize, tick, in_data_linear, out_data_linear);
+            Kernel_splitted_7_point(plsize, half_plsize, tick, in_data_linear, out_data_linear); // new pattern, flt
             break;
         case  2:
-            Kernel_original_7_point(plsize, half_plsize, tick, in_data_coord, out_data_coord);
+            Kernel_original_7_point(plsize, half_plsize, tick, in_data_coord, out_data_coord); // old pattern, coord
             break;
         case  3:
-            Kernel_splitted_7_point(plsize, half_plsize, tick, in_data_coord, out_data_coord);
+            Kernel_splitted_7_point(plsize, half_plsize, tick, in_data_coord, out_data_coord); // new pattern, coord
             break;
 
         default: fprintf(stderr, "Wrong core type of lc_kernel_generic!\n");

@@ -85,7 +85,7 @@ static CPtrWrapper<double, 1> r("mg_r", NR);
 static int is1, is2, is3, ie1, ie2, ie3;
 
 
-int main()
+extern "C" int main()
 {
   //-------------------------------------------------------------------------c
   // k is the current level. It is passed down through subroutine args

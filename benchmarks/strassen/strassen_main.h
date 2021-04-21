@@ -106,7 +106,7 @@ gettimeofday(&end, NULL);
 	return time;
 }
 
-int main()
+extern "C" int main()
 {
 	LOC_PAPI_INIT
 

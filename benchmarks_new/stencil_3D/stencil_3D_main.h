@@ -76,7 +76,7 @@ double CallKernel(int mode)
 	delete []b;
 }
 
-int main()
+extern "C" int main()
 {
     CallKernel((int)MODE);
 }

@@ -42,7 +42,7 @@ void Nothing()
 			}
 }
 
-int main()
+extern "C" int main()
 {
 	CPapiController :: Init();
 

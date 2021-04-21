@@ -55,7 +55,7 @@ locality::profiler::Logging(false);
 	return locality::utils::TimeDif(start, end);
 }
 
-int main()
+extern "C" int main()
 {
 #ifdef LOC_LOG_PATH
 	locality::memory_trace::Init(LOC_LOG_PATH);

@@ -43,7 +43,7 @@ double CallKernel(int mode)
         AlgorithmStats stats = Kernel(graph, levels);
 
         #ifndef METRIC_RUN
-        counter.force_update_counters(stats.wall_time, stats.band_per_iteration, stats.wall_perf);
+        counter.force_update_counters(stats.wall_time, stats.sustained_bw, stats.wall_perf);
         counter.print_local_counters();
         #endif
 	}
@@ -55,7 +55,7 @@ double CallKernel(int mode)
     return time;
 }
 
-int main()
+extern "C" int main()
 {
     CallKernel((int)MODE);
 }

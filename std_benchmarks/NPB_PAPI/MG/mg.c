@@ -87,7 +87,7 @@ static double r[NR];
 static int is1, is2, is3, ie1, ie2, ie3;
 
 
-int main()
+extern "C" int main()
 {
 LOC_PAPI_INIT
 

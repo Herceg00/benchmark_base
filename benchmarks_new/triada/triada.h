@@ -7,30 +7,15 @@ using std::string;
 
 const int CORE_TYPES = 10;
 
-/** starting from 1 */
-string GetCoreName(int core_type)
-{
-	string type_names[CORE_TYPES] =
-	{
-	        "A[i] = B[i]*X + C", // 2
-            "A[i] = B[i]*X[i] + C", // 3
-            "A[i] = B[i]*X + C[i]", // 3
-            "A[i] = B[i]*X[i] + C[i]", // 4
+/*
+"A[i] = B[ind[i]]*X + C", // 3
+"A[ind[i]] = B[i]*X + C", // 3
+"A[ind[i]] = B[ind[i]]*X + C", // 3
 
-            "A[i] = B[ind[i]]*X + C", // 3
-            "A[ind[i]] = B[i]*X + C", // 3
-            "A[ind[i]] = B[ind[i]]*X + C", // 3
-
-            "A[i] = B[ind[i]]*X + C", // 3
-            "A[ind[i]] = B[i]*X + C", // 3
-            "A[ind[i]] = B[ind[i]]*X + C", // 3
-	};
-
-	if(core_type < 1 || core_type > CORE_TYPES)
-		return "** ERROR **: bad kernel number";
-
-	return type_names[core_type];
-}
+"A[i] = B[ind[i]]*X + C", // 3
+"A[ind[i]] = B[i]*X + C", // 3
+"A[ind[i]] = B[ind[i]]*X + C", // 3
+*/
 
 template<typename AT, typename AT_ind>
 void InitSeq(AT *a, AT *b, AT *c, AT *x, AT_ind *ind, size_t size)
@@ -85,32 +70,61 @@ for(size_t i = 0; i < size; i++) \
     VAR(__VA_ARGS__); \
 }
 
-//	printf(#__VA_ARGS__);
-//	printf("");
+template<typename AT>
+inline void tuned_Copy(AT *a, AT *c, size_t size)
+{
+    ssize_t j;
+    #pragma omp parallel for
+    for (j=0; j<size; j++)
+        c[j] = a[j];
+}
+
+template<typename AT>
+inline void tuned_Scale(AT scalar, AT *c, AT *b, size_t size)
+{
+    ssize_t j;
+    #pragma omp parallel for
+    for (j=0; j<size; j++)
+        b[j] = scalar*c[j];
+}
+
+template<typename AT>
+inline void tuned_Add(AT *a, AT *b, AT *c, size_t size)
+{
+    ssize_t j;
+    #pragma omp parallel for
+    for (j=0; j<size; j++)
+        c[j] = a[j]+b[j];
+}
+
+template<typename AT>
+inline void tuned_Triad(AT scalar, AT *a, AT *b, AT *c, size_t size)
+{
+    ssize_t j;
+    #pragma omp parallel for
+    for (j=0; j<size; j++)
+        c[j] = a[j]+scalar*b[j];
+}
+
 
 template<typename AT, typename AT_ind>
-void Kernel(int core_type, AT *a, AT *b, AT *c, AT *x, AT_ind *ind, size_t size)
+void Kernel(int core_type, AT *a, AT *b, AT *c, AT *x, AT_ind *ind, size_t size, AT scalar)
 {
     base_type sc_x = x[0], sc_c = c[0];
 
 	switch (core_type) {
-		case  0:
-            #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(size_t index =      i, a[index], b[index], sc_x    , sc_c)
-		    break;
-		case  1:
-            #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(size_t index =      i, a[index], b[index], x[index], sc_c)
-		    break;
-		case  2:
-            #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(size_t index =      i, a[index], b[index], sc_x    , c[index])
-		    break;
-		case  3:
-            #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(size_t index =      i, a[index], b[index], x[index], c[index])
-		    break;
-
+	    case 0:
+            tuned_Copy(a, c, size);
+            break;
+        case 1:
+            tuned_Scale(scalar, b, c, size);
+            break;
+        case 2:
+            tuned_Add(a, b, c, size);
+            break;
+        case 3:
+            tuned_Triad(scalar, a, b, c, size);
+            break;
 		case  4:
             #pragma omp parallel for schedule(static)
 			CALL_AND_PROFILE(size_t index = ind[i], a[i], b[index], sc_x    , sc_c)
@@ -123,7 +137,6 @@ void Kernel(int core_type, AT *a, AT *b, AT *c, AT *x, AT_ind *ind, size_t size)
             #pragma omp parallel for schedule(static)
             CALL_AND_PROFILE(size_t index = ind[i], a[index], b[index], sc_x    , sc_c)
             break;
-
         case  7:
             #pragma omp parallel for schedule(static)
             CALL_AND_PROFILE(size_t index = ind[i], a[i], b[index], sc_x    , sc_c)

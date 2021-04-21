@@ -65,7 +65,7 @@ double CallKernel(int core_type)
     return time;
 }
 
-int main()
+extern "C" int main()
 {
     // locality::plain::Rotate(type_names[core_type]); - ?
 

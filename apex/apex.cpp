@@ -186,7 +186,7 @@ void PlotStrideMatrix()
 	delete[] data;
 }
 */
-int main()
+extern "C" int main()
 {
 	PlotRandMatrix();
 

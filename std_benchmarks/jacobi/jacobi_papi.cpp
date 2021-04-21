@@ -37,7 +37,7 @@ locality::papi::Stop();
 	printf("check_sum: %lg\n", Check<base_type, vec_type>(x, N));
 }
 
-int main()
+extern "C" int main()
 {
 locality::papi::Init(locality::papi::Set1());
 	CallKernel();

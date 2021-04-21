@@ -31,11 +31,19 @@ void Init(VectCSRGraph &graph, int scale)
     EdgesListGraph el_graph;
     int vertices_count = pow(2.0, scale);
     int edges_count = 32*vertices_count;
-    GraphGenerationAPI::random_uniform(el_graph, vertices_count, edges_count, DIRECTED_GRAPH);
+    //GraphGenerationAPI::random_uniform(el_graph, vertices_count, edges_count, DIRECTED_GRAPH);
 
     // Warning! Graph vertices is reordered and renumbered here. You can use special VGL API functions to renumber vertices.
     graph.import(el_graph);
 }
+
+struct AlgorithmStats
+{
+    double wall_time;
+    double ops_done;
+    double sustained_bw;
+    double wall_perf;
+};
 
 AlgorithmStats Kernel(VectCSRGraph &graph, VerticesArray<int> &levels)
 {
@@ -43,10 +51,15 @@ AlgorithmStats Kernel(VectCSRGraph &graph, VerticesArray<int> &levels)
 
     performance_stats.reset_timers();
     BFS::nec_top_down(graph, levels, source_vertex);
-    //performance_stats.print_timers_stats();
-    //std::cout << "inner perf: " << performance_stats.get_avg_perf(graph.get_edges_count()) << std::endl;
+    performance_stats.update_timer_stats();
 
-    return performance_stats.get_latest_algorithm_performance_stats();
+    AlgorithmStats stats;
+    stats.wall_perf = performance_stats.get_avg_perf(graph.get_edges_count()) / 1e6;
+    stats.sustained_bw = performance_stats.get_sustained_bandwidth() / 1e9;
+    stats.ops_done = performance_stats.get_edges_rate() / 1e6;
+    stats.wall_time = performance_stats.get_inner_time();
+
+    return stats;
 }
 
 #endif

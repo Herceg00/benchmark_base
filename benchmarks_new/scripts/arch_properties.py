@@ -33,12 +33,19 @@ def get_threads_count():
 def get_arch():  # returns architecture, eigher kunpeng920 or intel_xeon
     architecture = "unknown"
     output = subprocess.check_output(["lscpu"])
+    arch_line = ""
+    vendor_line = ""
     for item in output.decode().split("\n"):
-        if "Architecture:" in item:
+        if "Architecture" in item:
             arch_line = item.strip()
-            arch_str = arch_line.split(":")[1]
-            if "aarch64" in arch_str:
-                architecture = "kunpeng920"
-            if "x86_64" in arch_str:
-                architecture = "intel_xeon"
+        if "Vendor" in item:
+            vendor_line = item.strip()
+
+    if "aarch64" in arch_line:
+        architecture = "kunpeng920"
+    if "x86_64" in arch_line:
+        if "Intel" in vendor_line:
+            architecture = "intel_xeon"
+        if "AMD" in vendor_line:
+            architecture = "amd"
     return architecture
