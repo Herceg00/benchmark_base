@@ -8,16 +8,18 @@ W_SIZE ?= 512
 # SIZE=...
 
 #####
-
-CXX=clang++
-#CXX=icpc
 #CC_FLAGS=-O3 -funroll-loops -ftree-vectorize -ffast-math -march=armv8.1-a #-march=skylake-avx512 -mavx512f -mavx512cd  #-fopt-info-vec-all
 #CC_FLAGS= -O3 -ftree-vectorize -funroll-loops -ffast-math -fopenmp #-mno-sse -mno-avx
-CC_FLAGS=-O3 -Ofast -qopenmp -ffreestanding -qopt-streaming-stores always -xCORE-AVX2 # icc
-CC_FLAGS=-Ofast -fopenmp  -ffreestanding -fnt-store -march=znver3   #clang AMD
+
+#CXX=g++
+#CXX=clang++
+#CXX=icpc
+CXX=$(COMPILER)
+
+#CC_FLAGS=-O3 -qopenmp -ffreestanding -qopt-streaming-stores always -xCORE-AVX2 # icc
+CC_FLAGS=-O3 -fopenmp  -ffreestanding -fnt-store -march=znver3   #clang AMD
+#CC_FLAGS=-O3 -fopenmp  -ffreestanding
 #CC_FLAGS=-O3
-
-
 
 ifdef DEBUG
 	CXXFLAGS := $(CC_FLAGS) -std=c++11 -w -Wall -Wextra -Wno-error=unused-parameter -Wno-error=unknown-pragmas -Wno-unknown-pragmas -Wno-misleading-indentation -I ../../external_libraries/VectorGraphLibrary/

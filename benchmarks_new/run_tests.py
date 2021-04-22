@@ -101,7 +101,7 @@ def run_tests_across_specific_parameter(bench_name, parameter_name, all_paramete
         if not next_parameter:
             bench_table_name = get_bench_table_name(bench_name, parameters_string)
 
-            run_timings(bench_name, bench_table_name, parameters_string.split(" "))
+            run_timings(bench_name, bench_table_name, parameters_string.split(" "), options)
             if options.profile:
                 run_profiling(bench_name, bench_table_name, parameters_string.split(" "))
         else:
@@ -179,6 +179,9 @@ if __name__ == "__main__":
     parser.add_option('-s', '--sockets',
                       action="store", dest="sockets",
                       help="set number of sockets used", default=1)
+    parser.add_option('-c', '--compiler',
+                      action="store", dest="compiler",
+                      help="specify compiler used", default="g++")
 
     options, args = parser.parse_args()
 

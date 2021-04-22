@@ -23,10 +23,10 @@ void InitSeq(AT *a, AT *b, AT *c, AT *x, AT_ind *ind, size_t size)
     #pragma omp parallel
     {
         unsigned int myseed = omp_get_thread_num();
-        #pragma omp for schedule(static)
+        #pragma omp for
         for (size_t i = 0; i < size; i++) {
             ind[i] = i;
-            a[i] = 0;
+            a[i] = rand_r(&myseed);
             b[i] = rand_r(&myseed);
             c[i] = rand_r(&myseed);
             x[i] = rand_r(&myseed);

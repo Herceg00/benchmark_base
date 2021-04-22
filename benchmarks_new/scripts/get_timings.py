@@ -16,10 +16,12 @@ def get_timing_from_file_line(line, timings):
     return timings
 
 
-def run_test_and_parse_timings(prog_name, prog_args):  # collect time, perf and BW values
+def run_test_and_parse_timings(prog_name, prog_args, options):  # collect time, perf and BW values
     result = {}
     prog_name_arg = ["--prog=" + prog_name]
-    profiling_args = ["--compiler=g++", "--no_run=false", "--metrics=false", "--output="+tmp_timings_file_name]
+    compiler_arg="--compiler="+options.compiler
+    print(compiler_arg)
+    profiling_args = [compiler_arg, "--no_run=false", "--metrics=false", "--output="+tmp_timings_file_name]
     all_args = prog_name_arg + profiling_args + prog_args
 
     subprocess.check_call(["bash"] + ['./make_omp.sh'] + all_args)
@@ -69,12 +71,12 @@ def timings_add_separator():
         output_file.write("\n")
 
 
-def run_timings(prog_name, test_name, prog_args):
+def run_timings(prog_name, test_name, prog_args, options):
     arch = get_arch()
     timings_file_name = "./output/" + arch + "_timings.csv"
     roofline_file_name = "./output/" + arch + "_roofline.csv"
 
-    timings = run_test_and_parse_timings(prog_name, prog_args)
+    timings = run_test_and_parse_timings(prog_name, prog_args, options)
 
     init_table(timings_file_name, timings)
     add_timings_to_file(timings_file_name, test_name, timings)

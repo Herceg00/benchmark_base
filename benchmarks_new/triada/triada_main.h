@@ -8,7 +8,7 @@
 
 #define TYPE TYPE_PREDEF
 
-typedef float base_type;
+typedef double base_type;
 typedef size_t index_type;
 
 #include "triada.h"
@@ -35,15 +35,15 @@ double CallKernel(int core_type)
 
     #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * USUAL_METRICS_REPEAT;
-    Init(core_type, a, b, c, x, ind, LENGTH);
     #else
     int iterations = LOC_REPEAT;
     #endif
 
+    Init(core_type, a, b, c, x, ind, LENGTH);
+
 	for(int i = 0; i < iterations; i++)
 	{
         #ifndef METRIC_RUN
-		Init(core_type, a, b, c, x, ind, LENGTH);
 		locality::utils::CacheAnnil(core_type);
         counter.start_timing();
         #endif
