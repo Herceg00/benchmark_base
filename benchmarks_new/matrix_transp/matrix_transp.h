@@ -77,10 +77,10 @@ void KernelBlockTranspIJ(AT *a, AT *b, size_t block_size, size_t size)
         {
             for (size_t j = jj; j < jj+block_size; j++)
             {
-                #pragma simd
                 for (size_t i = ii; i < ii+block_size; i++)
                 {
-                    b[j*size + i] = a[i*size + j]; // sequential writes (stores)
+                    if(i < size && j < size)
+                        b[j*size + i] = a[i*size + j]; // sequential writes (stores)
                 }
             }
         }
@@ -97,10 +97,10 @@ void KernelBlockTranspJI(AT *a, AT *b, size_t block_size, size_t size)
         {
             for (size_t j = jj; j < jj+block_size; j++)
             {
-                #pragma simd
                 for (size_t i = ii; i < ii+block_size; i++)
                 {
-                    b[j*size + i] = a[i*size + j]; // sequential reads (loads)
+                    if(i < size && j < size)
+                        b[j*size + i] = a[i*size + j]; // sequential reads (loads)
                 }
             }
         }

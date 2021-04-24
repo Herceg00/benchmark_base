@@ -3,7 +3,7 @@
 
 using std::string;
 
-#define CACHE_LINE_K 256 // CACHE_LINE_K should be bigger than size of cache string
+#define CACHE_LINE_K RADIUS // CACHE_LINE_K should be bigger than size of cache string
 
 const int CORE_TYPES = 10;
 

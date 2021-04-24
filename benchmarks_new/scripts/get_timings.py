@@ -20,7 +20,6 @@ def run_test_and_parse_timings(prog_name, prog_args, options):  # collect time, 
     result = {}
     prog_name_arg = ["--prog=" + prog_name]
     compiler_arg="--compiler="+options.compiler
-    print(compiler_arg)
     profiling_args = [compiler_arg, "--no_run=false", "--metrics=false", "--output="+tmp_timings_file_name]
     all_args = prog_name_arg + profiling_args + prog_args
 

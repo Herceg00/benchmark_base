@@ -9,10 +9,15 @@ from scripts.arch_properties import get_arch
 
 linear_length = 800000000
 
-all_tests_data = {"triada": {"length": linear_length,
-                             "mode": {"min": 0, "max": 9, "step": 1},
-                             },
-                  "stencil_1D": {"mode": {"min": 0, "max": 1, "step": 1},
+
+# all upper borders are inclusive
+all_tests_data = {#"triada": {"radius": 256,
+                              #"length": linear_length,
+                  #           "mode": {"min": 0, "max": 9, "step": 1}},
+                  "triada": {"length": linear_length,
+                             "mode": {"min": 7, "max": 8, "step": 1},
+                             "radius": {"min": 1, "max": 250000000, "step": "mult", "step_val": 2}},
+                  "stencil_1D": {"mode": {"min": 0, "max": 0, "step": 1},
                                  "length": linear_length,
                                  "radius": {"min": 1, "max": 24, "step": 1}},
                   "stencil_2D": {"mode": {"min": 0, "max": 1, "step": 1},
@@ -21,9 +26,12 @@ all_tests_data = {"triada": {"length": linear_length,
                   "stencil_3D": {"mode": {"min": 0, "max": 1, "step": 1},
                                  "radius": {"min": 3, "max": 3, "step": 1},
                                  "length": {"min": 64, "max": 1800, "step": "mult", "step_val": 1.2}},
-                  "matrix_transp": {"mode": {"min": 0, "max": 3, "step": 1},
+                  #"matrix_transp": {"mode": {"min": 0, "max": 3, "step": 1},
+                  #                  "length": {"min": 256, "max": 131072, "step": "mult", "step_val": 2}},
+                  "matrix_transp": {"mode": {"min": 2, "max": 3, "step": 1},
+                                    "radius": {"min": 4, "max": 32, "step": "mult", "step_val": 2},
                                     "length": {"min": 256, "max": 131072, "step": "mult", "step_val": 2}},
-                  "matrix_mul": {"mode": {"min": 0, "max": 6, "step": 1},
+                  "matrix_mul": {"mode": {"min": 0, "max": 5, "step": 1},
                                  "length": {"min": 256, "max": 2048, "step": "mult", "step_val": 2}},
                   "lc_kernel_arcavgxyz": {"mode": {"min": 0, "max": 1, "step": 1},
                                           "length": {"min": 64, "max": 512, "step": "mult", "step_val": 1.2}},
@@ -48,7 +56,10 @@ all_tests_data = {"triada": {"length": linear_length,
                   "n_body": {"mode": {"min": 0, "max": 1, "step": 1}, # non-vector mode
                              "length": {"min": 1024, "max": 32768, "step": "mult", "step_val": 2}},
                   "atomic_graphs": {"mode": {"min": 0, "max": 1, "step": 1},
-                                    "length": {"min": 12, "max": 18, "step": 1}}
+                                    "length": {"min": 12, "max": 18, "step": 1}},
+                  "strided_walks": {"length": linear_length,
+                                    "mode": {"min": 0, "max": 1, "step": 1},
+                                    "radius": {"min": 1, "max": 250000000, "step": "mult", "step_val": 2}}
                   }
 
 RA_RADIUS="2" # 2 KB

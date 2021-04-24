@@ -3,52 +3,49 @@
 
 #include "locality.h"
 #include "size.h"
+#include "omp.h"
 #include <chrono>
-#include "../../locutils_new/timers.h"
 
-#include "matrix_transp.h"
-
-#define BLOCK_SIZE RADIUS
+#define STRIDE RADIUS
 
 typedef double base_type;
 
+#include "strided_walks.h"
+#include "../../locutils_new/timers.h"
+
+
 double CallKernel(int core_type)
 {
-    base_type* a = new base_type[(size_t)LENGTH * (size_t)LENGTH];
-    base_type* b = new base_type[(size_t)LENGTH * (size_t)LENGTH];
-    std::cout << "array sizes: " << ((size_t)LENGTH * (size_t)LENGTH / 1e9) * sizeof(base_type)* 2 << std::endl;
+    base_type *a = new base_type[LENGTH];
+    base_type *b = new base_type[LENGTH];
 
 	double time = -1;
-
     #ifndef METRIC_RUN
-    size_t bytes_requested = 2.0 * (sizeof(base_type) * (size_t)LENGTH * (size_t)LENGTH);
-    size_t flops_requested = (size_t)LENGTH * (size_t)LENGTH;
+    size_t flops_requested = LENGTH * 2;
+    size_t bytes_requested = LENGTH * (2 * sizeof(base_type));
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
 
     #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * USUAL_METRICS_REPEAT;
-    Init(a, b, LENGTH);
     #else
     int iterations = LOC_REPEAT;
     #endif
 
+    Init(a, b, LENGTH);
+
 	for(int i = 0; i < iterations; i++)
 	{
         #ifndef METRIC_RUN
-		Init(a, b, LENGTH);
 		locality::utils::CacheAnnil(core_type);
-
         counter.start_timing();
         #endif
 
-		Kernel(core_type, a, b, BLOCK_SIZE, LENGTH);
+		Kernel(core_type, a, b, LENGTH);
 
         #ifndef METRIC_RUN
         counter.end_timing();
-
         counter.update_counters();
-
         counter.print_local_counters();
         #endif
 	}
@@ -56,16 +53,14 @@ double CallKernel(int core_type)
     #ifndef METRIC_RUN
     counter.print_average_counters(true);
     #endif
-
-	delete[]a;
-	delete[]b;
+	delete []a;
+	delete []b;
 
     return time;
 }
 
-extern "C" int main()
+extern "C" int main(int argc, char *argv[])
 {
     CallKernel((int)MODE);
     return 0;
 }
-
