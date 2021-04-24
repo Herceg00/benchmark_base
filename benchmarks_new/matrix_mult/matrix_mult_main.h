@@ -15,13 +15,12 @@ typedef base_type array_type[LENGTH][LENGTH];
 using namespace matrix_mult;
 
 
-double CallKernel(int core_type)
+void CallKernel(int core_type)
 {
 	static array_type a;
 	static array_type b;
 	static array_type c;
 
-	double time = -1;
 #ifndef METRIC_RUN
     double bw_for_stat[6] = {(double)LENGTH * (double)LENGTH* (double)LENGTH * 2  + 2 * (double)LENGTH * (double)LENGTH,
                              (double)LENGTH * (double)LENGTH* (double)LENGTH * 3  + 1 * (double)LENGTH * (double)LENGTH,
@@ -62,13 +61,11 @@ double CallKernel(int core_type)
 #ifndef METRIC_RUN
     counter.print_average_counters(true);
 #endif
-    return time;
 }
 
 extern "C" int main()
 {
-    // locality::plain::Rotate(type_names[core_type]); - ?
-
     CallKernel((int)MODE);
+    return 0;
 }
 

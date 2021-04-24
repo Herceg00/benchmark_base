@@ -20,14 +20,13 @@ typedef base_type matrix_type[LENGTH][LENGTH];
 #include "../../locutils_new/timers.h"
 
 
-double CallKernel()
+void CallKernel()
 {
 	static matrix_type matrix;
 	static vec_type b;
 	static vec_type x;
 	static indx_type indx;
 
-	double time = -1;
 #ifndef METRIC_RUN
     double bytes_requested = 3 * (double)LENGTH * (double)LENGTH * (double)LENGTH * sizeof(double)/4  + 8 * sizeof(double)*(double)LENGTH*(double)LENGTH + 17 * sizeof(double)*(double)LENGTH ;
     double flops_requested = (double)LENGTH*(double)LENGTH*(double)LENGTH/2 + (double)LENGTH*(double)LENGTH * 3.5 + 2 *(double)LENGTH;
@@ -61,11 +60,10 @@ double CallKernel()
 #ifndef METRIC_RUN
     counter.print_average_counters(true);
 #endif
-
-    return time;
 }
 
 extern "C" int main()
 {
     CallKernel();
+    return 0;
 }

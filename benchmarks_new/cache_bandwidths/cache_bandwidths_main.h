@@ -11,13 +11,12 @@ typedef double base_type;
 #include "cache_bandwidths.h"
 #include "../../locutils_new/timers.h"
 
-double CallKernel()
+void CallKernel()
 {
     int threads_count = omp_get_max_threads();
     cout << threads_count << endl;
     base_type *caches_data = new base_type[LENGTH*threads_count];
 
-	double time = -1;
     #ifndef METRIC_RUN
     size_t flops_requested = (size_t)LENGTH * STEPS_COUNT;
     size_t bytes_requested = (size_t)LENGTH * STEPS_COUNT * sizeof(base_type);
@@ -54,11 +53,10 @@ double CallKernel()
     #endif
 
     delete []caches_data;
-
-    return time;
 }
 
 extern "C" int main()
 {
     CallKernel();
+    return 0;
 }

@@ -14,9 +14,8 @@ typedef float base_type;
 #include "lc_kernel_generic.h"
 #include "../../locutils_new/timers.h"
 
-double CallKernel(int mode)
+void CallKernel(int mode)
 {
-	double time = -1;
     cusizevector plsize, tick, half_plsize;
     plsize.x = (int)LENGTH;
     plsize.y = (int)LENGTH;
@@ -81,11 +80,10 @@ double CallKernel(int mode)
     delete []out_data_linear;
     delete []in_data_coord;
     delete []out_data_coord;
-
-	return time;
 }
 
 extern "C" int main()
 {
     CallKernel((int)MODE);
+    return 0;
 }

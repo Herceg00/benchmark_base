@@ -13,12 +13,10 @@ typedef double base_type;
 #include "stencil_3D.h"
 #include "../../locutils_new/timers.h"
 
-double CallKernel(int mode)
+void CallKernel(int mode)
 {
     base_type *a = new base_type[(size_t)LENGTH * (size_t)LENGTH * (size_t)LENGTH];
     base_type *b = new base_type[(size_t)LENGTH * (size_t)LENGTH * (size_t)LENGTH];
-
-	double time = -1;
 
     #ifndef METRIC_RUN
     size_t bytes_requested = 0;
@@ -70,7 +68,6 @@ double CallKernel(int mode)
     #ifndef METRIC_RUN
 	counter.print_average_counters(true);
     #endif
-	return time;
 
 	delete []a;
 	delete []b;
@@ -79,4 +76,5 @@ double CallKernel(int mode)
 extern "C" int main()
 {
     CallKernel((int)MODE);
+    return 0;
 }

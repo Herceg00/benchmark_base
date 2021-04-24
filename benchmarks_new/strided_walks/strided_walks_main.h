@@ -13,13 +13,11 @@ typedef double base_type;
 #include "strided_walks.h"
 #include "../../locutils_new/timers.h"
 
-
-double CallKernel(int core_type)
+void CallKernel(int core_type)
 {
     base_type *a = new base_type[LENGTH];
     base_type *b = new base_type[LENGTH];
 
-	double time = -1;
     #ifndef METRIC_RUN
     size_t flops_requested = LENGTH * 2;
     size_t bytes_requested = LENGTH * (2 * sizeof(base_type));
@@ -55,8 +53,6 @@ double CallKernel(int core_type)
     #endif
 	delete []a;
 	delete []b;
-
-    return time;
 }
 
 extern "C" int main(int argc, char *argv[])

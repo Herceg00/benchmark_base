@@ -12,13 +12,11 @@
 
 typedef double base_type;
 
-double CallKernel(int core_type)
+void CallKernel(int core_type)
 {
     base_type* a = new base_type[(size_t)LENGTH * (size_t)LENGTH];
     base_type* b = new base_type[(size_t)LENGTH * (size_t)LENGTH];
     std::cout << "array sizes: " << ((size_t)LENGTH * (size_t)LENGTH / 1e9) * sizeof(base_type)* 2 << std::endl;
-
-	double time = -1;
 
     #ifndef METRIC_RUN
     size_t bytes_requested = 2.0 * (sizeof(base_type) * (size_t)LENGTH * (size_t)LENGTH);
@@ -59,8 +57,6 @@ double CallKernel(int core_type)
 
 	delete[]a;
 	delete[]b;
-
-    return time;
 }
 
 extern "C" int main()

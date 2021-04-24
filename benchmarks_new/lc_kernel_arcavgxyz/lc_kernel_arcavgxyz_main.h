@@ -13,10 +13,8 @@ typedef float base_type;
 
 #include "lc_kernel_arcavgxyz.h"
 #include "../../locutils_new/timers.h"
-
-double CallKernel(int mode)
+void CallKernel(int mode)
 {
-	double time = -1;
     cusizevector plsize, tick, half_plsize;
     plsize.x = (int)LENGTH;
     plsize.y = (int)LENGTH;
@@ -66,10 +64,10 @@ double CallKernel(int mode)
     #ifndef METRIC_RUN
 	counter.print_average_counters(true);
     #endif
-	return time;
 }
 
 extern "C" int main()
 {
     CallKernel((int)MODE);
+    return 0;
 }

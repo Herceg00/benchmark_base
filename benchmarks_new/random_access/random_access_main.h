@@ -15,13 +15,11 @@ typedef int index_type;
 #include "random_access.h"
 #include "../../locutils_new/timers.h"
 
-double CallKernel(int mode)
+void CallKernel(int mode)
 {
     base_type *a = new base_type[LENGTH];
     index_type *index = new index_type[LENGTH];
     base_type *data = new base_type[RADIUS_IN_ELEMENTS];
-
-	double time = -1;
 
     #ifndef METRIC_RUN
     size_t bytes_requested = ((size_t)LENGTH) * (2 * sizeof(base_type) + sizeof(index_type));
@@ -60,11 +58,10 @@ double CallKernel(int mode)
     delete []a;
     delete []index;
     delete []data;
-
-	return time;
 }
 
 extern "C" int main()
 {
     CallKernel((int)MODE);
+    return 0;
 }

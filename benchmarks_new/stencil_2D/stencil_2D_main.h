@@ -13,25 +13,23 @@ typedef double base_type;
 #include "stencil_2D.h"
 #include "../../locutils_new/timers.h"
 
-double CallKernel(int mode)
+void CallKernel(int mode)
 {
     base_type *a = new base_type[(size_t)LENGTH * (size_t)LENGTH];
     base_type *b = new base_type[(size_t)LENGTH * (size_t)LENGTH];
-    std::cout << "array sizes: " << ((size_t)LENGTH * (size_t)LENGTH / 1e9) * sizeof(base_type)* 2 << std::endl;
-
-	double time = -1;
+    std::cout << "array sizes: " << ((size_t)LENGTH * (size_t)LENGTH / 1e9) * sizeof(base_type)* 2 << " GB" << std::endl;
 
     #ifndef METRIC_RUN
     size_t bytes_requested = 0;
     size_t flops_requested = 0;
-    if(mode == 0) // rectangle
+    if(mode == 0 || mode == 2) // rectangle
     {
         size_t bytes_per_element = (2*RADIUS + 1)*(2*RADIUS + 1)*sizeof(base_type); // no *2 since only 1 array in inner loop
         size_t flops_per_element = (2*RADIUS + 1)*(2*RADIUS + 1);
         bytes_requested = bytes_per_element * LENGTH* LENGTH;
         flops_requested = flops_per_element * LENGTH* LENGTH;
     }
-    else if(mode == 1) // cross
+    else if(mode == 1 || mode == 3) // cross
     {
         size_t bytes_per_element = (2*RADIUS + 2*RADIUS + 1)*sizeof(base_type); // no *2 since only 1 array in inner loop
         size_t flops_per_element = (2*RADIUS + 2*RADIUS);
@@ -74,11 +72,10 @@ double CallKernel(int mode)
 
 	delete []a;
 	delete []b;
-
-    return time;
 }
 
 extern "C" int main()
 {
     CallKernel((int)MODE);
+    return 0;
 }

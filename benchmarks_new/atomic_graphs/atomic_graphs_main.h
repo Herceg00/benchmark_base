@@ -15,12 +15,10 @@
 #include "../../locutils_new/timers.h"
 
 
-double CallKernel(int mode)
+void CallKernel(int mode)
 {
     // Declare graph in optimized Vect CSR representation
     EdgesListGraph el_graph;
-
-    double time = -1;
 
     #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * GRAPH_METRICS_REPEAT;
@@ -60,11 +58,10 @@ double CallKernel(int mode)
 
     delete[]in_stats;
     delete[]out_stats;
-
-    return time;
 }
 
 extern "C" int main()
 {
     CallKernel((int)MODE);
+    return 0;
 }

@@ -12,12 +12,10 @@ typedef double base_type;
 #include "stencil_1D.h"
 #include "../../locutils_new/timers.h"
 
-double CallKernel(int mode)
+void CallKernel(int mode)
 {
     base_type *a = new base_type[LENGTH];
     base_type *b = new base_type[LENGTH];
-
-	double time = -1;
 
     #ifndef METRIC_RUN
     size_t bytes_requested = (size_t)LENGTH * sizeof(base_type) * (2*RADIUS + 1); // no *2 since only 1 array in inner loop
@@ -58,11 +56,10 @@ double CallKernel(int mode)
 
 	delete []a;
 	delete []b;
-
-    return time;
 }
 
 extern "C" int main()
 {
     CallKernel((int)MODE);
+    return 0;
 }

@@ -20,13 +20,10 @@ typedef int* weight_type;
 #include "bellman_ford.h"
 #include "../../locutils_new/timers.h"
 
-
-double CallKernel(int core_type)
+void CallKernel(int core_type)
 {
     // Declare graph in optimized Vect CSR representation
     VectCSRGraph graph;
-
-    double time = -1;
 
     #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * GRAPH_METRICS_REPEAT;
@@ -59,11 +56,10 @@ double CallKernel(int core_type)
     #ifndef METRIC_RUN
     counter.print_average_counters(true);
     #endif
-
-    return time;
 }
 
 extern "C" int main()
 {
     CallKernel((int)MODE);
+    return 0;
 }

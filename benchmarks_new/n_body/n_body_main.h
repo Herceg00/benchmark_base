@@ -12,7 +12,7 @@ typedef float base_type;
 
 #include "../../locutils_new/timers.h"
 
-double CallKernel(int mode)
+void CallKernel(int mode)
 {
     const int nTimeSteps = 5;
     const double Mass = 1e12;
@@ -21,7 +21,6 @@ double CallKernel(int mode)
 
     Problem problem(Mass, dt, numParticles);
 
-	double time = -1;
     #ifndef METRIC_RUN
     double bytes_requested = (size_t) numParticles * (size_t) numParticles * 3 * sizeof(double) * nTimeSteps;
     double flops_requested = (size_t) numParticles * (size_t) numParticles * 20 * nTimeSteps;
@@ -52,11 +51,10 @@ double CallKernel(int mode)
     #ifndef METRIC_RUN
     counter.print_average_counters(true);
     #endif
-
-    return time;
 }
 
 extern "C" int main()
 {
 	CallKernel((int)MODE);
+	return 0;
 }

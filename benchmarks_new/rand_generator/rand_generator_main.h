@@ -13,11 +13,10 @@ typedef double base_type;
 
 #include "../../locutils_new/timers.h"
 
-double CallKernel(int mode)
+void CallKernel(int mode)
 {
     base_type *data = new base_type[LENGTH];
 
-	double time = -1;
     #ifndef METRIC_RUN
     double bytes_requested = (size_t) LENGTH * sizeof(double);
     double flops_requested = (size_t) LENGTH;
@@ -52,11 +51,10 @@ double CallKernel(int mode)
     #endif
 
 	delete []data;
-
-    return time;
 }
 
 extern "C" int main()
 {
 	CallKernel((int)MODE);
+	return 0;
 }

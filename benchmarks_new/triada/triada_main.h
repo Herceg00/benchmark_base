@@ -15,7 +15,7 @@ typedef size_t index_type;
 #include "../../locutils_new/timers.h"
 
 
-double CallKernel(int core_type)
+void CallKernel(int core_type)
 {
     base_type *a = new base_type[LENGTH];
     base_type *b = new base_type[LENGTH];
@@ -25,7 +25,6 @@ double CallKernel(int core_type)
 
     base_type scalar = rand() % 100;
 
-	double time = -1;
     #ifndef METRIC_RUN
     int triad_step_size[CORE_TYPES] = {/*stream*/2,2,3,3,/*old*/3,3,3,3,3,3};
     size_t flops_requested = LENGTH * 2;
@@ -65,8 +64,6 @@ double CallKernel(int core_type)
 	delete []c;
 	delete []x;
 	delete []ind;
-
-    return time;
 }
 
 extern "C" int main(int argc, char *argv[])
