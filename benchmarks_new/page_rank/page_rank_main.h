@@ -26,7 +26,7 @@ void CallKernel(int mode)
     #else
     int iterations = LOC_REPEAT;
     #endif
-    Init(graph, LENGTH);
+    Init(mode, graph, LENGTH);
     VerticesArray<float> page_ranks(graph);
 
     #ifndef METRIC_RUN
@@ -39,10 +39,16 @@ void CallKernel(int mode)
 		locality::utils::CacheAnnil();
         #endif
 
-        AlgorithmStats stats = Kernel(mode, graph, page_ranks);
+        performance_stats.reset_timers();
+        Kernel(graph, page_ranks);
+        performance_stats.update_timer_stats();
+
+        double perf = performance_stats.get_avg_perf(graph.get_edges_count());
+        double bw = performance_stats.get_sustained_bandwidth();
+        double time = performance_stats.get_inner_time();
 
         #ifndef METRIC_RUN
-        counter.force_update_counters(stats.wall_time, stats.band_per_iteration, stats.wall_perf);
+        counter.force_update_counters(time, bw, perf);
         counter.print_local_counters();
         #endif
 	}

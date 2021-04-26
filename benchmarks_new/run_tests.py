@@ -11,12 +11,9 @@ linear_length = 800000000
 
 
 # all upper borders are inclusive
-all_tests_data = {#"triada": {"radius": 256,
-                              #"length": linear_length,
-                  #           "mode": {"min": 0, "max": 9, "step": 1}},
-                  "triada": {"length": linear_length,
-                             "mode": {"min": 7, "max": 8, "step": 1},
-                             "radius": {"min": 1, "max": 250000000, "step": "mult", "step_val": 2}},
+all_tests_data = {"triada": {"radius": 256,
+                             "length": linear_length,
+                             "mode": {"min": 0, "max": 9, "step": 1}},
                   "stencil_1D": {"mode": {"min": 0, "max": 0, "step": 1},
                                  "length": linear_length,
                                  "radius": {"min": 1, "max": 24, "step": 1}},
@@ -146,7 +143,7 @@ def run_single_benchmark(bench_name, options):
 
     bench_table_name = get_bench_table_name(bench_name, parameters_string)
 
-    run_timings(bench_name, bench_table_name, parameters_string.split(" "))
+    run_timings(bench_name, bench_table_name, parameters_string.split(" "), options)
     if options.profile:
         run_profiling(bench_name, bench_table_name, parameters_string.split(" "))
 

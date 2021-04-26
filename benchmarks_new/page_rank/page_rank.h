@@ -26,37 +26,25 @@
 // -----------------------------------------------------------------------------------------------
 
 
-void Init(VectCSRGraph &graph, int scale)
+void Init(int core_type, VectCSRGraph &graph, int scale)
 {
     EdgesListGraph el_graph;
     int vertices_count = pow(2.0, scale);
     int edges_count = 32*vertices_count;
-    GraphGenerationAPI::random_uniform(el_graph, vertices_count, edges_count, DIRECTED_GRAPH);
+
+    if(core_type == 0)
+        GraphGenerationAPI::random_uniform(el_graph, vertices_count, edges_count, DIRECTED_GRAPH);
+    else if( core_type == 1)
+        GraphGenerationAPI::R_MAT(el_graph, vertices_count, edges_count, 57, 19, 19, 5, DIRECTED_GRAPH);
 
     // Warning! Graph vertices is reordered and renumbered here. You can use special VGL API functions to renumber vertices.
     graph.import(el_graph);
 }
 
-AlgorithmStats Kernel(int core_type, VectCSRGraph &graph, VerticesArray<float> &page_ranks)
+void Kernel(VectCSRGraph &graph, VerticesArray<float> &page_ranks)
 {
     float convergence_factor = 1.0e-4;
-
-    performance_stats.reset_timers();
-    switch(core_type)
-    {
-        case 0:
-            PageRank::nec_page_rank(graph, page_ranks, convergence_factor, PUSH_TRAVERSAL);
-            break;
-
-        case 1:
-            PageRank::nec_page_rank(graph, page_ranks, convergence_factor, PULL_TRAVERSAL);
-            break;
-
-        default: fprintf(stderr, "unexpected core type in page_rank");
-    }
-    //performance_stats.print_timers_stats();
-
-    return performance_stats.get_latest_algorithm_performance_stats();
+    PageRank::nec_page_rank(graph, page_ranks, convergence_factor);
 }
 
 #endif
