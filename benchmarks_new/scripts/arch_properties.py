@@ -30,7 +30,7 @@ def get_threads_count():
     return get_sockets_count()*get_cores_count()
 
 
-def get_arch():  # returns architecture, eigher kunpeng920 or intel_xeon
+def get_arch():  # returns architecture, eigher kunpeng or intel_xeon
     architecture = "unknown"
     output = subprocess.check_output(["lscpu"])
     arch_line = ""
@@ -42,10 +42,10 @@ def get_arch():  # returns architecture, eigher kunpeng920 or intel_xeon
             vendor_line = item.strip()
 
     if "aarch64" in arch_line:
-        architecture = "kunpeng920"
+        architecture = "kunpeng"
     if "x86_64" in arch_line:
         if "Intel" in vendor_line:
             architecture = "intel_xeon"
         if "AMD" in vendor_line:
-            architecture = "amd"
+            architecture = "amd_epyc"
     return architecture

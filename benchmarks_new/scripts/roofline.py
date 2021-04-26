@@ -11,10 +11,20 @@ tmp_data_prefix = "prof_data/"
 last_band = "L1"
 last_perf = "float_vector_FMA"
 
-kunpeng920_characteristics = {"bandwidths": {"DRAM": 130, "L3": 1060, "L2": 1800, "L1": 2200},
+kunpeng_characteristics = {"bandwidths": {"DRAM": 187, "L3": 1060, "L2": 1800, "L1": 2200},
                                          "peak_performances": {"float_no_vector_noFMA": 124,
                                                                "float_vector_noFMA": 499,
                                                                "float_vector_FMA": 1996}}  # GFLOP/s
+
+intel_xeon_characteristics = {"bandwidths": {"DRAM": 127, "L3": 1, "L2": 1, "L1": 1},
+                              "peak_performances": {"float_no_vector_noFMA": 1,
+                                                 "float_vector_noFMA": 1,
+                                                 "float_vector_FMA": 1}}  # GFLOP/s
+
+amd_epyc_characteristics = {"bandwidths": {"DRAM": 204, "L3": 1, "L2": 1, "L1": 1},
+                            "peak_performances": {"float_no_vector_noFMA": 1,
+                                                    "float_vector_noFMA": 1,
+                                                    "float_vector_FMA": 1}}  # GFLOP/s
 
 x_data_first = 1.0 / 256.0
 x_data_last = 1024
@@ -169,7 +179,7 @@ def generate_roofline_from_profiling_data(file_name, roofline_name):
     for line in profiling_file:
         line_pos += 1
         if line_pos == 1:
-            platform_characteristics = kunpeng920_characteristics
+            platform_characteristics = kunpeng_characteristics
             continue
         if line.startswith("#") or line.startswith("//"):
             continue

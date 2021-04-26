@@ -7,12 +7,23 @@ import copy
 import os
 from .arch_properties import get_arch
 from .files import *
+from .roofline import kunpeng_characteristics,intel_xeon_characteristics,amd_epyc_characteristics
 
 
 def get_timing_from_file_line(line, timings):
     for key, val in timings.items():
         if key in line:
             timings[key] = float(line.split(" ")[1])
+    arch_name = get_arch()
+    dram_bandwidth = 1
+    if arch_name == "kunpeng":
+        dram_bandwidth = kunpeng_characteristics["bandwidths"]["DRAM"]
+    if arch_name == "intel_xeon":
+        dram_bandwidth = intel_xeon_characteristics["bandwidths"]["DRAM"]
+    if arch_name == "amd_epyc":
+        dram_bandwidth = amd_epyc_characteristics["bandwidths"]["DRAM"]
+
+    timings["mem_efficiency"] = 100.0 * timings["avg_bw"]/dram_bandwidth
     return timings
 
 
@@ -27,7 +38,7 @@ def run_test_and_parse_timings(prog_name, prog_args, options):  # collect time, 
     a_file = open("./"+prog_name+"/"+tmp_timings_file_name)
 
     lines = a_file.readlines()
-    timings = {"avg_time": 0, "avg_bw": 0, "avg_flops": 0, "flops_per_byte": 0}
+    timings = {"avg_time": 0, "avg_bw": 0, "avg_flops": 0, "flops_per_byte": 0, "mem_efficiency": 0}
     for line in lines:
         timings = get_timing_from_file_line(line, timings)
     return timings

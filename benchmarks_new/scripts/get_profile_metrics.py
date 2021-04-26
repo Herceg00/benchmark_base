@@ -7,7 +7,7 @@ import copy
 import os
 from .arch_properties import get_arch
 from .files import *
-from .roofline import kunpeng920_characteristics
+from .roofline import kunpeng_characteristics
 
 
 def code(event_code):
@@ -32,7 +32,7 @@ def code(event_code):
 
 
 def get_no_conflict_events_list(architecture):
-    if architecture == "kunpeng920":
+    if architecture == "kunpeng":
         events = ["r7004", # MEM_STALL_ANY_LOAD
                   "r7005", # MEM_STALL_ANY_STORE
                   "r7001", # exec_stall_cycle
@@ -57,7 +57,7 @@ def get_no_conflict_events_list(architecture):
 
 
 def get_conflicted_events_list(architecture):
-    if architecture == "kunpeng920":
+    if architecture == "kunpeng":
         events = ["r2014", #"fetch_bubble"
                   "CPU_CYCLES",
                   "INST_SPEC",
@@ -109,7 +109,7 @@ def collect_list_of_events(prog_name, prog_args, event_list): # can collect grou
 def analyse_events(architecture, hardware_events):
     all = copy.deepcopy(hardware_events)
 
-    if architecture == "kunpeng920":
+    if architecture == "kunpeng":
         all["Frontend_Bound"] = 100.0* (all[code("fetch_bubble")]/(4.0 * all["CPU_CYCLES"]))
         all["Bad_Speculation"] = 100.0* ((all["INST_SPEC"] - all["INST_RETIRED"])/(4.0 * all["CPU_CYCLES"]))
         all["Retiring"] = 100.0* (all["INST_RETIRED"] / (4.0 * all["CPU_CYCLES"]))
@@ -125,16 +125,16 @@ def analyse_events(architecture, hardware_events):
         all["Remote_accesses"] = 100.0* (all[code("REMOTE_ACCESS")]/(all[code("MEM_ACCESS_LD")] + all[code("MEM_ACCESS_ST")]))
 
         all["L1_SBW"] = all[code("L1D_CACHE")] * 16 / (all["duration_time"])
-        all["L1_SBW_percent"] = 100.0 * all["L1_SBW"] / kunpeng920_characteristics["bandwidths"]["L1"]
+        all["L1_SBW_percent"] = 100.0 * all["L1_SBW"] / kunpeng_characteristics["bandwidths"]["L1"]
 
         all["L2_SBW"] = all[code("L2D_CACHE")] * 64 / (all["duration_time"])
-        all["L2_SBW_percent"] = 100.0 * all["L2_SBW"] / kunpeng920_characteristics["bandwidths"]["L2"]
+        all["L2_SBW_percent"] = 100.0 * all["L2_SBW"] / kunpeng_characteristics["bandwidths"]["L2"]
 
         all["L3_SBW"] = all[code("rd_spipe")] * 64 / (all["duration_time"])
-        all["L3_SBW_percent"] = 100.0 * all["L3_SBW"] * 64 / kunpeng920_characteristics["bandwidths"]["L3"]
+        all["L3_SBW_percent"] = 100.0 * all["L3_SBW"] * 64 / kunpeng_characteristics["bandwidths"]["L3"]
 
         all["DRAM_SBW"] = (all[code("flux_rd")] + all[code("flux_wr")]) * 32 / (all["duration_time"])
-        all["DRAM_SBW_percent"] = 100.0 * all["DRAM_SBW"] / kunpeng920_characteristics["bandwidths"]["DRAM"]
+        all["DRAM_SBW_percent"] = 100.0 * all["DRAM_SBW"] / kunpeng_characteristics["bandwidths"]["DRAM"]
 
     if architecture == "intel_xeon":
         all["LLC_hit_rate"] = 1.0 - (all["LLC-store-misses"] + all["LLC-load-misses"])/(all["LLC-stores"] + all["LLC-loads"])
