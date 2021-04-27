@@ -106,6 +106,33 @@ inline void tuned_Triad(AT scalar, AT *a, AT *b, AT *c, size_t size)
         c[j] = a[j]+scalar*b[j];
 }
 
+template<typename AT, typename AT_ind>
+inline void tuned_gather(AT *a, AT *b, AT_ind *ind, size_t size)
+{
+    ssize_t j;
+    #pragma omp parallel for
+    for (j=0; j<size; j++)
+        b[j] = a[ind[j]];
+}
+
+template<typename AT, typename AT_ind>
+inline void tuned_scatter(AT *a, AT *b, AT_ind *ind, size_t size)
+{
+    ssize_t j;
+    #pragma omp parallel for
+    for (j=0; j<size; j++)
+        b[ind[j]] = a[j];
+}
+
+template<typename AT, typename AT_ind>
+inline void tuned_scatter_gather(AT *a, AT *b, AT_ind *ind, size_t size)
+{
+    ssize_t j;
+    #pragma omp parallel for
+    for (j=0; j<size; j++)
+        b[ind[j]] = a[ind[j]];
+}
+
 
 template<typename AT, typename AT_ind>
 void Kernel(int core_type, AT *a, AT *b, AT *c, AT *x, AT_ind *ind, size_t size, AT scalar)
@@ -126,28 +153,22 @@ void Kernel(int core_type, AT *a, AT *b, AT *c, AT *x, AT_ind *ind, size_t size,
             tuned_Triad(scalar, a, b, c, size);
             break;
 		case  4:
-            #pragma omp parallel for schedule(static)
-			CALL_AND_PROFILE(size_t index = ind[i], a[i], b[index], sc_x    , sc_c)
+            tuned_gather(a, b, ind, size);
 		    break;
         case  5:
-            #pragma omp parallel for schedule(static)
-            CALL_AND_PROFILE(size_t index = ind[i], a[index], b[i], sc_x    , sc_c)
+            tuned_scatter(a, b, ind, size);
             break;
         case  6:
-            #pragma omp parallel for schedule(static)
-            CALL_AND_PROFILE(size_t index = ind[i], a[index], b[index], sc_x    , sc_c)
+            tuned_scatter_gather(a, b, ind, size);
             break;
         case  7:
-            #pragma omp parallel for schedule(static)
-            CALL_AND_PROFILE(size_t index = ind[i], a[i], b[index], sc_x    , sc_c)
+            tuned_gather(a, b, ind, size);
             break;
         case  8:
-            #pragma omp parallel for schedule(static)
-            CALL_AND_PROFILE(size_t index = ind[i], a[index], b[i], sc_x    , sc_c)
+            tuned_scatter(a, b, ind, size);
             break;
         case  9:
-            #pragma omp parallel for schedule(static)
-            CALL_AND_PROFILE(size_t index = ind[i], a[index], b[index], sc_x    , sc_c)
+            tuned_scatter_gather(a, b, ind, size);
             break;
 
 		default: fprintf(stderr, "Wrong core type of triad!\n");

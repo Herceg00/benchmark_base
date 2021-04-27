@@ -26,15 +26,19 @@ void Init(AT *a, AT *b, size_t size)
 template<typename AT>
 void Kernel_base(AT *a, const AT *b, size_t size)
 {
+    #pragma ivdep
+    #pragma simd
     #pragma omp parallel for schedule(static)
     for(size_t i = RADIUS; i < size - RADIUS; i++)
     {
         AT local_sum = 0;
+
         #pragma unroll(2*RADIUS+1)
-        for (size_t j = i - RADIUS; j < i + RADIUS + 1; j++)
+        for (int j = -RADIUS; j <= RADIUS; j++)
         {
-            local_sum += b[j];
+            local_sum += b[i + j];
         }
+
         a[i] = local_sum;
     }
 }
@@ -42,15 +46,19 @@ void Kernel_base(AT *a, const AT *b, size_t size)
 template<typename AT>
 void Kernel_restrict(AT * __restrict__ a, const AT * __restrict__ b, size_t size)
 {
+    #pragma ivdep
+    #pragma simd
     #pragma omp parallel for schedule(static)
     for(size_t i = RADIUS; i < size - RADIUS; i++)
     {
         AT local_sum = 0;
+
         #pragma unroll(2*RADIUS+1)
-        for (size_t j = i - RADIUS; j < i + RADIUS + 1; j++)
+        for (int j = -RADIUS; j <= RADIUS; j++)
         {
-            local_sum += b[j];
+            local_sum += b[i + j];
         }
+
         a[i] = local_sum;
     }
 }

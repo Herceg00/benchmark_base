@@ -18,11 +18,11 @@ ifeq ($(COMPILER),clang++)
 endif
 
 ifeq ($(COMPILER),g++)
-    CC_FLAGS=-O3 -fopenmp  -ffreestanding   #gcc kunpeng
+    CC_FLAGS=-O3 -fopenmp  -ffreestanding -fopt-info-vec-all=report.lst -ffast-math #gcc kunpeng
 endif
 
 ifeq ($(COMPILER),icpc)
-    CC_FLAGS=-O3 -qopenmp -ffreestanding -qopt-streaming-stores always -xCORE-AVX2 # icc
+    CC_FLAGS=-O3 -D NOFUNCCALL -qopt-report=1 -qopt-report-phase=vec -qopenmp -ffreestanding -qopt-streaming-stores always -xCOMMON-AVX512 # icc
 endif
 
 ifdef DEBUG
@@ -56,6 +56,7 @@ all : $(TGT)
 
 $(TGT_OMP_NP): $(LOC_NP).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
 	mkdir bin
+	g++ --version
 	$(CMD) -DLOC_REPEAT=$(REPEAT) -D$(METR)=0 -DRADIUS=$(ELEMS) -DLENGTH=$(LENGTH) -DMODE=$(MODE) $< -fopenmp -o $@  $(ADD_SRC)
 
 COMMAND := cleo-submit -np 1 -stderr err -as single

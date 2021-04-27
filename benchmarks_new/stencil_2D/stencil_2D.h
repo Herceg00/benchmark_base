@@ -26,56 +26,56 @@ void Init(AT *a, AT *b, size_t size)
 }
 
 template<typename AT>
-void Kernel_rectangle(AT *a, AT *b, size_t size)
+void Kernel_rectangle(AT * __restrict__ a, const AT * __restrict__ b, const size_t size)
 {
     #pragma omp parallel for schedule(static)
-    for(size_t y = RADIUS; y < size - RADIUS; y++)
+    for(int y = RADIUS; y < size - RADIUS; y++)
     {
-        for(size_t x = RADIUS; x < size - RADIUS; x++)
+        #pragma simd
+        #pragma ivdep
+        #pragma vector
+        for(int x = RADIUS; x < size - RADIUS; x++)
         {
             AT local_sum = 0;
 
             #pragma unroll(2*RADIUS+1)
-            for (size_t y_s = y - RADIUS; y_s <= y + RADIUS; y_s++)
+            for (int y_s = -RADIUS; y_s <= RADIUS; y_s++)
                 #pragma unroll(2*RADIUS+1)
-                for (size_t x_s = x - RADIUS; x_s <= x + RADIUS; x_s++)
-                    local_sum += b[y_s * size + x_s];
+                for (int x_s = -RADIUS; x_s <= RADIUS; x_s++)
+                    local_sum += b[(y + y_s) * LENGTH + (x + x_s)];
 
-            a[y * size + x] = local_sum;
+            a[y * LENGTH + x] = local_sum;
         }
     }
 }
 
 template<typename AT>
-void Kernel_rectangle_blocked(AT * __restrict__ a, AT * __restrict__ b, size_t size)
+void Kernel_rectangle_blocked(AT * __restrict__ a, const AT * __restrict__ b, size_t size)
 {
+    AT * __restrict__ a_local = a;
+    const AT * __restrict__ b_local = b;
+
     #pragma omp parallel for schedule(static)
-    for(size_t y_st = RADIUS; y_st < size - RADIUS; y_st += BLOCK_SIZE)
+    for(size_t y = RADIUS; y < LENGTH - RADIUS; y++)
     {
-        for(size_t x_st = RADIUS; x_st < size - RADIUS; x_st += BLOCK_SIZE)
+        #pragma simd
+        #pragma ivdep
+        #pragma vector
+        for(size_t x = RADIUS; x < LENGTH - RADIUS; x++)
         {
-            for(size_t yy = 0; yy < BLOCK_SIZE; yy++)
-            {
-                for(size_t xx = 0; xx < BLOCK_SIZE; xx++)
-                {
-                    size_t x = x_st + xx;
-                    size_t y = y_st + yy;
+            AT local_sum = 0;
 
-                    if((x < (size - RADIUS)) && y < ((size - RADIUS)))
-                    {
-                        AT local_sum = 0;
+            local_sum += b_local[(y -1) * LENGTH + (x - 1)];
+            local_sum += b_local[(y -1) * LENGTH + x];
+            local_sum += b_local[(y -1) * LENGTH + (x + 1)];
+            local_sum += b_local[y * LENGTH + (x - 1)];
+            local_sum += b_local[y * LENGTH + x];
+            local_sum += b_local[y * LENGTH + (x + 1)];
+            local_sum += b_local[(y + 1) * LENGTH + (x -1 )];
+            local_sum += b_local[(y + 1) * LENGTH + x];
+            local_sum += b_local[(y + 1) * LENGTH + (x + 1)];
 
-                        #pragma unroll(2*RADIUS+1)
-                        for (size_t y_s = y - RADIUS; y_s <= y + RADIUS; y_s++)
-                            #pragma unroll(2*RADIUS+1)
-                            for (size_t x_s = x - RADIUS; x_s <= x + RADIUS; x_s++)
-                                local_sum += b[y_s * size + x_s];
-
-                        a[y * size + x] = local_sum;
-                    }
-
-                }
-            }
+            a_local[y * LENGTH + x] = local_sum;
         }
     }
 }
@@ -84,23 +84,26 @@ template<typename AT>
 void Kernel_cross(AT * __restrict__ a, AT * __restrict__ b, size_t size)
 {
     #pragma omp parallel for schedule(static)
-    for(size_t y = RADIUS; y < size - RADIUS; y++)
+    for(int y = RADIUS; y < size - RADIUS; y++)
     {
-        for(size_t x = RADIUS; x < size - RADIUS; x++)
+        #pragma simd
+        #pragma ivdep
+        #pragma vector
+        for(int x = RADIUS; x < size - RADIUS; x++)
         {
-            AT local_sum = b[y * size + x];
+            AT local_sum = b[y * LENGTH + x];
 
             #pragma unroll(2*RADIUS+1)
-            for (size_t y_s = y - RADIUS; y_s <= y + RADIUS; y_s++)
+            for (int y_s = -RADIUS; y_s <= RADIUS; y_s++)
                 if(y_s != y)
-                    local_sum += b[y_s * size + x];
+                    local_sum += b[(y + y_s) * LENGTH + x];
 
             #pragma unroll(2*RADIUS+1)
-            for (size_t x_s = x - RADIUS; x_s <= x + RADIUS; x_s++)
+            for (int x_s = -RADIUS; x_s <= RADIUS; x_s++)
                 if(x_s != x)
-                    local_sum += b[y * size + x_s];
+                    local_sum += b[y * LENGTH + x + x_s];
 
-            a[y * size + x] = local_sum;
+            a[y * LENGTH + x] = local_sum;
         }
     }
 }
@@ -115,6 +118,9 @@ void Kernel_cross_blocked(AT * __restrict__ a, AT * __restrict__ b, size_t size)
         {
             for(size_t yy = 0; yy < BLOCK_SIZE; yy++)
             {
+                #pragma simd
+                #pragma ivdep
+                #pragma vector
                 for(size_t xx = 0; xx < BLOCK_SIZE; xx++)
                 {
                     size_t x = x_st + xx;
@@ -122,19 +128,19 @@ void Kernel_cross_blocked(AT * __restrict__ a, AT * __restrict__ b, size_t size)
 
                     if((x < (size - RADIUS)) && y < ((size - RADIUS)))
                     {
-                        AT local_sum = b[y * size + x];
+                        AT local_sum = b[y * LENGTH + x];
 
                         #pragma unroll(2*RADIUS+1)
-                        for (size_t y_s = y - RADIUS; y_s <= y + RADIUS; y_s++)
+                        for (int y_s = -RADIUS; y_s <= RADIUS; y_s++)
                             if(y_s != y)
-                                local_sum += b[y_s * size + x];
+                                local_sum += b[(y + y_s) * LENGTH + x];
 
                         #pragma unroll(2*RADIUS+1)
-                        for (size_t x_s = x - RADIUS; x_s <= x + RADIUS; x_s++)
+                        for (int x_s = -RADIUS; x_s <= RADIUS; x_s++)
                             if(x_s != x)
-                                local_sum += b[y * size + x_s];
+                                local_sum += b[y * LENGTH + x + x_s];
 
-                        a[y * size + x] = local_sum;
+                        a[y * LENGTH + x] = local_sum;
                     }
                 }
             }
