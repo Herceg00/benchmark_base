@@ -75,9 +75,10 @@ void InitRand(AT *x, cusizevector plsize, cusizevector half_plsize)
 }
 
 template <typename AT>
-void Init(AT *in_data, AT *out_data, cusizevector plsize, cusizevector half_plsize)
+void Init(AT *in_data[], AT *out_data, cusizevector plsize, cusizevector half_plsize)
 {
-    InitRand(in_data, plsize, half_plsize);
+    for(int i = 0; i < INNER_COMPLEXITY; i++)
+        InitRand(in_data[i], plsize, half_plsize);
     InitRand(out_data, plsize, half_plsize);
 }
 
@@ -85,7 +86,7 @@ template <typename AT>
 void Kernel_splitted_7_point(cusizevector plsize,
                              cusizevector half_plsize,
                              cusizevector tick,
-                             AT *in_data, AT *out_data)
+                             AT *in_data[], AT *out_data)
 {
     tick.x = rand()%2;
     tick.y = rand()%2;
@@ -108,16 +109,20 @@ void Kernel_splitted_7_point(cusizevector plsize,
             const int poffsetzp = get_new_poffset(i, tick.x, tick.y, tick.z, 0, 0, 1, plsize);
             const int poffsetzm = get_new_poffset(i, tick.x, tick.y, tick.z, 0, 0, -1, plsize);
 
-            AT sum = 0;
-            sum += in_data[poffset];
-            sum += in_data[poffsetxp];
-            sum += in_data[poffsetxm];
-            sum += in_data[poffsetyp];
-            sum += in_data[poffsetym];
-            sum += in_data[poffsetzp];
-            sum += in_data[poffsetzm];
+            #pragma unroll(INNER_COMPLEXITY)
+            for(int i = 0; i < INNER_COMPLEXITY; i++)
+            {
+                AT sum = 0;
+                sum += in_data[i][poffset];
+                sum += in_data[i][poffsetxp];
+                sum += in_data[i][poffsetxm];
+                sum += in_data[i][poffsetyp];
+                sum += in_data[i][poffsetym];
+                sum += in_data[i][poffsetzp];
+                sum += in_data[i][poffsetzm];
 
-            out_data[poffset] = sum;
+                out_data[poffset] += sum;
+            }
         }
     }
 }
@@ -126,7 +131,7 @@ template <typename AT>
 void Kernel_original_7_point(cusizevector plsize,
                              cusizevector half_plsize,
                              cusizevector tick,
-                             AT *in_data, AT *out_data)
+                             AT *in_data[], AT *out_data)
 {
     tick.x = rand()%2;
     tick.y = rand()%2;
@@ -152,16 +157,20 @@ void Kernel_original_7_point(cusizevector plsize,
                         poffsetzm=(pnz-1)*plsize.y*plsize.x+pny*plsize.x+(pnx),
                         poffsetzp=(pnz+1)*plsize.y*plsize.x+pny*plsize.x+(pnx);
 
-                AT sum = 0;
-                sum += in_data[poffset];
-                sum += in_data[poffsetxp];
-                sum += in_data[poffsetxm];
-                sum += in_data[poffsetyp];
-                sum += in_data[poffsetym];
-                sum += in_data[poffsetzp];
-                sum += in_data[poffsetzm];
+                #pragma unroll(INNER_COMPLEXITY)
+                for(int i = 0; i < INNER_COMPLEXITY; i++)
+                {
+                    AT sum = 0;
+                    sum += in_data[i][poffset];
+                    sum += in_data[i][poffsetxp];
+                    sum += in_data[i][poffsetxm];
+                    sum += in_data[i][poffsetyp];
+                    sum += in_data[i][poffsetym];
+                    sum += in_data[i][poffsetzp];
+                    sum += in_data[i][poffsetzm];
 
-                out_data[poffset] = sum;
+                    out_data[poffset] += sum;
+                }
             }
         }
     }
@@ -193,29 +202,15 @@ struct Coord
     }
 };
 
-template <typename LT, typename CT>
-void Kernel(int core_type,
+template <typename AT>
+void Kernel(int mode,
             cusizevector plsize,
             cusizevector half_plsize,
             cusizevector tick,
-            LT *in_data_linear, LT *out_data_linear,
-            CT *in_data_coord, CT *out_data_coord)
+            AT *in_data[], AT *out_data)
 {
-    switch (core_type)
-    {
-        case  0:
-            Kernel_original_7_point(plsize, half_plsize, tick, in_data_linear, out_data_linear); // old pattern, flt
-            break;
-        case  1:
-            Kernel_splitted_7_point(plsize, half_plsize, tick, in_data_linear, out_data_linear); // new pattern, flt
-            break;
-        case  2:
-            Kernel_original_7_point(plsize, half_plsize, tick, in_data_coord, out_data_coord); // old pattern, coord
-            break;
-        case  3:
-            Kernel_splitted_7_point(plsize, half_plsize, tick, in_data_coord, out_data_coord); // new pattern, coord
-            break;
-
-        default: fprintf(stderr, "Wrong core type of lc_kernel_generic!\n");
-    }
+    if(mode == 0 || mode == 1)
+        Kernel_original_7_point(plsize, half_plsize, tick, in_data, out_data); // old pattern, flt
+    if(mode == 2 || mode == 3)
+        Kernel_splitted_7_point(plsize, half_plsize, tick, in_data, out_data); // new pattern, flt
 }

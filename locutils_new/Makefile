@@ -56,7 +56,6 @@ all : $(TGT)
 
 $(TGT_OMP_NP): $(LOC_NP).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
 	mkdir bin
-	g++ --version
 	$(CMD) -DLOC_REPEAT=$(REPEAT) -D$(METR)=0 -DRADIUS=$(ELEMS) -DLENGTH=$(LENGTH) -DMODE=$(MODE) $< -fopenmp -o $@  $(ADD_SRC)
 
 COMMAND := cleo-submit -np 1 -stderr err -as single
