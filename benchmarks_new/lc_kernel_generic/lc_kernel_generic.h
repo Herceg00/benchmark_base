@@ -92,6 +92,9 @@ void Kernel_splitted_7_point(cusizevector plsize,
     tick.y = rand()%2;
     tick.z = rand()%2;
 
+    #pragma simd
+    #pragma ivdep
+    #pragma vector
     #pragma omp parallel for schedule(static)
     for (size_t i = 0; i < half_plsize.x * half_plsize.y * half_plsize.z; i++)
     {
@@ -137,6 +140,9 @@ void Kernel_original_7_point(cusizevector plsize,
     tick.y = rand()%2;
     tick.z = rand()%2;
 
+    #pragma simd
+    #pragma ivdep
+    #pragma vector
     #pragma omp parallel for schedule(static)
     for (size_t tz = 0; tz < (half_plsize.z); tz++)
     {

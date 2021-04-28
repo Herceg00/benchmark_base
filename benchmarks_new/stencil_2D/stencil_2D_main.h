@@ -8,7 +8,7 @@
 #include "../../locutils_new/perf_wrapper.h"
 
 
-typedef double base_type;
+typedef float base_type;
 
 #include "stencil_2D.h"
 #include "../../locutils_new/timers.h"

@@ -14,11 +14,11 @@ W_SIZE ?= 512
 CXX=$(COMPILER)
 
 ifeq ($(COMPILER),clang++)
-    CC_FLAGS=-O3 -fopenmp  -ffreestanding -fnt-store -march=znver3   #clang AMD
+    CC_FLAGS=-O3 -fopenmp -ffast-math -ffreestanding -fnt-store -march=znver3 #-Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize   #clang AMD
 endif
 
 ifeq ($(COMPILER),g++)
-    CC_FLAGS=-O3 -fopenmp  -ffreestanding -fopt-info-vec-all=report.lst -ffast-math #gcc kunpeng
+    CC_FLAGS=-O3 -fno-trapping-math -fopenmp-simd -fopenmp  -ffreestanding -fopt-info-vec-all=report.lst -ffast-math #gcc kunpeng
 endif
 
 ifeq ($(COMPILER),icpc)

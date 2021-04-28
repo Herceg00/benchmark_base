@@ -30,7 +30,7 @@ all_tests_data = {"triada": {"radius": 256,
                                  "length": {"min": 256, "max": 2048, "step": "mult", "step_val": 2}},
                   "lc_kernel_arcavgxyz": {"mode": {"min": 0, "max": 1, "step": 1},
                                           "length": {"min": 64, "max": 512, "step": "mult", "step_val": 1.2}},
-                  "lc_kernel_generic": {"radius": {"min": 1, "max": 8, "step": "mult", "step_val": 2},
+                  "lc_kernel_generic": {"radius": 8,
                                         "mode": {"min": 0, "max": 3, "step": 1},
                                         "length": {"min": 64, "max": 512, "step": "mult", "step_val": 1.2}},
                   "random_access": {"length": linear_length,
@@ -49,7 +49,7 @@ all_tests_data = {"triada": {"radius": 256,
                   "page_rank": {"mode": {"min": 0, "max": 1, "step": 1},
                                 "length": {"min": 12, "max": 23, "step": 1}
                                 },
-                  "n_body": {"mode": {"min": 0, "max": 1, "step": 1}, # non-vector mode
+                  "n_body": {"mode": {"min": 0, "max": 0, "step": 1}, # non-vector mode
                              "length": {"min": 1024, "max": 32768, "step": "mult", "step_val": 2}},
                   "atomic_graphs": {"mode": {"min": 0, "max": 1, "step": 1},
                                     "length": {"min": 12, "max": 18, "step": 1}},

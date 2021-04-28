@@ -101,7 +101,6 @@ void Problem::integrate()
 
         // Calculate total force
         for (int pj = 0; pj < mNumParticles; pj++) {
-
             if (pj != pi) {
                 base_type dx = pos_x[pj] - pos_x[pi];
                 base_type dy = pos_y[pj] - pos_y[pi];

@@ -46,7 +46,7 @@ void CallKernel(int mode)
     size_t inner_complexity = INNER_COMPLEXITY;
     size_t bytes_requested = inner_complexity * 8 * sizeof(base_type) * problem_size / 8;
     size_t flops_requested = inner_complexity * 8 * problem_size / 8;
-    if(mode == 2 || mode == 3)
+    if(mode == 1 || mode == 3)
     {
         bytes_requested *= 3;
         flops_requested *= 3;
