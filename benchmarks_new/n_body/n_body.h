@@ -7,6 +7,9 @@
 
 using namespace std;
 
+#ifdef __USE_KUNPENG__
+#include <arm_neon.h>
+#endif
 
 static mt19937 eng;
 
@@ -24,13 +27,13 @@ struct Problem {
     base_type mDt;
     unsigned mNumParticles;
 
-    base_type *pos_x;
-    base_type *pos_y;
-    base_type *pos_z;
+    base_type * __restrict__ pos_x;
+    base_type * __restrict__ pos_y;
+    base_type * __restrict__ pos_z;
 
-    base_type *vel_x;
-    base_type *vel_y;
-    base_type *vel_z;
+    base_type * __restrict__ vel_x;
+    base_type * __restrict__ vel_y;
+    base_type * __restrict__ vel_z;
 
     Problem(base_type Mass, base_type dt, unsigned numParticles);
     ~Problem();
@@ -99,7 +102,119 @@ void Problem::integrate()
 
         base_type force_x = 0, force_y = 0, force_z = 0;
 
+        #ifdef __USE_KUNPENG__
+        float posx_pi[4] = {pos_x[pi], pos_x[pi], pos_x[pi], pos_x[pi]};
+        float32x4_t x_pi = vld1q_f32(posx_pi);
+        float posy_pi[4] = {pos_y[pi], pos_y[pi], pos_y[pi], pos_y[pi]};
+        float32x4_t y_pi = vld1q_f32(posy_pi);
+        float posz_pi[4] = {pos_z[pi], pos_z[pi], pos_z[pi], pos_z[pi]};
+        float32x4_t z_pi = vld1q_f32(posz_pi);
+
+        float32x4_t sum_x = {0, 0, 0, 0};
+        float32x4_t sum_y = {0, 0, 0, 0};
+        float32x4_t sum_z = {0, 0, 0, 0};
+
         // Calculate total force
+        for (int pj = 0; pj < mNumParticles; pj += 4) {
+            if(pj/4 == pi/4)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if( (i + pj) != pi)
+                    {
+                        base_type dx = pos_x[pj + i] - pos_x[pi];
+                        base_type dy = pos_y[pj + i] - pos_y[pi];
+                        base_type dz = pos_z[pj + i] - pos_z[pi];
+
+                        const base_type dist2 = dx * dx + dy * dy + dz * dz;
+
+                        const base_type ConstDist2 = Const / dist2;
+                        const base_type idist = 1.0 / sqrt(dist2);
+
+                        // F = C * m * m / ||x2 - x1||^2 * (x2 - x1) / ||x2 - x1||
+                        force_x += ConstDist2 * dx * idist;
+                        force_y += ConstDist2 * dy * idist;
+                        force_z += ConstDist2 * dz * idist;
+                    }
+                }
+            }
+            else
+            {
+                float32x4_t posx =  vld1q_f32(&pos_x[pj]);
+                float32x4_t posy =  vld1q_f32(&pos_y[pj]);
+                float32x4_t posz =  vld1q_f32(&pos_z[pj]);
+
+                float32x4_t dx = vsubq_f32(posx, x_pi);
+                float32x4_t dy = vsubq_f32(posy, y_pi);
+                float32x4_t dz = vsubq_f32(posz, z_pi);
+
+                float32x4_t distx = vmulq_f32(dx,dx);
+                float32x4_t disty = vmulq_f32(dy,dy);
+                float32x4_t distz = vmulq_f32(dz,dz);
+
+                float32x4_t dist2 = vaddq_f32(distx, disty);
+                dist2 = vaddq_f32(dist2, distz);
+
+                float32x4_t cnst = vmovq_n_f32(Const);
+                float32x4_t cnst_1 = vmovq_n_f32(1.0);
+
+                float32x4_t reciprocal = vrecpeq_f32(dist2);
+                reciprocal = vmulq_f32(vrecpsq_f32(dist2, reciprocal), reciprocal);
+                reciprocal = vmulq_f32(vrecpsq_f32(dist2, reciprocal), reciprocal);
+                float32x4_t ConstDist2 = vmulq_f32(cnst,reciprocal);
+
+                reciprocal = vrsqrteq_f32(dist2);
+                reciprocal = vmulq_f32(vrsqrtsq_f32(dist2, reciprocal), reciprocal);
+                reciprocal = vmulq_f32(vrsqrtsq_f32(dist2, reciprocal), reciprocal);
+                float32x4_t idist = vmulq_f32(cnst_1,reciprocal);
+
+                /*float temp1[4];
+                vst1q_f32(temp1, idist);
+                for(int i = 0; i < 4; i++)
+                {
+                    base_type dx = pos_x[pj + i] - pos_x[pi];
+                    base_type dy = pos_y[pj + i] - pos_y[pi];
+                    base_type dz = pos_z[pj + i] - pos_z[pi];
+
+                    const base_type dist2 = dx * dx + dy * dy + dz * dz;
+
+                    const base_type ConstDist2 = Const / dist2;
+                    const base_type idist_c = 1.0 / sqrt(dist2);
+
+                    #pragma omp critical
+                    {
+                        if (idist_c != temp1[i])
+                            cout << idist_c << " " << temp1[i] << endl;
+                    }
+                }*/
+
+                dx = vmulq_f32(ConstDist2, dx);
+                dx = vmulq_f32(dx, idist);
+                dy = vmulq_f32(ConstDist2, dy);
+                dy = vmulq_f32(dy, idist);
+                dz = vmulq_f32(ConstDist2, dz);
+                dz = vmulq_f32(dz, idist);
+
+                sum_x = vaddq_f32(sum_x, dx);
+                sum_y = vaddq_f32(sum_y, dy);
+                sum_z = vaddq_f32(sum_z, dz);
+            }
+        }
+
+        float temp[4];
+        vst1q_f32(temp, sum_x);
+        for (int iter = 0; iter < 4; iter++){
+            force_x += temp[iter];
+        }
+        vst1q_f32(temp, sum_y);
+        for (int iter = 0; iter < 4; iter++){
+            force_y += temp[iter];
+        }
+        vst1q_f32(temp, sum_z);
+        for (int iter = 0; iter < 4; iter++){
+            force_z += temp[iter];
+        }
+        #else
         for (int pj = 0; pj < mNumParticles; pj++) {
             if (pj != pi) {
                 base_type dx = pos_x[pj] - pos_x[pi];
@@ -117,70 +232,13 @@ void Problem::integrate()
                 force_z += ConstDist2 * dz * idist;
             }
         }
+        #endif
 
         // dv / dt = a = F / m
         vel_x[pi] = force_x * mInverseMass * mDt;
         vel_y[pi] = force_y * mInverseMass * mDt;
         vel_z[pi] = force_z * mInverseMass * mDt;
-    }
 
-    // Update pos this should be done after all forces/velocities have being computed
-    #pragma omp parallel for
-    for (int pi = 0; pi < mNumParticles; pi++)
-    {
-        // dx / dt = v
-        pos_x[pi] += vel_x[pi] * mDt;
-        pos_y[pi] += vel_y[pi] * mDt;
-        pos_z[pi] += vel_z[pi] * mDt;
-    }
-}
-
-#define BLOCK_SIZE 32
-
-void Problem::integrate_blocked()
-{
-    const base_type Const = mG * mMass * mMass;
-
-    #pragma omp parallel for
-    for (int pi_start = 0; pi_start < mNumParticles; pi_start += BLOCK_SIZE)
-    {
-        for (int pj_start = 0; pj_start < mNumParticles; pj_start += BLOCK_SIZE)
-        {
-            #pragma unroll(BLOCK_SIZE)
-            for(int i = 0; i < BLOCK_SIZE; i++)
-            {
-                int pi = pi_start + i;
-                base_type force_x = 0, force_y = 0, force_z = 0;
-
-                #pragma simd
-                #pragma ivdep
-                #pragma unroll(BLOCK_SIZE)
-                for(int j = 0; j < BLOCK_SIZE; j++)
-                {
-                    int pj = pj_start + j;
-                    if (pj != pi) {
-                        base_type dx = pos_x[pj] - pos_x[pi];
-                        base_type dy = pos_y[pj] - pos_y[pi];
-                        base_type dz = pos_z[pj] - pos_z[pi];
-
-                        const base_type dist2 = dx * dx + dy * dy + dz * dz;
-
-                        const base_type ConstDist2 = Const / dist2;
-                        const base_type idist = 1.0 / sqrt(dist2);
-
-                        // F = C * m * m / ||x2 - x1||^2 * (x2 - x1) / ||x2 - x1||
-                        force_x += ConstDist2 * dx * idist;
-                        force_y += ConstDist2 * dy * idist;
-                        force_z += ConstDist2 * dz * idist;
-                    }
-                }
-
-                // dv / dt = a = F / m
-                vel_x[pi] = force_x * mInverseMass * mDt;
-                vel_y[pi] = force_y * mInverseMass * mDt;
-                vel_z[pi] = force_z * mInverseMass * mDt;
-            }
-        }
     }
 
     // Update pos this should be done after all forces/velocities have being computed
@@ -198,16 +256,6 @@ void Kernel(int core_type, Problem &problem, int nTimeSteps)
 {
     for (int ts = 0; ts < nTimeSteps; ts++)
     {
-        switch (core_type)
-        {
-            case  0:
-                problem.integrate();
-                break;
-            case  1:
-                problem.integrate_blocked();
-                break;
-
-            default: fprintf(stderr, "Wrong core type of random generator!\n");
-        }
+        problem.integrate();
     }
 }

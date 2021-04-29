@@ -55,7 +55,9 @@ all_tests_data = {"triada": {"radius": 256,
                                     "length": {"min": 12, "max": 18, "step": 1}},
                   "strided_walks": {"length": linear_length,
                                     "mode": {"min": 0, "max": 1, "step": 1},
-                                    "radius": {"min": 1, "max": 250000000, "step": "mult", "step_val": 2}}
+                                    "radius": {"min": 1, "max": 250000000, "step": "mult", "step_val": 2}},
+                  "prefix_sum": {"mode": {"min": 0, "max": 0, "step": 1},
+                                 "length": {"min": 100000, "max": linear_length, "step": "mult", "step_val": 2}},
                   }
 
 RA_RADIUS="2" # 2 KB

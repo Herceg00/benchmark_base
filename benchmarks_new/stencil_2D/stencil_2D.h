@@ -1,6 +1,8 @@
 #include <string>
 
+#ifdef __USE_KUNPENG__
 #include <arm_neon.h>
+#endif
 
 using std::string;
 
