@@ -1,6 +1,7 @@
 #include <mpi.h>
 #include <omp.h>
 #include <stdlib.h>
+#include <cstdio>
 
 extern "C" int main(int argc, char *argv[])
 {
