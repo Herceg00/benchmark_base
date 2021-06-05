@@ -15,13 +15,8 @@ extern "C" int main(int argc, char *argv[])
 
     MPI_Status stat;
 
-    if(size != 2){
-        if(rank == 0){
-            printf("This program requires exactly 2 MPI ranks, but you are attempting to use %d! Exiting...\n", size);
-        }
-        MPI_Finalize();
-        exit(0);
-    }
+    int first = atoi(argv[1]);
+    int second = atoi(argv[2]);
 
     for(int i=0; i<=26; i++)
     {
@@ -43,13 +38,13 @@ extern "C" int main(int argc, char *argv[])
 
         // Warm-up loop
         for(int i=1; i<=5; i++){
-            if(rank == 0){
-                MPI_Send(A, N, MPI_DOUBLE, 1, tag1, MPI_COMM_WORLD);
-                MPI_Recv(A, N, MPI_DOUBLE, 1, tag2, MPI_COMM_WORLD, &stat);
+            if(rank == first){
+                MPI_Send(A, N, MPI_DOUBLE, second, tag1, MPI_COMM_WORLD);
+                MPI_Recv(A, N, MPI_DOUBLE, second, tag2, MPI_COMM_WORLD, &stat);
             }
-            else if(rank == 1){
-                MPI_Recv(A, N, MPI_DOUBLE, 0, tag1, MPI_COMM_WORLD, &stat);
-                MPI_Send(A, N, MPI_DOUBLE, 0, tag2, MPI_COMM_WORLD);
+            else if(rank == second){
+                MPI_Recv(A, N, MPI_DOUBLE, first, tag1, MPI_COMM_WORLD, &stat);
+                MPI_Send(A, N, MPI_DOUBLE, first, tag2, MPI_COMM_WORLD);
             }
         }
 
@@ -58,13 +53,13 @@ extern "C" int main(int argc, char *argv[])
         start_time = MPI_Wtime();
 
         for(int i=1; i<=loop_count; i++){
-            if(rank == 0){
-                MPI_Send(A, N, MPI_DOUBLE, 1, tag1, MPI_COMM_WORLD);
-                MPI_Recv(A, N, MPI_DOUBLE, 1, tag2, MPI_COMM_WORLD, &stat);
+            if(rank == first){
+                MPI_Send(A, N, MPI_DOUBLE, second, tag1, MPI_COMM_WORLD);
+                MPI_Recv(A, N, MPI_DOUBLE, second, tag2, MPI_COMM_WORLD, &stat);
             }
-            else if(rank == 1){
-                MPI_Recv(A, N, MPI_DOUBLE, 0, tag1, MPI_COMM_WORLD, &stat);
-                MPI_Send(A, N, MPI_DOUBLE, 0, tag2, MPI_COMM_WORLD);
+            else if(rank == second){
+                MPI_Recv(A, N, MPI_DOUBLE, first, tag1, MPI_COMM_WORLD, &stat);
+                MPI_Send(A, N, MPI_DOUBLE, first, tag2, MPI_COMM_WORLD);
             }
         }
 

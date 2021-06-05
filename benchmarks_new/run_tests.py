@@ -58,6 +58,8 @@ all_tests_data = {"triada": {"radius": 256,
                                     "radius": {"min": 1, "max": 250000000, "step": "mult", "step_val": 2}},
                   "prefix_sum": {"mode": {"min": 0, "max": 0, "step": 1},
                                  "length": {"min": 100000, "max": linear_length, "step": "mult", "step_val": 2}},
+                  "saxpy_satis": {"length": linear_length,
+                                  "radius": {"min": 1, "max": get_cores_count(), "step": 1}}, #actually R = num_threads
                   }
 
 RA_RADIUS="2" # 2 KB
