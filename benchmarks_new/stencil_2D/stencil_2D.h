@@ -35,8 +35,6 @@ void Kernel_rectangle(AT * __restrict__ a, const AT * __restrict__ b, const size
     #pragma omp parallel for schedule(static)
     for(int y = RADIUS; y < size - RADIUS; y++)
     {
-        int nummm = omp_get_thread_num();
-        printf("%d\n", nummm);
         #pragma simd
         #pragma ivdep
         #pragma vector
