@@ -59,7 +59,7 @@ all_tests_data = {"triada": {"radius": 256,
                   "prefix_sum": {"mode": {"min": 0, "max": 0, "step": 1},
                                  "length": {"min": 100000, "max": linear_length, "step": "mult", "step_val": 2}},
                   "saxpy_satis": {"length": linear_length,
-                                  "radius": {"min": 1, "max": get_cores_count(), "step": 1}}, #actually R = num_threads
+                                  "threads": {"min": 1, "max": 8, "step": 1}}, #actually R = num_threads
                   }
 
 RA_RADIUS="2" # 2 KB
@@ -129,11 +129,17 @@ def run_benchmark(bench_name, bench_params, options):  # benchmarks a specified 
     # get first parameter (usually mode)
     first_parameter = next(iter(bench_params))
 
-    # generate list of parameters to be passed into benchmark (currently only threads)
-    threads = get_cores_count()
-    if int(options.sockets) > 1:
-        threads = int(options.sockets) * threads
-    list_of_params = "--threads=" + str(threads)
+    if "threads" in all_tests_data[bench_name].keys():
+        print("Threads in param")
+        list_of_params = "--redundant=" + "0"
+    else:
+        # generate list of parameters to be passed into benchmark (currently only threads)
+        print("NO Threads in param")
+        threads = get_cores_count()
+        if int(options.sockets) > 1:
+            threads = int(options.sockets) * threads
+        list_of_params = "--threads=" + str(threads)
+
 
     # recursively run benchmark for all combinations of input params
     run_tests_across_specific_parameter(bench_name, first_parameter, bench_params, list_of_params, options)

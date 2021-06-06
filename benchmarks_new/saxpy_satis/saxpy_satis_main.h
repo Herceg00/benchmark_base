@@ -14,7 +14,7 @@ typedef size_t index_type;
 #include "saxpy_satis.h"
 #include "../../locutils_new/timers.h"
 
-void CallKernel(int threads)
+void CallKernel()
 {
     base_type *a = new base_type[LENGTH];
     base_type *b = new base_type[LENGTH];
@@ -43,7 +43,7 @@ void CallKernel(int threads)
         counter.start_timing();
         #endif
 
-		Kernel(a, b, c, LENGTH, scalar, threads);
+		Kernel(a, b, c, LENGTH, scalar);
 
         #ifndef METRIC_RUN
         counter.end_timing();
@@ -62,6 +62,6 @@ void CallKernel(int threads)
 
 extern "C" int main(int argc, char *argv[])
 {
-    CallKernel((int)RADIUS);
+    CallKernel();
     return 0;
 }
