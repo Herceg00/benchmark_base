@@ -9,6 +9,9 @@ def get_cores_count():  # returns number of sockets of target architecture
         if "Core(s) per socket:" in item:
             cores_line = item.strip()
             cores = int(cores_line.split(":")[1])
+        if "Ядер на сокет:" in item:
+            cores_line = item.strip()
+            cores = int(cores_line.split(":")[1])
     if cores == -1:
         raise NameError('Can not detect number of cores of target architecture')
     return cores
@@ -19,6 +22,9 @@ def get_sockets_count():  # returns number of sockets of target architecture
     cores = -1
     for item in output.decode().split("\n"):
         if "Socket(s)" in item:
+            sockets_line = item.strip()
+            sockets = int(sockets_line.split(":")[1])
+        if "Сокетов:" in item:
             sockets_line = item.strip()
             sockets = int(sockets_line.split(":")[1])
     if sockets == -1:

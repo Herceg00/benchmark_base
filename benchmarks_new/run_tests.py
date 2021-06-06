@@ -139,11 +139,14 @@ def run_benchmark(bench_name, bench_params, options):  # benchmarks a specified 
     run_tests_across_specific_parameter(bench_name, first_parameter, bench_params, list_of_params, options)
 
 
-def run_single_benchmark(bench_name, options):
-    threads = get_cores_count()
-    if options.sockets > 1:
-        threads = options.sockets * threads
-    print("using " + str(threads) + " threads")
+def run_single_benchmark(bench_name, options, thread_num):
+    if thread_num is None:
+        threads = get_cores_count()
+        if options.sockets > 1:
+            threads = options.sockets * threads
+    else:
+        threads = thread_num
+    print("using " + str(threads) + " thread(s)")
     parameters_string = "--threads=" + str(threads) + " " + options.force
 
     bench_table_name = get_bench_table_name(bench_name, parameters_string)
@@ -193,13 +196,16 @@ if __name__ == "__main__":
     parser.add_option('-c', '--compiler',
                       action="store", dest="compiler",
                       help="specify compiler used", default="g++")
+    parser.add_option('-t', '--thread',
+                      action="store", dest="thread_num",
+                      help="specify thread number", default=None)
 
     options, args = parser.parse_args()
 
     if options.force != "":  # run single test
         print("FORCE RUN")
         check_target_bench_correctness(options.bench)
-        run_single_benchmark(options.bench, options)
+        run_single_benchmark(options.bench, options, options.thread_num)
     else:  # run tests
         for current_test, test_parameters in all_tests_data.items():
             if options.bench == "all" or current_test in options.bench:

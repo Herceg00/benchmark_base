@@ -18,7 +18,8 @@ ifeq ($(COMPILER),clang++)
 endif
 
 ifeq ($(COMPILER),g++)
-    CC_FLAGS=-D __USE_KUNPENG__ -O3 -fno-trapping-math -fopenmp-simd -fopenmp  -ffreestanding -fopt-info-vec-all=report.lst -ffast-math #gcc kunpeng
+    #CC_FLAGS=-D __USE_KUNPENG__ -O3 -fno-trapping-math -fopenmp-simd -fopenmp  -ffreestanding -fopt-info-vec-all=report.lst -ffast-math #gcc kunpeng
+    CC_FLAGS= -O3 -fno-trapping-math -fopenmp-simd -fopenmp  -ffreestanding -fopt-info-vec-all=report.lst -ffast-math #gcc kunpeng
 endif
 
 ifeq ($(COMPILER),icpc)
