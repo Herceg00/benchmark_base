@@ -26,7 +26,9 @@ def code(event_code):
              "L2D_CACHE": "r0016",
              "rd_spipe": "r20",
              "flux_rd": "r01",
-             "flux_wr": "r00"
+             "flux_wr": "r00",
+             "rd_hit_cpipe": "r02",
+             "rd_hit_spipe": "r22"
     }
     return codes[event_code]
 
@@ -66,7 +68,9 @@ def get_conflicted_events_list(architecture):
                   "r0016", #"L2D_CACHE":
                   "r20", #"rd_spipe":
                   "r01", #"flux_rd":
-                  "r00" #"flux_wr"
+                  "r00", #"flux_wr"
+                  "r02", #rd_hit_cpipe
+                  "r22" #rd_hit_spipe
                   ]
         return events
     return []
@@ -121,7 +125,14 @@ def analyse_events(architecture, hardware_events):
         all["Store_Bound"] = 100.0* (all[code("MEM_STALL_ANY_STORE")]/all[code("EXEC_STALL_CYCLE")])
         all["Core_Bound"] = 100.0* ((all[code("EXEC_STALL_CYCLE")] - all[code("MEM_STALL_ANY_LOAD")] - all[code("MEM_STALL_ANY_STORE")])/all[code("EXEC_STALL_CYCLE")])
 
+
+        print(all[code("rd_hit_cpipe")])
+        print(all[code("rd_hit_spipe")])
+        print(all[code("rd_spipe")])
         all["LL_hit_rate"] = 100.0* (1.0 - all[code("LL_CACHE_MISS")]/all[code("LL_CACHE")])
+        all["LL_hit_rate2"] = (all[code("rd_hit_cpipe")] + all[code("rd_hit_spipe")])/all[code("rd_spipe")]
+
+
         all["Remote_accesses"] = 100.0* (all[code("REMOTE_ACCESS")]/(all[code("MEM_ACCESS_LD")] + all[code("MEM_ACCESS_ST")]))
 
         all["L1_SBW"] = all[code("L1D_CACHE")] * 16 / (all["duration_time"])

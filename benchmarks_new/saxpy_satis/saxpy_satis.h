@@ -19,9 +19,9 @@ void Init(AT *a, AT *b, AT *c, size_t size)
 }
 
 template<typename AT>
-void Kernel(AT *a, AT *b, AT *c, size_t size, AT scalar, int threads)
+void Kernel(AT *a, AT *b, AT *c, size_t size, AT scalar)
 {
-    #pragma omp parallel for num_threads(threads)
+    #pragma omp parallel for
     for (size_t i = 0; i < size; i++)
         a[i] = scalar * b[i] + c[i];
 }

@@ -16,6 +16,7 @@ all_tests_data = {"triada": {"radius": 256,
                              "mode": {"min": 0, "max": 9, "step": 1}},
                   "stencil_1D": {"mode": {"min": 0, "max": 1, "step": 1},
                                  "length": linear_length,
+                                 "threads": 32,
                                  "radius": {"min": 1, "max": 24, "step": 1}},
                   "stencil_2D": {"mode": {"min": 0, "max": 3, "step": 1},
                                  "radius": {"min": 1, "max": 3, "step": 1},
@@ -59,7 +60,8 @@ all_tests_data = {"triada": {"radius": 256,
                   "prefix_sum": {"mode": {"min": 0, "max": 0, "step": 1},
                                  "length": {"min": 100000, "max": linear_length, "step": "mult", "step_val": 2}},
                   "saxpy_satis": {"length": linear_length,
-                                  "radius": {"min": 1, "max": get_cores_count(), "step": 1}}, #actually R = num_threads
+                                  "threads": 32,
+                                  "radius": {"min": 1, "max": 24, "step": 1}}, #actually R = num_threads
                   }
 
 RA_RADIUS="2" # 2 KB
@@ -129,28 +131,37 @@ def run_benchmark(bench_name, bench_params, options):  # benchmarks a specified 
     # get first parameter (usually mode)
     first_parameter = next(iter(bench_params))
 
-    # generate list of parameters to be passed into benchmark (currently only threads)
-    threads = get_cores_count()
-    if int(options.sockets) > 1:
-        threads = int(options.sockets) * threads
-    list_of_params = "--threads=" + str(threads)
+    if "threads" in all_tests_data[bench_name].keys():
+        print("Threads in param")
+        list_of_params = "--redundant=" + "0"
+    else:
+        # generate list of parameters to be passed into benchmark (currently only threads)
+        print("NO Threads in param")
+        threads = get_cores_count()
+        if int(options.sockets) > 1:
+            threads = int(options.sockets) * threads
+        list_of_params = "--threads=" + str(threads)
+
 
     # recursively run benchmark for all combinations of input params
     run_tests_across_specific_parameter(bench_name, first_parameter, bench_params, list_of_params, options)
 
 
-def run_single_benchmark(bench_name, options):
-    threads = get_cores_count()
-    if options.sockets > 1:
-        threads = options.sockets * threads
-    print("using " + str(threads) + " threads")
+def run_single_benchmark(options):
+    if options.thread_num is None:
+        threads = get_cores_count()
+        if options.sockets > 1:
+            threads = options.sockets * threads
+    else:
+        threads = options.thread_num
+    print("using " + str(threads) + " thread(s)")
     parameters_string = "--threads=" + str(threads) + " " + options.force
 
-    bench_table_name = get_bench_table_name(bench_name, parameters_string)
+    bench_table_name = get_bench_table_name(options.bench, parameters_string)
 
-    run_timings(bench_name, bench_table_name, parameters_string.split(" "), options)
+    run_timings(options.bench, bench_table_name, parameters_string.split(" "), options)
     if options.profile:
-        run_profiling(bench_name, bench_table_name, parameters_string.split(" "))
+        run_profiling(options.bench, bench_table_name, parameters_string.split(" "))
 
 
 def init():
@@ -193,13 +204,16 @@ if __name__ == "__main__":
     parser.add_option('-c', '--compiler',
                       action="store", dest="compiler",
                       help="specify compiler used", default="g++")
+    parser.add_option('-t', '--threads-num',
+                      action="store", dest="thread_num",
+                      help="specify thread number", default=None)
 
     options, args = parser.parse_args()
 
     if options.force != "":  # run single test
         print("FORCE RUN")
         check_target_bench_correctness(options.bench)
-        run_single_benchmark(options.bench, options)
+        run_single_benchmark(options)
     else:  # run tests
         for current_test, test_parameters in all_tests_data.items():
             if options.bench == "all" or current_test in options.bench:

@@ -33,6 +33,9 @@ while [ $# -gt 0 ]; do
     --output=*)
       OUTPUT="${1#*=}"
       ;;
+    --redundant=*)
+      REDUNDANT="${1#*=}"
+      ;;
     *)
 
       printf "***************************\n"
