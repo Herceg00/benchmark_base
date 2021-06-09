@@ -16,6 +16,7 @@ all_tests_data = {"triada": {"radius": 256,
                              "mode": {"min": 0, "max": 9, "step": 1}},
                   "stencil_1D": {"mode": {"min": 0, "max": 1, "step": 1},
                                  "length": linear_length,
+                                 "threads": 32,
                                  "radius": {"min": 1, "max": 24, "step": 1}},
                   "stencil_2D": {"mode": {"min": 0, "max": 3, "step": 1},
                                  "radius": {"min": 1, "max": 3, "step": 1},
@@ -59,7 +60,8 @@ all_tests_data = {"triada": {"radius": 256,
                   "prefix_sum": {"mode": {"min": 0, "max": 0, "step": 1},
                                  "length": {"min": 100000, "max": linear_length, "step": "mult", "step_val": 2}},
                   "saxpy_satis": {"length": linear_length,
-                                  "threads": {"min": 1, "max": 8, "step": 1}}, #actually R = num_threads
+                                  "threads": 32,
+                                  "radius": {"min": 1, "max": 24, "step": 1}}, #actually R = num_threads
                   }
 
 RA_RADIUS="2" # 2 KB
