@@ -32,6 +32,7 @@ void Init(AT *a, AT *b, size_t size)
 template<typename AT>
 void Kernel_rectangle(AT * __restrict__ a, const AT * __restrict__ b, const size_t size)
 {
+    #pragma novector
     #pragma omp parallel for schedule(static)
     for(int y = RADIUS; y < size - RADIUS; y++)
     {
@@ -42,8 +43,10 @@ void Kernel_rectangle(AT * __restrict__ a, const AT * __restrict__ b, const size
         {
             AT local_sum = 0;
 
+            #pragma novector
             #pragma unroll(2*RADIUS+1)
             for (int y_s = -RADIUS; y_s <= RADIUS; y_s++)
+                #pragma novector
                 #pragma unroll(2*RADIUS+1)
                 for (int x_s = -RADIUS; x_s <= RADIUS; x_s++)
                     local_sum += b[(y + y_s) * size + (x + x_s)];

@@ -28,6 +28,7 @@ void Kernel_base(AT *a, const AT *b, size_t size)
 {
     #pragma ivdep
     #pragma simd
+    #pragma vector
     #pragma omp parallel for schedule(static)
     for(size_t i = RADIUS; i < size - RADIUS; i++)
     {

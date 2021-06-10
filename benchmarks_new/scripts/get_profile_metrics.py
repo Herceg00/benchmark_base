@@ -151,7 +151,6 @@ def analyse_events(architecture, hardware_events):
             all["LL_hit_rate"] = 100.0* (1.0 - all[code("LL_CACHE_MISS")]/all[code("LL_CACHE")])
             all["LL_hit_rate2"] = 100.0*(all[code("rd_hit_cpipe")] + all[code("rd_hit_spipe")])/all[code("rd_spipe")]
 
-            file_object = open('LLC.txt', 'a')
             # Append 'hello' at the end of file
             file_object.write(str(all["LL_hit_rate"]) + ", " + str(all["LL_hit_rate2"]) + "\n")
             print("LL hit rate: " + str(all["LL_hit_rate"]) + ", " +  str(all["LL_hit_rate2"]))
