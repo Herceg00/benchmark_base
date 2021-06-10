@@ -27,7 +27,7 @@ all_tests_data = {"triada": {"radius": 256,
                   "matrix_transp": {"radius": {"min": 16, "max": 16, "step": 1},
                                     "mode": {"min": 0, "max": 3, "step": 1},
                                     "length": {"min": 256, "max": 131072, "step": "mult", "step_val": 2}},
-                  "matrix_mul": {"mode": {"min": 0, "max": 5, "step": 1},
+                  "matrix_mult": {"mode": {"min": 0, "max": 5, "step": 1},
                                  "length": {"min": 256, "max": 2048, "step": "mult", "step_val": 2}},
                   "lc_kernel_arcavgxyz": {"mode": {"min": 0, "max": 1, "step": 1},
                                           "length": {"min": 64, "max": 512, "step": "mult", "step_val": 1.2}},
@@ -179,7 +179,7 @@ def generate_roofline():
 def check_target_bench_correctness(bench_name):
     subfolders = [ f.name for f in os.scandir("./") if f.is_dir() ]
     if not (bench_name in subfolders):
-        raise ValueError('Incorrect benchmark name!')
+        raise ValueError('Incorrect benchmark name: {}!'.format(bench_name))
 
 
 if __name__ == "__main__":
