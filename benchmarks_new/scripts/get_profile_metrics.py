@@ -10,6 +10,9 @@ from .files import *
 from .roofline import kunpeng_characteristics
 
 
+short_run = True
+
+
 def code(event_code):
     codes = {"MEM_STALL_ANY_LOAD": "r7004",
              "MEM_STALL_ANY_STORE": "r7005",
@@ -24,11 +27,11 @@ def code(event_code):
              "fetch_bubble": "r2014",
              "L1D_CACHE": "r0004",
              "L2D_CACHE": "r0016",
-             "rd_spipe": "r20",
+             "rd_spipe": "rd_spipe",
              "flux_rd": "r01",
              "flux_wr": "r00",
-             "rd_hit_cpipe": "r02",
-             "rd_hit_spipe": "r22"
+             "rd_hit_cpipe": "rd_hit_cpipe",
+             "rd_hit_spipe": "rd_hit_spipe"
     }
     return codes[event_code]
 
@@ -45,7 +48,10 @@ def get_no_conflict_events_list(architecture):
                   "r0067", # MEM_ACCESS_ST
                   "r0032", # LL_CACHE
                   "r0033",  # LL_CACHE_MISS
-                  "duration_time"
+                  "duration_time",
+                  "rd_spipe", #"rd_spipe":
+                  "rd_hit_cpipe", #rd_hit_cpipe
+                  "rd_hit_spipe" #rd_hit_spipe
                   ]
         return events
     if architecture == "intel_xeon":
@@ -60,17 +66,16 @@ def get_no_conflict_events_list(architecture):
 
 def get_conflicted_events_list(architecture):
     if architecture == "kunpeng":
+        if short_run:
+            return []
         events = ["r2014", #"fetch_bubble"
                   "CPU_CYCLES",
                   "INST_SPEC",
                   "INST_RETIRED",
                   "r0004", #"L1D_CACHE":
                   "r0016", #"L2D_CACHE":
-                  "r20", #"rd_spipe":
                   "r01", #"flux_rd":
-                  "r00", #"flux_wr"
-                  "r02", #rd_hit_cpipe
-                  "r22" #rd_hit_spipe
+                  "r00" #"flux_wr"
                   ]
         return events
     return []
@@ -114,38 +119,41 @@ def analyse_events(architecture, hardware_events):
     all = copy.deepcopy(hardware_events)
 
     if architecture == "kunpeng":
-        all["Frontend_Bound"] = 100.0* (all[code("fetch_bubble")]/(4.0 * all["CPU_CYCLES"]))
-        all["Bad_Speculation"] = 100.0* ((all["INST_SPEC"] - all["INST_RETIRED"])/(4.0 * all["CPU_CYCLES"]))
-        all["Retiring"] = 100.0* (all["INST_RETIRED"] / (4.0 * all["CPU_CYCLES"]))
-        all["Backend_Bound"] = (100.0 - (all["Frontend_Bound"] + all["Bad_Speculation"] + all["Retiring"]))
-        all["Memory_Bound"] = 100.0* ((all[code("MEM_STALL_ANY_LOAD")] + all[code("MEM_STALL_ANY_STORE")])/all[code("EXEC_STALL_CYCLE")])
-        all["L1_Bound"] = 100.0* ((all[code("MEM_STALL_ANY_LOAD")] - all[code("MEM_STALL_L1MISS")])/all[code("EXEC_STALL_CYCLE")])
-        all["L2_Bound"] = 100.0* ((all[code("MEM_STALL_L1MISS")] - all[code("MEM_STALL_L2MISS")])/all[code("EXEC_STALL_CYCLE")])
-        all["L3_Bound_or_DRAM"] = 100.0* (all[code("MEM_STALL_L2MISS")]/all[code("EXEC_STALL_CYCLE")])
-        all["Store_Bound"] = 100.0* (all[code("MEM_STALL_ANY_STORE")]/all[code("EXEC_STALL_CYCLE")])
-        all["Core_Bound"] = 100.0* ((all[code("EXEC_STALL_CYCLE")] - all[code("MEM_STALL_ANY_LOAD")] - all[code("MEM_STALL_ANY_STORE")])/all[code("EXEC_STALL_CYCLE")])
+        if not short_run:
+            all["Frontend_Bound"] = 100.0* (all[code("fetch_bubble")]/(4.0 * all["CPU_CYCLES"]))
+            all["Bad_Speculation"] = 100.0* ((all["INST_SPEC"] - all["INST_RETIRED"])/(4.0 * all["CPU_CYCLES"]))
+            all["Retiring"] = 100.0* (all["INST_RETIRED"] / (4.0 * all["CPU_CYCLES"]))
+            all["Backend_Bound"] = (100.0 - (all["Frontend_Bound"] + all["Bad_Speculation"] + all["Retiring"]))
+            all["Memory_Bound"] = 100.0* ((all[code("MEM_STALL_ANY_LOAD")] + all[code("MEM_STALL_ANY_STORE")])/all[code("EXEC_STALL_CYCLE")])
+            all["L1_Bound"] = 100.0* ((all[code("MEM_STALL_ANY_LOAD")] - all[code("MEM_STALL_L1MISS")])/all[code("EXEC_STALL_CYCLE")])
+            all["L2_Bound"] = 100.0* ((all[code("MEM_STALL_L1MISS")] - all[code("MEM_STALL_L2MISS")])/all[code("EXEC_STALL_CYCLE")])
+            all["L3_Bound_or_DRAM"] = 100.0* (all[code("MEM_STALL_L2MISS")]/all[code("EXEC_STALL_CYCLE")])
+            all["Store_Bound"] = 100.0* (all[code("MEM_STALL_ANY_STORE")]/all[code("EXEC_STALL_CYCLE")])
+            all["Core_Bound"] = 100.0* ((all[code("EXEC_STALL_CYCLE")] - all[code("MEM_STALL_ANY_LOAD")] - all[code("MEM_STALL_ANY_STORE")])/all[code("EXEC_STALL_CYCLE")])
 
+            all["LL_hit_rate"] = 100.0* (1.0 - all[code("LL_CACHE_MISS")]/all[code("LL_CACHE")])
+            all["LL_hit_rate2"] = 100.0*(all[code("rd_hit_cpipe")] + all[code("rd_hit_spipe")])/all[code("rd_spipe")]
 
-        print(all[code("rd_hit_cpipe")])
-        print(all[code("rd_hit_spipe")])
-        print(all[code("rd_spipe")])
-        all["LL_hit_rate"] = 100.0* (1.0 - all[code("LL_CACHE_MISS")]/all[code("LL_CACHE")])
-        all["LL_hit_rate2"] = (all[code("rd_hit_cpipe")] + all[code("rd_hit_spipe")])/all[code("rd_spipe")]
+            all["Remote_accesses"] = 100.0* (all[code("REMOTE_ACCESS")]/(all[code("MEM_ACCESS_LD")] + all[code("MEM_ACCESS_ST")]))
 
+            all["L1_SBW"] = all[code("L1D_CACHE")] * 16 / (all["duration_time"])
+            all["L1_SBW_percent"] = 100.0 * all["L1_SBW"] / kunpeng_characteristics["bandwidths"]["L1"]
 
-        all["Remote_accesses"] = 100.0* (all[code("REMOTE_ACCESS")]/(all[code("MEM_ACCESS_LD")] + all[code("MEM_ACCESS_ST")]))
+            all["L2_SBW"] = all[code("L2D_CACHE")] * 64 / (all["duration_time"])
+            all["L2_SBW_percent"] = 100.0 * all["L2_SBW"] / kunpeng_characteristics["bandwidths"]["L2"]
 
-        all["L1_SBW"] = all[code("L1D_CACHE")] * 16 / (all["duration_time"])
-        all["L1_SBW_percent"] = 100.0 * all["L1_SBW"] / kunpeng_characteristics["bandwidths"]["L1"]
+            all["L3_SBW"] = all[code("rd_spipe")] * 64 / (all["duration_time"])
+            all["L3_SBW_percent"] = 100.0 * all["L3_SBW"] * 64 / kunpeng_characteristics["bandwidths"]["L3"]
 
-        all["L2_SBW"] = all[code("L2D_CACHE")] * 64 / (all["duration_time"])
-        all["L2_SBW_percent"] = 100.0 * all["L2_SBW"] / kunpeng_characteristics["bandwidths"]["L2"]
+            all["DRAM_SBW"] = (all[code("flux_rd")] + all[code("flux_wr")]) * 32 / (all["duration_time"])
+            all["DRAM_SBW_percent"] = 100.0 * all["DRAM_SBW"] / kunpeng_characteristics["bandwidths"]["DRAM"]
+        else:
+            all["LL_hit_rate"] = 100.0* (1.0 - all[code("LL_CACHE_MISS")]/all[code("LL_CACHE")])
+            all["LL_hit_rate2"] = 100.0*(all[code("rd_hit_cpipe")] + all[code("rd_hit_spipe")])/all[code("rd_spipe")]
 
-        all["L3_SBW"] = all[code("rd_spipe")] * 64 / (all["duration_time"])
-        all["L3_SBW_percent"] = 100.0 * all["L3_SBW"] * 64 / kunpeng_characteristics["bandwidths"]["L3"]
-
-        all["DRAM_SBW"] = (all[code("flux_rd")] + all[code("flux_wr")]) * 32 / (all["duration_time"])
-        all["DRAM_SBW_percent"] = 100.0 * all["DRAM_SBW"] / kunpeng_characteristics["bandwidths"]["DRAM"]
+            # Append 'hello' at the end of file
+            file_object.write(str(all["LL_hit_rate"]) + ", " + str(all["LL_hit_rate2"]) + "\n")
+            print("LL hit rate: " + str(all["LL_hit_rate"]) + ", " +  str(all["LL_hit_rate2"]))
 
     if architecture == "intel_xeon":
         all["LLC_hit_rate"] = 1.0 - (all["LLC-store-misses"] + all["LLC-load-misses"])/(all["LLC-stores"] + all["LLC-loads"])

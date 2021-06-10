@@ -16,7 +16,6 @@ all_tests_data = {"triada": {"radius": 256,
                              "mode": {"min": 0, "max": 9, "step": 1}},
                   "stencil_1D": {"mode": {"min": 0, "max": 1, "step": 1},
                                  "length": linear_length,
-                                 "threads": 32,
                                  "radius": {"min": 1, "max": 24, "step": 1}},
                   "stencil_2D": {"mode": {"min": 0, "max": 3, "step": 1},
                                  "radius": {"min": 1, "max": 3, "step": 1},
@@ -35,8 +34,10 @@ all_tests_data = {"triada": {"radius": 256,
                                         "mode": {"min": 0, "max": 3, "step": 1},
                                         "length": {"min": 64, "max": 512, "step": "mult", "step_val": 1.2}},
                   "random_access": {"length": linear_length,
-                                    "mode": {"min": 0, "max": 1, "step": 1},
-                                    "radius": {"min": 2, "max": 2097152, "step": "mult", "step_val": 2}}, # from 2 KB to 2 GB
+                                    "mode": 0,
+                                    "radius": {"min": 256, "max": 262144, "step": "mult", "step_val": 2}},
+                                    #"radius": {"min": 256, "max": 1024, "step": "mult", "step_val": 1.2}}, # from 256 KB to 64 MB in details
+                                    #"radius": {"min": 2, "max": 2097152, "step": "mult", "step_val": 2}}, # from 2 KB to 2 GB
                   "cache_bandwidths": {"length": 1024*1024*2,
                                        "mode": 0},
                   "rand_generator": {"length": linear_length,
@@ -60,8 +61,7 @@ all_tests_data = {"triada": {"radius": 256,
                   "prefix_sum": {"mode": {"min": 0, "max": 0, "step": 1},
                                  "length": {"min": 100000, "max": linear_length, "step": "mult", "step_val": 2}},
                   "saxpy_satis": {"length": linear_length,
-                                  "threads": 32,
-                                  "radius": {"min": 1, "max": 24, "step": 1}}, #actually R = num_threads
+                                  "threads": {"min": 0, "max": 64, "step": 1}}, #actually R = num_threads
                   }
 
 RA_RADIUS="2" # 2 KB

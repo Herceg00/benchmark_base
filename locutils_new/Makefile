@@ -22,14 +22,16 @@ ifeq ($(COMPILER),g++)
     CC_FLAGS= -O3 -fno-trapping-math -fopenmp-simd -fopenmp  -ffreestanding -fopt-info-vec-all=report.lst -ffast-math #gcc kunpeng
 endif
 
+ifeq ($(COMPILER),nvc++)
+    CC_FLAGS= -O3 -fast -Mvect=simd -Minfo -Munroll
+endif
+
 ifeq ($(COMPILER),icpc)
     CC_FLAGS=-O3 -D NOFUNCCALL -qopt-report=1 -qopt-report-phase=vec -qopenmp -ffreestanding -qopt-streaming-stores always -xCOMMON-AVX512 # icc
 endif
 
-ifdef DEBUG
-	CXXFLAGS := $(CC_FLAGS) -std=c++11 -w -Wall -Wextra -Wno-error=unused-parameter -Wno-error=unknown-pragmas -Wno-unknown-pragmas -Wno-misleading-indentation -I ../../external_libraries/VectorGraphLibrary/
-else
-	CXXFLAGS := $(CC_FLAGS) -std=c++11 -w -Wall -Wextra -Wno-error=unused-parameter -Wno-error=unknown-pragmas -Wno-unknown-pragmas -Wno-misleading-indentation -I ../../external_libraries/VectorGraphLibrary/
+ifneq ($(COMPILER),nvc++)
+	CXXFLAGS := -std=c++11 -w -Wall -Wextra -Wno-error=unused-parameter -Wno-error=unknown-pragmas -Wno-unknown-pragmas -Wno-misleading-indentation -I ../../external_libraries/VectorGraphLibrary/
 endif
 
 ifdef SIZE
@@ -51,7 +53,7 @@ TGT_OMP_NP = $(OUT_DIR)/omp_$(LOC_NP)_$(SIZE)
 
 TGT := $(TGT_OMP_NP)
 
-CMD := $(CXX) $(CPPFLAGS) $(CXXFLAGS) -I $(INC_DIR)
+CMD := $(CXX) $(CC_FLAGS) $(CPPFLAGS) $(CXXFLAGS) -I $(INC_DIR)
 
 all : $(TGT)
 
