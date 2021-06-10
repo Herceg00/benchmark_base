@@ -239,20 +239,20 @@ void Kernel(int core_type, AT *a, AT *b, size_t size)
 
             // rectangle
         case 2:
-            //#ifdef __USE_KUNPENG__
+            #ifdef __USE_KUNPENG__
             Kernel_rectangle_kunpeng_optimized(a, b, size);
-            //#else
-            //Kernel_rectangle(a, b, size);
-            //#endif
+            #else
+            Kernel_rectangle(a, b, size);
+            #endif
             break;
 
             // cross
         case 3:
-            //#ifdef __USE_KUNPENG__
+            #ifdef __USE_KUNPENG__
             Kernel_cross_kunpeng_optimized(a, b, size);
-            //#else
-            //Kernel_cross(a, b, size);
-            //#endif
+            #else
+            Kernel_cross(a, b, size);
+            #endif
             break;
 
         default: fprintf(stderr, "unexpected core type in stencil 2D");
