@@ -52,6 +52,8 @@ void CallKernel(int mode)
 
     #ifndef METRIC_RUN
 	counter.print_average_counters(true);
+    counter.print_bw();
+    counter.print_flops();
     #endif
 
 	delete []a;
@@ -60,6 +62,7 @@ void CallKernel(int mode)
 
 extern "C" int main()
 {
+    omp_set_num_threads(THREADS);
     CallKernel((int)MODE);
     return 0;
 }

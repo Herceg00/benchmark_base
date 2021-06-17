@@ -14,9 +14,10 @@ linear_length = 800000000
 all_tests_data = {"triada": {"radius": 256,
                              "length": linear_length,
                              "mode": {"min": 0, "max": 9, "step": 1}},
-                  "stencil_1D": {"mode": {"min": 0, "max": 1, "step": 1},
-                                 "length": linear_length,
-                                 "radius": {"min": 1, "max": 24, "step": 1}},
+                  "stencil_1D": {"mode": {"min": 0, "max": 0, "step": 1},
+                                 "length": 10000000,
+                                 "radius": {"min": 17, "max": 17, "step": 1},
+                                 "threads": {"min": 1, "max": 64, "step": 1}},
                   "stencil_2D": {"mode": {"min": 0, "max": 3, "step": 1},
                                  "radius": {"min": 1, "max": 3, "step": 1},
                                  "length": {"min": 256, "max": 131072, "step": "mult", "step_val": 2}},
@@ -62,6 +63,16 @@ all_tests_data = {"triada": {"radius": 256,
                                  "length": {"min": 100000, "max": linear_length, "step": "mult", "step_val": 2}},
                   "saxpy_satis": {"length": linear_length,
                                   "threads": {"min": 0, "max": 64, "step": 1}}, #actually R = num_threads
+                  "spmv": {"length": {"min": 1000, "max": 2000, "step": 1000},
+                           "radius": {"min": 20, "max": 25, "step": 5},
+                           "mode": {"min": 0, "max": 2, "step": 1},
+                           "rand_mode": {"min": 0, "max": 1, "step": 1}, 
+                           "threads": {"min": 64, "max": 64, "step": 1}},
+                    #length - matrix and vector dimension
+                    #radius - the degree of sparsity of the matrix (in % of all matrix elements)
+                    #mode - type of parallel for schedule (0 - static, 1 - guided, 2 - dynamic)
+                    #rand_mode - the way to get random numbers (0 - normal distribution, 1 - gaussian)
+                    #threads - amount of threads used in program
                   }
 
 RA_RADIUS="2" # 2 KB

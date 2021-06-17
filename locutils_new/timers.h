@@ -66,6 +66,19 @@ public:
         }
         std::cout << "flops_per_byte: " << (double) flops_executed / (double) bytes_requested << std::endl;
     }
+
+    void print_bw() {
+        FILE *fres = fopen("bw.txt", "a");
+        fprintf(fres, "%f\n", total_bw/LOC_REPEAT);
+        fclose(fres);
+    }
+
+    void print_flops()
+    {
+        FILE *fres = fopen("flops.txt", "a");
+        fprintf(fres, "%f\n", total_flops/LOC_REPEAT);
+        fclose(fres);   
+    }
 };
 
 #endif

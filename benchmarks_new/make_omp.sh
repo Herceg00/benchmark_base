@@ -1,4 +1,14 @@
 #!/bin/bash
+
+if [ ! -d "../external_libraries" ] 
+then
+    echo "Directory ../external_libraries DOES NOT exists." 
+    mkdir ../external_libraries
+    cd ../external_libraries
+    git clone https://github.com/afanasyev-ilya/VectorGraphLibrary.git
+    echo "VectorGraphLibrary has been installed." 
+fi
+
 export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/usr/local/lib64:/usr/lib64
 
 while [ $# -gt 0 ]; do
@@ -13,7 +23,7 @@ while [ $# -gt 0 ]; do
       LENGTH="${1#*=}"
       ;;
     --radius=*)
-      ELEMS="${1#*=}"
+      RADIUS="${1#*=}"
       ;;
     --compiler=*)
       COMPILER="${1#*=}"
@@ -51,11 +61,11 @@ cd ./"$PROG_NAME"
 rm -r bin
 
 if [[ $METRICS = "false" ]]; then
-    make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$MODE COMPILER=$COMPILER METRIC_FLAG=NULL THREADS=$EXP_THREADS
+    make RADIUS=$RADIUS LENGTH=$LENGTH MODE=$MODE COMPILER=$COMPILER METRIC_FLAG=NULL THREADS=$EXP_THREADS
 fi
 
 if [[ $METRICS = "true" ]]; then
-    make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$MODE COMPILER=$COMPILER METRIC_FLAG=METRIC_RUN THREADS=$EXP_THREADS
+    make RADIUS=$RADIUS LENGTH=$LENGTH MODE=$MODE COMPILER=$COMPILER METRIC_FLAG=METRIC_RUN THREADS=$EXP_THREADS
 fi
 
 rm $OUTPUT
