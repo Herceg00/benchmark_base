@@ -4,6 +4,7 @@
 const int BENCH_COUNT = 4;
 
 #include <omp.h>
+#include <Eigen/Dense>
 
 const char* type_names[BENCH_COUNT] = {
 	"ij", // 0
@@ -87,6 +88,19 @@ void KernelBlockTranspIJ(AT *a, AT *b, size_t block_size, size_t size)
     }
 }
 
+template<typename AT>
+void KernelBlockEigen(AT *a, AT *b, size_t block_size, size_t size, Eigen::MatrixXd &matr_a, Eigen::MatrixXd &matr_b) {
+
+#pragma omp parallel for schedule(static)
+    for (size_t ii = 0; ii < size; ii += block_size) {
+        for (size_t jj = 0; jj < size; jj += block_size) {
+            matr_b.block(ii, jj, block_size , block_size) = matr_a.block(jj, ii, block_size, block_size).transpose();
+        }
+    }
+}
+
+
+
 template <typename AT>
 void KernelBlockTranspJI(AT *a, AT *b, size_t block_size, size_t size)
 {
@@ -109,7 +123,7 @@ void KernelBlockTranspJI(AT *a, AT *b, size_t block_size, size_t size)
 
 
 template <typename AT>
-void Kernel(int core_type, AT *a, AT *b, size_t block_size, size_t size)
+void Kernel(int core_type, AT *a, AT *b, size_t block_size, size_t size, Eigen::MatrixXd &matr_a, Eigen::MatrixXd &matr_b)
 {
 	switch(core_type)
 	{
@@ -124,6 +138,11 @@ void Kernel(int core_type, AT *a, AT *b, size_t block_size, size_t size)
 
 		//ji block
 		case 3: KernelBlockTranspJI(a, b, block_size, size); break;
+
+            //ji block
+        case 4:
+                KernelBlockEigen(a, b, block_size, size, matr_a, matr_b);
+                break;
 
 		default: fprintf(stderr, "unexpected core type in matrix transpose");
 	}
