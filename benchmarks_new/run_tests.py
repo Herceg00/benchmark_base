@@ -8,6 +8,7 @@ from scripts.roofline import generate_roofline_from_profiling_data
 from scripts.arch_properties import get_arch
 
 linear_length = 800000000
+max_threads = 18
 
 
 # all upper borders are inclusive
@@ -17,7 +18,7 @@ all_tests_data = {"triada": {"radius": 256,
                   "stencil_1D": {"mode": {"min": 0, "max": 0, "step": 1},
                                  "length": 10000000,
                                  "radius": {"min": 17, "max": 17, "step": 1},
-                                 "threads": {"min": 1, "max": 64, "step": 1}},
+                                 "threads": {"min": 1, "max": max_threads, "step": 1}},
                   "stencil_2D": {"mode": {"min": 0, "max": 3, "step": 1},
                                  "radius": {"min": 1, "max": 3, "step": 1},
                                  "length": {"min": 256, "max": 131072, "step": "mult", "step_val": 2}},
@@ -46,16 +47,18 @@ all_tests_data = {"triada": {"radius": 256,
                   "bfs": {"mode": 0,
                           "length": {"min": 12, "max": 23, "step": 1}
                           },
-                  "bellman_ford": {"mode": {"min": 0, "max": 1, "step": 1},
-                          "length": {"min": 12, "max": 23, "step": 1}
+                  "bellman_ford": {"mode": 0,
+                          "length": 18,
+                          "threads": {"min": 1, "max": max_threads, "step": 1}
                           },
                   "page_rank": {"mode": {"min": 0, "max": 1, "step": 1},
-                                "length": {"min": 12, "max": 23, "step": 1}
+                                "length": {"min": 12, "max": 23, "step": 1},
+                                "threads": {"min": 1, "max": max_threads, "step": 1}
                                 },
                   "n_body": {"mode": 0, # non-vector mode
-                             "length": 16384,
+                             "length": 4096,
                              #"length": {"min": 1024, "max": 32768, "step": "mult", "step_val": 2},
-                             "threads": {"min": 1, "max": 64, "step": 1}},
+                             "threads": {"min": 1, "max": max_threads, "step": 1}},
                   "atomic_graphs": {"mode": {"min": 0, "max": 1, "step": 1},
                                     "length": {"min": 12, "max": 18, "step": 1}},
                   "strided_walks": {"length": linear_length,
@@ -64,12 +67,12 @@ all_tests_data = {"triada": {"radius": 256,
                   "prefix_sum": {"mode": {"min": 0, "max": 0, "step": 1},
                                  "length": {"min": 100000, "max": linear_length, "step": "mult", "step_val": 2}},
                   "saxpy_satis": {"length": linear_length,
-                                  "threads": {"min": 0, "max": 64, "step": 1}}, #actually R = num_threads
-                  "spmv": {"length": {"min": 1000, "max": 2000, "step": 1000},
-                           "radius": 5,
-                           "mode": {"min": 0, "max": 2, "step": 1},
-                           "rand_mode": {"min": 0, "max": 1, "step": 1},
-                           "threads": {"min": 64, "max": 64, "step": 1}},
+                                  "threads": {"min": 1, "max": max_threads, "step": 1}}, #actually R = num_threads
+                  "spmv": {"length": {"min": 10000, "max": 10000, "step": 1000},
+                           "radius": 10,
+                           "mode": 0,
+                           "rand_mode": 0,
+                           "threads": {"min": 1, "max": max_threads, "step": 1}},
                     #length - matrix and vector dimension
                     #radius - the degree of sparsity of the matrix (in % of all matrix elements)
                     #mode - type of parallel for schedule (0 - static, 1 - guided, 2 - dynamic)
