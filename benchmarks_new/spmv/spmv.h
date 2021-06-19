@@ -148,14 +148,14 @@ void mul_with_static_schedule(vector<nz_matrix_element> &matrix, matrix_head &he
     omp_set_num_threads(THREADS);
     #pragma omp parallel num_threads(THREADS)
     {
-        #pragma omp for private(j, tmp) schedule(static)
+        #pragma omp for schedule(static)
         for (int i=0; i<M; i++)
         {
             double result = 0.0;
-            for (j = rsIndex[i]; j <= reIndex[i]; j++)
+            for (int j = rsIndex[i]; j <= reIndex[i]; j++)
             {
-                tmp = cIndex[j];
-                result += val[j] * v[tmp];
+                int cidx = cIndex[j];
+                result += val[j] * v[cidx];
             }
             res[i] = result;
         }
@@ -167,14 +167,14 @@ void mul_with_guided_schedule(vector<nz_matrix_element> &matrix, matrix_head &he
     omp_set_num_threads(THREADS);
     #pragma omp parallel num_threads(THREADS)
     {
-        #pragma omp for private(j, tmp) schedule(guided)
+        #pragma omp for schedule(guided)
         for (int i=0; i<M; i++)
         {
             double result = 0.0;
-            for (j = rsIndex[i]; j <= reIndex[i]; j++)
+            for (int j = rsIndex[i]; j <= reIndex[i]; j++)
             {
-                tmp = cIndex[j];
-                result += val[j] * v[tmp];
+                int cidx = cIndex[j];
+                result += val[j] * v[cidx];
             }
             res[i] = result;
         }
@@ -190,10 +190,10 @@ void mul_with_dynamic_schedule(vector<nz_matrix_element> &matrix, matrix_head &h
         for (int i=0; i<M; i++)
         {
             double result = 0.0;
-            for (j = rsIndex[i]; j <= reIndex[i]; j++)
+            for (int j = rsIndex[i]; j <= reIndex[i]; j++)
             {
-                tmp = cIndex[j];
-                result += val[j] * v[tmp];
+                int cidx = cIndex[j];
+                result += val[j] * v[cidx];
             }
             res[i] = result;
         }

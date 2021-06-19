@@ -46,8 +46,10 @@ while [ $# -gt 0 ]; do
     --redundant=*)
       REDUNDANT="${1#*=}"
       ;;
+    --rand_mode=*)
+      RAND_MODE="${1#*=}"
+      ;;
     *)
-
       printf "***************************\n"
       printf "* Error: Invalid argument.*\n"
       printf "***************************\n"
@@ -61,11 +63,11 @@ cd ./"$PROG_NAME"
 rm -r bin
 
 if [[ $METRICS = "false" ]]; then
-    make RADIUS=$RADIUS LENGTH=$LENGTH MODE=$MODE COMPILER=$COMPILER METRIC_FLAG=NULL THREADS=$EXP_THREADS
+    make RADIUS=$RADIUS RAND_MODE=$RAND_MODE LENGTH=$LENGTH MODE=$MODE COMPILER=$COMPILER METRIC_FLAG=NULL THREADS=$EXP_THREADS
 fi
 
 if [[ $METRICS = "true" ]]; then
-    make RADIUS=$RADIUS LENGTH=$LENGTH MODE=$MODE COMPILER=$COMPILER METRIC_FLAG=METRIC_RUN THREADS=$EXP_THREADS
+    make RADIUS=$RADIUS RAND_MODE=$RAND_MODE LENGTH=$LENGTH MODE=$MODE COMPILER=$COMPILER METRIC_FLAG=METRIC_RUN THREADS=$EXP_THREADS
 fi
 
 rm $OUTPUT

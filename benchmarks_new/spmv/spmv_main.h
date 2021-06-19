@@ -63,7 +63,7 @@ void CallKernel(int core_type)
 	}
 
     #ifndef METRIC_RUN
-    counter.print_flops_div_bw();
+    counter.print_average_counters(true);
     #endif
 }
 

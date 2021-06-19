@@ -52,8 +52,10 @@ all_tests_data = {"triada": {"radius": 256,
                   "page_rank": {"mode": {"min": 0, "max": 1, "step": 1},
                                 "length": {"min": 12, "max": 23, "step": 1}
                                 },
-                  "n_body": {"mode": {"min": 0, "max": 0, "step": 1}, # non-vector mode
-                             "length": {"min": 1024, "max": 32768, "step": "mult", "step_val": 2}},
+                  "n_body": {"mode": 0, # non-vector mode
+                             "length": 16384,
+                             #"length": {"min": 1024, "max": 32768, "step": "mult", "step_val": 2},
+                             "threads": {"min": 1, "max": 64, "step": 1}},
                   "atomic_graphs": {"mode": {"min": 0, "max": 1, "step": 1},
                                     "length": {"min": 12, "max": 18, "step": 1}},
                   "strided_walks": {"length": linear_length,
@@ -64,9 +66,9 @@ all_tests_data = {"triada": {"radius": 256,
                   "saxpy_satis": {"length": linear_length,
                                   "threads": {"min": 0, "max": 64, "step": 1}}, #actually R = num_threads
                   "spmv": {"length": {"min": 1000, "max": 2000, "step": 1000},
-                           "radius": {"min": 20, "max": 25, "step": 5},
+                           "radius": 5,
                            "mode": {"min": 0, "max": 2, "step": 1},
-                           "rand_mode": {"min": 0, "max": 1, "step": 1}, 
+                           "rand_mode": {"min": 0, "max": 1, "step": 1},
                            "threads": {"min": 64, "max": 64, "step": 1}},
                     #length - matrix and vector dimension
                     #radius - the degree of sparsity of the matrix (in % of all matrix elements)
