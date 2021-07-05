@@ -136,7 +136,7 @@ def run_benchmark(bench_name, bench_params, options):  # benchmarks a specified 
         list_of_params = "--redundant=" + "0"
     else:
         # generate list of parameters to be passed into benchmark (currently only threads)
-        print("NO Threads in param")
+        print("No threads in param, using all available threads")
         threads = get_cores_count()
         if int(options.sockets) > 1:
             threads = int(options.sockets) * threads
