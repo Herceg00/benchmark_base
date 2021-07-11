@@ -10,7 +10,7 @@ using std::string;
 #define _7MB_ 7340032 //bytes
 
 template<typename AT>
-void Init(AT *a, AT **chunk, float32x4_t *local_sum, size_t size)
+void Init(AT *a, AT **chunk, size_t size)
 {
     #pragma omp parallel 
     {
@@ -21,17 +21,13 @@ void Init(AT *a, AT **chunk, float32x4_t *local_sum, size_t size)
         }
     }
     unsigned chunk_size = _7MB_ / sizeof(float);
-    for (int i = 0; i < omp_get_num_threads(); i++) {
+    for (int i = 0; i < omp_get_max_threads(); i++) {
         chunk[i] = a + i * chunk_size;
-        local_sum[i][0] = 0;
-        local_sum[i][1] = 0;
-        local_sum[i][2] = 0;
-        local_sum[i][3] = 0;
     }
 }
 
 template<typename AT>
-void Kernel_read(AT *a, AT **chunk, float32x4_t *local_sum, size_t size)
+void Kernel_read(AT *a, AT **chunk, size_t size)
 {
     #pragma omp parallel
     {
@@ -39,39 +35,39 @@ void Kernel_read(AT *a, AT **chunk, float32x4_t *local_sum, size_t size)
         unsigned int thread_num = myseed;
         float *chunk_start = chunk[thread_num];
         unsigned int offset = 0;
-        #pragma omp for schedule(static)
+        float32x4_t local_sum = {0, 0, 0, 0};
         for(int i = 0; i < RADIUS; i++)
         {
             float32x4_t data = vld1q_f32(chunk_start + offset);
-            local_sum[thread_num] = vaddq_f32(local_sum[thread_num], data);
+            local_sum = vaddq_f32(local_sum, data);
 
             offset += 4;
             data = vld1q_f32(chunk_start + offset);
-            local_sum[thread_num] = vaddq_f32(local_sum[thread_num], data);
+            local_sum = vaddq_f32(local_sum, data);
 
             offset += 4;
             data = vld1q_f32(chunk_start + offset);
-            local_sum[thread_num] = vaddq_f32(local_sum[thread_num], data);
+            local_sum = vaddq_f32(local_sum, data);
 
             offset += 4;
             data = vld1q_f32(chunk_start + offset);
-            local_sum[thread_num] = vaddq_f32(local_sum[thread_num], data);
+            local_sum = vaddq_f32(local_sum, data);
 
             offset += 4;
             data = vld1q_f32(chunk_start + offset);
-            local_sum[thread_num] = vaddq_f32(local_sum[thread_num], data);
+            local_sum = vaddq_f32(local_sum, data);
 
             offset += 4;
             data = vld1q_f32(chunk_start + offset);
-            local_sum[thread_num] = vaddq_f32(local_sum[thread_num], data);
+            local_sum = vaddq_f32(local_sum, data);
 
             offset += 4;
             data = vld1q_f32(chunk_start + offset);
-            local_sum[thread_num] = vaddq_f32(local_sum[thread_num], data);
+            local_sum = vaddq_f32(local_sum, data);
 
             offset += 4;
             data = vld1q_f32(chunk_start + offset);
-            local_sum[thread_num] = vaddq_f32(local_sum[thread_num], data);
+            local_sum = vaddq_f32(local_sum, data);
 
             if (offset > _32KB_ / sizeof(float)) {
                 offset = 0;
@@ -81,8 +77,8 @@ void Kernel_read(AT *a, AT **chunk, float32x4_t *local_sum, size_t size)
 }
 
 template<typename AT>
-void Kernel(int core_type, AT *a, AT **chunk, float32x4_t *local_sum, size_t size)
+void Kernel(int core_type, AT *a, AT **chunk, size_t size)
 {
     if(core_type == 0)
-        Kernel_read(a, chunk, local_sum, size);
+        Kernel_read(a, chunk, size);
 }

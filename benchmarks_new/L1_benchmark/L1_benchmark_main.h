@@ -15,17 +15,16 @@ typedef float base_type;
 void CallKernel(int mode)
 {
     base_type *a = new base_type[LENGTH];
-    float **chunk = (float **)malloc(sizeof(float *) * omp_get_num_threads());
-    float32x4_t *local_sum = new float32x4_t[omp_get_num_threads()];
+    float **chunk = (float **)malloc(sizeof(float *) * omp_get_max_threads());
     #ifndef METRIC_RUN
-     size_t bytes_requested = (size_t) RADIUS * 4 * sizeof(float) * 8;
-    size_t flops_requested = (size_t) RADIUS * 80;
+    size_t bytes_requested = (size_t) RADIUS * 4 * sizeof(float) * 8 * omp_get_max_threads();
+    size_t flops_requested = (size_t) RADIUS * 8 * omp_get_max_threads();
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
 
     #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * USUAL_METRICS_REPEAT;
-    Init(a, chunk, local_sum, LENGTH);
+    Init(a, chunk, LENGTH);
     #else
     int iterations = LOC_REPEAT;
     #endif
@@ -35,12 +34,12 @@ void CallKernel(int mode)
         fprintf(stderr, "%d\n", i);
         #ifndef METRIC_RUN
         std::cout << "cache anych" << std::endl;
-		Init(a, chunk, local_sum, LENGTH);
+		Init(a, chunk, LENGTH);
 		locality::utils::CacheAnnil(3);
 		counter.start_timing();
         #endif
 
-		Kernel(mode, a, chunk, local_sum, LENGTH);
+		Kernel(mode, a, chunk, LENGTH);
 
         #ifndef METRIC_RUN
 		counter.end_timing();
@@ -57,7 +56,6 @@ void CallKernel(int mode)
 
 	delete []a;
 	free(chunk);
-	delete []local_sum;
 }
 
 extern "C" int main()
