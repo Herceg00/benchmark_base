@@ -6,136 +6,177 @@
 #include <random>
 #include <cstdio>
 #include <cstdlib>
-//#include <cdouble>
 #include <set>
-
+#include <cmath>
+#include <parallel/algorithm>
+#include <chrono>
 using namespace std;
+using namespace chrono;
 
-struct coord {
-    int y;
-    int x;
-};  
+#define base_type double
+#define nz (unsigned long long) (LENGTH) * (unsigned long long) (RADIUS)
 
-struct nz_matrix_element {
-    int row_index;
-    int column_index;
-    double value;
+struct csr {
+    vector<base_type> value;
+    vector<unsigned long long> column_indexes;
+    vector<unsigned long long> row_indexing;
+    csr () {
+        value.resize(nz);
+        column_indexes.resize(nz);
+        row_indexing.resize(LENGTH + 1);
+    }
 };
-
-struct matrix_head {
-    int rows_am;
-    int columns_am;
-    int nz;
-};
-
-bool operator<(const coord &a, const coord &b) {
-    if (a.y != b.y) {
-        return a.y < b.y;
-    }
-    return a.x < b.x;
-}
-
-void get_matrix1(vector<nz_matrix_element> &v, matrix_head &h) //square matrix
+/*
+void print_csr(csr &matrix)
 {
-    srand(time(0));
-
-    int nz = (LENGTH * LENGTH) / 100 * RADIUS;
-    h.rows_am = LENGTH;
-    h.columns_am = LENGTH;
-    h.nz = nz;
-
-    set<coord> s;
-
+    fprintf(stderr, "-------------------------------\n");
     for (int i = 0; i < nz; i++) {
-        coord a;
-        a.y = rand() % LENGTH;
-        a.x = rand() % LENGTH;
-        while (s.find(a) != s.end()) {
-            a.y = rand() % LENGTH;
-            a.x = rand() % LENGTH;
-        }   
-        double val = static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / SHRT_MAX)) - static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / SHRT_MAX)); 
-        v.push_back({a.y, a.x, val});
+        fprintf(stderr, "%d) row: %d column: %d value: %lf\n", i, matrix.row_indexes[i], matrix.column_indexes[i], matrix.value[i]);
     }
+    fprintf(stderr, "-------------------------------\n");
 }
+*/
 
-void get_matrix2(vector<nz_matrix_element> &v, matrix_head &h)
+csr generate_csr_matrix_ud() // uniform distribution
 {
-    default_random_engine generator;
-    normal_distribution<double> distribution(-LENGTH, LENGTH);
 
-    int nz = (LENGTH * LENGTH) / 100 * RADIUS;
-    h.rows_am = LENGTH;
-    h.columns_am = LENGTH;
-    h.nz = nz;
+    double start, end;
+    fprintf(stderr, "Creating a matrix...\n\n");
 
-    set<coord> s;
-
-    for (int i = 0; i < nz; i++) {
-        coord a;
-        a.y = abs((int) distribution(generator)) % LENGTH;
-        a.x = abs((int) distribution(generator)) % LENGTH;
-        while (s.find(a) != s.end()) {
-            a.y = abs((int) distribution(generator)) % LENGTH;
-            a.x = abs((int) distribution(generator)) % LENGTH;
-        }   
-        double val = static_cast <double> (distribution(generator)) / (static_cast <double> (RAND_MAX / SHRT_MAX)) - static_cast <double> (distribution(generator)) / (static_cast <double> (RAND_MAX / SHRT_MAX)); 
-        v.push_back({a.y, a.x, val});
-    }
-}
-
-void get_vector(vector<double> &v)
-{
-    srand(time(0));
-    for (int i = 0; i < LENGTH; i++) {
-        double val = static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / SHRT_MAX)) - static_cast <double> (rand()) / (static_cast <double> (RAND_MAX / SHRT_MAX)); 
-        v.push_back(val);
-    }
-}
-
-void quicksort(double* a, double* vindex, int* rindex, int* cindex, int n)
-{
-    int i, j, m;
-    double p, t, s;
-    if (n < 2)
-        return;
-    p = vindex[n / 2];
-
-    for (i = 0, j = n - 1;; i++, j--) {
-        while (vindex[i]<p)
-            i++;
-        while (p<vindex[j])
-            j--;
-        if (i >= j)
-            break;
-        t = a[i];
-        a[i] = a[j];
-        a[j] = t;
-
-        s = vindex[i];
-        vindex[i] = vindex[j];
-        vindex[j] = s;
-
-        m = rindex[i];
-        rindex[i] = rindex[j];
-        rindex[j] = m;
-
-        m = cindex[i];
-        cindex[i] = cindex[j];
-        cindex[j] = m;
-    }
-    quicksort(a, vindex, rindex, cindex, i);
-    quicksort(a + i, vindex + i, rindex + i, cindex + i, n - i);
-}
-
-void getmul(double *val, vector<double> &vec, int* rIndex, int*cIndex, int nz, double* res)
-{
-    int i; 
-    for (i = 0; i < nz; i++)
+    vector<pair<int, int>> element_location(nz);
+    
+    fprintf(stderr, "1)Generating rows and columns. START  ----> ");
+    start = omp_get_wtime();
+    #pragma omp parallel 
     {
-        int rInd = rIndex[i];
-        int cInd = cIndex[i];
-        res[rInd] += val[i] * vec[cInd];
+        unsigned int myseed = omp_get_thread_num();
+        #pragma omp for schedule(static)
+        for (unsigned long long i = 0; i < nz; i++) {
+                int column = rand_r(&myseed) % LENGTH;
+                int row = rand_r(&myseed) % LENGTH;
+                element_location[i] = {row, column};
+        }
+
+    }
+    fprintf(stderr, "FINISH  ");
+    end = omp_get_wtime();
+    fprintf(stderr, "Time taken: %.2fs\n\n", end - start);
+
+    fprintf(stderr, "2)Sorting. START  ----> ");
+    start = omp_get_wtime();
+
+    __gnu_parallel::sort(element_location.begin(), element_location.end());
+
+    fprintf(stderr, "FINISH  ");
+    end = omp_get_wtime();
+    fprintf(stderr, "Time taken: %.2fs\n\n", end - start);
+
+    csr matrix;
+    vector<int> am_in_row(LENGTH);
+
+    fprintf(stderr, "3)Making CSR. START  ----> ");
+    start = omp_get_wtime();
+    #pragma omp parallel 
+    {
+        unsigned int myseed = omp_get_thread_num();
+        #pragma omp for schedule(static)
+        for (unsigned long long i = 0; i < nz; i++) {
+            matrix.value[i] = static_cast <base_type> (rand_r(&myseed)) / (static_cast <base_type> (RAND_MAX / SHRT_MAX)) - static_cast <base_type> (rand_r(&myseed)) / (static_cast <base_type> (RAND_MAX / SHRT_MAX));
+            matrix.column_indexes[i] = element_location[i].second;
+            #pragma omp atomic
+            am_in_row[element_location[i].first]++;
+        }
+    }
+    for (unsigned long long i = 1; i <= LENGTH; i++) {
+        matrix.row_indexing[i] = matrix.row_indexing[i - 1] + am_in_row[i - 1];
+    }
+
+    fprintf(stderr, "FINISH  ");
+    end = omp_get_wtime();
+    fprintf(stderr, "Time taken: %.2fs\n\n", end - start);
+    fprintf(stderr, "The matrix has been created\n\n");
+
+    return matrix;
+}
+
+
+base_type get_thread_safe_normal_distribution_number(const double & m, const double & d) { // !!!
+    static thread_local mt19937 generator; // !!!
+    normal_distribution<double> distribution(m, d); // !!!
+    return distribution(generator); // !!!
+} // !!!
+
+csr generate_csr_matrix_nd() // normal distribution
+{
+    double start, end;
+    fprintf(stderr, "Creating a matrix...\n\n");
+
+    vector<pair<int, int>> element_location(nz);
+
+    fprintf(stderr, "1)Generating rows and columns. START  ----> ");
+    start = omp_get_wtime();
+    #pragma omp parallel
+    {
+        #pragma omp for schedule(static)
+        for (unsigned long long i = 0; i < nz; i++) {
+                int column = abs(int(get_thread_safe_normal_distribution_number(LENGTH / 2, LENGTH / 5))) % LENGTH; // !!!
+                int row = abs(int(get_thread_safe_normal_distribution_number(LENGTH / 2, LENGTH / 5))) % LENGTH; // !!!
+                element_location[i] = {row, column};
+        }
+
+    }
+    fprintf(stderr, "FINISH  ");
+    end = omp_get_wtime();
+    fprintf(stderr, "Time taken: %.2fs\n\n", end - start);
+
+    fprintf(stderr, "2)Sorting. START  ----> ");
+    start = omp_get_wtime();
+
+    __gnu_parallel::sort(element_location.begin(), element_location.end());
+
+    fprintf(stderr, "FINISH  ");
+    end = omp_get_wtime();
+    fprintf(stderr, "Time taken: %.2fs\n\n", end - start);
+
+    csr matrix;
+    vector<int> am_in_row(LENGTH);
+
+    fprintf(stderr, "3)Making CSR. START  ----> ");
+    start = omp_get_wtime();
+    #pragma omp parallel
+    {
+        #pragma omp for schedule(static)
+        for (unsigned long long i = 0; i < nz; i++) {
+            matrix.value[i] = get_thread_safe_normal_distribution_number(RADIUS, 1e6); // !!!
+            matrix.column_indexes[i] = element_location[i].second;
+            #pragma omp atomic
+            am_in_row[element_location[i].first]++;
+        }
+    }
+    for (unsigned long long i = 1; i <= LENGTH; i++) {
+        matrix.row_indexing[i] = matrix.row_indexing[i - 1] + am_in_row[i - 1];
+    }
+
+    fprintf(stderr, "FINISH  ");
+    end = omp_get_wtime();
+    fprintf(stderr, "Time taken: %.2fs\n\n", end - start);
+    fprintf(stderr, "The matrix has been created\n\n");
+
+    return matrix;
+}
+
+void get_vector(vector<base_type> &v)
+{
+
+    v.resize(LENGTH);
+    #pragma omp parallel 
+    {
+        unsigned int myseed = omp_get_thread_num();
+        #pragma omp for schedule (static)
+        for (unsigned long long i = 0; i < LENGTH; i++) {
+            base_type val = static_cast <base_type> (rand_r(&myseed)) / (static_cast <base_type> (RAND_MAX / SHRT_MAX)) - static_cast <base_type> (rand_r(&myseed)) / (static_cast <base_type> (RAND_MAX / SHRT_MAX)); 
+            v[i] = val;
+        }
     }
 }
 

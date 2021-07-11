@@ -74,7 +74,6 @@ rm $OUTPUT
 
 if [ $NO_RUN = "false" ]; then
     export OMP_NUM_THREADS=$EXP_THREADS
-    export OMP_PROC_BIND=true
     export OMP_PROC_BIND=close
     export LD_LIBRARY_PATH=/opt/intel/oneapi/compiler/2021.1.2/linux/compiler/lib/intel64_lin/:$LD_LIBRARY_PATH
     if [[ $METRICS = "true" ]]; then

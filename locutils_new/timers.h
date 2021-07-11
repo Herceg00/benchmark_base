@@ -15,11 +15,11 @@ class PerformanceCounter {
     double local_bw = 0;
     double local_time = 0;
     double local_flops = 0;
-    size_t bytes_requested;
-    size_t flops_executed;
+    unsigned long long bytes_requested;
+    unsigned long long flops_executed;
     double type = 0;
 public:
-    PerformanceCounter(size_t bytes, size_t flops):bytes_requested(bytes), flops_executed(flops) {
+    PerformanceCounter(unsigned long long bytes, unsigned long long flops):bytes_requested(bytes), flops_executed(flops) {
         type = flops_executed / bytes_requested;
     }
     void start_timing(void) {
@@ -69,14 +69,14 @@ public:
 
     void print_bw() {
         FILE *fres = fopen("bw.txt", "a");
-        fprintf(fres, "%f\n", total_bw/LOC_REPEAT);
+        fprintf(fres, "%lf\n", total_bw/LOC_REPEAT);
         fclose(fres);
     }
 
     void print_flops()
     {
         FILE *fres = fopen("flops.txt", "a");
-        fprintf(fres, "%f\n", total_flops/LOC_REPEAT);
+        fprintf(fres, "%lf\n", total_flops/LOC_REPEAT);
         fclose(fres);   
     }
 };

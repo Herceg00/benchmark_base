@@ -8,10 +8,12 @@
 #include <chrono>
 #include "get.cpp"
 
-typedef double base_type;
+#define base_type double
 
 #include "spmv.h"
 #include "../../locutils_new/timers.h"
+
+#define nz (long long) (LENGTH) * (long long)(RADIUS)
 
 void CallKernel(int core_type)
 {
@@ -20,40 +22,42 @@ void CallKernel(int core_type)
     #else
     int iterations = LOC_REPEAT;
     #endif
+    vector<base_type> v;
+    fprintf(stderr, "\nMax threads: %u\n", omp_get_max_threads());
+    omp_set_num_threads(omp_get_max_threads());
 
-    vector<nz_matrix_element> matrix;
-    matrix_head head;
-    vector<double> v;
-
+    fprintf(stderr, "\nAllocating memory for vectors...\n\n");
+    csr matrix;
+    fprintf(stderr, "Memory for vectors has been allocated\n\n");
     if (RAND_MODE == 0) {
-        get_matrix1(matrix, head);
+        matrix = generate_csr_matrix_ud();
     } else if (RAND_MODE == 1) {
-        get_matrix2(matrix, head);
+        matrix = generate_csr_matrix_nd();
     } else {
         fprintf(stderr, "Unknown rand_mode\n");
         exit(1);
     }
-
     get_vector(v);
 
-    fprintf(stderr, "nz: %d\n", head.nz);
+    omp_set_num_threads(THREADS);
 
-    Init(matrix, head, v);
+    Init(matrix);
 
     #ifndef METRIC_RUN
-    size_t flops_requested = head.nz;
-    size_t bytes_requested = head.nz * (sizeof(int) + sizeof(int) + sizeof(double)) + LENGTH * sizeof(int);
+    unsigned long long flops_requested = nz;
+    unsigned long long bytes_requested = nz * (sizeof(int) + sizeof(int) + sizeof(double)) + LENGTH * sizeof(int);
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
 
 	for(int i = 0; i < iterations; i++)
 	{
+        fprintf(stderr, "%d\n", i);
         #ifndef METRIC_RUN
 		locality::utils::CacheAnnil(core_type);
         counter.start_timing();
         #endif
 
-		Kernel(MODE, matrix, head, v);
+		Kernel(MODE, matrix, v);
 
         #ifndef METRIC_RUN
         counter.end_timing();
@@ -65,10 +69,14 @@ void CallKernel(int core_type)
     #ifndef METRIC_RUN
     counter.print_average_counters(true);
     #endif
+    counter.print_flops();
+    counter.print_bw();
+    counter.print_time();
 }
 
 extern "C" int main(int argc, char *argv[])
 {
+    fprintf(stderr, "main\n");
     CallKernel((int)MODE);
     return 0;
 }

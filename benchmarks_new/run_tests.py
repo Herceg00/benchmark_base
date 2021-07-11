@@ -8,7 +8,7 @@ from scripts.roofline import generate_roofline_from_profiling_data
 from scripts.arch_properties import get_arch
 
 linear_length = 800000000
-max_threads = 18
+max_threads = 64
 
 
 # all upper borders are inclusive
@@ -17,8 +17,8 @@ all_tests_data = {"triada": {"radius": 256,
                              "mode": {"min": 0, "max": 9, "step": 1}},
                   "stencil_1D": {"mode": {"min": 0, "max": 0, "step": 1},
                                  "length": 10000000,
-                                 "radius": {"min": 17, "max": 17, "step": 1},
-                                 "threads": {"min": 1, "max": max_threads, "step": 1}},
+                                 "radius": {"min": 1, "max": 24, "step": 1},
+                                 "threads": {"min": max_threads, "max": max_threads, "step": 1}},
                   "stencil_2D": {"mode": {"min": 0, "max": 3, "step": 1},
                                  "radius": {"min": 1, "max": 3, "step": 1},
                                  "length": {"min": 256, "max": 131072, "step": "mult", "step_val": 2}},
@@ -35,11 +35,13 @@ all_tests_data = {"triada": {"radius": 256,
                   "lc_kernel_generic": {"radius": 8,
                                         "mode": {"min": 0, "max": 3, "step": 1},
                                         "length": {"min": 64, "max": 512, "step": "mult", "step_val": 1.2}},
-                  "random_access": {"length": linear_length,
+                  "random_access": {"length": 80000000,
                                     "mode": 0,
-                                    "radius": {"min": 256, "max": 262144, "step": "mult", "step_val": 2}},
+                                    #"radius": {"min": 256, "max": 262144, "step": "mult", "step_val": 2}},
                                     #"radius": {"min": 256, "max": 1024, "step": "mult", "step_val": 1.2}}, # from 256 KB to 64 MB in details
                                     #"radius": {"min": 2, "max": 2097152, "step": "mult", "step_val": 2}}, # from 2 KB to 2 GB
+                                    "radius": 125000, 
+                                    "threads": {"min": 1, "max": max_threads, "step": 1}},
                   "cache_bandwidths": {"length": 1024*1024*2,
                                        "mode": 0},
                   "rand_generator": {"length": linear_length,
@@ -68,13 +70,13 @@ all_tests_data = {"triada": {"radius": 256,
                                  "length": {"min": 100000, "max": linear_length, "step": "mult", "step_val": 2}},
                   "saxpy_satis": {"length": linear_length,
                                   "threads": {"min": 1, "max": max_threads, "step": 1}}, #actually R = num_threads
-                  "spmv": {"length": {"min": 10000, "max": 10000, "step": 1000},
-                           "radius": 10,
-                           "mode": 0,
-                           "rand_mode": 0,
-                           "threads": {"min": 1, "max": max_threads, "step": 1}},
+                  "spmv": {"length": {"min": 62500, "max": 16000000, "step": "mult", "step_val": 2},
+                           "radius": 128,
+                           "rand_mode": {"min": 0, "max": 1, "step": 1},
+                           "mode": {"min": 0, "max": 0, "step": 1},
+                           "threads": {"min": max_threads, "max": max_threads, "step": 1}},
                     #length - matrix and vector dimension
-                    #radius - the degree of sparsity of the matrix (in % of all matrix elements)
+                    #radius - C. Amount of non-zero elements = length * radius = length * C
                     #mode - type of parallel for schedule (0 - static, 1 - guided, 2 - dynamic)
                     #rand_mode - the way to get random numbers (0 - normal distribution, 1 - gaussian)
                     #threads - amount of threads used in program
