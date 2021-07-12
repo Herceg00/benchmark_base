@@ -8,7 +8,7 @@ from scripts.roofline import generate_roofline_from_profiling_data
 from scripts.arch_properties import get_arch
 
 linear_length = 800000000
-max_threads = 64
+max_threads = 48
 
 
 # all upper borders are inclusive
@@ -35,7 +35,7 @@ all_tests_data = {"triada": {"radius": 256,
                   "lc_kernel_generic": {"radius": 8,
                                         "mode": {"min": 0, "max": 3, "step": 1},
                                         "length": {"min": 64, "max": 512, "step": "mult", "step_val": 1.2}},
-                  "random_access": {"length": 80000000,
+                  "random_access": {"length": linear_length,
                                     "mode": 0,
                                     #"radius": {"min": 256, "max": 262144, "step": "mult", "step_val": 2}},
                                     #"radius": {"min": 256, "max": 1024, "step": "mult", "step_val": 1.2}}, # from 256 KB to 64 MB in details
@@ -70,9 +70,9 @@ all_tests_data = {"triada": {"radius": 256,
                                  "length": {"min": 100000, "max": linear_length, "step": "mult", "step_val": 2}},
                   "saxpy_satis": {"length": linear_length,
                                   "threads": {"min": 1, "max": max_threads, "step": 1}}, #actually R = num_threads
-                  "spmv": {"length": {"min": 62500, "max": 16000000, "step": "mult", "step_val": 2},
-                           "radius": 128,
-                           "rand_mode": {"min": 0, "max": 1, "step": 1},
+                  "spmv": {"length": {"min": 250000, "max": 16000000, "step": "mult", "step_val": 2},
+                           "radius": 120,
+                           "rand_mode": {"min": 0, "max": 0, "step": 1},
                            "mode": {"min": 0, "max": 0, "step": 1},
                            "threads": {"min": max_threads, "max": max_threads, "step": 1}},
                     #length - matrix and vector dimension
@@ -80,6 +80,11 @@ all_tests_data = {"triada": {"radius": 256,
                     #mode - type of parallel for schedule (0 - static, 1 - guided, 2 - dynamic)
                     #rand_mode - the way to get random numbers (0 - normal distribution, 1 - gaussian)
                     #threads - amount of threads used in program
+                    "L1_benchmark": { 
+                                      "mode": 0,
+                                      "length": 524288000,
+                                      "radius": 1000000000
+                                    },
                   }
 
 RA_RADIUS="2" # 2 KB

@@ -79,6 +79,13 @@ public:
         fprintf(fres, "%lf\n", total_flops/LOC_REPEAT);
         fclose(fres);   
     }
+
+    void print_time()
+    {
+        FILE *fres = fopen("time.txt", "a");
+        fprintf(fres, "%lf\n", total_time/LOC_REPEAT);
+        fclose(fres);   
+    }
 };
 
 #endif
