@@ -20797,3 +20797,1176 @@ L1_benchmark_main.h:65:12: note: ***** Analysis failed with vector mode VOID
 /opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/iostream:74:25: missed: statement clobbers memory: std::ios_base::Init::Init (&__ioinit);
 /opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/iostream:74:25: missed: statement clobbers memory: __cxa_atexit (__dt_comp , &__ioinit, &__dso_handle);
 L1_benchmark_main.h:66:1: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:1085:16: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:20:26: missed: couldn't vectorize loop
+L1_benchmark.h:20:26: missed: statement clobbers memory: _23 = rand_r (&myseed);
+L1_benchmark.h:15:13: note: vectorized 0 loops in function.
+L1_benchmark.h:17:22: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:17:22: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark.h:15:13: missed: statement clobbers memory: __builtin_GOMP_barrier ();
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:20:26: missed: statement clobbers memory: _23 = rand_r (&myseed);
+L1_benchmark.h:20:13: note: ***** Analysis failed with vector mode V4SF
+L1_benchmark.h:20:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SF
+L1_benchmark.h:20:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:40:26: missed: couldn't vectorize loop
+L1_benchmark.h:40:26: missed: not vectorized: control flow in loop.
+L1_benchmark.h:33:13: note: vectorized 0 loops in function.
+L1_benchmark.h:37:16: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:37:16: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark.h:33:13: note: ***** Analysis failed with vector mode V4SF
+L1_benchmark.h:33:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SF
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _68 = __builtin_aarch64_ld1v4sf (_17);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _66 = __builtin_aarch64_ld1v4sf (_23);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _64 = __builtin_aarch64_ld1v4sf (_28);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _62 = __builtin_aarch64_ld1v4sf (_33);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _19 = __builtin_aarch64_ld1v4sf (_38);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _29 = __builtin_aarch64_ld1v4sf (_43);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _39 = __builtin_aarch64_ld1v4sf (_48);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _49 = __builtin_aarch64_ld1v4sf (_53);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:73:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:40:26: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:34:16: missed: couldn't vectorize loop
+L1_benchmark_main.h:34:16: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+../../locutils_new/utils.h:67:21: optimized: loop vectorized using 16 byte vectors
+L1_benchmark.h:24:23: missed: couldn't vectorize loop
+L1_benchmark.h:24:23: missed: not vectorized: latch block not empty.
+L1_benchmark_main.h:15:6: note: vectorized 1 loops in function.
+L1_benchmark_main.h:17:40: missed: statement clobbers memory: _13 = operator new [] (2097152000);
+L1_benchmark_main.h:18:75: missed: statement clobbers memory: _1 = omp_get_max_threads ();
+L1_benchmark_main.h:18:37: missed: statement clobbers memory: chunk_16 = malloc (_3);
+L1_benchmark_main.h:18:37: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:20:91: missed: statement clobbers memory: _4 = omp_get_max_threads ();
+L1_benchmark_main.h:21:71: missed: statement clobbers memory: _6 = omp_get_max_threads ();
+L1_benchmark_main.h:21:71: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/timers.h:22:120: missed: statement clobbers memory: counter.start_time = std::chrono::_V2::steady_clock::now ();
+../../locutils_new/timers.h:22:120: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/timers.h:22:120: missed: statement clobbers memory: counter.end_time = std::chrono::_V2::steady_clock::now ();
+../../locutils_new/timers.h:47:38: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:34:16: missed: statement clobbers memory: fprintf (stderr.0_8, "%d\n", i_75);
+L1_benchmark_main.h:34:16: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark_main.h:34:16: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "cache anych", 11);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:50:18: missed: statement clobbers memory: std::__throw_bad_cast ();
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_71);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _87 = OBJ_TYPE_REF(_82;_71->6) (_71, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _73 = std::basic_ostream<char>::put (&cout, _80);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_73);
+L1_benchmark_main.h:15:6: missed: statement clobbers memory: __builtin_GOMP_parallel (_Z4InitIfEvPT_PS1_m._omp_fn.0, &.omp_data_o.6, 0, 0);
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:15:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark_main.h:15:6: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:24:44: missed: statement clobbers memory: _56 = omp_get_max_threads ();
+L1_benchmark.h:24:23: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:24:5: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:24:5: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+../../locutils_new/utils.h:64:41: missed: statement clobbers memory: _43 = operator new [] (50331648);
+../../locutils_new/utils.h:65:18: note: ***** Analysis failed with vector mode V4SI
+../../locutils_new/utils.h:65:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SI
+../../locutils_new/utils.h:70:11: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/utils.h:73:12: missed: statement clobbers memory: operator delete [] (_43);
+../../locutils_new/utils.h:73:12: note: ***** Analysis succeeded with vector mode V4SI
+../../locutils_new/utils.h:73:12: note: SLPing BB part
+../../locutils_new/utils.h:73:12: note: ------>vectorizing SLP node starting from: *_364 = 12582906;
+../../locutils_new/utils.h:73:12: note: vect_is_simple_use: operand 12582906, type of def: constant
+../../locutils_new/utils.h:73:12: note: vect_is_simple_use: operand 12582907, type of def: constant
+../../locutils_new/utils.h:73:12: note: transform store. ncopies = 1
+../../locutils_new/utils.h:73:12: note: created new init_stmt: vect_cst__456 = { 12582906, 12582907 };
+../../locutils_new/utils.h:73:12: note: create vector_type-pointer variable to type: vector(2) int  vectorizing a pointer ref: *_364
+../../locutils_new/utils.h:73:12: note: created vectp.142_363
+../../locutils_new/utils.h:73:12: note: add new stmt: MEM[(int *)vectp.142_363] = vect_cst__456;
+../../locutils_new/utils.h:73:12: note: vectorizing stmts using SLP.
+../../locutils_new/utils.h:73:12: optimized: basic block part vectorized using 16 byte vectors
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V16QI would be the same
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V8QI would be the same
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V4HI would be the same
+../../locutils_new/utils.h:75:9: missed: statement clobbers memory: printf ("cache_annil: %d\n", helper_159);
+../../locutils_new/timers.h:26:53: missed: statement clobbers memory: counter.start_time = std::chrono::_V2::steady_clock::now ();
+L1_benchmark.h:85:5: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:85:5: note: basic block vectorized
+L1_benchmark_main.h:15:6: missed: statement clobbers memory: __builtin_GOMP_parallel (_Z11Kernel_readIfEvPT_PS1_m._omp_fn.0, &.omp_data_o.20, 0, 0);
+L1_benchmark.h:33:13: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:33:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark.h:79:12: missed: statement clobbers memory: fprintf (stderr.18_90, "%f\n", _91);
+L1_benchmark.h:79:12: note: ***** Analysis failed with vector mode V4SF
+L1_benchmark.h:79:12: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SF
+../../locutils_new/timers.h:30:51: missed: statement clobbers memory: counter.end_time = std::chrono::_V2::steady_clock::now ();
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_time: ", 12);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _97 = std::basic_ostream<char>::_M_insert<double> (&cout, _106);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_97, " s", 2);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_141);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _160 = OBJ_TYPE_REF(_155;_141->6) (_141, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _143 = std::basic_ostream<char>::put (_97, _153);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_143);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_bw: ", 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _99 = std::basic_ostream<char>::_M_insert<double> (&cout, _110);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_99, " Gb/s", 5);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_133);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _174 = OBJ_TYPE_REF(_169;_133->6) (_133, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _135 = std::basic_ostream<char>::put (_99, _167);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_135);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_flops: ", 13);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _101 = std::basic_ostream<char>::_M_insert<double> (&cout, _114);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_101, " GFlops", 7);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_125);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _188 = OBJ_TYPE_REF(_183;_125->6) (_125, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _127 = std::basic_ostream<char>::put (_101, _181);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_127);
+L1_benchmark_main.h:32:22: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_time: ", 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _202 = std::basic_ostream<char>::_M_insert<double> (&cout, _201);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_202, " s", 2);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_227);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _246 = OBJ_TYPE_REF(_241;_227->6) (_227, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _229 = std::basic_ostream<char>::put (_202, _239);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_229);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_bw: ", 8);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _205 = std::basic_ostream<char>::_M_insert<double> (&cout, _204);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_205, " Gb/s", 5);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_219);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _260 = OBJ_TYPE_REF(_255;_219->6) (_219, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _221 = std::basic_ostream<char>::put (_205, _253);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_221);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_flops: ", 11);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _208 = std::basic_ostream<char>::_M_insert<double> (&cout, _207);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_208, " GFlops", 7);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_266);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _282 = OBJ_TYPE_REF(_277;_266->6) (_266, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _268 = std::basic_ostream<char>::put (_208, _275);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_268);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "flops_per_byte: ", 16);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _214 = std::basic_ostream<char>::_M_insert<double> (&cout, _213);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_288);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _304 = OBJ_TYPE_REF(_299;_288->6) (_288, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _290 = std::basic_ostream<char>::put (_214, _297);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_290);
+../../locutils_new/timers.h:71:27: missed: statement clobbers memory: _193 = fopen ("bw.txt", "a");
+../../locutils_new/timers.h:72:16: missed: statement clobbers memory: fprintf (_193, "%lf\n", _204);
+../../locutils_new/timers.h:73:15: missed: statement clobbers memory: fclose (_193);
+../../locutils_new/timers.h:78:27: missed: statement clobbers memory: _190 = fopen ("flops.txt", "a");
+../../locutils_new/timers.h:79:16: missed: statement clobbers memory: fprintf (_190, "%lf\n", _207);
+../../locutils_new/timers.h:80:15: missed: statement clobbers memory: fclose (_190);
+L1_benchmark_main.h:57:11: missed: statement clobbers memory: operator delete [] (_13);
+L1_benchmark_main.h:58:6: missed: statement clobbers memory: free (chunk_16);
+L1_benchmark_main.h:59:1: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:63:24: missed: statement clobbers memory: omp_set_num_threads (48);
+L1_benchmark_main.h:64:15: missed: statement clobbers memory: CallKernel (0);
+L1_benchmark_main.h:65:12: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/iostream:74:25: missed: statement clobbers memory: std::ios_base::Init::Init (&__ioinit);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/iostream:74:25: missed: statement clobbers memory: __cxa_atexit (__dt_comp , &__ioinit, &__dso_handle);
+L1_benchmark_main.h:66:1: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:1085:16: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:20:26: missed: couldn't vectorize loop
+L1_benchmark.h:20:26: missed: statement clobbers memory: _23 = rand_r (&myseed);
+L1_benchmark.h:15:13: note: vectorized 0 loops in function.
+L1_benchmark.h:17:22: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:17:22: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark.h:15:13: missed: statement clobbers memory: __builtin_GOMP_barrier ();
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:20:26: missed: statement clobbers memory: _23 = rand_r (&myseed);
+L1_benchmark.h:20:13: note: ***** Analysis failed with vector mode V4SF
+L1_benchmark.h:20:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SF
+L1_benchmark.h:20:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:40:26: missed: couldn't vectorize loop
+L1_benchmark.h:40:26: missed: not vectorized: control flow in loop.
+L1_benchmark.h:33:13: note: vectorized 0 loops in function.
+L1_benchmark.h:37:16: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:37:16: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark.h:33:13: note: ***** Analysis failed with vector mode V4SF
+L1_benchmark.h:33:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SF
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _68 = __builtin_aarch64_ld1v4sf (_17);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _66 = __builtin_aarch64_ld1v4sf (_23);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _64 = __builtin_aarch64_ld1v4sf (_28);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _62 = __builtin_aarch64_ld1v4sf (_33);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _19 = __builtin_aarch64_ld1v4sf (_38);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _29 = __builtin_aarch64_ld1v4sf (_43);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _39 = __builtin_aarch64_ld1v4sf (_48);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: _49 = __builtin_aarch64_ld1v4sf (_53);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:73:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:40:26: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:34:16: missed: couldn't vectorize loop
+L1_benchmark_main.h:34:16: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+../../locutils_new/utils.h:67:21: optimized: loop vectorized using 16 byte vectors
+L1_benchmark.h:24:23: missed: couldn't vectorize loop
+L1_benchmark.h:24:23: missed: not vectorized: latch block not empty.
+L1_benchmark_main.h:15:6: note: vectorized 1 loops in function.
+L1_benchmark_main.h:17:40: missed: statement clobbers memory: _13 = operator new [] (2097152000);
+L1_benchmark_main.h:18:75: missed: statement clobbers memory: _1 = omp_get_max_threads ();
+L1_benchmark_main.h:18:37: missed: statement clobbers memory: chunk_16 = malloc (_3);
+L1_benchmark_main.h:18:37: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:20:91: missed: statement clobbers memory: _4 = omp_get_max_threads ();
+L1_benchmark_main.h:21:71: missed: statement clobbers memory: _6 = omp_get_max_threads ();
+L1_benchmark_main.h:21:71: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/timers.h:22:120: missed: statement clobbers memory: counter.start_time = std::chrono::_V2::steady_clock::now ();
+../../locutils_new/timers.h:22:120: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/timers.h:22:120: missed: statement clobbers memory: counter.end_time = std::chrono::_V2::steady_clock::now ();
+../../locutils_new/timers.h:47:38: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:34:16: missed: statement clobbers memory: fprintf (stderr.0_8, "%d\n", i_78);
+L1_benchmark_main.h:34:16: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark_main.h:34:16: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "cache anych", 11);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:50:18: missed: statement clobbers memory: std::__throw_bad_cast ();
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_74);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _90 = OBJ_TYPE_REF(_85;_74->6) (_74, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _76 = std::basic_ostream<char>::put (&cout, _83);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_76);
+L1_benchmark_main.h:15:6: missed: statement clobbers memory: __builtin_GOMP_parallel (_Z4InitIfEvPT_PS1_m._omp_fn.0, &.omp_data_o.6, 0, 0);
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:15:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark_main.h:15:6: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:24:44: missed: statement clobbers memory: _59 = omp_get_max_threads ();
+L1_benchmark.h:24:23: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:24:5: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:24:5: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+../../locutils_new/utils.h:64:41: missed: statement clobbers memory: _46 = operator new [] (50331648);
+../../locutils_new/utils.h:65:18: note: ***** Analysis failed with vector mode V4SI
+../../locutils_new/utils.h:65:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SI
+../../locutils_new/utils.h:70:11: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/utils.h:73:12: missed: statement clobbers memory: operator delete [] (_46);
+../../locutils_new/utils.h:73:12: note: ***** Analysis succeeded with vector mode V4SI
+../../locutils_new/utils.h:73:12: note: SLPing BB part
+../../locutils_new/utils.h:73:12: note: ------>vectorizing SLP node starting from: *_359 = 12582906;
+../../locutils_new/utils.h:73:12: note: vect_is_simple_use: operand 12582906, type of def: constant
+../../locutils_new/utils.h:73:12: note: vect_is_simple_use: operand 12582907, type of def: constant
+../../locutils_new/utils.h:73:12: note: transform store. ncopies = 1
+../../locutils_new/utils.h:73:12: note: created new init_stmt: vect_cst__451 = { 12582906, 12582907 };
+../../locutils_new/utils.h:73:12: note: create vector_type-pointer variable to type: vector(2) int  vectorizing a pointer ref: *_359
+../../locutils_new/utils.h:73:12: note: created vectp.141_358
+../../locutils_new/utils.h:73:12: note: add new stmt: MEM[(int *)vectp.141_358] = vect_cst__451;
+../../locutils_new/utils.h:73:12: note: vectorizing stmts using SLP.
+../../locutils_new/utils.h:73:12: optimized: basic block part vectorized using 16 byte vectors
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V16QI would be the same
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V8QI would be the same
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V4HI would be the same
+../../locutils_new/utils.h:75:9: missed: statement clobbers memory: printf ("cache_annil: %d\n", helper_159);
+../../locutils_new/timers.h:26:53: missed: statement clobbers memory: counter.start_time = std::chrono::_V2::steady_clock::now ();
+L1_benchmark.h:85:5: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:85:5: note: basic block vectorized
+L1_benchmark_main.h:15:6: missed: statement clobbers memory: __builtin_GOMP_parallel (_Z11Kernel_readIfEvPT_PS1_m._omp_fn.0, &.omp_data_o.19, 0, 0);
+L1_benchmark.h:33:13: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:33:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark_main.h:15:6: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/timers.h:30:51: missed: statement clobbers memory: counter.end_time = std::chrono::_V2::steady_clock::now ();
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_time: ", 12);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _97 = std::basic_ostream<char>::_M_insert<double> (&cout, _106);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_97, " s", 2);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_141);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _160 = OBJ_TYPE_REF(_155;_141->6) (_141, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _143 = std::basic_ostream<char>::put (_97, _153);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_143);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_bw: ", 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _99 = std::basic_ostream<char>::_M_insert<double> (&cout, _110);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_99, " Gb/s", 5);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_133);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _174 = OBJ_TYPE_REF(_169;_133->6) (_133, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _135 = std::basic_ostream<char>::put (_99, _167);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_135);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_flops: ", 13);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _101 = std::basic_ostream<char>::_M_insert<double> (&cout, _114);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_101, " GFlops", 7);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_125);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _188 = OBJ_TYPE_REF(_183;_125->6) (_125, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _127 = std::basic_ostream<char>::put (_101, _181);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_127);
+L1_benchmark_main.h:32:22: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_time: ", 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _202 = std::basic_ostream<char>::_M_insert<double> (&cout, _201);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_202, " s", 2);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_227);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _246 = OBJ_TYPE_REF(_241;_227->6) (_227, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _229 = std::basic_ostream<char>::put (_202, _239);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_229);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_bw: ", 8);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _205 = std::basic_ostream<char>::_M_insert<double> (&cout, _204);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_205, " Gb/s", 5);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_219);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _260 = OBJ_TYPE_REF(_255;_219->6) (_219, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _221 = std::basic_ostream<char>::put (_205, _253);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_221);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_flops: ", 11);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _208 = std::basic_ostream<char>::_M_insert<double> (&cout, _207);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_208, " GFlops", 7);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_266);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _282 = OBJ_TYPE_REF(_277;_266->6) (_266, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _268 = std::basic_ostream<char>::put (_208, _275);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_268);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "flops_per_byte: ", 16);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _214 = std::basic_ostream<char>::_M_insert<double> (&cout, _213);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_288);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _304 = OBJ_TYPE_REF(_299;_288->6) (_288, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _290 = std::basic_ostream<char>::put (_214, _297);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_290);
+../../locutils_new/timers.h:71:27: missed: statement clobbers memory: _193 = fopen ("bw.txt", "a");
+../../locutils_new/timers.h:72:16: missed: statement clobbers memory: fprintf (_193, "%lf\n", _204);
+../../locutils_new/timers.h:73:15: missed: statement clobbers memory: fclose (_193);
+../../locutils_new/timers.h:78:27: missed: statement clobbers memory: _190 = fopen ("flops.txt", "a");
+../../locutils_new/timers.h:79:16: missed: statement clobbers memory: fprintf (_190, "%lf\n", _207);
+../../locutils_new/timers.h:80:15: missed: statement clobbers memory: fclose (_190);
+L1_benchmark_main.h:57:11: missed: statement clobbers memory: operator delete [] (_13);
+L1_benchmark_main.h:58:6: missed: statement clobbers memory: free (chunk_16);
+L1_benchmark_main.h:59:1: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:63:24: missed: statement clobbers memory: omp_set_num_threads (48);
+L1_benchmark_main.h:64:15: missed: statement clobbers memory: CallKernel (0);
+L1_benchmark_main.h:65:12: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/iostream:74:25: missed: statement clobbers memory: std::ios_base::Init::Init (&__ioinit);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/iostream:74:25: missed: statement clobbers memory: __cxa_atexit (__dt_comp , &__ioinit, &__dso_handle);
+L1_benchmark_main.h:66:1: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:1085:16: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:20:26: missed: couldn't vectorize loop
+L1_benchmark.h:20:26: missed: statement clobbers memory: _23 = rand_r (&myseed);
+L1_benchmark.h:15:13: note: vectorized 0 loops in function.
+L1_benchmark.h:17:22: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:17:22: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark.h:15:13: missed: statement clobbers memory: __builtin_GOMP_barrier ();
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:20:26: missed: statement clobbers memory: _23 = rand_r (&myseed);
+L1_benchmark.h:20:13: note: ***** Analysis failed with vector mode V4SF
+L1_benchmark.h:20:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SF
+L1_benchmark.h:20:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:40:26: missed: couldn't vectorize loop
+L1_benchmark.h:40:26: missed: not vectorized: control flow in loop.
+L1_benchmark.h:30:6: note: vectorized 0 loops in function.
+L1_benchmark.h:35:49: missed: statement clobbers memory: _1 = omp_get_thread_num ();
+L1_benchmark.h:37:16: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:37:16: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_7);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_13);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_16);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_19);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_22);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_25);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_28);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:73:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:40:26: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:80:1: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:34:16: missed: couldn't vectorize loop
+L1_benchmark_main.h:34:16: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+../../locutils_new/utils.h:67:21: optimized: loop vectorized using 16 byte vectors
+L1_benchmark.h:24:23: missed: couldn't vectorize loop
+L1_benchmark.h:24:23: missed: not vectorized: latch block not empty.
+L1_benchmark_main.h:15:6: note: vectorized 1 loops in function.
+L1_benchmark_main.h:17:40: missed: statement clobbers memory: _13 = operator new [] (2097152000);
+L1_benchmark_main.h:18:75: missed: statement clobbers memory: _1 = omp_get_max_threads ();
+L1_benchmark_main.h:18:37: missed: statement clobbers memory: chunk_16 = malloc (_3);
+L1_benchmark_main.h:18:37: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:20:87: missed: statement clobbers memory: _4 = omp_get_max_threads ();
+L1_benchmark_main.h:21:71: missed: statement clobbers memory: _6 = omp_get_max_threads ();
+L1_benchmark_main.h:21:71: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/timers.h:22:120: missed: statement clobbers memory: counter.start_time = std::chrono::_V2::steady_clock::now ();
+../../locutils_new/timers.h:22:120: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/timers.h:22:120: missed: statement clobbers memory: counter.end_time = std::chrono::_V2::steady_clock::now ();
+../../locutils_new/timers.h:47:38: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:34:16: missed: statement clobbers memory: fprintf (stderr.0_8, "%d\n", i_75);
+L1_benchmark_main.h:34:16: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark_main.h:34:16: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "cache anych", 11);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:50:18: missed: statement clobbers memory: std::__throw_bad_cast ();
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_71);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _87 = OBJ_TYPE_REF(_82;_71->6) (_71, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _73 = std::basic_ostream<char>::put (&cout, _80);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_73);
+L1_benchmark_main.h:15:6: missed: statement clobbers memory: __builtin_GOMP_parallel (_Z4InitIfEvPT_PS1_m._omp_fn.0, &.omp_data_o.6, 0, 0);
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:15:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark_main.h:15:6: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:24:44: missed: statement clobbers memory: _56 = omp_get_max_threads ();
+L1_benchmark.h:24:23: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:24:5: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:24:5: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+../../locutils_new/utils.h:64:41: missed: statement clobbers memory: _43 = operator new [] (50331648);
+../../locutils_new/utils.h:65:18: note: ***** Analysis failed with vector mode V4SI
+../../locutils_new/utils.h:65:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SI
+../../locutils_new/utils.h:70:11: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/utils.h:73:12: missed: statement clobbers memory: operator delete [] (_43);
+../../locutils_new/utils.h:73:12: note: ***** Analysis succeeded with vector mode V4SI
+../../locutils_new/utils.h:73:12: note: SLPing BB part
+../../locutils_new/utils.h:73:12: note: ------>vectorizing SLP node starting from: *_356 = 12582906;
+../../locutils_new/utils.h:73:12: note: vect_is_simple_use: operand 12582906, type of def: constant
+../../locutils_new/utils.h:73:12: note: vect_is_simple_use: operand 12582907, type of def: constant
+../../locutils_new/utils.h:73:12: note: transform store. ncopies = 1
+../../locutils_new/utils.h:73:12: note: created new init_stmt: vect_cst__448 = { 12582906, 12582907 };
+../../locutils_new/utils.h:73:12: note: create vector_type-pointer variable to type: vector(2) int  vectorizing a pointer ref: *_356
+../../locutils_new/utils.h:73:12: note: created vectp.137_355
+../../locutils_new/utils.h:73:12: note: add new stmt: MEM[(int *)vectp.137_355] = vect_cst__448;
+../../locutils_new/utils.h:73:12: note: vectorizing stmts using SLP.
+../../locutils_new/utils.h:73:12: optimized: basic block part vectorized using 16 byte vectors
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V16QI would be the same
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V8QI would be the same
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V4HI would be the same
+../../locutils_new/utils.h:75:9: missed: statement clobbers memory: printf ("cache_annil: %d\n", helper_156);
+../../locutils_new/timers.h:26:53: missed: statement clobbers memory: counter.start_time = std::chrono::_V2::steady_clock::now ();
+L1_benchmark.h:85:5: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:85:5: note: basic block vectorized
+L1_benchmark.h:86:20: missed: statement clobbers memory: Kernel_read<float> (_13, chunk_16, 524288000);
+../../locutils_new/timers.h:30:51: missed: statement clobbers memory: counter.end_time = std::chrono::_V2::steady_clock::now ();
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_time: ", 12);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _94 = std::basic_ostream<char>::_M_insert<double> (&cout, _103);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_94, " s", 2);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_138);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _157 = OBJ_TYPE_REF(_152;_138->6) (_138, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _140 = std::basic_ostream<char>::put (_94, _150);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_140);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_bw: ", 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _96 = std::basic_ostream<char>::_M_insert<double> (&cout, _107);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_96, " Gb/s", 5);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_130);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _171 = OBJ_TYPE_REF(_166;_130->6) (_130, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _132 = std::basic_ostream<char>::put (_96, _164);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_132);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_flops: ", 13);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _98 = std::basic_ostream<char>::_M_insert<double> (&cout, _111);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_98, " GFlops", 7);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_122);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _185 = OBJ_TYPE_REF(_180;_122->6) (_122, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _124 = std::basic_ostream<char>::put (_98, _178);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_124);
+L1_benchmark_main.h:32:22: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_time: ", 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _199 = std::basic_ostream<char>::_M_insert<double> (&cout, _198);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_199, " s", 2);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_224);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _243 = OBJ_TYPE_REF(_238;_224->6) (_224, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _226 = std::basic_ostream<char>::put (_199, _236);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_226);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_bw: ", 8);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _202 = std::basic_ostream<char>::_M_insert<double> (&cout, _201);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_202, " Gb/s", 5);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_216);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _257 = OBJ_TYPE_REF(_252;_216->6) (_216, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _218 = std::basic_ostream<char>::put (_202, _250);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_218);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_flops: ", 11);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _205 = std::basic_ostream<char>::_M_insert<double> (&cout, _204);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_205, " GFlops", 7);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_263);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _279 = OBJ_TYPE_REF(_274;_263->6) (_263, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _265 = std::basic_ostream<char>::put (_205, _272);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_265);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "flops_per_byte: ", 16);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _211 = std::basic_ostream<char>::_M_insert<double> (&cout, _210);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_285);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _301 = OBJ_TYPE_REF(_296;_285->6) (_285, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _287 = std::basic_ostream<char>::put (_211, _294);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_287);
+../../locutils_new/timers.h:71:27: missed: statement clobbers memory: _190 = fopen ("bw.txt", "a");
+../../locutils_new/timers.h:72:16: missed: statement clobbers memory: fprintf (_190, "%lf\n", _201);
+../../locutils_new/timers.h:73:15: missed: statement clobbers memory: fclose (_190);
+../../locutils_new/timers.h:78:27: missed: statement clobbers memory: _187 = fopen ("flops.txt", "a");
+../../locutils_new/timers.h:79:16: missed: statement clobbers memory: fprintf (_187, "%lf\n", _204);
+../../locutils_new/timers.h:80:15: missed: statement clobbers memory: fclose (_187);
+L1_benchmark_main.h:57:11: missed: statement clobbers memory: operator delete [] (_13);
+L1_benchmark_main.h:58:6: missed: statement clobbers memory: free (chunk_16);
+L1_benchmark_main.h:59:1: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:63:24: missed: statement clobbers memory: omp_set_num_threads (48);
+L1_benchmark_main.h:64:15: missed: statement clobbers memory: CallKernel (0);
+L1_benchmark_main.h:65:12: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/iostream:74:25: missed: statement clobbers memory: std::ios_base::Init::Init (&__ioinit);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/iostream:74:25: missed: statement clobbers memory: __cxa_atexit (__dt_comp , &__ioinit, &__dso_handle);
+L1_benchmark_main.h:66:1: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:1085:16: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:20:26: missed: couldn't vectorize loop
+L1_benchmark.h:20:26: missed: statement clobbers memory: _23 = rand_r (&myseed);
+L1_benchmark.h:15:13: note: vectorized 0 loops in function.
+L1_benchmark.h:17:22: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:17:22: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark.h:15:13: missed: statement clobbers memory: __builtin_GOMP_barrier ();
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:20:26: missed: statement clobbers memory: _23 = rand_r (&myseed);
+L1_benchmark.h:20:13: note: ***** Analysis failed with vector mode V4SF
+L1_benchmark.h:20:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SF
+L1_benchmark.h:20:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:40:26: missed: couldn't vectorize loop
+L1_benchmark.h:40:26: missed: not vectorized: control flow in loop.
+L1_benchmark.h:30:6: note: vectorized 0 loops in function.
+L1_benchmark.h:35:49: missed: statement clobbers memory: _1 = omp_get_thread_num ();
+L1_benchmark.h:37:16: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:37:16: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_7);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_13);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_16);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_19);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_22);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_25);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_28);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:73:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:40:26: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:80:1: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:34:16: missed: couldn't vectorize loop
+L1_benchmark_main.h:34:16: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+../../locutils_new/utils.h:67:21: optimized: loop vectorized using 16 byte vectors
+L1_benchmark.h:24:23: missed: couldn't vectorize loop
+L1_benchmark.h:24:23: missed: not vectorized: latch block not empty.
+L1_benchmark_main.h:15:6: note: vectorized 1 loops in function.
+L1_benchmark_main.h:17:40: missed: statement clobbers memory: _9 = operator new [] (2097152000);
+L1_benchmark_main.h:18:75: missed: statement clobbers memory: _1 = omp_get_max_threads ();
+L1_benchmark_main.h:18:37: missed: statement clobbers memory: chunk_12 = malloc (_3);
+L1_benchmark_main.h:18:37: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/timers.h:22:120: missed: statement clobbers memory: counter.start_time = std::chrono::_V2::steady_clock::now ();
+../../locutils_new/timers.h:22:120: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/timers.h:22:120: missed: statement clobbers memory: counter.end_time = std::chrono::_V2::steady_clock::now ();
+L1_benchmark_main.h:34:16: missed: statement clobbers memory: fprintf (stderr.0_4, "%d\n", i_200);
+L1_benchmark_main.h:34:16: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark_main.h:34:16: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "cache anych", 11);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:50:18: missed: statement clobbers memory: std::__throw_bad_cast ();
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_63);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _79 = OBJ_TYPE_REF(_74;_63->6) (_63, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _65 = std::basic_ostream<char>::put (&cout, _72);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_65);
+L1_benchmark_main.h:15:6: missed: statement clobbers memory: __builtin_GOMP_parallel (_Z4InitIfEvPT_PS1_m._omp_fn.0, &.omp_data_o.6, 0, 0);
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:15:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark_main.h:15:6: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:24:44: missed: statement clobbers memory: _48 = omp_get_max_threads ();
+L1_benchmark.h:24:23: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:24:5: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:24:5: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+../../locutils_new/utils.h:64:41: missed: statement clobbers memory: _35 = operator new [] (50331648);
+../../locutils_new/utils.h:65:18: note: ***** Analysis failed with vector mode V4SI
+../../locutils_new/utils.h:65:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SI
+../../locutils_new/utils.h:70:11: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/utils.h:73:12: missed: statement clobbers memory: operator delete [] (_35);
+../../locutils_new/utils.h:73:12: note: ***** Analysis succeeded with vector mode V4SI
+../../locutils_new/utils.h:73:12: note: SLPing BB part
+../../locutils_new/utils.h:73:12: note: ------>vectorizing SLP node starting from: *_189 = 12582906;
+../../locutils_new/utils.h:73:12: note: vect_is_simple_use: operand 12582906, type of def: constant
+../../locutils_new/utils.h:73:12: note: vect_is_simple_use: operand 12582907, type of def: constant
+../../locutils_new/utils.h:73:12: note: transform store. ncopies = 1
+../../locutils_new/utils.h:73:12: note: created new init_stmt: vect_cst__440 = { 12582906, 12582907 };
+../../locutils_new/utils.h:73:12: note: create vector_type-pointer variable to type: vector(2) int  vectorizing a pointer ref: *_189
+../../locutils_new/utils.h:73:12: note: created vectp.137_343
+../../locutils_new/utils.h:73:12: note: add new stmt: MEM[(int *)vectp.137_343] = vect_cst__440;
+../../locutils_new/utils.h:73:12: note: vectorizing stmts using SLP.
+../../locutils_new/utils.h:73:12: optimized: basic block part vectorized using 16 byte vectors
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V16QI would be the same
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V8QI would be the same
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V4HI would be the same
+../../locutils_new/utils.h:75:9: missed: statement clobbers memory: printf ("cache_annil: %d\n", helper_64);
+../../locutils_new/timers.h:26:53: missed: statement clobbers memory: counter.start_time = std::chrono::_V2::steady_clock::now ();
+L1_benchmark.h:85:5: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:85:5: note: basic block vectorized
+L1_benchmark.h:86:20: missed: statement clobbers memory: Kernel_read<float> (_9, chunk_12, 524288000);
+../../locutils_new/timers.h:30:51: missed: statement clobbers memory: counter.end_time = std::chrono::_V2::steady_clock::now ();
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_time: ", 12);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _86 = std::basic_ostream<char>::_M_insert<double> (&cout, _95);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_86, " s", 2);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_130);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _149 = OBJ_TYPE_REF(_144;_130->6) (_130, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _132 = std::basic_ostream<char>::put (_86, _142);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_132);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_bw: ", 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _88 = std::basic_ostream<char>::_M_insert<double> (&cout, _99);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_88, " Gb/s", 5);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_122);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _163 = OBJ_TYPE_REF(_158;_122->6) (_122, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _124 = std::basic_ostream<char>::put (_88, _156);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_124);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_flops: ", 13);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _90 = std::basic_ostream<char>::_M_insert<double> (&cout, _103);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_90, " GFlops", 7);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_114);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _177 = OBJ_TYPE_REF(_172;_114->6) (_114, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _116 = std::basic_ostream<char>::put (_90, _170);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_116);
+L1_benchmark_main.h:32:22: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_time: ", 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _191 = std::basic_ostream<char>::_M_insert<double> (&cout, _190);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_191, " s", 2);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_216);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _235 = OBJ_TYPE_REF(_230;_216->6) (_216, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _218 = std::basic_ostream<char>::put (_191, _228);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_218);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_bw: ", 8);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _194 = std::basic_ostream<char>::_M_insert<double> (&cout, _193);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_194, " Gb/s", 5);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_208);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _249 = OBJ_TYPE_REF(_244;_208->6) (_208, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _210 = std::basic_ostream<char>::put (_194, _242);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_210);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_flops: ", 11);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _197 = std::basic_ostream<char>::_M_insert<double> (&cout, _196);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_197, " GFlops", 7);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_255);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _271 = OBJ_TYPE_REF(_266;_255->6) (_255, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _257 = std::basic_ostream<char>::put (_197, _264);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_257);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "flops_per_byte: ", 16);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _203 = std::basic_ostream<char>::_M_insert<double> (&cout, 6.25e-2);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_277);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _293 = OBJ_TYPE_REF(_288;_277->6) (_277, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _279 = std::basic_ostream<char>::put (_203, _286);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_279);
+../../locutils_new/timers.h:71:27: missed: statement clobbers memory: _182 = fopen ("bw.txt", "a");
+../../locutils_new/timers.h:72:16: missed: statement clobbers memory: fprintf (_182, "%lf\n", _193);
+../../locutils_new/timers.h:73:15: missed: statement clobbers memory: fclose (_182);
+../../locutils_new/timers.h:78:27: missed: statement clobbers memory: _179 = fopen ("flops.txt", "a");
+../../locutils_new/timers.h:79:16: missed: statement clobbers memory: fprintf (_179, "%lf\n", _196);
+../../locutils_new/timers.h:80:15: missed: statement clobbers memory: fclose (_179);
+L1_benchmark_main.h:57:11: missed: statement clobbers memory: operator delete [] (_9);
+L1_benchmark_main.h:58:6: missed: statement clobbers memory: free (chunk_12);
+L1_benchmark_main.h:59:1: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:63:24: missed: statement clobbers memory: omp_set_num_threads (48);
+L1_benchmark_main.h:64:15: missed: statement clobbers memory: CallKernel (0);
+L1_benchmark_main.h:65:12: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/iostream:74:25: missed: statement clobbers memory: std::ios_base::Init::Init (&__ioinit);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/iostream:74:25: missed: statement clobbers memory: __cxa_atexit (__dt_comp , &__ioinit, &__dso_handle);
+L1_benchmark_main.h:66:1: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:1085:16: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:20:26: missed: couldn't vectorize loop
+L1_benchmark.h:20:26: missed: statement clobbers memory: _23 = rand_r (&myseed);
+L1_benchmark.h:15:13: note: vectorized 0 loops in function.
+L1_benchmark.h:17:22: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:17:22: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark.h:15:13: missed: statement clobbers memory: __builtin_GOMP_barrier ();
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:20:26: missed: statement clobbers memory: _23 = rand_r (&myseed);
+L1_benchmark.h:20:13: note: ***** Analysis failed with vector mode V4SF
+L1_benchmark.h:20:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SF
+L1_benchmark.h:20:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:40:26: missed: couldn't vectorize loop
+L1_benchmark.h:40:26: missed: not vectorized: control flow in loop.
+L1_benchmark.h:30:6: note: vectorized 0 loops in function.
+L1_benchmark.h:35:49: missed: statement clobbers memory: _1 = omp_get_thread_num ();
+L1_benchmark.h:37:16: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:37:16: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_7);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_13);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_16);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_19);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_22);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_25);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: missed: statement clobbers memory: __builtin_aarch64_ld1v4sf (_28);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/lib64/gcc/aarch64-linux-gnu/9.3.1/include/arm_neon.h:17574:36: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:73:13: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:40:26: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:80:1: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:34:16: missed: couldn't vectorize loop
+L1_benchmark_main.h:34:16: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
+../../locutils_new/utils.h:67:21: optimized: loop vectorized using 16 byte vectors
+L1_benchmark.h:24:23: missed: couldn't vectorize loop
+L1_benchmark.h:24:23: missed: not vectorized: latch block not empty.
+L1_benchmark_main.h:15:6: note: vectorized 1 loops in function.
+L1_benchmark_main.h:17:40: missed: statement clobbers memory: _9 = operator new [] (2097152000);
+L1_benchmark_main.h:18:75: missed: statement clobbers memory: _1 = omp_get_max_threads ();
+L1_benchmark_main.h:18:37: missed: statement clobbers memory: chunk_12 = malloc (_3);
+L1_benchmark_main.h:18:37: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/timers.h:22:120: missed: statement clobbers memory: counter.start_time = std::chrono::_V2::steady_clock::now ();
+../../locutils_new/timers.h:22:120: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/timers.h:22:120: missed: statement clobbers memory: counter.end_time = std::chrono::_V2::steady_clock::now ();
+L1_benchmark_main.h:34:16: missed: statement clobbers memory: fprintf (stderr.0_4, "%d\n", i_200);
+L1_benchmark_main.h:34:16: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark_main.h:34:16: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "cache anych", 11);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:50:18: missed: statement clobbers memory: std::__throw_bad_cast ();
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_63);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _79 = OBJ_TYPE_REF(_74;_63->6) (_63, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _65 = std::basic_ostream<char>::put (&cout, _72);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_65);
+L1_benchmark_main.h:15:6: missed: statement clobbers memory: __builtin_GOMP_parallel (_Z4InitIfEvPT_PS1_m._omp_fn.0, &.omp_data_o.6, 0, 0);
+L1_benchmark.h:15:13: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:15:13: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+L1_benchmark_main.h:15:6: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:24:44: missed: statement clobbers memory: _48 = omp_get_max_threads ();
+L1_benchmark.h:24:23: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:24:5: note: ***** Analysis failed with vector mode V2DI
+L1_benchmark.h:24:5: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+../../locutils_new/utils.h:64:41: missed: statement clobbers memory: _35 = operator new [] (50331648);
+../../locutils_new/utils.h:65:18: note: ***** Analysis failed with vector mode V4SI
+../../locutils_new/utils.h:65:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V4SI
+../../locutils_new/utils.h:70:11: note: ***** Analysis failed with vector mode VOID
+../../locutils_new/utils.h:73:12: missed: statement clobbers memory: operator delete [] (_35);
+../../locutils_new/utils.h:73:12: note: ***** Analysis succeeded with vector mode V4SI
+../../locutils_new/utils.h:73:12: note: SLPing BB part
+../../locutils_new/utils.h:73:12: note: ------>vectorizing SLP node starting from: *_189 = 12582906;
+../../locutils_new/utils.h:73:12: note: vect_is_simple_use: operand 12582906, type of def: constant
+../../locutils_new/utils.h:73:12: note: vect_is_simple_use: operand 12582907, type of def: constant
+../../locutils_new/utils.h:73:12: note: transform store. ncopies = 1
+../../locutils_new/utils.h:73:12: note: created new init_stmt: vect_cst__440 = { 12582906, 12582907 };
+../../locutils_new/utils.h:73:12: note: create vector_type-pointer variable to type: vector(2) int  vectorizing a pointer ref: *_189
+../../locutils_new/utils.h:73:12: note: created vectp.137_343
+../../locutils_new/utils.h:73:12: note: add new stmt: MEM[(int *)vectp.137_343] = vect_cst__440;
+../../locutils_new/utils.h:73:12: note: vectorizing stmts using SLP.
+../../locutils_new/utils.h:73:12: optimized: basic block part vectorized using 16 byte vectors
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V16QI would be the same
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V8QI would be the same
+../../locutils_new/utils.h:73:12: note: ***** The result for vector mode V4HI would be the same
+../../locutils_new/utils.h:75:9: missed: statement clobbers memory: printf ("cache_annil: %d\n", helper_64);
+../../locutils_new/timers.h:26:53: missed: statement clobbers memory: counter.start_time = std::chrono::_V2::steady_clock::now ();
+L1_benchmark.h:85:5: note: ***** Analysis failed with vector mode VOID
+L1_benchmark.h:85:5: note: basic block vectorized
+L1_benchmark.h:86:20: missed: statement clobbers memory: Kernel_read<float> (_9, chunk_12, 524288000);
+../../locutils_new/timers.h:30:51: missed: statement clobbers memory: counter.end_time = std::chrono::_V2::steady_clock::now ();
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_time: ", 12);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _86 = std::basic_ostream<char>::_M_insert<double> (&cout, _95);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_86, " s", 2);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_130);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _149 = OBJ_TYPE_REF(_144;_130->6) (_130, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _132 = std::basic_ostream<char>::put (_86, _142);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_132);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_bw: ", 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _88 = std::basic_ostream<char>::_M_insert<double> (&cout, _99);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_88, " Gb/s", 5);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_122);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _163 = OBJ_TYPE_REF(_158;_122->6) (_122, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _124 = std::basic_ostream<char>::put (_88, _156);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_124);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "local_flops: ", 13);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _90 = std::basic_ostream<char>::_M_insert<double> (&cout, _103);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_90, " GFlops", 7);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_114);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _177 = OBJ_TYPE_REF(_172;_114->6) (_114, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _116 = std::basic_ostream<char>::put (_90, _170);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_116);
+L1_benchmark_main.h:32:22: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_time: ", 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _191 = std::basic_ostream<char>::_M_insert<double> (&cout, _190);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_191, " s", 2);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_216);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _235 = OBJ_TYPE_REF(_230;_216->6) (_216, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _218 = std::basic_ostream<char>::put (_191, _228);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_218);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_bw: ", 8);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _194 = std::basic_ostream<char>::_M_insert<double> (&cout, _193);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_194, " Gb/s", 5);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_208);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _249 = OBJ_TYPE_REF(_244;_208->6) (_208, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _210 = std::basic_ostream<char>::put (_194, _242);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_210);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "avg_flops: ", 11);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _197 = std::basic_ostream<char>::_M_insert<double> (&cout, _196);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (_197, " GFlops", 7);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_255);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _271 = OBJ_TYPE_REF(_266;_255->6) (_255, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _257 = std::basic_ostream<char>::put (_197, _264);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_257);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:570:18: missed: statement clobbers memory: std::__ostream_insert<char, std::char_traits<char> > (&cout, "flops_per_byte: ", 16);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:221:29: missed: statement clobbers memory: _203 = std::basic_ostream<char>::_M_insert<double> (&cout, 6.25e-2);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/basic_ios.h:49:7: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:874:2: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Analysis failed with vector mode V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:875:51: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V16QI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:876:21: missed: statement clobbers memory: std::ctype<char>::_M_widen_init (_277);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Analysis failed with vector mode V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:27: note: ***** Skipping vector mode V16QI, which would repeat the analysis for V2DI
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/bits/locale_facets.h:877:23: missed: statement clobbers memory: _293 = OBJ_TYPE_REF(_288;_277->6) (_277, 10);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:600:19: missed: statement clobbers memory: _279 = std::basic_ostream<char>::put (_203, _286);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/ostream:622:25: missed: statement clobbers memory: std::basic_ostream<char>::flush (_279);
+../../locutils_new/timers.h:71:27: missed: statement clobbers memory: _182 = fopen ("bw.txt", "a");
+../../locutils_new/timers.h:72:16: missed: statement clobbers memory: fprintf (_182, "%lf\n", _193);
+../../locutils_new/timers.h:73:15: missed: statement clobbers memory: fclose (_182);
+../../locutils_new/timers.h:78:27: missed: statement clobbers memory: _179 = fopen ("flops.txt", "a");
+../../locutils_new/timers.h:79:16: missed: statement clobbers memory: fprintf (_179, "%lf\n", _196);
+../../locutils_new/timers.h:80:15: missed: statement clobbers memory: fclose (_179);
+L1_benchmark_main.h:57:11: missed: statement clobbers memory: operator delete [] (_9);
+L1_benchmark_main.h:58:6: missed: statement clobbers memory: free (chunk_12);
+L1_benchmark_main.h:59:1: note: ***** Analysis failed with vector mode VOID
+L1_benchmark_main.h:63:24: missed: statement clobbers memory: omp_set_num_threads (48);
+L1_benchmark_main.h:64:15: missed: statement clobbers memory: CallKernel (0);
+L1_benchmark_main.h:65:12: note: ***** Analysis failed with vector mode VOID
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/iostream:74:25: missed: statement clobbers memory: std::ios_base::Init::Init (&__ioinit);
+/opt/aarch64/compiler/gcc-9.3.1-2021.03-aarch64-linux/include/c++/9.3.1/iostream:74:25: missed: statement clobbers memory: __cxa_atexit (__dt_comp , &__ioinit, &__dso_handle);
+L1_benchmark_main.h:66:1: note: ***** Analysis failed with vector mode VOID

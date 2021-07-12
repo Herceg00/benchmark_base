@@ -18,7 +18,7 @@ void CallKernel(int mode)
     float **chunk = (float **)malloc(sizeof(float *) * omp_get_max_threads());
     #ifndef METRIC_RUN
     size_t bytes_requested = (size_t) RADIUS * 4 * sizeof(float) * 8 * omp_get_max_threads();
-    size_t flops_requested = (size_t) RADIUS * 8 * omp_get_max_threads();
+    size_t flops_requested = (size_t) RADIUS * 8  * omp_get_max_threads();
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
 

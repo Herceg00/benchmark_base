@@ -29,6 +29,7 @@ void Init(AT *a, AT **chunk, size_t size)
 template<typename AT>
 void Kernel_read(AT *a, AT **chunk, size_t size)
 {
+    float return_val = 0;
     #pragma omp parallel
     {
         unsigned int myseed = omp_get_thread_num();
@@ -73,6 +74,7 @@ void Kernel_read(AT *a, AT **chunk, size_t size)
                 offset = 0;
             }
         }
+        return_val = local_sum[thread_num % 4];
     }
 }
 
