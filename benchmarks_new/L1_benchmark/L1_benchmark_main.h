@@ -12,40 +12,46 @@ typedef float base_type;
 #include "L1_benchmark.h"
 #include "../../locutils_new/timers.h"
 
+#define SIMD_SIZE 128 // should be 512 for intel
+#define INNER_LOADS 16
+
 void CallKernel(int mode)
 {
     base_type *a = new base_type[LENGTH];
     float **chunk = (float **)malloc(sizeof(float *) * omp_get_max_threads());
+
+    std::cout << 4 * sizeof(float) << std::endl;
     #ifndef METRIC_RUN
-    size_t bytes_requested = (size_t) RADIUS * 4 * sizeof(float) * 8 * omp_get_max_threads();
-    size_t flops_requested = (size_t) RADIUS * 8  * omp_get_max_threads();
+    size_t bytes_requested = (size_t) RADIUS * (SIMD_SIZE/sizeof(float)) * (size_t)INNER_LOADS * omp_get_max_threads();
+    size_t flops_requested = (size_t) RADIUS * (size_t)INNER_LOADS * omp_get_max_threads();
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
 
     #ifdef METRIC_RUN
     int iterations = LOC_REPEAT * USUAL_METRICS_REPEAT;
-    Init(a, chunk, LENGTH);
     #else
     int iterations = LOC_REPEAT;
     #endif
 
+    Init(a, chunk, LENGTH);
+
     for(int i = 0; i < iterations; i++)
 	{
-        fprintf(stderr, "%d\n", i);
         #ifndef METRIC_RUN
         std::cout << "cache anych" << std::endl;
-		Init(a, chunk, LENGTH);
 		locality::utils::CacheAnnil(3);
 		counter.start_timing();
         #endif
 
-		Kernel(mode, a, chunk, LENGTH);
+		float val = Kernel(mode, a, chunk, LENGTH);
 
         #ifndef METRIC_RUN
 		counter.end_timing();
 		counter.update_counters();
 		counter.print_local_counters();
         #endif
+
+		std::cout << "val: " << val << std::endl;
 	}
     
     #ifndef METRIC_RUN
