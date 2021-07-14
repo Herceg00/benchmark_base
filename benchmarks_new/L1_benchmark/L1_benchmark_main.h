@@ -12,7 +12,7 @@ typedef float base_type;
 #include "L1_benchmark.h"
 #include "../../locutils_new/timers.h"
 
-#define SIMD_SIZE 128 // should be 512 for intel
+#define SIMD_SIZE 512 // should be 512 for intel
 #define INNER_LOADS 16
 
 void CallKernel(int mode)
