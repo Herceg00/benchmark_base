@@ -19,7 +19,7 @@ endif
 
 ifeq ($(COMPILER),g++)
     #CC_FLAGS=-D __USE_KUNPENG__ -O3 -fno-trapping-math -fopenmp-simd -fopenmp  -ffreestanding -fopt-info-vec-all=report.lst -ffast-math #gcc kunpeng
-    CC_FLAGS= -O3 -fno-trapping-math -fopenmp-simd -fopenmp  -ffreestanding -fopt-info-vec-all=report.lst -ffast-math #gcc kunpeng
+    CC_FLAGS= -D __USE_KUNPENG__ -O2 -fno-trapping-math -fopenmp-simd -fopenmp  -ffreestanding -fopt-info-vec-all=report.lst -ffast-math #gcc kunpeng
 endif
 
 ifeq ($(COMPILER),nvc++)
@@ -27,7 +27,7 @@ ifeq ($(COMPILER),nvc++)
 endif
 
 ifeq ($(COMPILER),icpc)
-    CC_FLAGS=-O3 -D NOFUNCCALL -qopt-report=1 -qopt-report-phase=vec -qopenmp -ffreestanding -qopt-streaming-stores always -xCOMMON-AVX512 # icc
+    CC_FLAGS=-D __USE_INTEL__ -O3 -D NOFUNCCALL -qopt-report=1 -qopt-report-phase=vec -qopenmp -ffreestanding -qopt-streaming-stores always -xCOMMON-AVX512 # icc
 endif
 
 ifneq ($(COMPILER),nvc++)
