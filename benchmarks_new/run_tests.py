@@ -82,7 +82,7 @@ all_tests_data = {"triada": {"radius": 256,
                     #threads - amount of threads used in program
                     "L1_benchmark": { 
                                       "mode": 0,
-                                      "length": 524288000*10,
+                                      "length": 524288000,
                                       "radius": 1000000000
                                     },
                   }

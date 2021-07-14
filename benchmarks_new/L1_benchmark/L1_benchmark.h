@@ -4,9 +4,9 @@
 #include <arm_neon.h>
 #endif 
 
-//#ifdef __USE_INTEL__
+#ifdef __USE_INTEL__
 #include <immintrin.h>
-//#endif 
+#endif 
 
 using std::string;
 
@@ -40,6 +40,7 @@ float Kernel_read(AT *a, AT **chunk, size_t size)
     float return_val = 0;
     #pragma omp parallel
     {
+        unsigned int thread_num = omp_get_thread_num();
         float32x4_t null = {0, 0, 0, 0};
         float *chunk_start = chunk[thread_num];
         unsigned int offset = 0;
@@ -132,15 +133,14 @@ float Kernel_read(AT *a, AT **chunk, size_t size)
 }
 #endif 
 
-//#ifdef __USE_INTEL__
+#ifdef __USE_INTEL__
 template<typename AT>
 float Kernel_read(AT *a, AT **chunk, size_t size)
 {
     float return_val = 0;
     #pragma omp parallel
     {
-        unsigned int myseed = omp_get_thread_num();
-        unsigned int thread_num = myseed;
+        unsigned int thread_num = omp_get_thread_num();
         __m512 null = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         float *chunk_start = chunk[thread_num];
         unsigned int offset = 0;
@@ -286,7 +286,7 @@ float Kernel_read(AT *a, AT **chunk, size_t size)
     }
     return return_val;
 }
-//#endif 
+#endif 
 
 
 template<typename AT>
