@@ -25,7 +25,9 @@ typedef float base_type;
 void CallKernel(int mode)
 {
     base_type *a = new base_type[LENGTH];
-    float **chunk = (float **)malloc(sizeof(float *) * omp_get_max_threads());
+    base_type *b = new base_type[LENGTH];
+    float **chunk_read = (float **)malloc(sizeof(float *) * omp_get_max_threads());
+    float **chunk_write = (float **)malloc(sizeof(float *) * omp_get_max_threads());
 
     std::cout << 4 * sizeof(float) << std::endl;
     #ifndef METRIC_RUN
@@ -43,7 +45,7 @@ void CallKernel(int mode)
     int iterations = LOC_REPEAT;
     #endif
 
-    Init(a, chunk, LENGTH);
+    Init(a, b, chunk_read, chunk_write, LENGTH);
 
     for(int i = 0; i < iterations; i++)
 	{
@@ -53,7 +55,7 @@ void CallKernel(int mode)
 		counter.start_timing();
         #endif
 
-		float val = Kernel(mode, a, chunk, LENGTH);
+		float val = Kernel(mode, chunk_read, chunk_write, LENGTH);
 
         #ifndef METRIC_RUN
 		counter.end_timing();
@@ -71,7 +73,9 @@ void CallKernel(int mode)
     #endif
 
 	delete []a;
-	free(chunk);
+	delete []b;
+	free(chunk_read);
+	free(chunk_write);
 }
 
 extern "C" int main()
