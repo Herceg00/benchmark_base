@@ -81,7 +81,7 @@ all_tests_data = {"triada": {"radius": 256,
                     #rand_mode - the way to get random numbers (0 - normal distribution, 1 - gaussian)
                     #threads - amount of threads used in program
                     "L1_benchmark": { 
-                                      "mode": 0,
+                            "mode": {"min": 0, "max": 1, "step": 1},
                                       "length": 524288000,
                                       "radius": 1000000000
                                     },

@@ -30,6 +30,9 @@ void CallKernel(int mode)
     std::cout << 4 * sizeof(float) << std::endl;
     #ifndef METRIC_RUN
     size_t bytes_requested = (size_t) RADIUS * (SIMD_SIZE/sizeof(float)) * (size_t)INNER_LOADS * omp_get_max_threads();
+    if (mode == 1) {
+        bytes_requested *= 2;
+    }
     size_t flops_requested = (size_t) RADIUS * (size_t)INNER_LOADS * omp_get_max_threads();
     auto counter = PerformanceCounter(bytes_requested, flops_requested);
     #endif
