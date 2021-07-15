@@ -8,7 +8,7 @@ from scripts.roofline import generate_roofline_from_profiling_data
 from scripts.arch_properties import get_arch
 
 linear_length = 800000000
-max_threads = 48
+max_threads = 64
 
 
 # all upper borders are inclusive
@@ -80,8 +80,8 @@ all_tests_data = {"triada": {"radius": 256,
                     #mode - type of parallel for schedule (0 - static, 1 - guided, 2 - dynamic)
                     #rand_mode - the way to get random numbers (0 - normal distribution, 1 - gaussian)
                     #threads - amount of threads used in program
-                    "L1_benchmark": { 
-                            "mode": {"min": 0, "max": 1, "step": 1},
+                    "L1_bandwidth": {
+                                      "mode": {"min": 0, "max": 5, "step": 1}, # mode 0,1,2 - L1 cache, mode 3,4,5 - L2 cache
                                       "length": 524288000,
                                       "radius": 1000000000
                                     },
