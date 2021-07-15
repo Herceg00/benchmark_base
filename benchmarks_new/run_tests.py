@@ -85,6 +85,10 @@ all_tests_data = {"triada": {"radius": 256,
                                       "length": 524288000,
                                       "radius": 1000000000
                                     },
+                    "multi_socket_bandwidth": {
+                            "mode": {"min": 0, "max": 5, "step": 1},
+                            "length": 1000000
+                    },
                   }
 
 RA_RADIUS="2" # 2 KB
