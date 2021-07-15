@@ -9,7 +9,7 @@
 
 typedef float base_type;
 
-#include "L1_benchmark.h"
+#include "L1_bandwidth.h"
 #include "../../locutils_new/timers.h"
 
 #ifdef __USE_INTEL__
