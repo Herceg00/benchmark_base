@@ -30,8 +30,10 @@ def get_timing_from_file_line(line, timings):
 def run_test_and_parse_timings(prog_name, prog_args, options):  # collect time, perf and BW values
     result = {}
     prog_name_arg = ["--prog=" + prog_name]
-    compiler_arg="--compiler="+options.compiler
-    profiling_args = [compiler_arg, "--no_run=false", "--metrics=false", "--output="+tmp_timings_file_name]
+    compiler_arg=["--compiler="+options.compiler]
+    # if options.no_compile :
+    #     compiler_arg.append("--no-compile") 
+    profiling_args = compiler_arg + ["--no_run=false", "--metrics=false", "--output="+tmp_timings_file_name]
     all_args = prog_name_arg + profiling_args + prog_args
 
     subprocess.check_call(["bash"] + ['./make_omp.sh'] + all_args)

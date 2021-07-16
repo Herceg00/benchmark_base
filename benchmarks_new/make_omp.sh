@@ -24,6 +24,9 @@ while [ $# -gt 0 ]; do
     --no_run=*)
       NO_RUN="${1#*=}"
       ;;
+    --force-comp)
+      FORCE_COMP=true
+      ;;
     --metrics=*)
       METRICS="${1#*=}"
       ;;
@@ -33,9 +36,9 @@ while [ $# -gt 0 ]; do
     --output=*)
       OUTPUT="${1#*=}"
       ;;
-    --redundant=*)
-      REDUNDANT="${1#*=}"
-      ;;
+    # --redundant=*)
+    #   REDUNDANT="${1#*=}"
+    #   ;;
     *)
 
       printf "***************************\n"
@@ -46,35 +49,41 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-cd ./"$PROG_NAME"
+pushd "./${PROG_NAME}" || { echo "Cannot cd ${PROG_NAME}..."; exit 1; }
 
-rm -r bin
-
-if [[ $METRICS = "false" ]]; then
-    make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$MODE COMPILER=$COMPILER METRIC_FLAG=NULL THREADS=$EXP_THREADS
+# Do compile if needed
+if [ "x${FORCE_COMP}" != x ]; then
+  rm -r bin
+fi
+if [[ ${METRICS} = "false" ]]; then
+  export POSTFIX="_no_metrics"  
+  make "ELEMS=${ELEMS}" "LENGTH=${LENGTH}" "MODE=${MODE}"\
+    "COMPILER=${COMPILER}" METRIC_FLAG=NULL "THREADS=${EXP_THREADS}"
 fi
 
-if [[ $METRICS = "true" ]]; then
-    make ELEMS=$ELEMS LENGTH=$LENGTH MODE=$MODE COMPILER=$COMPILER METRIC_FLAG=METRIC_RUN THREADS=$EXP_THREADS
+if [[ ${METRICS} = "true" ]]; then
+  export POSTFIX="_with_metrics"  
+  make "ELEMS=${ELEMS}" "LENGTH=${LENGTH}" "MODE=${MODE}"\
+    "COMPILER=${COMPILER}" METRIC_FLAG=METRIC_RUN "THREADS=${EXP_THREADS}"
 fi
 
-rm $OUTPUT
-
-if [ $NO_RUN = "false" ]; then
-    export OMP_NUM_THREADS=$EXP_THREADS
-    export OMP_PROC_BIND=true
-    export OMP_PROC_BIND=close
-    export LD_LIBRARY_PATH=/opt/intel/oneapi/compiler/2021.1.2/linux/compiler/lib/intel64_lin/:$LD_LIBRARY_PATH
-    if [[ $METRICS = "true" ]]; then
-        perf stat -o $OUTPUT -a -e $EVENTS ./bin/omp_$PROG_NAME""_np_STD
-    fi
-    if [[ $METRICS = "false" ]]; then
-        ./bin/omp_$PROG_NAME""_np_STD > $OUTPUT
-        cp $OUTPUT ./test.txt
+rm "${OUTPUT}"
+# Run benchmark if needed
+if [ "x${NO_RUN}" = "xfalse" ]; then
+  PROG="./bin/omp_${PROG_NAME}_np_STD${POSTFIX}"
+  export OMP_NUM_THREADS=${EXP_THREADS}
+  export OMP_PROC_BIND=true
+  export OMP_PROC_BIND=close
+  export LD_LIBRARY_PATH=/opt/intel/oneapi/compiler/2021.1.2/linux/compiler/lib/intel64_lin/:${LD_LIBRARY_PATH}
+  if [[ "x${METRICS}" = "xtrue" ]]; then
+    perf stat -o "${OUTPUT}" -a -e "${EVENTS}" "${PROG}"
+  fi
+  if [[ ${METRICS} = "false" ]]; then
+    ${PROG} > "${OUTPUT}"
+    cp "${OUTPUT}" ./test.txt
+  fi
 fi
 
-fi
-
-cd ../
+popd || echo "Whooops! Cannot return from ${PROG_NAME}..."
 
 

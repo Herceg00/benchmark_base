@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from scripts.get_profile_metrics import run_profiling, profiling_add_separator
 from scripts.get_timings import run_timings, timings_add_separator
 from scripts.arch_properties import get_threads_count, get_cores_count, get_sockets_count
@@ -107,6 +109,7 @@ def run_tests_across_specific_parameter(bench_name, parameter_name, all_paramete
     parameter_info = all_parameters_data[parameter_name]
 
     i = get_min(parameter_info)
+    options.no_compile = False
     while i <= get_max(parameter_info):
         parameters_string = prev_params + " " + "--"+parameter_name+"="+str(i)
 
@@ -120,6 +123,7 @@ def run_tests_across_specific_parameter(bench_name, parameter_name, all_paramete
         else:
             run_tests_across_specific_parameter(bench_name, next_parameter, all_parameters_data, parameters_string, options)
 
+        options.no_compile = True
         i = get_step(parameter_info, i)
 
         if i > get_max(parameter_info):

@@ -49,7 +49,7 @@ LOC_NP = $(BENCH)_np
 
 REPEAT ?= 8
 
-TGT_OMP_NP = $(OUT_DIR)/omp_$(LOC_NP)_$(SIZE)
+TGT_OMP_NP = $(OUT_DIR)/omp_$(LOC_NP)_$(SIZE)$(POSTFIX)
 
 TGT := $(TGT_OMP_NP)
 
@@ -58,7 +58,7 @@ CMD := $(CXX) $(CC_FLAGS) $(CPPFLAGS) $(CXXFLAGS) -I $(INC_DIR)
 all : $(TGT)
 
 $(TGT_OMP_NP): $(LOC_NP).cpp size.h ../size.h $(BENCH).h $(INC_DIR)/*
-	mkdir bin
+	test -d $(OUT_DIR) || mkdir $(OUT_DIR)
 	$(CMD) -DLOC_REPEAT=$(REPEAT) -D$(METR)=0 -DRADIUS=$(ELEMS) -DLENGTH=$(LENGTH) -DMODE=$(MODE) $< -fopenmp -o $@  $(ADD_SRC)
 
 COMMAND := cleo-submit -np 1 -stderr err -as single
